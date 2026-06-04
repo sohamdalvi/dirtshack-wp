@@ -302,3 +302,124 @@ add_action( 'get_template_part_parts/elements/page_headline', 'dirtshack_emit_he
 // content-single-product.php (see ohio-child/woocommerce/content-single-product.php),
 // which places it above <div class="product"> — the top of the product content.
 
+// ─── Cross-promo strip: Store → Marketplace ──────────────────────────────────
+//
+// A slim, dismissible bar above the header introducing Market.DirtShack.in.
+// Rendered at wp_body_open (top of <body>, above Ohio's header) and its CSS is
+// injected at wp_head priority 99 — same technique as the hero — so Ohio cannot
+// override it. Dismissal is remembered client-side via localStorage (no cookie
+// round-trip, cache-safe on Bluehost). Never shown during cart/checkout so it
+// can't interrupt an active purchase flow.
+
+if ( ! defined( 'DIRTSHACK_MARKETPLACE_URL' ) ) {
+    define( 'DIRTSHACK_MARKETPLACE_URL', 'https://market.dirtshack.in/' );
+}
+
+/**
+ * True on pages where the strip must never appear (cart / checkout).
+ */
+function dirtshack_xpromo_suppressed() {
+    return ( function_exists( 'is_cart' ) && is_cart() )
+        || ( function_exists( 'is_checkout' ) && is_checkout() );
+}
+
+add_action( 'wp_body_open', 'dirtshack_cross_promo_strip' );
+function dirtshack_cross_promo_strip() {
+    if ( dirtshack_xpromo_suppressed() ) {
+        return;
+    }
+    $url = add_query_arg(
+        array(
+            'utm_source'   => 'dirtshack_store',
+            'utm_medium'   => 'topbar',
+            'utm_campaign' => 'cross_promo',
+        ),
+        DIRTSHACK_MARKETPLACE_URL
+    );
+    ?>
+    <div class="ds-xpromo" id="ds-xpromo" role="region" aria-label="DirtShack Marketplace">
+        <div class="ds-xpromo__inner">
+            <span class="ds-xpromo__icon" aria-hidden="true">&#127949;</span>
+            <span class="ds-xpromo__text">
+                <strong class="ds-xpromo__head">Buy. Sell. Ride.</strong>
+                <span class="ds-xpromo__sub">Used bikes &amp; parts on the DirtShack Marketplace &mdash; list yours free.</span>
+            </span>
+            <a class="ds-xpromo__cta" href="<?php echo esc_url( $url ); ?>">
+                Browse the Marketplace&nbsp;&rarr;
+            </a>
+        </div>
+    </div>
+    <?php
+}
+
+// Strip CSS — injected after Ohio's stylesheet so it always wins.
+add_action( 'wp_head', 'dirtshack_cross_promo_css', 99 );
+function dirtshack_cross_promo_css() {
+    if ( dirtshack_xpromo_suppressed() ) {
+        return;
+    }
+    ?>
+<style id="ds-xpromo-css">
+.ds-xpromo {
+    background: var(--ds-dark, #111) !important;
+    color: #fff !important;
+    font-size: .82rem !important;
+    line-height: 1.3 !important;
+    border-bottom: 2px solid var(--ds-yellow, #c8e600) !important;
+}
+.ds-xpromo__inner {
+    max-width: var(--ds-max, 1280px) !important;
+    margin: 0 auto !important;
+    padding: .55rem var(--ds-pad, 1.5rem) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: .9rem !important;
+}
+.ds-xpromo__icon { font-size: 1.15rem !important; flex: 0 0 auto !important; }
+.ds-xpromo__text {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: .6rem !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+}
+.ds-xpromo__head {
+    color: var(--ds-yellow, #c8e600) !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+}
+.ds-xpromo__sub {
+    color: #e8e8e8 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+.ds-xpromo__cta {
+    flex: 0 0 auto !important;
+    background: var(--ds-yellow, #c8e600) !important;
+    color: var(--ds-dark, #111) !important;
+    font-weight: 800 !important;
+    letter-spacing: .05em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    padding: .5rem 1.1rem !important;
+    border-radius: var(--ds-radius, 3px) !important;
+    font-size: .76rem !important;
+    white-space: nowrap !important;
+    transition: opacity .18s !important;
+}
+.ds-xpromo__cta:hover { opacity: .82 !important; }
+
+/* ── Mobile: stack copy, keep it one tidy block ── */
+@media (max-width: 768px) {
+    .ds-xpromo__inner { flex-wrap: wrap !important; gap: .5rem .7rem !important; padding: .55rem 1rem !important; }
+    .ds-xpromo__text { flex-direction: column !important; align-items: flex-start !important; gap: .1rem !important; flex: 1 1 60% !important; }
+    .ds-xpromo__sub { white-space: normal !important; font-size: .74rem !important; }
+    .ds-xpromo__cta { flex: 1 1 100% !important; text-align: center !important; padding: .6rem 1rem !important; }
+}
+</style>
+    <?php
+}
+
