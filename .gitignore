@@ -1,0 +1,49 @@
+# ─── WordPress core (never tracked here) ─────────────────────
+/wp-admin/
+/wp-includes/
+wp-*.php
+xmlrpc.php
+index.php
+.htaccess
+license.txt
+readme.html
+
+# ─── Generated / environment-specific ────────────────────────
+wp-content/uploads/
+wp-content/cache/
+wp-content/wpo-cache/
+wp-content/upgrade/
+wp-content/languages/
+wp-content/mu-plugins/
+wp-content/object-cache.php
+wp-content/advanced-cache.php
+debug.log
+*.log
+
+# ─── Third-party plugins (keep only custom/companion ones) ───
+wp-content/plugins/*
+!wp-content/plugins/ohio-extra/
+!wp-content/plugins/ohio-portfolio/
+# !wp-content/plugins/dirtshack-core/   # uncomment when created
+
+# ─── Themes (keep parent + child only) ───────────────────────
+wp-content/themes/twentytwenty*/
+
+# ─── Backups, staging & data exports (live order/customer data) ─
+wp-content/wpvividbackups/
+wp-content/wpvivid_uploads/
+wp-content/wpvivid_staging/
+wp-content/webtoffee_export/
+
+# ─── Database dumps with live data — NEVER commit ────────────
+# Only database/schema.sql (structure) and database/migrations/*.sql belong in git.
+*.sql
+!database/schema.sql
+!database/migrations/*.sql
+lite-backup.sql*
+
+# ─── OS / editor files ───────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.save

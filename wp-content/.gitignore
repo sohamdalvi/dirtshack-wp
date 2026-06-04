@@ -1,0 +1,42 @@
+# ─── Generated / environment-specific ───────────────────────
+uploads/
+cache/
+wpo-cache/
+upgrade/
+debug.log
+
+# ─── Backups & exports ───────────────────────────────────────
+wpvividbackups/
+wpvivid_uploads/
+wpvivid_staging/
+webtoffee_export/
+
+# ─── Third-party plugins (not custom code) ───────────────────
+plugins/*
+
+# ─── Custom / theme-companion plugins — keep these ───────────
+!plugins/ohio-extra/
+!plugins/ohio-portfolio/
+# Uncomment when created:
+# !plugins/dirtshack-core/
+
+# ─── Themes ──────────────────────────────────────────────────
+!themes/
+themes/twentytwenty*/
+
+# ─── mu-plugins: exclude LocalWP SSO ─────────────────────────
+mu-plugins/
+
+# ─── Languages (regenerated on demand) ───────────────────────
+languages/
+
+# ─── Environment-specific WordPress dropins ──────────────────
+object-cache.php
+advanced-cache.php
+
+# ─── OS / editor files ───────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.save
