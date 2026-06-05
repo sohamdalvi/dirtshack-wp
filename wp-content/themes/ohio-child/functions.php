@@ -87,9 +87,14 @@ function dirtshack_redirect_legacy_shop() {
  * Falls back to the legacy homepage image when the named file isn't present yet.
  */
 function dirtshack_hero_image_url( $name ) {
-    $rel  = 'assets/heroes/' . $name . '.jpg';
-    if ( file_exists( get_stylesheet_directory() . '/' . $rel ) ) {
-        return get_stylesheet_directory_uri() . '/' . $rel;
+    $dir = get_stylesheet_directory();
+    $uri = get_stylesheet_directory_uri();
+    // Prefer WebP (much smaller), fall back to JPG/PNG named file.
+    foreach ( array( 'webp', 'jpg' ) as $ext ) {
+        $rel = 'assets/heroes/' . $name . '.' . $ext;
+        if ( file_exists( $dir . '/' . $rel ) ) {
+            return $uri . '/' . $rel;
+        }
     }
     return content_url( 'uploads/2026/hero.jpg' ); // safety fallback
 }
