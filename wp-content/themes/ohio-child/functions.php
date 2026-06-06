@@ -125,19 +125,9 @@ function dirtshack_hero_image_url( $name ) {
  * Image + tagline are chosen per page; tagline may contain a `.ds-accent` span.
  */
 function dirtshack_current_hero() {
-    // Single product view — check before is_shop (a product is not the shop).
-    if ( function_exists( 'is_product' ) && is_product() ) {
-        return array(
-            'image'   => dirtshack_hero_image_url( 'product' ),
-            'tagline' => 'Built to <span class="ds-accent">Ride</span> Hard',
-        );
-    }
-    if ( function_exists( 'is_shop' ) && is_shop() ) {
-        return array(
-            'image'   => dirtshack_hero_image_url( 'shop' ),
-            'tagline' => 'Gear & Parts Built for the <span class="ds-accent">Trail</span>',
-        );
-    }
+    // NOTE: Shop, single Product and My Account intentionally have NO hero
+    // (disabled on request). dirtshack_no_banner_css() also hides Ohio's
+    // page-headline on those pages so content sits cleanly under the sticky menu.
     if ( function_exists( 'is_cart' ) && is_cart() ) {
         return array(
             'image'   => dirtshack_hero_image_url( 'cart' ),
@@ -151,12 +141,6 @@ function dirtshack_current_hero() {
         return array(
             'image'   => dirtshack_hero_image_url( 'checkout' ),
             'tagline' => 'Secure <span class="ds-accent">Checkout</span>',
-        );
-    }
-    if ( function_exists( 'is_account_page' ) && is_account_page() ) {
-        return array(
-            'image'   => dirtshack_hero_image_url( 'myaccount' ),
-            'tagline' => 'My <span class="ds-accent">Account</span>',
         );
     }
     // The "Braap" page is set as the blog Posts page, so it resolves as the
@@ -260,6 +244,36 @@ function dirtshack_inner_hero_css() {
 @media (max-width: 600px) {
     .ds-hero--inner { min-height: 38vh !important; margin-bottom: 1.75rem !important; }
 }
+</style>
+    <?php
+}
+
+// ─── No-banner pages (Shop, single Product, My Account) ───────────────────────
+//
+// These pages had a hero before; now they have none (removed from
+// dirtshack_current_hero above). Without the hero, Ohio's default page-headline
+// (its own title/image banner) would reappear — so hide it here and pull the
+// content up flush under the sticky menu, with a little breathing room. Injected
+// at wp_head 9999 so it lands after Ohio's inline dynamic CSS.
+function dirtshack_is_no_banner_page() {
+    return ( function_exists( 'is_shop' ) && is_shop() )
+        || ( function_exists( 'is_product' ) && is_product() )
+        || ( function_exists( 'is_account_page' ) && is_account_page() );
+}
+add_action( 'wp_head', 'dirtshack_no_banner_css', 9999 );
+function dirtshack_no_banner_css() {
+    if ( ! dirtshack_is_no_banner_page() ) {
+        return;
+    }
+    ?>
+<style id="ds-no-banner-css">
+/* No hero / no Ohio page-headline banner on these pages */
+.page-headline,
+.subheader-holder,
+.breadcrumb-holder { display: none !important; }
+.page-container.top-offset { padding-top: 0 !important; }
+/* Breathing room below the sticky menu (no banner to space it now) */
+#content { padding-top: 2rem !important; }
 </style>
     <?php
 }
