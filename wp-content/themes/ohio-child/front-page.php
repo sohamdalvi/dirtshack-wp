@@ -129,6 +129,16 @@ function dirtshack_home_css() { ?>
     margin: 0 !important;
     padding: 0 !important;
 }
+/* Featured products: the query renders 8; show 4 on mobile, 6 on tablet, 8 on
+   desktop by hiding the extras per breakpoint. Cache-safe — the HTML is identical
+   for every visitor, only the CSS adapts (you can't vary the count server-side
+   behind a full-page cache). Keeps each tier to clean rows (2×2 / 2×3 / 2×4). */
+@media (max-width: 767px) {
+    #ds-home .ds-grid .ds-product:nth-child(n+5) { display: none !important; }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    #ds-home .ds-grid .ds-product:nth-child(n+7) { display: none !important; }
+}
 
 /* ── 1. Hero ── */
 #ds-home .ds-hero {
