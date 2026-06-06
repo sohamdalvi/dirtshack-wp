@@ -40,17 +40,24 @@ function dirtshack_home_css() { ?>
 .home .breadcrumb-holder { display: none !important; }
 .home .page-container.top-offset { padding-top: 0 !important; }
 
-/* ── Header: a real static dark bar, NOT a floating overlay. Ohio positions the
-      header absolutely over the hero; force it into normal document flow so the
-      hero sits *below* the bar instead of behind it. `static` (not `relative`)
-      also neutralises Ohio's `top` offset and its scroll `-sticky` fixed state,
-      so the bar simply stays at the top of the page and scrolls with it. ── */
+/* ── Header: a sticky dark bar (not a floating overlay). Ohio positions the
+      header absolutely over the hero; instead we use CSS position:sticky so the
+      bar stays in normal flow — the hero sits *below* it (offset, no overlap) —
+      and pins to the top of the viewport on scroll, with no layout jump. This
+      overrides Ohio's absolute placement, its `top` offset and its JS `-sticky`
+      fixed state. ── */
 .home #masthead,
 .home #masthead.header,
 .home #masthead.-sticky {
-    position: static !important;
-    top: auto !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
 }
+/* Ancestors must not clip, or sticky won't pin */
+.home .site,
+.home .site-content,
+.home #content { overflow: visible !important; }
 
 /* Solid dark background + horizontal logo (matches Ohio's scrolled appearance) */
 .home #masthead.header,
@@ -61,9 +68,30 @@ function dirtshack_home_css() { ?>
 }
 .home #masthead .header-wrap { box-shadow: 0 2px 12px rgba(0,0,0,.4) !important; }
 
-/* Logo: always show the horizontal (sticky) logo; hide the stacked overlay logos */
+/* Shorter bar: Ohio sets an explicit 70px height — trim it to 54px and shrink the
+   action icons/hamburger so they fit the slimmer bar. */
+.home #masthead,
+.home #masthead.header,
+.home #masthead .header-wrap,
+.home #masthead .header-wrap-inner {
+    height: 54px !important;
+    min-height: 54px !important;
+}
+.home #masthead .menu-optional .icon-button,
+.home #masthead .mobile-hamburger,
+.home #masthead .mobile-hamburger .hamburger,
+.home #masthead .hamburger-button {
+    height: 44px !important;
+    width: 44px !important;
+}
+
+/* Logo: always show ONE horizontal (sticky) logo. Ohio ships four logo blocks —
+   .logo + .logo-mobile (stacked, transparent-state) and .logo-sticky +
+   .logo-sticky-mobile (horizontal, scrolled-state). Hide all but .logo-sticky so
+   a single horizontal logo shows at every width / scroll state. */
 .home #masthead .logo,
-.home #masthead .logo-mobile { display: none !important; }
+.home #masthead .logo-mobile,
+.home #masthead .logo-sticky-mobile { display: none !important; }
 .home #masthead .logo-sticky {
     display: block !important;
     opacity: 1 !important;
