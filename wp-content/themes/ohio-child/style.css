@@ -329,6 +329,16 @@ Text Domain: ohio-child
 #colophon .widgets-column:has(.widget_ohio_widget_subscribe) { display: none !important; }
 #colophon .widget_ohio_widget_subscribe { display: none !important; } /* fallback if :has() unsupported */
 
+/* 1b. Rebalance: with the newsletter column gone, spread the remaining three
+   columns to fill the row on desktop (3-up instead of 4-up). */
+@media (min-width: 992px) {
+    #colophon .widgets .widgets-column {
+        width: 33.3333% !important;
+        max-width: 33.3333% !important;
+        flex: 0 0 33.3333% !important;
+    }
+}
+
 /* 2. Dark / light toggle */
 .color-switcher,
 .color-switcher-mobile,
