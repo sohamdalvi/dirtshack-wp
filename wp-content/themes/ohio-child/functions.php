@@ -714,6 +714,11 @@ function dirtshack_header_css() {
    large empty gap below the menu on inner pages — collapse it. */
 .theme-ohio .header-cap { display: none !important; }
 
+/* Hide Ohio's top utility bar ("Welcome to Dirt Shack" / "Log In / Sign Up").
+   It's the standalone .subheader strip above the header (not the header's own
+   `subheader_included` modifier class), so this only removes that top bar. */
+.theme-ohio .subheader { display: none !important; }
+
 /* Solid dark background */
 .theme-ohio #masthead.header,
 .theme-ohio #masthead .header-wrap,
