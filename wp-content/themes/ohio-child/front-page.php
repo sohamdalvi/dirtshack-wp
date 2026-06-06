@@ -279,8 +279,52 @@ function dirtshack_home_css() { ?>
 #ds-home .ds-why-section { padding-top: 26px !important; padding-bottom: 26px !important; }
 #ds-home .ds-why-section .ds-section__head { margin-bottom: 1rem !important; }
 
-/* ── Instagram feed (Smash Balloon) — let the plugin own its grid; just frame it ── */
+/* ── Instagram feed (Smash Balloon) — restyle the plugin chrome to match the brand
+   (black / white / neon green) instead of its default grey + Instagram-blue look.
+   These elements are injected by the plugin's JS, but the CSS still applies. ── */
 #ds-home .ds-instagram #sb_instagram { margin: 0 auto !important; }
+
+/* Hide the plugin's profile header/bio — we already have our own "From the Trail"
+   heading with the @dirtshack.in link, so the avatar + bio block is redundant. */
+#ds-home .ds-instagram #sb_instagram .sbi_header,
+#ds-home .ds-instagram #sb_instagram .sb_instagram_header { display: none !important; }
+
+/* Rounded photos to match the rest of the cards */
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_item,
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo_wrap,
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo { border-radius: 10px !important; overflow: hidden !important; }
+
+/* "Load More" → dark pill (secondary) */
+#ds-home .ds-instagram #sb_instagram #sbi_load .sbi_load_btn,
+#ds-home .ds-instagram #sb_instagram .sbi_load_btn {
+    background: #1a1a1a !important;
+    color: #fff !important;
+    border: 1px solid #2a2a2a !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    letter-spacing: .05em !important;
+    text-transform: uppercase !important;
+    transition: background .18s, opacity .18s !important;
+}
+#ds-home .ds-instagram #sb_instagram .sbi_load_btn:hover { background: #000 !important; }
+
+/* "Follow on Instagram" → neon-green pill (primary, matches the brand CTAs) */
+#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a,
+#ds-home .ds-instagram #sb_instagram a.sbi_follow_btn {
+    background: #C4E000 !important;
+    color: #111 !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    transition: opacity .18s !important;
+}
+#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a:hover,
+#ds-home .ds-instagram #sb_instagram a.sbi_follow_btn:hover { opacity: .85 !important; }
+#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a .fa-instagram,
+#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a svg,
+#ds-home .ds-instagram #sb_instagram .sbi_follow_btn svg { color: #111 !important; fill: #111 !important; }
 
 /* ── 6. Blog cards — 1 col mobile ── */
 #ds-home .ds-blog-grid {
