@@ -272,8 +272,10 @@ function dirtshack_no_banner_css() {
 .subheader-holder,
 .breadcrumb-holder { display: none !important; }
 .page-container.top-offset { padding-top: 0 !important; }
-/* Breathing room below the sticky menu (no banner to space it now) */
-#content { padding-top: 2rem !important; }
+/* A little breathing room below the sticky menu (header-cap is collapsed) */
+.site-content, #content { padding-top: 1.25rem !important; }
+/* Remove the social share (Facebook / X / Pinterest) from the product page */
+.single-product .share-bar { display: none !important; }
 </style>
     <?php
 }
@@ -548,6 +550,11 @@ function dirtshack_header_css() {
 .theme-ohio .site,
 .theme-ohio .site-content,
 .theme-ohio #content { overflow: visible !important; }
+
+/* Ohio inserts a .header-cap spacer to reserve room for its (formerly fixed)
+   header. Our header is now sticky in-flow, so the cap is redundant and leaves a
+   large empty gap below the menu on inner pages — collapse it. */
+.theme-ohio .header-cap { display: none !important; }
 
 /* Solid dark background */
 .theme-ohio #masthead.header,
