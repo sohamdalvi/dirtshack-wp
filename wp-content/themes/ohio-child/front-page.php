@@ -40,24 +40,60 @@ function dirtshack_home_css() { ?>
 .home .breadcrumb-holder { display: none !important; }
 .home .page-container.top-offset { padding-top: 0 !important; }
 
-/* ── Header: dark background once Ohio makes it sticky, so the white part of
-      the horizontal logo + nav stay legible against the page below the hero ── */
-.home .header-sticky-holder,
-.home .sticky-header,
-.home .header-is-sticky,
-.home [class*="header"][class*="sticky"],
-.home .site-header.sticky,
-.home .site-header.fixed,
-.home .site-header.scrolled {
+/* ── Header: force the solid dark "scrolled" look at ALL scroll positions, so the
+      menu is a static dark bar with the horizontal logo instead of a transparent
+      overlay floating over the hero (matches Ohio's own -sticky appearance). ── */
+.home #masthead.header,
+.home #masthead .header-wrap,
+.home #masthead .header-wrap-inner,
+.home #masthead .subheader {
     background: #111 !important;
-    box-shadow: 0 2px 12px rgba(0,0,0,.4) !important;
 }
-.home .header-sticky-holder .main-menu > li > a,
-.home .sticky-header .main-menu > li > a,
-.home .header-is-sticky .main-menu > li > a,
-.home [class*="header"][class*="sticky"] nav a { color: #fff !important; }
-.home .cart-count,
-.home .header-cart-count { background: #C4E000 !important; color: #111 !important; }
+.home #masthead .header-wrap { box-shadow: 0 2px 12px rgba(0,0,0,.4) !important; }
+
+/* Logo: always show the horizontal (sticky) logo; hide the stacked overlay logos */
+.home #masthead .logo,
+.home #masthead .logo-mobile { display: none !important; }
+.home #masthead .logo-sticky {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+/* The sticky logo ships two scheme images (both the horizontal logo) — show only
+   the dark-scheme one (correct on the dark bar) so the logo doesn't render twice,
+   and cap its height so it stays a normal header logo (it's ~100px tall otherwise). */
+.home #masthead .logo-sticky .dark-scheme-logo {
+    display: block !important;
+    max-height: 38px !important;
+    width: auto !important;
+}
+.home #masthead .logo-sticky .main-logo.light-scheme-logo { display: none !important; }
+
+/* Action icons in the top bar → white. Scoped to .menu-optional (the icon row)
+   and the hamburger toggle ONLY — the hamburger slide-in menu lives in .nav /
+   .slide-in-overlay and must keep its own (dark-on-light) colours. */
+.home #masthead .menu-optional .icon-button,
+.home #masthead .menu-optional .icon-button .icon,
+.home #masthead .menu-optional .icon-button i,
+.home #masthead .menu-optional > li > a { color: #fff !important; }
+/* Hamburger lines → white (target the line spans/icon, not the button box) */
+.home #masthead .mobile-hamburger .hamburger span,
+.home #masthead .mobile-hamburger .hamburger i,
+.home #masthead .hamburger-button span,
+.home #masthead .hamburger-button i { background-color: #fff !important; color: #fff !important; }
+
+/* Inline nav links ("Shop", "Braap") sit in the dark bar on tablet/desktop →
+   white. The SAME element becomes the mobile slide-in panel when opened (Ohio
+   adds `.visible`); there the panel is light, so links revert to dark. This keys
+   off the open-state class, not a width breakpoint, so it's robust either way. */
+.home #masthead .slide-in-overlay .menu-link,
+.home #masthead .nav-container .menu-link { color: #fff !important; }
+.home #masthead .slide-in-overlay.visible .menu-link { color: #111 !important; }
+
+/* Cart count badge stays brand green */
+.home #masthead .cart-count,
+.home #masthead .cart-button .count,
+.home #masthead .header-cart-count { background: #C4E000 !important; color: #111 !important; }
 
 /* ── Homepage design tokens (scoped fallbacks so the page is self-contained) ── */
 #ds-home {
