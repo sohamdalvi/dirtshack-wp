@@ -317,3 +317,63 @@ Text Domain: ohio-child
         gap: .75rem !important;
     }
 }
+
+/* ─── Footer tweaks ──────────────────────────────────────────────────────────
+   1. Remove the "Sign up for the newsletter" widget (and its now-empty column).
+   2. Remove the dark / light color switcher.
+   3. Move the "Follow Us" social links out of the header side rail and into a
+      branded strip at the very bottom (rendered via wp_footer in functions.php).
+   ------------------------------------------------------------------------------ */
+
+/* 1. Newsletter signup — hide the whole footer column that holds it */
+#colophon .widgets-column:has(.widget_ohio_widget_subscribe) { display: none !important; }
+#colophon .widget_ohio_widget_subscribe { display: none !important; } /* fallback if :has() unsupported */
+
+/* 2. Dark / light toggle */
+.color-switcher,
+.color-switcher-mobile,
+.color-switcher-toddler { display: none !important; }
+
+/* 3a. Hide the header side-rail social bar (the footer copy below re-enables it) */
+.social-bar { display: none !important; }
+
+/* 3a-ii. Hide the duplicate social links that sat under the footer logo — they
+   now live in the bottom strip. Matched by content (a block widget containing a
+   social link) so it stays stable across environments regardless of widget ID. */
+#colophon .widget_block:has(a[href*="instagram.com"]),
+#colophon .widget_block:has(a[href*="facebook.com"]) { display: none !important; }
+
+/* 3b. Footer social strip — branded dark bar pinned to the page bottom */
+.ds-footer-social {
+    background: var(--ds-dark) !important;
+    border-top: 2px solid var(--ds-yellow) !important;
+    padding: 1rem var(--ds-pad) !important;
+}
+.ds-footer-social .social-bar { display: block !important; }
+.ds-footer-social .social-bar-holder {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .35rem 1.25rem !important;
+    max-width: var(--ds-max) !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+.ds-footer-social .social-bar-holder > li { margin: 0 !important; float: none !important; }
+.ds-footer-social .social-bar-holder .caption {
+    color: var(--ds-yellow) !important;
+    font-weight: 800 !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    font-size: .72rem !important;
+}
+.ds-footer-social .social-bar-holder a {
+    color: #fff !important;
+    font-weight: 700 !important;
+    letter-spacing: .04em !important;
+    text-decoration: none !important;
+    transition: color .18s !important;
+}
+.ds-footer-social .social-bar-holder a:hover { color: var(--ds-yellow) !important; }

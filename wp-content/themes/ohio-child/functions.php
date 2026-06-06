@@ -485,3 +485,21 @@ html.ds-xpromo-off .ds-xpromo { display: none !important; }
     <?php
 }
 
+
+// ─── Footer: move "Follow Us" social links to the bottom ──────────────────────
+//
+// Ohio renders the social bar as a side rail in the header. We hide that rail in
+// CSS (style.css) and re-render Ohio's own social_bar template part at the very
+// bottom of the page. Reusing the template keeps the links sourced from Ohio's
+// options (ACF `global_header_menu_social_links`) — nothing hardcoded — and is
+// update-safe (no template override). The matching layout/visibility CSS lives in
+// style.css under "Footer tweaks".
+add_action( 'wp_footer', 'dirtshack_footer_social_bar', 20 );
+function dirtshack_footer_social_bar() {
+    if ( is_admin() ) {
+        return;
+    }
+    echo '<div class="ds-footer-social">';
+    get_template_part( 'parts/elements/social_bar' );
+    echo '</div>';
+}
