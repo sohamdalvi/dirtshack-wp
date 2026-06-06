@@ -421,7 +421,9 @@ function dirtshack_xpromo_suppressed() {
         || ( function_exists( 'is_checkout' ) && is_checkout() );
 }
 
-add_action( 'wp_body_open', 'dirtshack_cross_promo_strip' );
+// Announcement bar removed on request — render hook disabled (function kept in
+// case it's wanted back later; re-add this add_action to restore it).
+// add_action( 'wp_body_open', 'dirtshack_cross_promo_strip' );
 function dirtshack_cross_promo_strip() {
     if ( dirtshack_xpromo_suppressed() ) {
         return;
@@ -457,7 +459,8 @@ function dirtshack_cross_promo_strip() {
 // `ds-xpromo-off` on <html> so the CSS below hides the bar with zero layout shift
 // (no FOUC, no CLS). It is byte-identical for every visitor, so it stays fully
 // cacheable. The click-to-dismiss handler lives in assets/js/ds.js.
-add_action( 'wp_head', 'dirtshack_xpromo_nofouc_script', 1 );
+// Disabled with the announcement bar (no bar → no no-FOUC read needed).
+// add_action( 'wp_head', 'dirtshack_xpromo_nofouc_script', 1 );
 function dirtshack_xpromo_nofouc_script() {
     if ( dirtshack_xpromo_suppressed() ) {
         return;
@@ -468,7 +471,8 @@ function dirtshack_xpromo_nofouc_script() {
 }
 
 // Strip CSS — injected after Ohio's stylesheet so it always wins.
-add_action( 'wp_head', 'dirtshack_cross_promo_css', 99 );
+// Disabled with the announcement bar (no bar → no CSS needed).
+// add_action( 'wp_head', 'dirtshack_cross_promo_css', 99 );
 function dirtshack_cross_promo_css() {
     if ( dirtshack_xpromo_suppressed() ) {
         return;
