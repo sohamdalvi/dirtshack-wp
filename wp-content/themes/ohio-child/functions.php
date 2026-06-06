@@ -743,8 +743,18 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .logo-mobile,
 .theme-ohio #masthead .logo-sticky-mobile { display: none !important; }
 .theme-ohio #masthead .logo-sticky { display: block !important; opacity: 1 !important; visibility: visible !important; }
-.theme-ohio #masthead .logo-sticky .dark-scheme-logo { display: block !important; max-height: 38px !important; width: auto !important; }
+.theme-ohio #masthead .logo-sticky .dark-scheme-logo { display: block !important; }
 .theme-ohio #masthead .logo-sticky .main-logo.light-scheme-logo { display: none !important; }
+/* Lock the logo to ONE small height in both the top (non-sticky) and scrolled
+   (.-sticky) states so it doesn't resize on scroll. Overrides Ohio's per-state
+   logo height rules (it sets 100/70/50px at top and 45/30/20px when sticky). */
+.theme-ohio #masthead .logo-sticky img,
+.theme-ohio #masthead.-sticky .logo-sticky img {
+    height: 30px !important;
+    min-height: 0 !important;
+    max-height: 30px !important;
+    width: auto !important;
+}
 
 /* Action icons + hamburger → white. The hamburger glyph is an icon font
    (<i class="icon">) → colour it, NOT background (white bg = solid box). */
