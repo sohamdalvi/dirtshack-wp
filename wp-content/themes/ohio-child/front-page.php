@@ -349,7 +349,7 @@ if ( ! $ds_shop_url ) {
     <section class="ds-hero" style="background-image:url('<?php echo esc_url( dirtshack_hero_image_url( 'home' ) ); ?>')">
         <div class="ds-hero__overlay"></div>
         <div class="ds-hero__content">
-            <h1 class="ds-hero__title">Fuelling the <span class="ds-accent">Dirt Biking</span><br>Culture in India</h1>
+            <h1 class="ds-hero__title">Engineered to Global Standards.<br>Built for <span class="ds-accent">Indian Riders.</span></h1>
             <div class="ds-hero__ctas">
                 <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_shop_url ); ?>">Shop Parts</a>
                 <a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( $ds_market_url ); ?>">Used Bike Marketplace</a>
