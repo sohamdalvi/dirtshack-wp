@@ -70,6 +70,15 @@ function dirtshack_enqueue_scripts() {
         filemtime( $path ),
         array( 'in_footer' => true, 'strategy' => 'defer' )
     );
+
+    // Cache-bust the child style.css. Ohio enqueues it (handle 'ohio-style') with
+    // a STATIC version (theme version 1.0.0), so Bluehost/CDN serve a stale copy
+    // after edits. Re-stamp its version with the file's mtime so each deploy busts
+    // the cache cleanly. (This runs after Ohio's enqueue at priority 10.)
+    $css = get_stylesheet_directory() . '/style.css';
+    if ( file_exists( $css ) && isset( wp_styles()->registered['ohio-style'] ) ) {
+        wp_styles()->registered['ohio-style']->ver = (string) filemtime( $css );
+    }
 }
 
 // ─── Custom functions, hooks and filters below ───────────────────────────────
@@ -562,9 +571,107 @@ function dirtshack_footer_social_bar() {
     if ( is_admin() ) {
         return;
     }
-    echo '<div class="ds-footer-social">';
-    get_template_part( 'parts/elements/social_bar' );
-    echo '</div>';
+    // Brand icons (Font Awesome 'fa-brands', already loaded by Ohio) → the live
+    // social URLs. Own markup (not Ohio's social_bar) so it doesn't collide with
+    // the header side-rail and so we control the icon look.
+    $links = array(
+        array( 'url' => 'https://www.facebook.com/profile.php?id=61579063452683', 'icon' => 'fa-facebook-f', 'label' => 'Facebook' ),
+        array( 'url' => 'https://www.instagram.com/dirtshack.in/',                'icon' => 'fa-instagram',  'label' => 'Instagram' ),
+        array( 'url' => 'https://www.youtube.com/@dirtshackindia',                'icon' => 'fa-youtube',    'label' => 'YouTube' ),
+    );
+    echo '<div class="ds-footer-social"><div class="ds-footer-social__inner">';
+    echo '<span class="ds-footer-social__label">Follow Us</span>';
+    echo '<ul class="ds-footer-social__list">';
+    foreach ( $links as $l ) {
+        printf(
+            '<li><a class="ds-footer-social__link" href="%s" target="_blank" rel="noopener" aria-label="%s"><i class="fa-brands %s" aria-hidden="true"></i></a></li>',
+            esc_url( $l['url'] ),
+            esc_attr( $l['label'] ),
+            esc_attr( $l['icon'] )
+        );
+    }
+    echo '</ul></div></div>';
+}
+
+// ─── Footer CSS (inline, wp_head 9999) ────────────────────────────────────────
+//
+// Lives here, not in style.css: the child style.css is enqueued with a static
+// ?ver, so Bluehost/CDN cache an old copy and footer edits there don't reach live.
+// Inline <style> ships with the (uncached) HTML and prints after Ohio's own inline
+// CSS, so it wins. Hides the header social side-rail, the dark/light switcher, the
+// newsletter column and the duplicate under-logo social; rebalances the remaining
+// columns; and styles the bottom social strip.
+add_action( 'wp_head', 'dirtshack_footer_css', 9999 );
+function dirtshack_footer_css() {
+    ?>
+<style id="ds-footer-css">
+/* Hide Ohio's header social side-rail (the vertical "Follow Us" on the page edge) */
+.elements-bar { display: none !important; }
+
+/* Hide the dark / light color switcher */
+.color-switcher,
+.color-switcher-mobile,
+.color-switcher-toddler { display: none !important; }
+
+/* Footer: hide the newsletter column + the duplicate under-logo social block */
+#colophon .widgets-column:has(.widget_ohio_widget_subscribe) { display: none !important; }
+#colophon .widget_ohio_widget_subscribe { display: none !important; } /* :has() fallback */
+#colophon .widget_block:has(a[href*="instagram.com"]),
+#colophon .widget_block:has(a[href*="facebook.com"]) { display: none !important; }
+
+/* Rebalance the remaining footer columns to fill the row (3-up on desktop) */
+@media (min-width: 992px) {
+    #colophon .widgets .widgets-column {
+        width: 33.3333% !important;
+        max-width: 33.3333% !important;
+        flex: 0 0 33.3333% !important;
+    }
+}
+
+/* Bottom social strip — branded dark bar with brand icons */
+.ds-footer-social {
+    background: #111 !important;
+    border-top: 2px solid #C4E000 !important;
+    padding: 1rem clamp(1rem, 4vw, 3rem) !important;
+}
+.ds-footer-social__inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .35rem 1.1rem !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+}
+.ds-footer-social__label {
+    color: #C4E000 !important;
+    font-weight: 800 !important;
+    letter-spacing: .14em !important;
+    text-transform: uppercase !important;
+    font-size: .72rem !important;
+}
+.ds-footer-social__list {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.1rem !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.ds-footer-social__list > li { margin: 0 !important; padding: 0 !important; float: none !important; }
+.ds-footer-social__link {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #fff !important;
+    font-size: 1.15rem !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+    transition: color .18s !important;
+}
+.ds-footer-social__link:hover { color: #C4E000 !important; }
+</style>
+    <?php
 }
 
 // ─── Site-wide header: sticky dark bar (consistency across all pages) ─────────
