@@ -436,7 +436,34 @@ if ( ! $ds_shop_url ) {
     </section>
     <?php endif; ?>
 
-    <!-- ── 3. WHY DIRTSHACK (compact ribbon) ── -->
+    <!-- ── 3. MARKETPLACE CARD ── -->
+    <section class="ds-section ds-section--grey">
+        <div class="ds-wrap">
+            <div class="ds-market">
+                <div class="ds-market__copy">
+                    <span class="ds-market__eyebrow">DirtShack Marketplace</span>
+                    <h2 class="ds-market__title">Buy &amp; sell used dirt bikes</h2>
+                    <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
+                </div>
+                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 4. INSTAGRAM FEED (Smash Balloon) ── -->
+    <?php if ( shortcode_exists( 'instagram-feed' ) ) : ?>
+    <section class="ds-section ds-instagram">
+        <div class="ds-wrap">
+            <div class="ds-section__head">
+                <h2 class="ds-section__title">From the Trail</h2>
+                <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
+            </div>
+            <?php echo do_shortcode( '[instagram-feed]' ); ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- ── 5. WHY DIRTSHACK (compact ribbon) ── -->
     <section class="ds-section ds-section--dark ds-why-section">
         <div class="ds-wrap">
             <div class="ds-section__head">
@@ -463,33 +490,6 @@ if ( ! $ds_shop_url ) {
                     <h3 class="ds-why__title">Rider Community</h3>
                     <p class="ds-why__text">Built by riders, for riders — support that speaks dirt.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── 4. INSTAGRAM FEED (Smash Balloon) ── -->
-    <?php if ( shortcode_exists( 'instagram-feed' ) ) : ?>
-    <section class="ds-section ds-instagram">
-        <div class="ds-wrap">
-            <div class="ds-section__head">
-                <h2 class="ds-section__title">From the Trail</h2>
-                <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
-            </div>
-            <?php echo do_shortcode( '[instagram-feed]' ); ?>
-        </div>
-    </section>
-    <?php endif; ?>
-
-    <!-- ── 5. MARKETPLACE CARD ── -->
-    <section class="ds-section ds-section--grey">
-        <div class="ds-wrap">
-            <div class="ds-market">
-                <div class="ds-market__copy">
-                    <span class="ds-market__eyebrow">DirtShack Marketplace</span>
-                    <h2 class="ds-market__title">Buy &amp; sell used dirt bikes</h2>
-                    <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
-                </div>
-                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
             </div>
         </div>
     </section>
