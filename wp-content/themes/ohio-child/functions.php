@@ -51,6 +51,27 @@ function ohio_child_add_parent_dep( $tag, $handle ) {
     return $tag;
 }
 
+// ─── Enqueue child JS (cache-safe client behaviours) ─────────────────────────
+//
+// One small, deferred, site-wide script (announcement-bar dismissal). The
+// version string is the file's modification time so a CDN/browser cache busts
+// cleanly the moment the file changes — and never on a per-request basis.
+add_action( 'wp_enqueue_scripts', 'dirtshack_enqueue_scripts', 20 );
+function dirtshack_enqueue_scripts() {
+    $rel  = 'assets/js/ds.js';
+    $path = get_stylesheet_directory() . '/' . $rel;
+    if ( ! file_exists( $path ) ) {
+        return;
+    }
+    wp_enqueue_script(
+        'dirtshack-js',
+        get_stylesheet_directory_uri() . '/' . $rel,
+        array(),
+        filemtime( $path ),
+        array( 'in_footer' => true, 'strategy' => 'defer' )
+    );
+}
+
 // ─── Custom functions, hooks and filters below ───────────────────────────────
 // Add all DirtShack-specific PHP customisations here instead of editing the
 // parent theme. This file is safe from Ohio theme updates.
@@ -352,8 +373,25 @@ function dirtshack_cross_promo_strip() {
             <a class="ds-xpromo__cta" href="<?php echo esc_url( $url ); ?>">
                 Browse the Marketplace&nbsp;&rarr;
             </a>
+            <button type="button" class="ds-xpromo__close" aria-label="<?php esc_attr_e( 'Dismiss', 'ohio-child' ); ?>">&times;</button>
         </div>
     </div>
+    <?php
+}
+
+// No-flash dismissal read. The page HTML is page-cached and always *includes*
+// the bar, so we can't render it hidden server-side per visitor. This tiny
+// synchronous <head> script runs before first paint, reads localStorage and sets
+// `ds-xpromo-off` on <html> so the CSS below hides the bar with zero layout shift
+// (no FOUC, no CLS). It is byte-identical for every visitor, so it stays fully
+// cacheable. The click-to-dismiss handler lives in assets/js/ds.js.
+add_action( 'wp_head', 'dirtshack_xpromo_nofouc_script', 1 );
+function dirtshack_xpromo_nofouc_script() {
+    if ( dirtshack_xpromo_suppressed() ) {
+        return;
+    }
+    ?>
+<script>try{if(localStorage.getItem('dsXpromoDismissed')==='1'){document.documentElement.classList.add('ds-xpromo-off');}}catch(e){}</script>
     <?php
 }
 
@@ -365,12 +403,15 @@ function dirtshack_cross_promo_css() {
     }
     ?>
 <style id="ds-xpromo-css">
+/* Dismissed (class set by the no-FOUC head script / ds.js) */
+html.ds-xpromo-off .ds-xpromo { display: none !important; }
+
 .ds-xpromo {
     background: var(--ds-dark, #111) !important;
     color: #fff !important;
     font-size: .82rem !important;
     line-height: 1.3 !important;
-    border-bottom: 2px solid var(--ds-yellow, #c8e600) !important;
+    border-bottom: 2px solid var(--ds-yellow, #C4E000) !important;
 }
 .ds-xpromo__inner {
     max-width: var(--ds-max, 1280px) !important;
@@ -416,13 +457,29 @@ function dirtshack_cross_promo_css() {
     transition: opacity .18s !important;
 }
 .ds-xpromo__cta:hover { opacity: .82 !important; }
+.ds-xpromo__close {
+    flex: 0 0 auto !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    color: #bbb !important;
+    font-size: 1.25rem !important;
+    line-height: 1 !important;
+    padding: .15rem .35rem !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    transition: color .18s !important;
+}
+.ds-xpromo__close:hover { color: #fff !important; }
 
 /* ── Mobile: stack copy, keep it one tidy block ── */
 @media (max-width: 768px) {
-    .ds-xpromo__inner { flex-wrap: wrap !important; gap: .5rem .7rem !important; padding: .55rem 1rem !important; }
+    .ds-xpromo__inner { flex-wrap: wrap !important; gap: .5rem .7rem !important; padding: .55rem 1rem !important; position: relative !important; padding-right: 2.2rem !important; }
     .ds-xpromo__text { flex-direction: column !important; align-items: flex-start !important; gap: .1rem !important; flex: 1 1 60% !important; }
     .ds-xpromo__sub { white-space: normal !important; font-size: .74rem !important; }
     .ds-xpromo__cta { flex: 1 1 100% !important; text-align: center !important; padding: .6rem 1rem !important; }
+    .ds-xpromo__close { position: absolute !important; top: .35rem !important; right: .5rem !important; }
 }
 </style>
     <?php

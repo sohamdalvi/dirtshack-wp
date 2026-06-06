@@ -20,11 +20,11 @@ Text Domain: ohio-child
 /* ── DirtShack — Global overrides + Homepage ────────────────────────────── */
 
 :root {
-    --ds-yellow:  #c8e600;
+    --ds-yellow:  #C4E000;  /* brand neon green */
     --ds-dark:    #111111;
     --ds-grey:    #f4f4f4;
     --ds-border:  #e5e5e5;
-    --ds-radius:  3px;
+    --ds-radius:  16px;     /* brand corner radius */
     --ds-max:     1280px;
     --ds-pad:     clamp(1rem, 4vw, 3rem);
 }
