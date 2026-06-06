@@ -503,3 +503,89 @@ function dirtshack_footer_social_bar() {
     get_template_part( 'parts/elements/social_bar' );
     echo '</div>';
 }
+
+// ─── Site-wide header: sticky dark bar (consistency across all pages) ─────────
+//
+// Ohio renders the header as a transparent overlay that floats over the hero and
+// only turns into a solid dark bar once scrolled (its JS `-sticky` state). We make
+// that solid dark bar the permanent appearance on EVERY page: a CSS position:sticky
+// bar that stays in normal flow (so page content/heroes sit below it, no overlap)
+// and pins to the top on scroll. Mirrors what the homepage used to do on its own —
+// now global. (Homepage-only layout neutralisations stay in front-page.php.)
+//
+// Priority 9999 (not 99): this callback is registered in the child functions.php,
+// which loads BEFORE the parent, so at priority 99 it would print *before* Ohio's
+// own inline dynamic CSS and lose specificity ties. 9999 prints it last so it wins
+// (same technique as dirtshack_fix_headline_bg_css above).
+add_action( 'wp_head', 'dirtshack_header_css', 9999 );
+function dirtshack_header_css() {
+    ?>
+<style id="ds-header-css">
+/* Sticky in normal flow (overrides Ohio's absolute placement + JS -sticky fixed) */
+.theme-ohio #masthead,
+.theme-ohio #masthead.header,
+.theme-ohio #masthead.-sticky {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+}
+/* Ancestors must not clip or sticky won't pin */
+.theme-ohio .site,
+.theme-ohio .site-content,
+.theme-ohio #content { overflow: visible !important; }
+
+/* Solid dark background */
+.theme-ohio #masthead.header,
+.theme-ohio #masthead .header-wrap,
+.theme-ohio #masthead .header-wrap-inner,
+.theme-ohio #masthead .subheader { background: #111 !important; }
+.theme-ohio #masthead .header-wrap { box-shadow: 0 2px 12px rgba(0,0,0,.4) !important; }
+
+/* Shorter bar (Ohio sets 70px → 54px) + smaller action icons/hamburger */
+.theme-ohio #masthead,
+.theme-ohio #masthead.header,
+.theme-ohio #masthead .header-wrap,
+.theme-ohio #masthead .header-wrap-inner { height: 54px !important; min-height: 54px !important; }
+.theme-ohio #masthead .menu-optional .icon-button,
+.theme-ohio #masthead .mobile-hamburger,
+.theme-ohio #masthead .mobile-hamburger .hamburger,
+.theme-ohio #masthead .hamburger-button { height: 44px !important; width: 44px !important; }
+
+/* One horizontal logo. Ohio ships 4 logo blocks — hide all but .logo-sticky and
+   show only its dark-scheme image (both scheme imgs are the same Light-H.png, so
+   showing both renders a doubled logo). Cap height so it stays a normal logo. */
+.theme-ohio #masthead .logo,
+.theme-ohio #masthead .logo-mobile,
+.theme-ohio #masthead .logo-sticky-mobile { display: none !important; }
+.theme-ohio #masthead .logo-sticky { display: block !important; opacity: 1 !important; visibility: visible !important; }
+.theme-ohio #masthead .logo-sticky .dark-scheme-logo { display: block !important; max-height: 38px !important; width: auto !important; }
+.theme-ohio #masthead .logo-sticky .main-logo.light-scheme-logo { display: none !important; }
+
+/* Action icons + hamburger → white. The hamburger glyph is an icon font
+   (<i class="icon">) → colour it, NOT background (white bg = solid box). */
+.theme-ohio #masthead .menu-optional .icon-button,
+.theme-ohio #masthead .menu-optional .icon-button .icon,
+.theme-ohio #masthead .menu-optional .icon-button i,
+.theme-ohio #masthead .menu-optional > li > a { color: #fff !important; }
+.theme-ohio #masthead .mobile-hamburger .hamburger i,
+.theme-ohio #masthead .mobile-hamburger .hamburger .icon,
+.theme-ohio #masthead .hamburger-button i,
+.theme-ohio #masthead .hamburger-button .icon { color: #fff !important; background-color: transparent !important; }
+.theme-ohio #masthead .mobile-hamburger .hamburger > span,
+.theme-ohio #masthead .hamburger-button > span { background-color: #fff !important; }
+
+/* Inline nav links → white on the dark bar; revert to dark when the mobile
+   slide-in panel is open (Ohio adds `.visible`) so they stay readable on the
+   light panel. Keyed off the open-state class, not a width breakpoint. */
+.theme-ohio #masthead .slide-in-overlay .menu-link,
+.theme-ohio #masthead .nav-container .menu-link { color: #fff !important; }
+.theme-ohio #masthead .slide-in-overlay.visible .menu-link { color: #111 !important; }
+
+/* Cart count badge → brand green */
+.theme-ohio #masthead .cart-count,
+.theme-ohio #masthead .cart-button .count,
+.theme-ohio #masthead .header-cart-count { background: #C4E000 !important; color: #111 !important; }
+</style>
+    <?php
+}
