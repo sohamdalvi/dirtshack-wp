@@ -278,18 +278,23 @@ function dirtshack_no_banner_css() {
 .single-product .share-bar { display: none !important; }
 
 /* Mobile product gallery: make it obvious there are more images. Ohio inits the
-   gallery slider with navBtn:true on <=1180px (so .clb-slider-nav-btn prev/next
-   arrows exist in the DOM when there is >1 image) but hides them on touch — force
-   them visible as circular arrows on the sides. */
+   gallery slider with navBtn:true on <=1180px, so the .clb-slider-nav-btn prev/next
+   buttons exist in the DOM (when a product has >1 image) — but it hides the
+   CONTAINER with display:none on touch. Force the container visible and place the
+   two buttons as circular arrows on the left/right edges of the image. */
 @media (max-width: 1180px) {
-    .single-product .woo-product-image .clb-slider-nav-btn,
+    /* positioning context for the side arrows */
+    .single-product .woo-product-image-slider .clb-slider { position: relative !important; }
+
+    /* un-hide the nav container (the key fix — display, not just opacity) */
     .single-product .woo-product-image-slider .clb-slider-nav-btn {
+        display: block !important;
         opacity: 1 !important;
         visibility: visible !important;
-        pointer-events: auto !important;
+        pointer-events: none !important; /* container ignores taps; buttons re-enable */
     }
-    .single-product .woo-product-image .clb-slider-nav-btn .prev-btn,
-    .single-product .woo-product-image .clb-slider-nav-btn .next-btn,
+
+    /* prev / next as circular arrows pinned to the sides, centred over the image */
     .single-product .woo-product-image-slider .clb-slider-nav-btn .prev-btn,
     .single-product .woo-product-image-slider .clb-slider-nav-btn .next-btn {
         display: flex !important;
@@ -297,12 +302,26 @@ function dirtshack_no_banner_css() {
         justify-content: center !important;
         opacity: 1 !important;
         visibility: visible !important;
-        width: 40px !important;
-        height: 40px !important;
+        pointer-events: auto !important;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 6 !important;
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
         border-radius: 50% !important;
         background: rgba(17,17,17,.55) !important;
         color: #fff !important;
     }
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .prev-btn { left: 10px !important; right: auto !important; }
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .next-btn { right: 10px !important; left: auto !important; }
+
+    /* white arrow glyphs */
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .prev-btn svg,
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .next-btn svg { fill: #fff !important; }
 }
 </style>
     <?php
