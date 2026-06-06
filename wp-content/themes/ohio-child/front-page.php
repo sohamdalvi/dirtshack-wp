@@ -284,8 +284,8 @@ function dirtshack_home_css() { ?>
    These elements are injected by the plugin's JS, but the CSS still applies. ── */
 #ds-home .ds-instagram #sb_instagram { margin: 0 auto !important; }
 
-/* Hide the plugin's profile header/bio — we already have our own "From the Trail"
-   heading with the @dirtshack.in link, so the avatar + bio block is redundant. */
+/* Hide the plugin's profile header/bio — we already show the @dirtshack.in link
+   above the feed, so the avatar + bio block is redundant. */
 #ds-home .ds-instagram #sb_instagram .sbi_header,
 #ds-home .ds-instagram #sb_instagram .sb_instagram_header { display: none !important; }
 
