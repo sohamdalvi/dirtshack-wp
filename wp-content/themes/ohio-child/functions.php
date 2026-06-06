@@ -276,6 +276,34 @@ function dirtshack_no_banner_css() {
 .site-content, #content { padding-top: 1.25rem !important; }
 /* Remove the social share (Facebook / X / Pinterest) from the product page */
 .single-product .share-bar { display: none !important; }
+
+/* Mobile product gallery: make it obvious there are more images. Ohio inits the
+   gallery slider with navBtn:true on <=1180px (so .clb-slider-nav-btn prev/next
+   arrows exist in the DOM when there is >1 image) but hides them on touch — force
+   them visible as circular arrows on the sides. */
+@media (max-width: 1180px) {
+    .single-product .woo-product-image .clb-slider-nav-btn,
+    .single-product .woo-product-image-slider .clb-slider-nav-btn {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+    .single-product .woo-product-image .clb-slider-nav-btn .prev-btn,
+    .single-product .woo-product-image .clb-slider-nav-btn .next-btn,
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .prev-btn,
+    .single-product .woo-product-image-slider .clb-slider-nav-btn .next-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        background: rgba(17,17,17,.55) !important;
+        color: #fff !important;
+    }
+}
 </style>
     <?php
 }
