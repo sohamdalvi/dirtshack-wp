@@ -484,7 +484,6 @@ if ( ! $ds_shop_url ) {
     <section class="ds-section ds-instagram">
         <div class="ds-wrap">
             <div class="ds-section__head">
-                <h2 class="ds-section__title">From the Trail</h2>
                 <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
             </div>
             <?php echo do_shortcode( '[instagram-feed]' ); ?>
