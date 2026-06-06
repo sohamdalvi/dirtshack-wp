@@ -154,28 +154,53 @@ function dirtshack_home_css() { ?>
     width: 100% !important;
     max-width: var(--max) !important;
     margin: 0 auto !important;
-    padding: 2.5rem var(--padx) 2.75rem !important;
+    padding: 2.5rem var(--padx) 1rem !important;   /* small bottom pad: title sits on the bottom edge */
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     text-align: left !important;
 }
 #ds-home .ds-hero__title {
-    margin: 0 0 1.1rem !important;
-    font-size: clamp(1.7rem, 7vw, 3.2rem) !important;
+    margin: 0 !important;
+    font-size: clamp(1rem, 4.2vw, 1.6rem) !important; /* reduced */
     font-weight: 800 !important;
-    letter-spacing: -.02em !important;
-    line-height: 1.05 !important;
+    letter-spacing: -.01em !important;
+    line-height: 1.18 !important;
     text-transform: uppercase !important;
     color: #fff !important;
     text-shadow: 0 2px 14px rgba(0,0,0,.5) !important;
 }
 #ds-home .ds-accent { color: var(--g) !important; }
-#ds-home .ds-hero__ctas {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: .75rem !important;
+
+/* Marketplace badge — top-right of the hero, styled as a clearly-EXTERNAL link
+   (translucent dark pill + neon-green border + ↗ outbound arrow, opens new tab). */
+#ds-home .ds-hero__market {
+    position: absolute !important;
+    top: .9rem !important;
+    right: clamp(1rem, 4vw, 2rem) !important;
+    z-index: 3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: .4rem !important;
+    max-width: calc(100% - 2rem) !important;
+    padding: .5rem .9rem !important;
+    border-radius: 999px !important;
+    background: rgba(0,0,0,.55) !important;
+    border: 1.5px solid var(--g) !important;
+    color: #fff !important;
+    font-size: .68rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    line-height: 1.1 !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+    transition: background .18s, color .18s !important;
 }
+#ds-home .ds-hero__market:hover { background: var(--g) !important; color: var(--d) !important; }
+#ds-home .ds-hero__market .ds-ext { color: var(--g) !important; font-weight: 900 !important; font-size: 1.05em !important; }
+#ds-home .ds-hero__market:hover .ds-ext { color: var(--d) !important; }
 
 /* ── Marketplace card ── */
 #ds-home .ds-market {
@@ -365,7 +390,7 @@ function dirtshack_home_css() { ?>
     #ds-home .ds-why-section { padding-top: 44px !important; padding-bottom: 44px !important; } /* keep ribbon compact */
     #ds-home .ds-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1.5rem !important; }
     #ds-home .ds-hero { min-height: 52vh !important; }
-    #ds-home .ds-hero__content { padding: 4rem var(--padx) 4rem !important; }
+    #ds-home .ds-hero__content { padding: 3rem var(--padx) 1.5rem !important; }
 }
 </style>
 <?php }
@@ -392,12 +417,11 @@ if ( ! $ds_shop_url ) {
     <!-- ── 1. HERO ── -->
     <section class="ds-hero" style="background-image:url('<?php echo esc_url( dirtshack_hero_image_url( 'home' ) ); ?>')">
         <div class="ds-hero__overlay"></div>
+        <a class="ds-hero__market" href="<?php echo esc_url( $ds_market_url ); ?>" target="_blank" rel="noopener">
+            Garage Sale on Marketplace <span class="ds-ext" aria-hidden="true">&#8599;</span>
+        </a>
         <div class="ds-hero__content">
             <h1 class="ds-hero__title">Engineered to Global Standards.<br>Built for <span class="ds-accent">Indian Riders.</span></h1>
-            <div class="ds-hero__ctas">
-                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_shop_url ); ?>">Shop Parts</a>
-                <a class="ds-btn ds-btn--ghost" href="<?php echo esc_url( $ds_market_url ); ?>">Used Bike Marketplace</a>
-            </div>
         </div>
     </section>
 
