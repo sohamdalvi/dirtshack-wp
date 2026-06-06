@@ -192,59 +192,7 @@ function dirtshack_home_css() { ?>
     gap: .75rem !important;
 }
 
-/* ── 2. Category card ── */
-#ds-home .ds-cat {
-    position: relative !important;
-    display: block !important;
-    border-radius: var(--r) !important;
-    overflow: hidden !important;
-    aspect-ratio: 4 / 3 !important;
-    background: var(--d) !important;
-    text-decoration: none !important;
-    color: #fff !important;
-}
-#ds-home .ds-cat__img {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
-    opacity: .72 !important;
-    transition: transform .35s, opacity .2s !important;
-}
-#ds-home .ds-cat:hover .ds-cat__img { transform: scale(1.06) !important; opacity: .55 !important; }
-#ds-home .ds-cat__overlay {
-    position: absolute !important;
-    inset: 0 !important;
-    background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.05) 70%) !important;
-}
-#ds-home .ds-cat__name {
-    position: absolute !important;
-    left: 0 !important; right: 0 !important; bottom: 0 !important;
-    z-index: 2 !important;
-    margin: 0 !important;
-    padding: .85rem 1rem !important;
-    font-size: .92rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .02em !important;
-    text-transform: uppercase !important;
-    color: #fff !important;
-    line-height: 1.2 !important;
-}
-/* Marketplace tile — distinct neon-green treatment so it reads as an outbound link */
-#ds-home .ds-cat--market {
-    background: linear-gradient(135deg, #1d1d1d 0%, #111 100%) !important;
-    border: 2px solid var(--g) !important;
-}
-#ds-home .ds-cat--market .ds-cat__overlay {
-    background: radial-gradient(circle at 70% 25%, rgba(196,224,0,.18) 0%, rgba(0,0,0,0) 55%),
-                linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.05) 70%) !important;
-}
-#ds-home .ds-cat--market .ds-cat__name { color: var(--g) !important; }
-#ds-home .ds-cat__ext { font-size: .9em !important; font-weight: 900 !important; }
-
-/* ── 3. Marketplace card ── */
+/* ── Marketplace card ── */
 #ds-home .ds-market {
     position: relative !important;
     display: flex !important;
@@ -328,19 +276,26 @@ function dirtshack_home_css() { ?>
 #ds-home .ds-why {
     display: flex !important;
     flex-direction: column !important;
-    gap: .5rem !important;
-    padding: 1.25rem 1rem !important;
+    gap: .3rem !important;
+    padding: .8rem .9rem !important;
     background: #1a1a1a !important;
     border: 1px solid #2a2a2a !important;
     border-radius: var(--r) !important;
 }
 #ds-home .ds-why__icon {
-    width: 34px !important; height: 34px !important;
+    width: 24px !important; height: 24px !important;
     color: var(--g) !important;
 }
 #ds-home .ds-why__icon svg { width: 100% !important; height: 100% !important; display: block !important; }
-#ds-home .ds-why__title { margin: 0 !important; font-size: .95rem !important; font-weight: 800 !important; color: #fff !important; }
-#ds-home .ds-why__text { margin: 0 !important; font-size: .82rem !important; line-height: 1.45 !important; color: #b9b9b9 !important; }
+#ds-home .ds-why__title { margin: 0 !important; font-size: .86rem !important; font-weight: 800 !important; color: #fff !important; line-height: 1.2 !important; }
+#ds-home .ds-why__text { margin: 0 !important; font-size: .76rem !important; line-height: 1.35 !important; color: #b9b9b9 !important; }
+
+/* Compact "ribbon": trim the section's vertical padding + heading gap */
+#ds-home .ds-why-section { padding-top: 26px !important; padding-bottom: 26px !important; }
+#ds-home .ds-why-section .ds-section__head { margin-bottom: 1rem !important; }
+
+/* ── Instagram feed (Smash Balloon) — let the plugin own its grid; just frame it ── */
+#ds-home .ds-instagram #sb_instagram { margin: 0 auto !important; }
 
 /* ── 6. Blog cards — 1 col mobile ── */
 #ds-home .ds-blog-grid {
@@ -378,6 +333,7 @@ function dirtshack_home_css() { ?>
 /* ── Desktop (≥1025px): 4-col product/category grids, 80px section padding ── */
 @media (min-width: 1025px) {
     #ds-home .ds-section { padding: 80px var(--padx) !important; }
+    #ds-home .ds-why-section { padding-top: 44px !important; padding-bottom: 44px !important; } /* keep ribbon compact */
     #ds-home .ds-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1.5rem !important; }
     #ds-home .ds-hero { min-height: 52vh !important; }
     #ds-home .ds-hero__content { padding: 4rem var(--padx) 4rem !important; }
@@ -416,73 +372,7 @@ if ( ! $ds_shop_url ) {
         </div>
     </section>
 
-    <!-- ── 2. SHOP BY CATEGORY ── -->
-    <?php
-    // Native WooCommerce product categories — top-level, non-empty, deterministic
-    // order (by name) so the cached HTML is stable. Nothing hardcoded: editing the
-    // category tree changes this grid.
-    $ds_cats = get_terms( array(
-        'taxonomy'   => 'product_cat',
-        'hide_empty' => true,
-        'parent'     => 0,
-        'orderby'    => 'name',
-        'order'      => 'ASC',
-        'number'     => 8,
-        'exclude'    => array( (int) get_option( 'default_product_cat' ) ),
-    ) );
-
-    if ( ! empty( $ds_cats ) && ! is_wp_error( $ds_cats ) ) :
-    ?>
-    <section class="ds-section">
-        <div class="ds-wrap">
-            <div class="ds-section__head">
-                <h2 class="ds-section__title">Shop by Category</h2>
-                <a class="ds-link" href="<?php echo esc_url( $ds_shop_url ); ?>">All parts &rarr;</a>
-            </div>
-            <div class="ds-grid">
-            <?php foreach ( $ds_cats as $cat ) :
-                $thumb_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
-            ?>
-                <a class="ds-cat" href="<?php echo esc_url( get_term_link( $cat ) ); ?>">
-                    <?php if ( $thumb_id ) :
-                        echo wp_get_attachment_image(
-                            $thumb_id,
-                            'woocommerce_thumbnail',
-                            false,
-                            array( 'class' => 'ds-cat__img', 'loading' => 'lazy', 'alt' => esc_attr( $cat->name ) )
-                        );
-                    endif; ?>
-                    <span class="ds-cat__overlay"></span>
-                    <h3 class="ds-cat__name"><?php echo esc_html( $cat->name ); ?></h3>
-                </a>
-            <?php endforeach; ?>
-
-                <!-- Marketplace tile — looks like a category, links out to the
-                     used-bike marketplace (URL from the constant, not hardcoded). -->
-                <a class="ds-cat ds-cat--market" href="<?php echo esc_url( $ds_market_url ); ?>">
-                    <span class="ds-cat__overlay"></span>
-                    <h3 class="ds-cat__name">Marketplace <span class="ds-cat__ext" aria-hidden="true">&#8599;</span></h3>
-                </a>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
-
-    <!-- ── 3. MARKETPLACE CARD ── -->
-    <section class="ds-section ds-section--grey">
-        <div class="ds-wrap">
-            <div class="ds-market">
-                <div class="ds-market__copy">
-                    <span class="ds-market__eyebrow">DirtShack Marketplace</span>
-                    <h2 class="ds-market__title">Buy &amp; sell used dirt bikes</h2>
-                    <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
-                </div>
-                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── 4. FEATURED PRODUCTS ── -->
+    <!-- ── 2. FEATURED PRODUCTS ── -->
     <?php
     // Pull products flagged "featured" in WooCommerce (content stays editable via
     // the featured flag — nothing hardcoded). Deterministic order. If the store
@@ -546,8 +436,8 @@ if ( ! $ds_shop_url ) {
     </section>
     <?php endif; ?>
 
-    <!-- ── 5. WHY DIRTSHACK ── -->
-    <section class="ds-section ds-section--dark">
+    <!-- ── 3. WHY DIRTSHACK (compact ribbon) ── -->
+    <section class="ds-section ds-section--dark ds-why-section">
         <div class="ds-wrap">
             <div class="ds-section__head">
                 <h2 class="ds-section__title">Why DirtShack</h2>
@@ -573,6 +463,33 @@ if ( ! $ds_shop_url ) {
                     <h3 class="ds-why__title">Rider Community</h3>
                     <p class="ds-why__text">Built by riders, for riders — support that speaks dirt.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── 4. INSTAGRAM FEED (Smash Balloon) ── -->
+    <?php if ( shortcode_exists( 'instagram-feed' ) ) : ?>
+    <section class="ds-section ds-instagram">
+        <div class="ds-wrap">
+            <div class="ds-section__head">
+                <h2 class="ds-section__title">From the Trail</h2>
+                <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
+            </div>
+            <?php echo do_shortcode( '[instagram-feed]' ); ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- ── 5. MARKETPLACE CARD ── -->
+    <section class="ds-section ds-section--grey">
+        <div class="ds-wrap">
+            <div class="ds-market">
+                <div class="ds-market__copy">
+                    <span class="ds-market__eyebrow">DirtShack Marketplace</span>
+                    <h2 class="ds-market__title">Buy &amp; sell used dirt bikes</h2>
+                    <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
+                </div>
+                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
             </div>
         </div>
     </section>
