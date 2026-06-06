@@ -40,9 +40,19 @@ function dirtshack_home_css() { ?>
 .home .breadcrumb-holder { display: none !important; }
 .home .page-container.top-offset { padding-top: 0 !important; }
 
-/* ── Header: force the solid dark "scrolled" look at ALL scroll positions, so the
-      menu is a static dark bar with the horizontal logo instead of a transparent
-      overlay floating over the hero (matches Ohio's own -sticky appearance). ── */
+/* ── Header: a real static dark bar, NOT a floating overlay. Ohio positions the
+      header absolutely over the hero; force it into normal document flow so the
+      hero sits *below* the bar instead of behind it. `static` (not `relative`)
+      also neutralises Ohio's `top` offset and its scroll `-sticky` fixed state,
+      so the bar simply stays at the top of the page and scrolls with it. ── */
+.home #masthead,
+.home #masthead.header,
+.home #masthead.-sticky {
+    position: static !important;
+    top: auto !important;
+}
+
+/* Solid dark background + horizontal logo (matches Ohio's scrolled appearance) */
 .home #masthead.header,
 .home #masthead .header-wrap,
 .home #masthead .header-wrap-inner,
@@ -76,11 +86,15 @@ function dirtshack_home_css() { ?>
 .home #masthead .menu-optional .icon-button .icon,
 .home #masthead .menu-optional .icon-button i,
 .home #masthead .menu-optional > li > a { color: #fff !important; }
-/* Hamburger lines → white (target the line spans/icon, not the button box) */
-.home #masthead .mobile-hamburger .hamburger span,
+/* Hamburger → white. The glyph is an icon font (<i class="icon">), so colour it
+   (NOT background — a white background turns it into a solid box). Span-based line
+   variants still get a white background, harmlessly. */
 .home #masthead .mobile-hamburger .hamburger i,
-.home #masthead .hamburger-button span,
-.home #masthead .hamburger-button i { background-color: #fff !important; color: #fff !important; }
+.home #masthead .mobile-hamburger .hamburger .icon,
+.home #masthead .hamburger-button i,
+.home #masthead .hamburger-button .icon { color: #fff !important; background-color: transparent !important; }
+.home #masthead .mobile-hamburger .hamburger > span,
+.home #masthead .hamburger-button > span { background-color: #fff !important; }
 
 /* Inline nav links ("Shop", "Braap") sit in the dark bar on tablet/desktop →
    white. The SAME element becomes the mobile slide-in panel when opened (Ohio
