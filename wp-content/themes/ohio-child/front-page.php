@@ -232,6 +232,17 @@ function dirtshack_home_css() { ?>
     color: #fff !important;
     line-height: 1.2 !important;
 }
+/* Marketplace tile — distinct neon-green treatment so it reads as an outbound link */
+#ds-home .ds-cat--market {
+    background: linear-gradient(135deg, #1d1d1d 0%, #111 100%) !important;
+    border: 2px solid var(--g) !important;
+}
+#ds-home .ds-cat--market .ds-cat__overlay {
+    background: radial-gradient(circle at 70% 25%, rgba(196,224,0,.18) 0%, rgba(0,0,0,0) 55%),
+                linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.05) 70%) !important;
+}
+#ds-home .ds-cat--market .ds-cat__name { color: var(--g) !important; }
+#ds-home .ds-cat__ext { font-size: .9em !important; font-weight: 900 !important; }
 
 /* ── 3. Marketplace card ── */
 #ds-home .ds-market {
@@ -445,6 +456,13 @@ if ( ! $ds_shop_url ) {
                     <h3 class="ds-cat__name"><?php echo esc_html( $cat->name ); ?></h3>
                 </a>
             <?php endforeach; ?>
+
+                <!-- Marketplace tile — looks like a category, links out to the
+                     used-bike marketplace (URL from the constant, not hardcoded). -->
+                <a class="ds-cat ds-cat--market" href="<?php echo esc_url( $ds_market_url ); ?>">
+                    <span class="ds-cat__overlay"></span>
+                    <h3 class="ds-cat__name">Marketplace <span class="ds-cat__ext" aria-hidden="true">&#8599;</span></h3>
+                </a>
             </div>
         </div>
     </section>
