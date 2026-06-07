@@ -329,6 +329,23 @@ function dirtshack_home_css() { ?>
 #ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo_wrap,
 #ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo { border-radius: 10px !important; overflow: hidden !important; }
 
+/* Keep the tiles square, but a bit smaller with a clear gap between them.
+   .sbi_photo is forced to a 1:1 box (height:auto + aspect-ratio beat the inline
+   pixel height the plugin's JS sets). Widening the .sbi_item padding opens up the
+   gutter — which both separates the tiles and shrinks each square (border-box, so
+   padding eats into the fixed column width). */
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo {
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 0 !important;
+}
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo_wrap { height: auto !important; }
+#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_item {
+    height: auto !important;
+    padding: 12px !important;
+}
+
 /* "Load More" → dark pill (secondary) */
 #ds-home .ds-instagram #sb_instagram #sbi_load .sbi_load_btn,
 #ds-home .ds-instagram #sb_instagram .sbi_load_btn {
