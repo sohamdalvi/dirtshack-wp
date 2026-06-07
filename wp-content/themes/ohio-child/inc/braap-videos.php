@@ -180,6 +180,14 @@ function dirtshack_braap_meta_box_cb( $post ) {
 		</p>
 	<?php elseif ( $url ) : ?>
 		<p style="color:#b32d2e;"><strong>Couldn't read a video ID from that URL.</strong> Double-check the link.</p>
+	<?php else : ?>
+		<?php $body_id = dirtshack_braap_youtube_id_from_content( $post->post_content ); ?>
+		<?php if ( $body_id ) : ?>
+			<p style="margin-top:8px;">
+				<img src="<?php echo esc_url( dirtshack_braap_thumb_url( $body_id ) ); ?>" alt="" style="width:100%;height:auto;border-radius:6px;" />
+				<span class="description">Using the YouTube video from your post body (ID: <code><?php echo esc_html( $body_id ); ?></code>). Paste a URL above to override it.</span>
+			</p>
+		<?php endif; ?>
 	<?php endif; ?>
 	<?php
 }
@@ -228,6 +236,38 @@ function dirtshack_braap_youtube_id( $url ) {
 }
 
 /**
+ * Pull the first YouTube video ID out of an arbitrary HTML/text blob — a post
+ * body that may contain a Gutenberg embed block, a bare oEmbed URL, a raw
+ * <iframe>, or a plain watch/youtu.be/shorts link. Used as a fallback when the
+ * author pasted the link into the editor body instead of the meta box.
+ */
+function dirtshack_braap_youtube_id_from_content( $content ) {
+	$content = (string) $content;
+	if ( '' === $content ) {
+		return '';
+	}
+	if ( preg_match( '~(?:youtube(?:-nocookie)?\.com/(?:watch\?[^"\s<>]*?v=|embed/|shorts/|v/|live/)|youtu\.be/)([A-Za-z0-9_-]{11})~', $content, $m ) ) {
+		return $m[1];
+	}
+	return '';
+}
+
+/**
+ * The effective YouTube video ID for a post: the explicit meta-box URL wins;
+ * otherwise we fall back to the first YouTube link/embed found in the post body.
+ * This means a link pasted straight into the editor still drives the archive
+ * thumbnail and the click-to-load player — the meta box is the preferred place
+ * but no longer mandatory.
+ */
+function dirtshack_braap_effective_youtube_id( $post_id ) {
+	$id = dirtshack_braap_youtube_id( get_post_meta( $post_id, DIRTSHACK_BRAAP_META, true ) );
+	if ( $id ) {
+		return $id;
+	}
+	return dirtshack_braap_youtube_id_from_content( get_post_field( 'post_content', $post_id ) );
+}
+
+/**
  * The YouTube-hosted thumbnail for a video ID. hqdefault (480×360) is the size
  * that is guaranteed to exist for every video (maxres often 404s).
  */
@@ -243,7 +283,7 @@ function dirtshack_braap_poster_html( $post_id, $img_size = 'medium_large' ) {
 	if ( has_post_thumbnail( $post_id ) ) {
 		return get_the_post_thumbnail( $post_id, $img_size, array( 'loading' => 'lazy', 'alt' => '' ) );
 	}
-	$vid = dirtshack_braap_youtube_id( get_post_meta( $post_id, DIRTSHACK_BRAAP_META, true ) );
+	$vid = dirtshack_braap_effective_youtube_id( $post_id );
 	if ( $vid ) {
 		return sprintf(
 			'<img src="%s" alt="" loading="lazy" width="480" height="360" />',
@@ -315,7 +355,7 @@ function dirtshack_braap_card( $post_id ) {
  * is output.
  */
 function dirtshack_braap_player( $post_id ) {
-	$vid = dirtshack_braap_youtube_id( get_post_meta( $post_id, DIRTSHACK_BRAAP_META, true ) );
+	$vid = dirtshack_braap_effective_youtube_id( $post_id );
 	if ( ! $vid ) {
 		return '';
 	}
@@ -335,6 +375,27 @@ function dirtshack_braap_player( $post_id ) {
 	</div>
 	<?php
 	return ob_get_clean();
+}
+
+// ─── Single page: drop a body-pasted YouTube embed ───────────────────────────
+//
+// The video is presented by the click-to-load player at the top of the single
+// page (built from the meta box OR, as a fallback, from a link in the body). If
+// the author pasted the link into the editor body, Gutenberg/WP turns it into a
+// live embed — which would duplicate the player and load a second, heavy iframe
+// on the shared host. Strip YouTube embeds from the body so only the lazy player
+// remains; the body stays the written commentary. Runs after do_blocks/autoembed
+// (priority 20) so the figures/iframes are already rendered.
+add_filter( 'the_content', 'dirtshack_braap_strip_body_youtube', 20 );
+function dirtshack_braap_strip_body_youtube( $content ) {
+	if ( ! is_singular( DIRTSHACK_BRAAP_CPT ) || ! in_the_loop() || ! is_main_query() ) {
+		return $content;
+	}
+	// Gutenberg / oEmbed figures (wp-block-embed … is-provider-youtube).
+	$content = preg_replace( '~<figure[^>]*\bwp-block-embed\b[^>]*\bis-provider-youtube\b[^>]*>.*?</figure>~is', '', $content );
+	// Bare YouTube iframes (raw HTML block or classic autoembed output).
+	$content = preg_replace( '~<iframe\b[^>]*\b(?:youtube(?:-nocookie)?\.com|youtu\.be)[^>]*>\s*</iframe>~i', '', $content );
+	return $content;
 }
 
 // ─── Front-end CSS (inline, wp_head 9999) ────────────────────────────────────
