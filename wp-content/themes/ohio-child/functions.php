@@ -85,6 +85,9 @@ function dirtshack_enqueue_scripts() {
 // Add all DirtShack-specific PHP customisations here instead of editing the
 // parent theme. This file is safe from Ohio theme updates.
 
+// "Braap" Videos custom post type (CPT + taxonomies + meta box + facade embeds).
+require get_stylesheet_directory() . '/inc/braap-videos.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active
@@ -152,12 +155,23 @@ function dirtshack_current_hero() {
             'tagline' => 'Secure <span class="ds-accent">Checkout</span>',
         );
     }
-    // The "Braap" page is set as the blog Posts page, so it resolves as the
-    // blog index (is_home), not a normal page (is_page).
-    if ( is_home() && is_main_query() ) {
+    // Braap Videos — the CPT archive at /braap/ and its taxonomy listings
+    // (video type / creator) carry the "Braap" brand hero. (Single video pages
+    // get NO hero — the lazy embed is the top of the page; see single-braap_video.php.)
+    if ( ( function_exists( 'is_post_type_archive' ) && is_post_type_archive( 'braap_video' ) )
+        || ( function_exists( 'is_tax' ) && is_tax( array( 'braap_type', 'braap_creator' ) ) ) ) {
         return array(
             'image'   => dirtshack_hero_image_url( 'braap' ),
             'tagline' => 'Twist the Throttle. <span class="ds-accent">Braap</span> On.',
+        );
+    }
+    // The blog Posts page (now at /blog/) resolves as the blog index (is_home).
+    // It keeps a hero, but the "Braap" brand has moved to the Videos CPT above,
+    // so the blog gets its own generic banner.
+    if ( is_home() && is_main_query() ) {
+        return array(
+            'image'   => dirtshack_hero_image_url( 'blog' ),
+            'tagline' => 'The DirtShack <span class="ds-accent">Blog</span>',
         );
     }
     return false;
@@ -384,9 +398,11 @@ function dirtshack_emit_hero_once() {
     }
 }
 
-// Shop, Cart, My Account and Braap (blog) all render Ohio's `page_headline`
-// partial right after the header. We hook that get_template_part call and emit
-// the hero just before the (now hidden) headline — i.e. at the top of #content.
+// Cart, Checkout and the blog index all render Ohio's `page_headline` partial
+// right after the header. We hook that get_template_part call and emit the hero
+// just before the (now hidden) headline — i.e. at the top of #content. The Braap
+// Videos archive / taxonomy pages use the child theme's own templates, which
+// call dirtshack_emit_hero_once() directly instead of going through this hook.
 add_action( 'get_template_part_parts/elements/page_headline', 'dirtshack_emit_hero_once' );
 
 // Single product view does NOT use page_headline, and Ohio's product layout
@@ -747,13 +763,22 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .logo-sticky .main-logo.light-scheme-logo { display: none !important; }
 /* Lock the logo to ONE small height in both the top (non-sticky) and scrolled
    (.-sticky) states so it doesn't resize on scroll. Overrides Ohio's per-state
-   logo height rules (it sets 100/70/50px at top and 45/30/20px when sticky). */
+   logo height rules (it sets 100/70/50px at top and 45/30/20px when sticky).
+   The wordmark is a wide 6.85:1 image. On mobile Ohio constrains .logo-sticky to
+   a fixed ~107px width (the room left beside the action icons); forcing a fixed
+   HEIGHT inside that clamped width (with object-fit:fill) crushed the aspect
+   ratio. Size by aspect ratio instead — cap height at 30px AND width at 100% of
+   the container, height:auto so the logo never distorts. Desktop: the container
+   is wide, so max-height binds → 30px tall at full width. Mobile: max-width binds
+   → it scales down proportionally to fit. object-fit:contain is a safety net. */
 .theme-ohio #masthead .logo-sticky img,
 .theme-ohio #masthead.-sticky .logo-sticky img {
-    height: 30px !important;
+    height: auto !important;
     min-height: 0 !important;
     max-height: 30px !important;
     width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
 }
 
 /* Action icons + hamburger → white. The hamburger glyph is an icon font

@@ -10,7 +10,7 @@
  *   3. Marketplace card  — single CTA out to market.dirtshack.in
  *   4. Featured Products — WooCommerce "featured" flag (falls back to latest)
  *   5. Why DirtShack     — four icon blocks
- *   6. Latest Braap      — latest blog posts
+ *   6. Latest Braap      — latest Braap Videos (CPT), static facade cards
  *   0. Footer            — Ohio footer via get_footer()
  *
  * Cache notes: every section renders from deterministic, page-cacheable queries.
@@ -556,41 +556,41 @@ if ( ! $ds_shop_url ) {
         </div>
     </section>
 
-    <!-- ── 6. LATEST BRAAP (blog) ── -->
+    <!-- ── 6. LATEST BRAAP (Videos CPT) ── -->
     <?php
-    $ds_posts = new WP_Query( array(
-        'post_type'           => 'post',
+    // Pulls the most recent Braap Videos (the CPT — NOT blog posts). Rendered with
+    // the same static facade cards as the archive: thumbnail + play overlay that
+    // LINK to the single-video page. No live iframes, no comment forms — fully
+    // page-cacheable. (dirtshack_braap_card + its CSS come from inc/braap-videos.php.)
+    $ds_videos = new WP_Query( array(
+        'post_type'           => 'braap_video',
         'post_status'         => 'publish',
-        'posts_per_page'      => 3,
+        'posts_per_page'      => 4,
         'ignore_sticky_posts' => true,
         'orderby'             => 'date',
         'order'               => 'DESC',
         'no_found_rows'       => true,
     ) );
 
-    if ( $ds_posts->have_posts() ) :
-        $ds_blog_url = get_permalink( (int) get_option( 'page_for_posts' ) );
+    if ( $ds_videos->have_posts() && function_exists( 'dirtshack_braap_card' ) ) :
+        $ds_braap_url = get_post_type_archive_link( 'braap_video' );
     ?>
     <section class="ds-section">
         <div class="ds-wrap">
             <div class="ds-section__head">
-                <h2 class="ds-section__title">Latest from Braap</h2>
-                <?php if ( $ds_blog_url ) : ?>
-                    <a class="ds-link" href="<?php echo esc_url( $ds_blog_url ); ?>">All posts &rarr;</a>
+                <h2 class="ds-section__title">Latest Braap</h2>
+                <?php if ( $ds_braap_url ) : ?>
+                    <a class="ds-link" href="<?php echo esc_url( $ds_braap_url ); ?>">All videos &rarr;</a>
                 <?php endif; ?>
             </div>
-            <div class="ds-blog-grid">
-            <?php while ( $ds_posts->have_posts() ) : $ds_posts->the_post(); ?>
-                <a class="ds-post" href="<?php echo esc_url( get_permalink() ); ?>">
-                    <?php if ( has_post_thumbnail() ) : ?>
-                        <span class="ds-post__img"><?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy' ) ); ?></span>
-                    <?php endif; ?>
-                    <span class="ds-post__body">
-                        <span class="ds-post__date"><?php echo esc_html( get_the_date() ); ?></span>
-                        <span class="ds-post__title"><?php the_title(); ?></span>
-                    </span>
-                </a>
-            <?php endwhile; wp_reset_postdata(); ?>
+            <div class="ds-braap-grid">
+            <?php
+            while ( $ds_videos->have_posts() ) :
+                $ds_videos->the_post();
+                echo dirtshack_braap_card( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput — built from esc_* helpers
+            endwhile;
+            wp_reset_postdata();
+            ?>
             </div>
         </div>
     </section>
