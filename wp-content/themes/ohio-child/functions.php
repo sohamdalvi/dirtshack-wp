@@ -648,6 +648,11 @@ function dirtshack_footer_css() {
     }
 }
 
+/* Tighten Ohio's tall footer widget row — it pads 72px top/bottom (49px on
+   smaller screens), and our short columns left a big empty band above the
+   scroll-top / copyright bar. Trim it close. */
+#colophon .widgets { padding-top: 36px !important; padding-bottom: 18px !important; }
+
 /* Bottom social strip — branded dark bar with brand icons */
 .ds-footer-social {
     background: #111 !important;
