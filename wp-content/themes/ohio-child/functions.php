@@ -81,6 +81,135 @@ function dirtshack_enqueue_scripts() {
     }
 }
 
+// ─── Performance: trim render-blocking + per-request bloat ───────────────────
+//
+// A low-traffic WooCommerce store still pays for assets on every page view.
+// Safe reductions (verified against live dirtshack.in, 2026-06-08):
+//   - wp-emoji — legacy emoji detection script/style, unused.
+//   - Unused Ohio "Linea" icon-font families — each is a render-blocking CSS
+//     file + a webfont download. Keep basic/ecommerce/ionicons/fontawesome/
+//     bootstrap (fontawesome powers the footer social bar); drop the rest.
+//     If a glyph goes missing in Ohio's UI, re-add that family below.
+//   - reCAPTCHA assets → only on My Account; Instagram assets → only on home.
+// (We do NOT touch wc-cart-fragments — Ohio's add-to-cart depends on it; see note below.)
+add_action( 'wp_enqueue_scripts', 'dirtshack_perf_dequeue', 99 );
+function dirtshack_perf_dequeue() {
+    if ( is_admin() ) {
+        return;
+    }
+
+    // 3. Drop unused Linea icon-font packs (handles: icon-pack-<name>).
+    //    These are <head> styles, so dequeue during wp_enqueue_scripts.
+    $unused_icon_packs = array(
+        'icon-pack-linea-arrows',
+        'icon-pack-linea-music',
+        'icon-pack-linea-weather',
+        'icon-pack-linea-software',
+        'icon-pack-linea-basic-elaboration',
+    );
+    foreach ( $unused_icon_packs as $handle ) {
+        wp_dequeue_style( $handle );
+    }
+
+    // 4. reCAPTCHA-Woo: only login + register are protected (rcfwc_login/register = on;
+    //    checkout/review/lost-password = off on live), and both forms live on the My Account
+    //    page. The plugin enqueues the Google reCAPTCHA api.js + its own JS site-wide, so drop
+    //    them everywhere except My Account. (wp-login.php is unaffected — it uses the separate
+    //    login_enqueue_scripts hook, so admin-login reCAPTCHA still works.)
+    if ( ! ( function_exists( 'is_account_page' ) && is_account_page() ) ) {
+        wp_dequeue_script( 'recaptcha' );   // https://www.google.com/recaptcha/api.js (external, render-affecting)
+        wp_dequeue_script( 'rcfwc-js' );
+    }
+
+    // 5. Instagram feed (Smash Balloon) is rendered only in the homepage "From the Trail"
+    //    section, but the plugin enqueues its CSS/JS on every page (incl. cart). Keep it on the
+    //    front page only.
+    if ( ! is_front_page() ) {
+        wp_dequeue_script( 'sbi_scripts' );
+        wp_dequeue_style( 'sbi_styles' );
+    }
+}
+
+// NOTE: We deliberately DO NOT dequeue 'wc-cart-fragments'. Ohio's own
+// woocommerce.min.js runs a CUSTOM AJAX add-to-cart (button class
+// `data_button_ajax`) that references `wc_cart_fragments_params` — the JS object
+// the wc-cart-fragments script localises. Dequeuing cart-fragments makes that
+// object undefined, Ohio's handler throws, and the button's loading spinner
+// never clears (infinite spinner; add-to-cart appears broken). So cart-fragments
+// must load wherever an add-to-cart button can appear, i.e. site-wide. The
+// per-page session cost is accepted — the cached HTML is unaffected (fragments
+// run client-side after load), and WP Super Cache Expert + Cloudflare still serve
+// the static page. (Removed the earlier dequeue on 2026-06-08 after it broke
+// add-to-cart on shop/product pages.)
+
+// ─── Cart page enhancements: rebuild qty +/- after re-render + auto-update ────
+// Loaded only on the cart page; depends on jQuery. See assets/js/ds-cart.js.
+add_action( 'wp_enqueue_scripts', 'dirtshack_enqueue_cart_js', 30 );
+function dirtshack_enqueue_cart_js() {
+    if ( ! ( function_exists( 'is_cart' ) && is_cart() ) ) {
+        return;
+    }
+    $rel  = 'assets/js/ds-cart.js';
+    $path = get_stylesheet_directory() . '/' . $rel;
+    if ( ! file_exists( $path ) ) {
+        return;
+    }
+    wp_enqueue_script(
+        'dirtshack-cart',
+        get_stylesheet_directory_uri() . '/' . $rel,
+        array( 'jquery' ),
+        (string) filemtime( $path ),
+        true
+    );
+}
+
+// ─── Fix Ohio's broken cart-page AJAX refresh (jQuery 3.7 incompatibility) ───
+//
+// Ohio's assets/js/woocommerce.min.js (handle 'ohio-woocommerce') refreshes the
+// cart table + totals after add-to-cart / quantity change by calling, in effect:
+//     $('.shop_table.cart').on('load', URL + ' .shop_table.cart:eq(0) > *', fn)
+//     $('.cart_totals').on('load',     URL + ' .cart_totals:eq(0) > *',     fn)
+// It MEANT jQuery's AJAX `.load(url, cb)` but wrote `.on('load', selector, cb)`.
+// jQuery 3.7 then tries to parse the cart URL as a CSS selector and throws
+// "Syntax error, unrecognized expression: https://…/cart/ .shop_table.cart:eq(0) > *",
+// aborting the refresh → cart totals stay frozen until a full page reload.
+// Fix = a child-theme copy of that file with `.on("load",o+…` → `.load(o+…`
+// (2 spots), swapped in for the parent's handle so it survives Ohio updates.
+// Ohio registers 'ohio-woocommerce' on wp_footer:10 (prints at :20), so we
+// re-point its src at priority 11.
+add_action( 'wp_footer', 'dirtshack_fix_ohio_cart_js', 11 );
+function dirtshack_fix_ohio_cart_js() {
+    if ( is_admin() ) {
+        return;
+    }
+    $rel  = 'assets/js/ohio-woocommerce-jq3fix.js';
+    $path = get_stylesheet_directory() . '/' . $rel;
+    if ( ! file_exists( $path ) ) {
+        return;
+    }
+    $scripts = wp_scripts();
+    if ( isset( $scripts->registered['ohio-woocommerce'] ) ) {
+        $scripts->registered['ohio-woocommerce']->src = get_stylesheet_directory_uri() . '/' . $rel;
+        $scripts->registered['ohio-woocommerce']->ver = (string) filemtime( $path );
+    }
+}
+
+// Disable the emoji detection loader site-wide (front end + admin).
+add_action( 'init', 'dirtshack_disable_emojis' );
+function dirtshack_disable_emojis() {
+    remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+    remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+    remove_action( 'wp_print_styles', 'print_emoji_styles' );
+    remove_action( 'admin_print_styles', 'print_emoji_styles' );
+    remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+    remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+    remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+    add_filter( 'tiny_mce_plugins', function ( $plugins ) {
+        return is_array( $plugins ) ? array_diff( $plugins, array( 'wpemoji' ) ) : array();
+    } );
+    add_filter( 'emoji_svg_url', '__return_false' );
+}
+
 // ─── Custom functions, hooks and filters below ───────────────────────────────
 // Add all DirtShack-specific PHP customisations here instead of editing the
 // parent theme. This file is safe from Ohio theme updates.
