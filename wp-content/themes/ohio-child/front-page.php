@@ -522,7 +522,7 @@ if ( ! $ds_shop_url ) {
             <div class="ds-market">
                 <div class="ds-market__copy">
                     <span class="ds-market__eyebrow">DirtShack Marketplace</span>
-                    <h2 class="ds-market__title">Buy &amp; sell used dirt bikes</h2>
+                    <h2 class="ds-market__title">Garage Sale for the Dirt Bike Community</h2>
                     <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
                 </div>
                 <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
