@@ -279,15 +279,16 @@ function dirtshack_braap_thumb_url( $video_id ) {
  * Poster image for a video post: the featured image if one is set, otherwise the
  * YouTube thumbnail. Returns an array( 'html' => <img…>, 'has_thumb' => bool ).
  */
-function dirtshack_braap_poster_html( $post_id, $img_size = 'medium_large' ) {
+function dirtshack_braap_poster_html( $post_id, $img_size = 'medium_large', $alt = '' ) {
 	if ( has_post_thumbnail( $post_id ) ) {
-		return get_the_post_thumbnail( $post_id, $img_size, array( 'loading' => 'lazy', 'alt' => '' ) );
+		return get_the_post_thumbnail( $post_id, $img_size, array( 'loading' => 'lazy', 'alt' => $alt ) );
 	}
 	$vid = dirtshack_braap_effective_youtube_id( $post_id );
 	if ( $vid ) {
 		return sprintf(
-			'<img src="%s" alt="" loading="lazy" width="480" height="360" />',
-			esc_url( dirtshack_braap_thumb_url( $vid ) )
+			'<img src="%s" alt="%s" loading="lazy" width="480" height="360" />',
+			esc_url( dirtshack_braap_thumb_url( $vid ) ),
+			esc_attr( $alt )
 		);
 	}
 	return '';
@@ -326,7 +327,7 @@ function dirtshack_braap_type_tag( $post_id, $linked = true ) {
  * (no iframe is loaded here). Cacheable, no JS.
  */
 function dirtshack_braap_card( $post_id ) {
-	$poster = dirtshack_braap_poster_html( $post_id, 'medium_large' );
+	$poster = dirtshack_braap_poster_html( $post_id, 'medium_large', get_the_title( $post_id ) );
 	$tag    = dirtshack_braap_type_tag( $post_id, false ); // non-link chip: the card itself is an <a>
 	ob_start();
 	?>

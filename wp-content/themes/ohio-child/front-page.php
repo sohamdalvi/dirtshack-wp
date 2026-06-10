@@ -256,11 +256,19 @@ function dirtshack_home_css() { ?>
     border: 1px solid var(--bd) !important;
     border-radius: var(--r) !important;
     overflow: hidden !important;
-    text-decoration: none !important;
     color: var(--d) !important;
     transition: box-shadow .2s, transform .2s !important;
 }
 #ds-home .ds-product:hover { box-shadow: 0 8px 28px rgba(0,0,0,.10) !important; transform: translateY(-2px) !important; }
+/* Image + name are the clickable link; the add-to-cart button sits outside it
+   (nested <a> is invalid HTML). flex:1 lets the link grow so the foot pins low. */
+#ds-home .ds-product__link {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    text-decoration: none !important;
+    color: var(--d) !important;
+}
 #ds-home .ds-product__img {
     width: 100% !important;
     aspect-ratio: 1 / 1 !important;
@@ -276,16 +284,60 @@ function dirtshack_home_css() { ?>
     transition: transform .35s !important;
 }
 #ds-home .ds-product:hover .ds-product__img img { transform: scale(1.05) !important; }
-#ds-home .ds-product__body { padding: .85rem 1rem 1rem !important; flex: 1 !important; }
+#ds-home .ds-product__body { padding: .85rem 1rem .5rem !important; }
 #ds-home .ds-product__name {
     font-size: .88rem !important;
     font-weight: 700 !important;
-    margin: 0 0 .35rem !important;
+    margin: 0 !important;
     color: var(--d) !important;
     line-height: 1.3 !important;
 }
+#ds-home .ds-product__foot {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: .6rem !important;
+    padding: 0 1rem 1rem !important;
+}
 #ds-home .ds-product__price { margin: 0 !important; font-size: .92rem !important; font-weight: 700 !important; color: var(--d) !important; }
 #ds-home .ds-product__price * { color: var(--d) !important; }
+/* Add-to-cart: full-width neon pill (a comfortable ≥40px tap target). Overrides
+   Ohio's stock button styling. "added"/loading states keep the brand colour. */
+#ds-home .ds-product__foot .button,
+#ds-home .ds-product__cart {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: .65rem 1rem !important;
+    min-height: 40px !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: var(--g) !important;
+    color: var(--d) !important;
+    font-size: .76rem !important;
+    font-weight: 800 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    line-height: 1.25 !important;
+    cursor: pointer !important;
+    transition: opacity .18s !important;
+}
+#ds-home .ds-product__foot .button:hover,
+#ds-home .ds-product__cart:hover { opacity: .85 !important; color: var(--d) !important; }
+#ds-home .ds-product__foot .added_to_cart {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: .72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .04em !important;
+    text-transform: uppercase !important;
+    color: var(--d) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+}
 
 /* ── 5. Why DirtShack — 2 col mobile ── */
 #ds-home .ds-why-grid {
@@ -497,19 +549,31 @@ if ( ! $ds_shop_url ) {
                 $product = wc_get_product( get_the_ID() );
                 if ( ! $product ) { continue; }
             ?>
-                <a class="ds-product" href="<?php echo esc_url( get_permalink() ); ?>">
-                    <span class="ds-product__img">
-                        <?php if ( has_post_thumbnail() ) :
-                            the_post_thumbnail( 'woocommerce_thumbnail', array( 'loading' => 'lazy' ) );
-                        else : ?>
-                            <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" alt="" loading="lazy">
-                        <?php endif; ?>
-                    </span>
-                    <span class="ds-product__body">
-                        <span class="ds-product__name"><?php the_title(); ?></span>
+                <div class="ds-product">
+                    <a class="ds-product__link" href="<?php echo esc_url( get_permalink() ); ?>">
+                        <span class="ds-product__img">
+                            <?php if ( has_post_thumbnail() ) :
+                                the_post_thumbnail( 'woocommerce_thumbnail', array( 'loading' => 'lazy', 'alt' => esc_attr( get_the_title() ) ) );
+                            else : ?>
+                                <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy">
+                            <?php endif; ?>
+                        </span>
+                        <span class="ds-product__body">
+                            <span class="ds-product__name"><?php the_title(); ?></span>
+                        </span>
+                    </a>
+                    <div class="ds-product__foot">
                         <span class="ds-product__price"><?php echo wp_kses_post( $product->get_price_html() ); ?></span>
-                    </span>
-                </a>
+                        <?php
+                        // WooCommerce's own loop button: respects product type (Add to
+                        // cart / Select options / Read more), adds a real ?add-to-cart
+                        // href so it works without JS, and is upgraded to AJAX by the
+                        // site cart script. Kept OUTSIDE the card link (a nested <a>
+                        // would be invalid HTML and shatter the grid layout).
+                        woocommerce_template_loop_add_to_cart( array( 'class' => 'button ds-product__cart' ) );
+                        ?>
+                    </div>
+                </div>
             <?php endwhile; wp_reset_postdata(); ?>
             </div>
         </div>
@@ -535,9 +599,11 @@ if ( ! $ds_shop_url ) {
     <section class="ds-section ds-instagram">
         <div class="ds-wrap">
             <div class="ds-section__head">
+                <h2 class="ds-section__title">From the Trail</h2>
                 <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
             </div>
-            <?php echo do_shortcode( '[instagram-feed]' ); ?>
+            <?php // num/cols override the saved feed settings (legacy-shortcode path) so the row stays full: one row of 4 on desktop, 2 on mobile. ?>
+            <?php echo do_shortcode( '[instagram-feed num="8" cols="4" colsmobile="2"]' ); ?>
         </div>
     </section>
     <?php endif; ?>

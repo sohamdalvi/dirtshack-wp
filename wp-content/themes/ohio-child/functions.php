@@ -942,3 +942,53 @@ function dirtshack_header_css() {
 </style>
     <?php
 }
+
+// ─── Accessibility: fill in missing image alt text ───────────────────────────
+//
+// Many product images (and other media) were uploaded without alt text, so they
+// render `alt=""`. For a content image that conveys the product's appearance an
+// empty alt is a miss (WCAG 1.1.1). This filter supplies a sensible fallback —
+// the parent product/post title, else the attachment's own title — but ONLY when
+// no alt has been set, so real, curated alt text is never overwritten. Applies
+// everywhere WordPress builds an <img> (shop loop, product pages, homepage cards).
+add_filter( 'wp_get_attachment_image_attributes', 'dirtshack_image_alt_fallback', 20, 2 );
+function dirtshack_image_alt_fallback( $attr, $attachment ) {
+    if ( ! empty( $attr['alt'] ) || ! ( $attachment instanceof WP_Post ) ) {
+        return $attr;
+    }
+    $alt = $attachment->post_parent ? get_the_title( $attachment->post_parent ) : '';
+    if ( '' === trim( (string) $alt ) ) {
+        $alt = $attachment->post_title;
+    }
+    $alt = trim( wp_strip_all_tags( (string) $alt ) );
+    if ( '' !== $alt ) {
+        $attr['alt'] = $alt; // core escapes attributes on output
+    }
+    return $attr;
+}
+
+// ─── Performance: remove Ohio's full-screen preloader ────────────────────────
+//
+// Ohio gates the first paint behind a full-screen preloader overlay (a centred
+// animated dot) and fades #page in from opacity:0 once window.load fires. On a
+// shared host that delays meaningful content (and hurts LCP) for a purely
+// decorative spinner. We:
+//   1. strip the `global-page-animation` body class so #page never starts hidden
+//      (its opacity:0 rule is scoped to that class), and
+//   2. hide the `.page-preloader` overlay from the first paint.
+// Both are file-based + cache-safe and don't depend on Ohio's JS running, so the
+// real page always shows immediately. (The option itself lives in the DB, which
+// our deploy never syncs — doing this in code makes it deterministic.)
+add_filter( 'body_class', 'dirtshack_disable_page_fade' );
+function dirtshack_disable_page_fade( $classes ) {
+    return array_diff( $classes, array( 'global-page-animation' ) );
+}
+
+add_action( 'wp_head', 'dirtshack_disable_preloader_css', 9999 );
+function dirtshack_disable_preloader_css() { ?>
+<style id="ds-no-preloader">
+.page-preloader { display: none !important; }
+#page { opacity: 1 !important; margin-top: 0 !important; }
+</style>
+    <?php
+}
