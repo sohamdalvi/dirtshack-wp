@@ -819,6 +819,15 @@ function dirtshack_footer_css() {
    scroll-top / copyright bar. Trim it close. */
 #colophon .widgets { padding-top: 36px !important; padding-bottom: 18px !important; }
 
+/* Footer logo: scale it up so the brand mark has more presence in the column. */
+#colophon .widget_ohio_widget_logo .branding img,
+#colophon .widget_ohio_widget_logo .logo img {
+    height: auto !important;
+    max-height: 96px !important;
+    width: auto !important;
+    max-width: 100% !important;
+}
+
 /* Bottom social strip — branded dark bar with brand icons */
 .ds-footer-social {
     background: #111 !important;
@@ -912,6 +921,26 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .header-wrap-inner,
 .theme-ohio #masthead .subheader { background: #111 !important; }
 .theme-ohio #masthead .header-wrap { box-shadow: 0 2px 12px rgba(0,0,0,.4) !important; }
+
+/* Align the header's inner content (switcher + logo on the left, nav + action
+   icons/cart on the right) to the SAME 1280px content rail as the homepage
+   sections, instead of running edge-to-edge of the browser. Mirrors how the
+   front-page is built (.ds-section provides the clamp() gutter, .ds-wrap caps
+   content at 1280px centred): the full-width dark .header-wrap takes the gutter,
+   and .header-wrap-inner — the actual logo/nav row in this (header-3) layout —
+   is capped + centred, so the switcher and cart line up with "Featured
+   Products". (No .page-container exists in this header style.) */
+.theme-ohio #masthead .header-wrap {
+    padding-left: clamp(1rem, 5vw, 3rem) !important;
+    padding-right: clamp(1rem, 5vw, 3rem) !important;
+    box-sizing: border-box !important;
+}
+.theme-ohio #masthead .header-wrap-inner {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
 
 /* Shorter bar (Ohio sets 70px → 54px) + smaller action icons/hamburger */
 .theme-ohio #masthead,
