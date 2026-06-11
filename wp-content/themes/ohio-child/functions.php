@@ -81,6 +81,43 @@ function dirtshack_enqueue_scripts() {
     }
 }
 
+// ─── DirtShack ecosystem switcher (shared portal widget) ─────────────────────
+//
+// A self-contained, dependency-free portal switcher hosted centrally at
+// dirtshack.in. It renders into a Shadow DOM (brings its own styles + fonts —
+// we add NO CSS and it can't conflict with Ohio) and auto-detects the active
+// portal by hostname (shop.dirtshack.in → highlights "Shop"). It must load from
+// the hosted URL (not vendored) so new portals propagate here automatically.
+//
+//   1) Script — enqueued site-wide, deferred, no version query (let the host's
+//      cache headers control freshness). WP 7.0 supports the array strategy arg.
+//   2) Mount — a `[data-ecosystem-switcher]` div placed just left of the logo.
+//      Ohio renders the logo via get_template_part('parts/elements/menu_logo')
+//      from every header style, so hooking that template-part action drops the
+//      mount immediately before the branding for ANY header style without
+//      copying/patching an Ohio file (survives theme updates). Same technique as
+//      dirtshack_emit_hero_once() on the page_headline part below.
+add_action( 'wp_enqueue_scripts', 'dirtshack_ecosystem_switcher_script', 20 );
+function dirtshack_ecosystem_switcher_script() {
+    wp_enqueue_script(
+        'dirtshack-ecosystem',
+        'https://dirtshack.in/ecosystem/switcher.js',
+        array(),
+        null, // no version query — hosted cache headers control freshness
+        array( 'in_footer' => true, 'strategy' => 'defer' )
+    );
+}
+
+add_action( 'get_template_part_parts/elements/menu_logo', 'dirtshack_ecosystem_switcher_mount' );
+function dirtshack_ecosystem_switcher_mount() {
+    static $done = false;
+    if ( $done ) {
+        return; // one mount per page, even if the logo part is loaded twice
+    }
+    $done = true;
+    echo '<div data-ecosystem-switcher></div>';
+}
+
 // ─── Performance: trim render-blocking + per-request bloat ───────────────────
 //
 // A low-traffic WooCommerce store still pays for assets on every page view.
@@ -939,6 +976,15 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .cart-count,
 .theme-ohio #masthead .cart-button .count,
 .theme-ohio #masthead .header-cart-count { background: #C4E000 !important; color: #111 !important; }
+
+/* Ecosystem switcher → logo spacing. The switcher mounts as the sibling right
+   before .branding (see dirtshack_ecosystem_switcher_mount). The switcher's
+   trigger has a bordered box whose right edge sits flush against .branding at
+   every width, so the wordmark ends up touching/overlapping that border. Add a
+   small left margin to give the logo clear breathing room from the switcher.
+   Adjacency selector → only the header logo that actually follows the switcher
+   is affected (never the footer widget logo). */
+.theme-ohio #masthead [data-ecosystem-switcher] + .branding { margin-left: 14px !important; }
 </style>
     <?php
 }
