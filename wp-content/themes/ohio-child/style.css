@@ -27,6 +27,22 @@ Text Domain: ohio-child
     --ds-radius:  16px;     /* brand corner radius */
     --ds-max:     1280px;
     --ds-pad:     clamp(1rem, 4vw, 3rem);
+    --ds-heading-font: "League Spartan", "Montserrat", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page-headline .title,
+.widget-title,
+.ds-section-title,
+.ds-section__title {
+    font-family: var(--ds-heading-font) !important;
+    font-weight: 800 !important;
+    letter-spacing: .01em;
 }
 
 /* ─── Header: make logo & nav pop ─────────────────────────────────────── */

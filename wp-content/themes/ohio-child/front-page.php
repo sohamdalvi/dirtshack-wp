@@ -5,10 +5,10 @@
  * Section order (mobile-first; scales up responsively to desktop):
  *   0. Announcement bar  — rendered site-wide at wp_body_open (see functions.php)
  *   0. Sticky header     — Ohio header via get_header()
- *   1. Hero ~45vh        — one image, dark overlay, headline + two CTAs
+ *   1. Hero ~45vh        — one image, dark overlay, headline
  *   2. Shop by Category  — native WooCommerce product categories
- *   3. Marketplace card  — single CTA out to market.dirtshack.in
- *   4. Featured Products — WooCommerce "featured" flag (falls back to latest)
+ *   3. Featured Products — WooCommerce "featured" flag (falls back to latest)
+ *   4. Social Track Marks — Instagram feed
  *   5. Why DirtShack     — four icon blocks
  *   6. Latest Braap      — latest Braap Videos (CPT), static facade cards
  *   0. Footer            — Ohio footer via get_footer()
@@ -53,6 +53,7 @@ function dirtshack_home_css() { ?>
     --r: 16px;             /* corner radius */
     --max: 1280px;
     --padx: clamp(1rem, 5vw, 3rem);
+    --heading-font: "League Spartan", "Montserrat", sans-serif;
     background: #fff !important;
 }
 
@@ -77,12 +78,14 @@ function dirtshack_home_css() { ?>
     margin: 0 0 1.5rem !important;
 }
 #ds-home .ds-section__title {
+    font-family: var(--heading-font) !important;
     font-size: clamp(1.4rem, 4vw, 1.9rem) !important;
     font-weight: 800 !important;
-    letter-spacing: -.02em !important;
+    letter-spacing: .02em !important;
     margin: 0 !important;
     color: var(--d) !important;
     line-height: 1.15 !important;
+    text-transform: uppercase !important;
 }
 #ds-home .ds-section--dark .ds-section__title { color: #fff !important; }
 #ds-home .ds-link {
@@ -171,82 +174,18 @@ function dirtshack_home_css() { ?>
     text-align: left !important;
 }
 #ds-home .ds-hero__title {
+    font-family: var(--heading-font) !important;
     margin: 0 !important;
-    font-size: clamp(1rem, 4.2vw, 1.6rem) !important; /* reduced */
-    font-weight: 800 !important;
-    letter-spacing: -.01em !important;
-    line-height: 1.18 !important;
+    font-size: clamp(2rem, 7vw, 4.8rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: .015em !important;
+    line-height: .92 !important;
     text-transform: uppercase !important;
     color: #fff !important;
     text-shadow: 0 2px 14px rgba(0,0,0,.5) !important;
+    max-width: 8ch !important;
 }
 #ds-home .ds-accent { color: var(--g) !important; }
-
-/* Marketplace badge — top-right of the hero, styled as a clearly-EXTERNAL link
-   (translucent dark pill + neon-green border + ↗ outbound arrow, opens new tab). */
-#ds-home .ds-hero__market {
-    position: absolute !important;
-    top: .9rem !important;
-    right: clamp(1rem, 4vw, 2rem) !important;
-    z-index: 3 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: .4rem !important;
-    max-width: calc(100% - 2rem) !important;
-    padding: .5rem .9rem !important;
-    border-radius: 999px !important;
-    background: rgba(0,0,0,.55) !important;
-    border: 1.5px solid var(--g) !important;
-    color: #fff !important;
-    font-size: .68rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .04em !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    line-height: 1.1 !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-    backdrop-filter: blur(4px) !important;
-    transition: background .18s, color .18s !important;
-}
-#ds-home .ds-hero__market:hover { background: var(--g) !important; color: var(--d) !important; }
-#ds-home .ds-hero__market .ds-ext { color: var(--g) !important; font-weight: 900 !important; font-size: 1.05em !important; }
-#ds-home .ds-hero__market:hover .ds-ext { color: var(--d) !important; }
-
-/* ── Marketplace card ── */
-#ds-home .ds-market {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
-    border-radius: var(--r) !important;
-    padding: 2rem 1.5rem !important;
-    background:
-        linear-gradient(120deg, rgba(17,17,17,.92) 0%, rgba(17,17,17,.65) 100%),
-        var(--d) !important;
-    border: 2px solid var(--g) !important;
-}
-#ds-home .ds-market__eyebrow {
-    font-size: .72rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .15em !important;
-    text-transform: uppercase !important;
-    color: var(--g) !important;
-}
-#ds-home .ds-market__title {
-    margin: 0 !important;
-    font-size: clamp(1.3rem, 5vw, 1.75rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-    color: #fff !important;
-}
-#ds-home .ds-market__sub {
-    margin: 0 !important;
-    font-size: .9rem !important;
-    line-height: 1.5 !important;
-    color: #d6d6d6 !important;
-    max-width: 46ch !important;
-}
 
 /* ── 4. Product card ── */
 #ds-home .ds-product {
@@ -459,8 +398,6 @@ function dirtshack_home_css() { ?>
     #ds-home .ds-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 1.25rem !important; }
     #ds-home .ds-why-grid { grid-template-columns: repeat(4, 1fr) !important; }
     #ds-home .ds-blog-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    #ds-home .ds-market { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; padding: 2.25rem 2.5rem !important; }
-    #ds-home .ds-market__copy { display: flex !important; flex-direction: column !important; gap: .5rem !important; }
 }
 
 /* ── Desktop (≥1025px): 4-col product/category grids, 80px section padding ── */
@@ -476,14 +413,6 @@ function dirtshack_home_css() { ?>
 
 get_header();
 
-/* Helper: marketplace URL with cross-promo UTM tags (constant from functions.php). */
-$ds_market_url = defined( 'DIRTSHACK_MARKETPLACE_URL' )
-    ? add_query_arg(
-        array( 'utm_source' => 'dirtshack_store', 'utm_medium' => 'homepage', 'utm_campaign' => 'marketplace' ),
-        DIRTSHACK_MARKETPLACE_URL
-    )
-    : 'https://market.dirtshack.in/';
-
 /* Helper: the WooCommerce shop URL ("Shop Parts"). */
 $ds_shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : '';
 if ( ! $ds_shop_url ) {
@@ -494,13 +423,10 @@ if ( ! $ds_shop_url ) {
 <main id="ds-home" class="ds-home">
 
     <!-- ── 1. HERO ── -->
-    <section class="ds-hero" style="background-image:url('<?php echo esc_url( dirtshack_hero_image_url( 'home' ) ); ?>')">
+    <section class="ds-hero" style="background-image:url('<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/heroes/shop-hero.webp' ); ?>')">
         <div class="ds-hero__overlay"></div>
-        <a class="ds-hero__market" href="<?php echo esc_url( $ds_market_url ); ?>" target="_blank" rel="noopener">
-            Garage Sale on Marketplace <span class="ds-ext" aria-hidden="true">&#8599;</span>
-        </a>
         <div class="ds-hero__content">
-            <h1 class="ds-hero__title">Engineered to Global Standards.<br>Built for <span class="ds-accent">Indian Riders.</span></h1>
+            <h1 class="ds-hero__title">India's Home<br>for <span class="ds-accent">Dirt Biking</span></h1>
         </div>
     </section>
 
@@ -580,26 +506,12 @@ if ( ! $ds_shop_url ) {
     </section>
     <?php endif; ?>
 
-    <!-- ── 3. MARKETPLACE CARD ── -->
-    <section class="ds-section ds-section--grey">
-        <div class="ds-wrap">
-            <div class="ds-market">
-                <div class="ds-market__copy">
-                    <span class="ds-market__eyebrow">DirtShack Marketplace</span>
-                    <h2 class="ds-market__title">Garage Sale for the Dirt Bike Community</h2>
-                    <p class="ds-market__sub">A dedicated marketplace for pre-owned bikes &amp; parts, built by riders. List yours free.</p>
-                </div>
-                <a class="ds-btn ds-btn--primary" href="<?php echo esc_url( $ds_market_url ); ?>">Visit the Marketplace &rarr;</a>
-            </div>
-        </div>
-    </section>
-
     <!-- ── 4. INSTAGRAM FEED (Smash Balloon) ── -->
     <?php if ( shortcode_exists( 'instagram-feed' ) ) : ?>
     <section class="ds-section ds-instagram">
         <div class="ds-wrap">
             <div class="ds-section__head">
-                <h2 class="ds-section__title">From the Trail</h2>
+                <h2 class="ds-section__title">Social Track Marks</h2>
                 <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
             </div>
             <?php // num/cols override the saved feed settings (legacy-shortcode path) so the row stays full: one row of 4 on desktop, 2 on mobile. ?>
@@ -661,7 +573,7 @@ if ( ! $ds_shop_url ) {
     <section class="ds-section">
         <div class="ds-wrap">
             <div class="ds-section__head">
-                <h2 class="ds-section__title">Latest Braap</h2>
+                <h2 class="ds-section__title">Latest Braap (Blogs)</h2>
                 <?php if ( $ds_braap_url ) : ?>
                     <a class="ds-link" href="<?php echo esc_url( $ds_braap_url ); ?>">All videos &rarr;</a>
                 <?php endif; ?>
