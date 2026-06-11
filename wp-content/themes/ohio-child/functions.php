@@ -18,18 +18,11 @@
 //
 add_action( 'wp_enqueue_scripts', 'ohio_child_enqueue_styles', 5 );
 function ohio_child_enqueue_styles() {
-    wp_enqueue_style(
-        'dirtshack-heading-font',
-        'https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap',
-        array(),
-        null
-    );
-
     // Load the parent theme's full stylesheet (18 000+ lines of Ohio CSS).
     wp_enqueue_style(
         'ohio-parent-style',
         get_template_directory_uri() . '/style.css',
-        array( 'dirtshack-heading-font' ),
+        array(),
         wp_get_theme( 'ohio' )->get( 'Version' )
     );
 
@@ -128,7 +121,7 @@ function dirtshack_perf_dequeue() {
         wp_dequeue_script( 'rcfwc-js' );
     }
 
-    // 5. Instagram feed (Smash Balloon) is rendered only in the homepage "Social Track Marks"
+    // 5. Instagram feed (Smash Balloon) is rendered only in the homepage "From the Trail"
     //    section, but the plugin enqueues its CSS/JS on every page (incl. cart). Keep it on the
     //    front page only.
     if ( ! is_front_page() ) {
@@ -775,15 +768,6 @@ function dirtshack_footer_css() {
 #colophon .widget_block:has(a[href*="instagram.com"]),
 #colophon .widget_block:has(a[href*="facebook.com"]) { display: none !important; }
 
-/* Footer logo: scale it up so the brand mark has more presence */
-#colophon .widget_ohio_widget_logo .branding img,
-#colophon .widget_ohio_widget_logo .logo img {
-    height: auto !important;
-    max-height: 72px !important;
-    width: auto !important;
-    max-width: 100% !important;
-}
-
 /* Rebalance the remaining footer columns to fill the row (3-up on desktop) */
 @media (min-width: 992px) {
     #colophon .widgets .widgets-column {
@@ -891,20 +875,6 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .header-wrap-inner,
 .theme-ohio #masthead .subheader { background: #111 !important; }
 .theme-ohio #masthead .header-wrap { box-shadow: 0 2px 12px rgba(0,0,0,.4) !important; }
-
-/* Keep the header bar full-width, but align the actual logo/nav/action content
-   to the same content rail as the homepage sections ("Featured Products"). */
-.theme-ohio #masthead .header-wrap.page-container,
-.theme-ohio #masthead .top-part.page-container,
-.theme-ohio #masthead .bottom-part.page-container {
-    width: min(100%, 1280px) !important;
-    max-width: 1280px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: clamp(1rem, 5vw, 3rem) !important;
-    padding-right: clamp(1rem, 5vw, 3rem) !important;
-    box-sizing: border-box !important;
-}
 
 /* Shorter bar (Ohio sets 70px → 54px) + smaller action icons/hamburger */
 .theme-ohio #masthead,
@@ -1022,3 +992,14 @@ function dirtshack_disable_preloader_css() { ?>
 </style>
     <?php
 }
+
+/**
+ * Checkout: drop the separate shipping address.
+ *
+ * Tells WooCommerce the cart never needs a distinct shipping address, which
+ * removes the "Ship to a different address?" checkbox AND the entire second
+ * set of shipping fields from the checkout (both are gated on
+ * needs_shipping_address() in checkout/form-shipping.php). Orders then ship to
+ * the billing address. No template override or per-field logic needed.
+ */
+add_filter( 'woocommerce_cart_needs_shipping_address', '__return_false' );
