@@ -16,7 +16,7 @@ SSH_PORT=22                                 # Bluehost default; change if needed
 SSH_KEY=""
 # =============================================================================
 
-LOCAL_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+LOCAL_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../wp-content" && pwd )"
 
 # ── Colour helpers ────────────────────────────────────────────────────────────
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
@@ -55,10 +55,11 @@ $DRY_RUN && RSYNC_OPTS+=(--dry-run)
 # ── What gets synced ──────────────────────────────────────────────────────────
 # Each entry: LOCAL_DIR  REMOTE_DIR
 declare -a SYNC_PAIRS=(
-  "themes/ohio-child/               themes/ohio-child/"
-  "themes/ohio/                     themes/ohio/"
-  "plugins/ohio-extra/              plugins/ohio-extra/"
-  "plugins/ohio-portfolio/          plugins/ohio-portfolio/"
+  "themes/ohio-child/                    themes/ohio-child/"
+  "themes/ohio/                          themes/ohio/"
+  "plugins/ohio-extra/                   plugins/ohio-extra/"
+  "plugins/ohio-portfolio/               plugins/ohio-portfolio/"
+  "mu-plugins/dirtshack-gst-report.php   mu-plugins/dirtshack-gst-report.php"
 )
 
 # ── Safety: never sync these even if paths are changed above ─────────────────
@@ -93,8 +94,8 @@ for pair in "${SYNC_PAIRS[@]}"; do
   LOCAL_PATH="${LOCAL_ROOT}/${LOCAL_DIR}"
   REMOTE_PATH="${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_ROOT}/${REMOTE_DIR}"
 
-  if [[ ! -d "$LOCAL_PATH" ]]; then
-    warn "Skipping ${LOCAL_DIR} — directory not found locally."
+  if [[ ! -e "$LOCAL_PATH" ]]; then
+    warn "Skipping ${LOCAL_DIR} — path not found locally."
     continue
   fi
 
