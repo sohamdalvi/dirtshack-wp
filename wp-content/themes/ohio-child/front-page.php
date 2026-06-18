@@ -172,7 +172,8 @@ function dirtshack_home_css() { ?>
 }
 #ds-home .ds-hero__title {
     margin: 0 !important;
-    font-size: clamp(1rem, 4.2vw, 1.6rem) !important; /* reduced */
+    font-size: clamp(1.35rem, 3vw, 2.2rem) !important;
+    font-family: "Archivo Black", sans-serif !important;
     font-weight: 800 !important;
     letter-spacing: -.01em !important;
     line-height: 1.18 !important;

@@ -26,6 +26,13 @@ function ohio_child_enqueue_styles() {
         wp_get_theme( 'ohio' )->get( 'Version' )
     );
 
+    wp_enqueue_style(
+        'dirtshack-font-archivo-black',
+        'https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap',
+        array(),
+        null
+    );
+
     // The child's style.css is already enqueued by Ohio's enqueue.php as
     // 'ohio-style' (because get_stylesheet_uri() now points here).
     // We just need to declare the parent as a dependency so WordPress
@@ -1069,12 +1076,57 @@ function dirtshack_disable_preloader_css() { ?>
 }
 
 /**
- * Checkout: drop the separate shipping address.
+ * Checkout: drop the separate shipping address form.
  *
- * Tells WooCommerce the cart never needs a distinct shipping address, which
- * removes the "Ship to a different address?" checkbox AND the entire second
- * set of shipping fields from the checkout (both are gated on
- * needs_shipping_address() in checkout/form-shipping.php). Orders then ship to
- * the billing address. No template override or per-field logic needed.
+ * Removes the "Ship to a different address?" checkbox and the second set of
+ * shipping fields. Shipping address is always the same as billing.
  */
 add_filter( 'woocommerce_cart_needs_shipping_address', '__return_false' );
+
+/**
+ * Copy billing address into shipping address on every order.
+ *
+ * Because the shipping form is hidden, WooCommerce never receives shipping
+ * fields from the checkout POST and leaves _shipping_* meta blank. This hook
+ * fills them so the order record, PDF invoices, and tax lookup all have a
+ * populated shipping address.
+ */
+add_action( 'woocommerce_checkout_create_order', function ( $order, $data ) {
+	$order->set_address( [
+		'first_name' => $data['billing_first_name'] ?? '',
+		'last_name'  => $data['billing_last_name']  ?? '',
+		'company'    => $data['billing_company']     ?? '',
+		'address_1'  => $data['billing_address_1']  ?? '',
+		'address_2'  => $data['billing_address_2']  ?? '',
+		'city'       => $data['billing_city']        ?? '',
+		'state'      => $data['billing_state']       ?? '',
+		'postcode'   => $data['billing_postcode']    ?? '',
+		'country'    => $data['billing_country']     ?? '',
+		'phone'      => $data['billing_phone']       ?? '',
+		'email'      => $data['billing_email']       ?? '',
+	], 'shipping' );
+}, 10, 2 );
+
+/**
+ * Fix checkout tax not updating when billing state changes.
+ *
+ * woocommerce_default_customer_address=geolocation re-initialises the customer
+ * session to base (MH) during update_order_review AJAX, clobbering the billing
+ * location WooCommerce sets from posted fields. Explicitly re-applying the
+ * posted billing location here (priority 10, before calculate_totals at 20)
+ * ensures the correct state is used for CGST/SGST vs IGST resolution.
+ */
+add_action( 'woocommerce_checkout_update_order_review', function ( $posted_data ) {
+	$data = [];
+	parse_str( $posted_data, $data );
+
+	$country  = $data['billing_country']  ?? '';
+	$state    = $data['billing_state']    ?? '';
+	$postcode = $data['billing_postcode'] ?? '';
+	$city     = $data['billing_city']     ?? '';
+
+	if ( $country ) {
+		WC()->customer->set_billing_location( $country, $state, $postcode, $city );
+		WC()->customer->save();
+	}
+}, 10 );
