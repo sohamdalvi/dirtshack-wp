@@ -125,7 +125,7 @@ Text Domain: ohio-child
 /* ─── Hero ──────────────────────────────────────────────────────────────── */
 #ds-home .ds-hero {
     position: relative !important;
-    min-height: 58vh !important;
+    min-height: 32vh !important;
     height: auto !important;
     display: flex !important;
     align-items: flex-end !important;
@@ -138,7 +138,7 @@ Text Domain: ohio-child
 }
 .ds-hero {
     position: relative;
-    min-height: 58vh;
+    min-height: 32vh;
     display: flex;
     align-items: flex-end;
     background-size: cover;
@@ -305,7 +305,7 @@ Text Domain: ohio-child
     }
 }
 @media (max-width: 768px) {
-    #ds-home .ds-hero { min-height: 50vh !important; background-position: center center !important; }
+    #ds-home .ds-hero { min-height: 32vh !important; background-position: center center !important; }
     #ds-home .ds-hero__content { padding: 2rem 1.25rem 2.5rem !important; }
     #ds-home .ds-trust__inner { flex-wrap: wrap !important; }
     #ds-home .ds-trust__item { flex: 1 1 45% !important; }

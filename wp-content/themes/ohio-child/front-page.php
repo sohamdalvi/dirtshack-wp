@@ -469,7 +469,7 @@ function dirtshack_home_css() { ?>
     #ds-home .ds-section { padding: 80px var(--padx) !important; }
     #ds-home .ds-why-section { padding-top: 44px !important; padding-bottom: 44px !important; } /* keep ribbon compact */
     #ds-home .ds-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1.5rem !important; }
-    #ds-home .ds-hero { min-height: 38vh !important; }
+    #ds-home .ds-hero { min-height: 32vh !important; }
     #ds-home .ds-hero__content { padding: 3rem var(--padx) 1.5rem !important; }
 }
 </style>
