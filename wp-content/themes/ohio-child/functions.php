@@ -786,6 +786,62 @@ function dirtshack_footer_social_bar() {
     echo '</ul></div></div>';
 }
 
+// ─── Product gallery: dot indicators on mobile ───────────────────────────────
+// Ohio initialises the gallery with dots:false on mobile and destroys the slider
+// entirely on desktop — so destroy+reinit breaks the desktop layout. Instead we
+// inject our own dot strip that mirrors Ohio's SVG dot style and listens to
+// clb-slider.changed, which Ohio fires on every swipe. Desktop is unaffected.
+add_action( 'wp_footer', 'dirtshack_gallery_dots', 25 );
+function dirtshack_gallery_dots() {
+    if ( ! is_product() ) {
+        return;
+    }
+    ?>
+<style id="ds-gallery-dots-css">
+@media (max-width: 1180px) {
+    .ds-gallery-dots {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 4px !important;
+        padding: 10px 0 4px !important;
+    }
+    .ds-gallery-dots svg circle { transition: stroke 0.2s, fill 0.2s !important; }
+    .ds-gallery-dots .ds-dot-active svg circle { stroke: #c8e600 !important; fill: #c8e600 !important; }
+}
+@media (min-width: 1181px) { .ds-gallery-dots { display: none !important; } }
+</style>
+<script>
+(function ($) {
+    $(document).ready(function () {
+        if ($(window).width() > 1180) return;
+
+        setTimeout(function () {
+            var gallery  = $('.woocommerce-product-gallery');
+            var items    = gallery.find('.clb-slider-item:not(.cloned)');
+            if (!gallery.length || items.length < 2) return;
+
+            // Ohio's own dot SVG — same markup clb-slider uses internally
+            var dotSVG = '<svg width="14" height="14" viewBox="0 0 22 22"><g stroke="#17161A" stroke-width="2" fill="none" transform="translate(11,11)"><circle cx="0" cy="0" r="7"></circle></g></svg>';
+            var wrap = $('<div class="ds-gallery-dots"></div>');
+            items.each(function (i) {
+                wrap.append('<span class="' + (i === 0 ? 'ds-dot-active' : '') + '">' + dotSVG + '</span>');
+            });
+            gallery.after(wrap);
+
+            gallery.on('clb-slider.changed clb-slider.init', function () {
+                var idx = gallery.find('.clb-slider-item:not(.cloned)').index(
+                    gallery.find('.clb-slider-item.active').first()
+                );
+                wrap.find('span').removeClass('ds-dot-active').eq(Math.max(idx, 0)).addClass('ds-dot-active');
+            });
+        }, 450);
+    });
+}(jQuery));
+</script>
+    <?php
+}
+
 // ─── Footer CSS (inline, wp_head 9999) ────────────────────────────────────────
 //
 // Lives here, not in style.css: the child style.css is enqueued with a static
@@ -798,6 +854,36 @@ add_action( 'wp_head', 'dirtshack_footer_css', 9999 );
 function dirtshack_footer_css() {
     ?>
 <style id="ds-footer-css">
+/* ── Product page back button ── */
+.ds-product-back-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.1rem 2rem 1.1rem;
+}
+.ds-product-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #111;
+    background: #c8e600;
+    text-decoration: none;
+    padding: 0.45rem 1rem 0.45rem 0.7rem;
+    border-radius: 2px;
+    line-height: 1;
+    transition: transform 0.15s ease-out;
+}
+.ds-product-back:hover,
+.ds-product-back:focus { color: #111 !important; background: #c8e600 !important; text-decoration: none !important; transform: translateX(-3px); transition: transform 0.15s ease-out; }
+.ds-product-back svg { width: 1em; height: 1em; flex-shrink: 0; }
+
+/* Hide the sticky next-product nav card on single product pages */
+.sticky-nav[data-js="sticky-nav-product"] { display: none !important; }
+
 /* Hide Ohio's header social side-rail (the vertical "Follow Us" on the page edge) */
 .elements-bar { display: none !important; }
 
