@@ -10,7 +10,6 @@
  *   3. Marketplace card  — single CTA out to market.dirtshack.in
  *   4. Featured Products — WooCommerce "featured" flag (falls back to latest)
  *   5. Why DirtShack     — four icon blocks
- *   6. Latest Braap      — latest Braap Videos (CPT), static facade cards
  *   0. Footer            — Ohio footer via get_footer()
  *
  * Cache notes: every section renders from deterministic, page-cacheable queries.
@@ -145,7 +144,7 @@ function dirtshack_home_css() { ?>
     position: relative !important;
     display: flex !important;
     align-items: flex-end !important;
-    min-height: 32vh !important;
+    min-height: clamp(220px, 32vh, 340px) !important;
     padding: 0 !important;
     background-size: cover !important;
     background-position: center 70% !important;
@@ -172,7 +171,7 @@ function dirtshack_home_css() { ?>
 }
 #ds-home .ds-hero__title {
     margin: 0 !important;
-    font-size: clamp(1.35rem, 3vw, 2.2rem) !important;
+    font-size: clamp(1.05rem, 2.1vw, 1.6rem) !important;
     font-family: "Archivo Black", sans-serif !important;
     font-weight: 800 !important;
     letter-spacing: -.01em !important;
@@ -469,7 +468,7 @@ function dirtshack_home_css() { ?>
     #ds-home .ds-section { padding: 80px var(--padx) !important; }
     #ds-home .ds-why-section { padding-top: 44px !important; padding-bottom: 44px !important; } /* keep ribbon compact */
     #ds-home .ds-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1.5rem !important; }
-    #ds-home .ds-hero { min-height: 32vh !important; }
+    #ds-home .ds-hero { min-height: clamp(220px, 32vh, 340px) !important; }
     #ds-home .ds-hero__content { padding: 3rem var(--padx) 1.5rem !important; }
 }
 </style>
@@ -578,20 +577,6 @@ if ( ! $ds_shop_url ) {
     </section>
     <?php endif; ?>
 
-    <!-- ── 4. INSTAGRAM FEED (Smash Balloon) ── -->
-    <?php if ( shortcode_exists( 'instagram-feed' ) ) : ?>
-    <section class="ds-section ds-instagram">
-        <div class="ds-wrap">
-            <div class="ds-section__head">
-                <h2 class="ds-section__title">Social Tracks</h2>
-                <a class="ds-link" href="https://www.instagram.com/dirtshack.in/" target="_blank" rel="noopener">@dirtshack.in &rarr;</a>
-            </div>
-            <?php // num/cols override the saved feed settings (legacy-shortcode path) so the row stays full: one row of 4 on desktop, 2 on mobile. ?>
-            <?php echo do_shortcode( '[instagram-feed num="8" cols="4" colsmobile="2"]' ); ?>
-        </div>
-    </section>
-    <?php endif; ?>
-
     <!-- ── 5. WHY DIRTSHACK (compact ribbon) ── -->
     <section class="ds-section ds-section--dark ds-why-section">
         <div class="ds-wrap">
@@ -622,46 +607,6 @@ if ( ! $ds_shop_url ) {
             </div>
         </div>
     </section>
-
-    <!-- ── 6. LATEST BRAAP (Videos CPT) ── -->
-    <?php
-    // Pulls the most recent Braap Videos (the CPT — NOT blog posts). Rendered with
-    // the same static facade cards as the archive: thumbnail + play overlay that
-    // LINK to the single-video page. No live iframes, no comment forms — fully
-    // page-cacheable. (dirtshack_braap_card + its CSS come from inc/braap-videos.php.)
-    $ds_videos = new WP_Query( array(
-        'post_type'           => 'braap_video',
-        'post_status'         => 'publish',
-        'posts_per_page'      => 4,
-        'ignore_sticky_posts' => true,
-        'orderby'             => 'date',
-        'order'               => 'DESC',
-        'no_found_rows'       => true,
-    ) );
-
-    if ( $ds_videos->have_posts() && function_exists( 'dirtshack_braap_card' ) ) :
-        $ds_braap_url = get_post_type_archive_link( 'braap_video' );
-    ?>
-    <section class="ds-section">
-        <div class="ds-wrap">
-            <div class="ds-section__head">
-                <h2 class="ds-section__title">Latest Braap (Blogs)</h2>
-                <?php if ( $ds_braap_url ) : ?>
-                    <a class="ds-link" href="<?php echo esc_url( $ds_braap_url ); ?>">All videos &rarr;</a>
-                <?php endif; ?>
-            </div>
-            <div class="ds-braap-grid">
-            <?php
-            while ( $ds_videos->have_posts() ) :
-                $ds_videos->the_post();
-                echo dirtshack_braap_card( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput — built from esc_* helpers
-            endwhile;
-            wp_reset_postdata();
-            ?>
-            </div>
-        </div>
-    </section>
-    <?php endif; ?>
 
 </main>
 
