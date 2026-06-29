@@ -786,6 +786,58 @@ function dirtshack_footer_social_bar() {
     echo '</ul></div></div>';
 }
 
+// ─── Product gallery: real carousel on desktop (fix stacked images) ──────────
+//
+// Ohio ships two single-product gallery behaviours, chosen ONLY by whether the
+// `.page-container.sticky-gallery` wrapper also carries the `classic-gallery`
+// class (compare ohio/woocommerce/single-product/views/type_1.php — no class —
+// with type_3.php — has it). The class is the single switch read by Ohio's
+// handleSingleProductGallery() in assets/js/woocommerce.min.js:
+//   • WITHOUT it  → on desktop (>1180px) Ohio DESTROYS the clbSlider and the
+//     gallery falls back to its raw 1-column CSS grid (.woocommerce-product-gallery
+//     is display:grid). Every image renders full-size, stacked on top of each
+//     other — the reported bug. (≤1180px it still builds a swipe carousel, which
+//     is why mobile looked fine.)
+//   • WITH it     → Ohio runs clbSlider as a real one-image carousel at ALL
+//     widths, and the left-hand thumbnails switch slides via `to-slide`.
+//
+// The active layout (type_1) hardcodes the wrapper class with no PHP filter to
+// hook, and the child theme avoids copying large Ohio templates (drift risk). So
+// we add `classic-gallery` from the client, BEFORE Ohio's gallery init (which is
+// bound on window.load — see woocommerce.js `$(window).on('load', …)`), and only
+// at >1180px so mobile's existing swipe carousel + dots are left untouched. The
+// script prints at wp_footer:5 — ahead of Ohio's enqueued woocommerce script
+// (footer:20) — so its resize listener also registers first and the class is set
+// before Ohio re-inits the gallery on a width change.
+add_action( 'wp_footer', 'dirtshack_gallery_desktop_carousel', 5 );
+function dirtshack_gallery_desktop_carousel() {
+	if ( ! is_product() ) {
+		return;
+	}
+	?>
+<script id="ds-gallery-desktop-carousel">
+(function () {
+	function apply() {
+		var el = document.querySelector('.sticky-gallery');
+		if (!el) return;
+		// >1180px = Ohio's desktop branch (the one that stacks). Force the
+		// carousel layout there; leave mobile (≤1180px) to Ohio's own swipe slider.
+		if (window.innerWidth > 1180) {
+			el.classList.add('classic-gallery');
+		} else {
+			el.classList.remove('classic-gallery');
+		}
+	}
+	apply(); // runs now (footer): the gallery markup is already in the DOM
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', apply);
+	}
+	window.addEventListener('resize', apply);
+}());
+</script>
+	<?php
+}
+
 // ─── Product gallery: dot indicators on mobile ───────────────────────────────
 // Ohio initialises the gallery with dots:false on mobile and destroys the slider
 // entirely on desktop — so destroy+reinit breaks the desktop layout. Instead we
@@ -799,14 +851,33 @@ function dirtshack_gallery_dots() {
     ?>
 <style id="ds-gallery-dots-css">
 @media (max-width: 1180px) {
+    /* Overlay the dots on the image's lower edge rather than placing them in
+       flow below the gallery. `.woo-product-image-slider` is overflow:hidden and
+       its height is driven by the image, so in-flow dots beneath the gallery can
+       be clipped (rendered only partially visible). Absolute-positioning them
+       over the bottom of the slider — its offset parent (position:relative) —
+       keeps them fully visible on any image and adds no layout shift. A pill
+       backdrop guarantees contrast over both light and dark product photos. */
+    .woo-product-image-slider { position: relative !important; }
     .ds-gallery-dots {
+        position: absolute !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 10px !important;
+        z-index: 5 !important;
+        width: max-content !important;
+        margin: 0 auto !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 4px !important;
-        padding: 10px 0 4px !important;
+        gap: 5px !important;
+        padding: 5px 9px !important;
+        background: rgba(17, 17, 17, .45) !important;
+        border-radius: 999px !important;
+        pointer-events: none !important;
     }
-    .ds-gallery-dots svg circle { transition: stroke 0.2s, fill 0.2s !important; }
+    .ds-gallery-dots svg { display: block !important; }
+    .ds-gallery-dots svg circle { stroke: rgba(255, 255, 255, .8) !important; transition: stroke 0.2s, fill 0.2s !important; }
     .ds-gallery-dots .ds-dot-active svg circle { stroke: #c8e600 !important; fill: #c8e600 !important; }
 }
 @media (min-width: 1181px) { .ds-gallery-dots { display: none !important; } }
@@ -1045,9 +1116,15 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .mobile-hamburger .hamburger,
 .theme-ohio #masthead .hamburger-button { height: 44px !important; width: 44px !important; }
 
-/* One horizontal logo. Ohio ships 4 logo blocks — hide all but .logo-sticky and
-   show only its dark-scheme image (both scheme imgs are the same Light-H.png, so
-   showing both renders a doubled logo). Cap height so it stays a normal logo. */
+/* Responsive logo. Ohio ships 4 logo blocks; the images differ by shape:
+     .logo / .logo-mobile  → Light.png  = the 500x500 SQUARE wordmark
+     .logo-sticky          → Light-H.png = the ~6.85:1 HORIZONTAL wordmark
+   (each block also carries a light-scheme Dark.png for light headers — we always
+   want the white "dark-scheme" image on this dark bar).
+   DESKTOP/TABLET (default below): show the horizontal .logo-sticky, hide the rest.
+   MOBILE (<=768px, see media query further down): the horizontal wordmark gets
+   crushed to ~16px tall in the cramped phone header, so swap to the square logo
+   (show .logo-mobile, hide .logo-sticky). */
 .theme-ohio #masthead .logo,
 .theme-ohio #masthead .logo-mobile,
 .theme-ohio #masthead .logo-sticky-mobile { display: none !important; }
@@ -1072,6 +1149,26 @@ function dirtshack_header_css() {
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
+}
+
+/* MOBILE: use the SQUARE logo. On phones the horizontal wordmark is forced into
+   the ~107px slot left beside the action icons and renders ~16px tall — too small
+   to read. The square 500x500 logo fills the 54px bar height instead. Hide the
+   horizontal .logo-sticky, show .logo-mobile's white (dark-scheme) square image. */
+@media screen and (max-width: 768px) {
+    .theme-ohio #masthead .logo-sticky { display: none !important; }
+    .theme-ohio #masthead .logo-mobile { display: block !important; opacity: 1 !important; visibility: visible !important; }
+    .theme-ohio #masthead .logo-mobile .dark-scheme-logo { display: block !important; }
+    .theme-ohio #masthead .logo-mobile .main-logo.light-scheme-logo { display: none !important; }
+    .theme-ohio #masthead .logo-mobile img,
+    .theme-ohio #masthead.-sticky .logo-mobile img {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: 40px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain !important;
+    }
 }
 
 /* Action icons + hamburger → white. The hamburger glyph is an icon font
@@ -1216,3 +1313,76 @@ add_action( 'woocommerce_checkout_update_order_review', function ( $posted_data 
 		WC()->customer->save();
 	}
 }, 10 );
+
+/**
+ * Append a "+ taxes" suffix to product prices on the storefront.
+ *
+ * Prices on the homepage cards (front-page.php), the Shop loop, product
+ * category/tag archives, the single product page and the cross-sell
+ * ("You may be interested in…") products below the cart all render through
+ * WooCommerce's get_price_html(), so this one filter covers every surface
+ * the brief asked for. The cart's own line items and totals use wc_price()
+ * (NOT get_price_html), so is_cart() only annotates the suggested products,
+ * never the cart rows where tax is already its own line. Checkout, mini-cart
+ * fragments and admin stay excluded.
+ *
+ * Output: ₹1,999 <small class="ds-price-suffix">+ taxes</small>
+ * Free / price-less products (variable with no range, "Free!", POA) are left
+ * untouched so we never render "Free! + taxes".
+ */
+function dirtshack_price_tax_suffix( $price_html, $product ) {
+	// Only on the customer-facing storefront surfaces named in the brief.
+	// is_cart() catches the cross-sell product loop below the cart items.
+	if ( is_admin()
+		|| ! function_exists( 'is_shop' )
+		|| ! ( is_front_page() || is_shop() || is_product_taxonomy() || is_product() || is_cart() ) ) {
+		return $price_html;
+	}
+
+	// Nothing to annotate, or the product is free → leave the markup as-is.
+	if ( '' === trim( (string) $price_html ) ) {
+		return $price_html;
+	}
+	$amount = $product instanceof WC_Product ? $product->get_price() : '';
+	if ( '' === $amount || (float) $amount <= 0 ) {
+		return $price_html;
+	}
+
+	return $price_html . ' <small class="ds-price-suffix">+ taxes</small>';
+}
+add_filter( 'woocommerce_get_price_html', 'dirtshack_price_tax_suffix', 20, 2 );
+
+/**
+ * Style the "+ taxes" suffix.
+ *
+ * Injected inline at wp_head 9999 (the reliable-on-live pattern — see the
+ * CSS-caching note in functions.php). Renders the suffix as small, muted,
+ * baseline-aligned secondary text so the price stays the dominant element.
+ * The #ds-home override beats front-page.php's
+ * `#ds-home .ds-product__price * { color: var(--d) !important }` so the
+ * suffix keeps its subordinate grey on the homepage cards too.
+ */
+function dirtshack_price_tax_suffix_css() {
+	if ( is_admin()
+		|| ! function_exists( 'is_shop' )
+		|| ! ( is_front_page() || is_shop() || is_product_taxonomy() || is_product() || is_cart() ) ) {
+		return;
+	}
+	?>
+<style id="dirtshack-price-suffix-css">
+.ds-price-suffix{
+	display:inline;
+	margin-left:.28em;
+	font-size:.62em;
+	font-weight:500;
+	line-height:1;
+	vertical-align:baseline;
+	letter-spacing:.01em;
+	color:#6b7280;
+	white-space:nowrap;
+}
+#ds-home .ds-product__price .ds-price-suffix{ color:#6b7280 !important; }
+</style>
+	<?php
+}
+add_action( 'wp_head', 'dirtshack_price_tax_suffix_css', 9999 );
