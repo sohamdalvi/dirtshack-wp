@@ -141,9 +141,17 @@ for rel_path in "${SYNC_PATHS[@]}"; do
     exit $EXIT_CODE
   fi
 
-  FILE_CHANGES=$(echo "$OUTPUT" | grep -cE '^[><ch]' || true)
-  if [[ $FILE_CHANGES -gt 0 ]]; then
-    echo "$OUTPUT" | grep -E '^[><ch]' | head -20
+  # rsync --itemize-changes prints one line per file it considers. openrsync (the
+  # rsync shipped with macOS) emits a no-op line for an explicitly-named single
+  # file even when it's identical — ">f......." with ALL dots after the type, i.e.
+  # no attribute differs — only during --dry-run. The real --apply run correctly
+  # skips it, which is why a dry run could report 2 files but --apply copies 1. A
+  # genuine change always carries at least one non-dot flag (e.g. ">fcst...."), so
+  # keep only those lines. This makes the dry-run count match what --apply does.
+  CHANGED=$(echo "$OUTPUT" | awk '/^[<>ch][fdDLS]/ && substr($1,3) ~ /[^.]/')
+  if [[ -n "$CHANGED" ]]; then
+    FILE_CHANGES=$(echo "$CHANGED" | wc -l | tr -d ' ')
+    echo "$CHANGED" | head -20
     [[ $FILE_CHANGES -gt 20 ]] && echo "  ... and $((FILE_CHANGES - 20)) more"
     TOTAL_CHANGES=$((TOTAL_CHANGES + FILE_CHANGES))
   else
