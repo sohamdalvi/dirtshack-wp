@@ -1103,8 +1103,8 @@ function dirtshack_header_css() {
    is capped + centred, so the switcher and cart line up with "Featured
    Products". (No .page-container exists in this header style.) */
 .theme-ohio #masthead .header-wrap {
-    padding-left: clamp(1rem, 5vw, 3rem) !important;
-    padding-right: clamp(1rem, 5vw, 3rem) !important;
+    padding-left: clamp(1rem, 4vw, 3rem) !important;
+    padding-right: clamp(1rem, 4vw, 3rem) !important;
     box-sizing: border-box !important;
 }
 .theme-ohio #masthead .header-wrap-inner {
@@ -1114,11 +1114,12 @@ function dirtshack_header_css() {
     margin-right: auto !important;
 }
 
-/* Shorter bar (Ohio sets 70px → 54px) + smaller action icons/hamburger */
+/* Bar height matches the rest of the DirtShack ecosystem (Home/Garage/Academy/
+   Market all use 66px; Ohio's own default is 70px) + smaller action icons/hamburger */
 .theme-ohio #masthead,
 .theme-ohio #masthead.header,
 .theme-ohio #masthead .header-wrap,
-.theme-ohio #masthead .header-wrap-inner { height: 54px !important; min-height: 54px !important; }
+.theme-ohio #masthead .header-wrap-inner { height: 66px !important; min-height: 66px !important; }
 .theme-ohio #masthead .menu-optional .icon-button,
 .theme-ohio #masthead .mobile-hamburger,
 .theme-ohio #masthead .mobile-hamburger .hamburger,
@@ -1136,7 +1137,11 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .logo,
 .theme-ohio #masthead .logo-mobile,
 .theme-ohio #masthead .logo-sticky-mobile { display: none !important; }
-.theme-ohio #masthead .logo-sticky { display: block !important; opacity: 1 !important; visibility: visible !important; }
+/* flex (not block) so the logo image and the ::after sub-portal label
+   (added below) sit on the same line instead of the label wrapping
+   underneath — Ohio's own img styling elsewhere makes the logo block-level,
+   which would otherwise force it onto its own line. */
+.theme-ohio #masthead .logo-sticky { display: flex !important; align-items: center !important; opacity: 1 !important; visibility: visible !important; }
 .theme-ohio #masthead .logo-sticky .dark-scheme-logo { display: block !important; }
 .theme-ohio #masthead .logo-sticky .main-logo.light-scheme-logo { display: none !important; }
 /* Lock the logo to ONE small height in both the top (non-sticky) and scrolled
@@ -1145,39 +1150,59 @@ function dirtshack_header_css() {
    The wordmark is a wide 6.85:1 image. On mobile Ohio constrains .logo-sticky to
    a fixed ~107px width (the room left beside the action icons); forcing a fixed
    HEIGHT inside that clamped width (with object-fit:fill) crushed the aspect
-   ratio. Size by aspect ratio instead — cap height at 30px AND width at 100% of
+   ratio. Size by aspect ratio instead — cap height AND width at 100% of
    the container, height:auto so the logo never distorts. Desktop: the container
-   is wide, so max-height binds → 30px tall at full width. Mobile: max-width binds
-   → it scales down proportionally to fit. object-fit:contain is a safety net. */
+   is wide, so max-height binds → full height at full width. Mobile: max-width
+   binds → it scales down proportionally to fit. object-fit:contain is a safety
+   net. Height caps (36px desktop / 30px mobile) match Home/Garage/Academy/Market. */
 .theme-ohio #masthead .logo-sticky img,
 .theme-ohio #masthead.-sticky .logo-sticky img {
     height: auto !important;
     min-height: 0 !important;
-    max-height: 30px !important;
+    max-height: 36px !important;
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
 }
-
-/* MOBILE: use the SQUARE logo. On phones the horizontal wordmark is forced into
-   the ~107px slot left beside the action icons and renders ~16px tall — too small
-   to read. The square 500x500 logo fills the 54px bar height instead. Hide the
-   horizontal .logo-sticky, show .logo-mobile's white (dark-scheme) square image. */
-@media screen and (max-width: 768px) {
-    .theme-ohio #masthead .logo-sticky { display: none !important; }
-    .theme-ohio #masthead .logo-mobile { display: block !important; opacity: 1 !important; visibility: visible !important; }
-    .theme-ohio #masthead .logo-mobile .dark-scheme-logo { display: block !important; }
-    .theme-ohio #masthead .logo-mobile .main-logo.light-scheme-logo { display: none !important; }
-    .theme-ohio #masthead .logo-mobile img,
-    .theme-ohio #masthead.-sticky .logo-mobile img {
-        height: auto !important;
-        min-height: 0 !important;
-        max-height: 40px !important;
-        width: auto !important;
-        max-width: 100% !important;
-        object-fit: contain !important;
-    }
+@media screen and (max-width: 760px) {
+    .theme-ohio #masthead .logo-sticky img,
+    .theme-ohio #masthead.-sticky .logo-sticky img { max-height: 30px !important; }
 }
+
+/* Sub-portal label after the logo, matching the "| Garage" / "| Academy" text
+   Home/Garage/Academy/Market show next to their logo (their .brand-sub span).
+   Ohio's logo markup (parts/elements/menu_logo.php) has no equivalent slot to
+   hook text into without forking the template, so it's added as a generated
+   ::after on .logo-sticky instead — same visual result, no template override.
+   Desktop only (per request); the mobile header is too tight for it. */
+.theme-ohio #masthead .logo-sticky::after {
+    content: "Shop";
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.6rem;
+    padding-left: 0.6rem;
+    border-left: 1px solid rgba(255,255,255,0.25);
+    color: #ffffff;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 0.92rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    white-space: nowrap;
+}
+@media screen and (max-width: 760px) {
+    .theme-ohio #masthead .logo-sticky::after { display: none !important; }
+}
+
+/* Reverted 2026-07-01: mobile used to swap to the square .logo-mobile logo here
+   (the horizontal wordmark was cramped into a ~107px slot next to the action
+   icons and rendered too small). Reinstated the horizontal .logo-sticky on
+   mobile instead, and freed up the room it needs by moving Search (already
+   done — see the sticky-product/search-bar work above) and Profile (see
+   dirtshack_mobile_account_menu_item below) out of the mobile top bar and
+   into the hamburger panel, so the wordmark isn't competing with as many
+   icons for space. */
 
 /* Action icons + hamburger → white. The hamburger glyph is an icon font
    (<i class="icon">) → colour it, NOT background (white bg = solid box). */
@@ -1191,6 +1216,36 @@ function dirtshack_header_css() {
 .theme-ohio #masthead .hamburger-button .icon { color: #fff !important; background-color: transparent !important; }
 .theme-ohio #masthead .mobile-hamburger .hamburger > span,
 .theme-ohio #masthead .hamburger-button > span { background-color: #fff !important; }
+
+/* The header search icon (opened Ohio's overlay popup) is no longer hidden
+   here with CSS — it's removed at the source via an empty child-theme
+   override, ohio-child/parts/elements/search.php, since it's fully replaced
+   by the always-visible search bar under the hero on Home + Shop. */
+
+/* Hide the Account/Profile icon from the MOBILE top bar only (desktop keeps
+   it) — moved into the hamburger nav panel instead (see
+   dirtshack_mobile_account_menu_item()) to free up room for the horizontal
+   logo on phones. */
+@media screen and (max-width: 768px) {
+    .theme-ohio #masthead .menu-optional li.icon-button-holder:has(.favorites-global) { display: none !important; }
+}
+
+/* Tighten the gap between Cart and the hamburger button so they read as one
+   grouped action-cluster on the right (Ohio's own default is a 12px
+   margin-left on .mobile-hamburger — only ever visible on mobile, since
+   Ohio itself hides .mobile-hamburger on desktop). */
+.theme-ohio #masthead .mobile-hamburger { margin-left: 4px !important; }
+
+/* Hide the "Shop" pill from the desktop header nav (it's the site's only
+   primary-menu item, rendered inline via #site-navigation on wide screens).
+   Scoped off Ohio's own JS-computed `.header.-mobile` class — not a pixel
+   breakpoint — because Ohio's nav switches to the hamburger/off-canvas mode
+   at a width it calculates from actual header content, not a fixed value
+   (measured empirically: mode-switch fell somewhere in 775–784px on this
+   header, not a round number). On mobile (`.header.-mobile` present) this
+   rule doesn't match, so #site-navigation still renders normally inside the
+   hamburger slide-in panel. */
+.theme-ohio #masthead.header:not(.-mobile) #site-navigation { display: none !important; }
 
 /* Inline nav links → white on the dark bar; revert to dark when the mobile
    slide-in panel is open (Ohio adds `.visible`) so they stay readable on the
@@ -1394,3 +1449,163 @@ function dirtshack_price_tax_suffix_css() {
 	<?php
 }
 add_action( 'wp_head', 'dirtshack_price_tax_suffix_css', 9999 );
+
+/**
+ * Search bar — replaces the header search icon (removed at the source via
+ * ohio-child/parts/elements/search.php) with an always-visible bar under
+ * the hero, on the Home and Shop pages.
+ *
+ * Reuses WooCommerce's own get_product_search_form() (Ohio's themed
+ * product-searchform.php: real <label>, category dropdown, hidden
+ * post_type=product field) rather than hand-rolling a form — it already
+ * submits to the shop/current category and works with JS off; we only
+ * restyle it via dirtshack_search_bar_css().
+ *
+ * Bare markup only (no section/wrap) — for embedding inside an existing
+ * section, e.g. front-page.php folds this into the Featured Products band
+ * instead of giving it a separate white section (that doubled up the
+ * top/bottom padding between the hero and the product grid).
+ */
+function dirtshack_search_bar_markup() {
+	if ( ! function_exists( 'get_product_search_form' ) ) {
+		return;
+	}
+	?>
+	<div class="ds-search-bar">
+		<?php get_product_search_form(); ?>
+	</div>
+	<?php
+}
+
+// Standalone version (own section + wrap) — used on the Shop page, which has
+// no existing section to fold into at that position.
+function dirtshack_search_bar_section() {
+	?>
+	<section class="ds-section ds-search-section">
+		<div class="ds-wrap">
+			<?php dirtshack_search_bar_markup(); ?>
+		</div>
+	</section>
+	<?php
+}
+
+// Shop page: drop the bar at the very top of the page content — the same
+// "under the hero" slot front-page.php places it in — via the
+// woocommerce_archive_description hook, which prints first inside
+// page-container (before the filter/sort bar and product grid). Scoped to
+// is_shop() only (not category/tag archives, which keep their normal top).
+add_action( 'woocommerce_archive_description', 'dirtshack_shop_search_bar', 5 );
+function dirtshack_shop_search_bar() {
+	if ( ! function_exists( 'is_shop' ) || ! is_shop() ) {
+		return;
+	}
+	dirtshack_search_bar_section();
+}
+
+add_action( 'wp_head', 'dirtshack_search_bar_css', 9999 );
+function dirtshack_search_bar_css() {
+	if ( ! ( is_front_page() || ( function_exists( 'is_shop' ) && is_shop() ) ) ) {
+		return;
+	}
+	?>
+<style id="ds-search-bar-css">
+.ds-search-section { padding: 28px clamp(1rem, 5vw, 3rem) !important; }
+.ds-search-bar { max-width: 640px; margin: 0 auto 1.25rem; }
+.ds-search-bar .woocommerce-product-search {
+	display: flex !important;
+	align-items: stretch !important;
+	background: #fff !important;
+	border: 1px solid #e5e5e5 !important;
+	border-radius: 999px !important;
+	overflow: hidden !important;
+	box-shadow: 0 2px 10px rgba(0,0,0,.06) !important;
+}
+.ds-search-bar .woocommerce-product-search:focus-within {
+	box-shadow: 0 0 0 3px rgba(196,224,0,.5) !important;
+}
+.ds-search-bar .woocommerce-product-search label {
+	flex: 1 !important;
+	display: flex !important;
+	align-items: center !important;
+	margin: 0 !important;
+	min-width: 0 !important;
+}
+.ds-search-bar .woocommerce-product-search .search-field {
+	flex: 1 !important;
+	min-width: 0 !important;
+	border: 0 !important;
+	background: transparent !important;
+	padding: 0 1.1rem !important;
+	min-height: 48px !important;
+	font-size: .95rem !important;
+	color: #111 !important;
+	outline: none !important;
+}
+.ds-search-bar .woocommerce-product-search select[name="search_term"] {
+	border: 0 !important;
+	border-left: 1px solid #eee !important;
+	background: #fafafa !important;
+	color: #555 !important;
+	padding: 0 1.6rem 0 .85rem !important;
+	min-height: 48px !important;
+	max-width: 140px !important;
+	font-size: .8rem !important;
+	flex-shrink: 0 !important;
+}
+.ds-search-bar .woocommerce-product-search .search-submit {
+	flex-shrink: 0 !important;
+	width: 52px !important;
+	min-height: 48px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: #C4E000 !important;
+	color: #111 !important;
+	cursor: pointer !important;
+	transition: opacity .15s !important;
+}
+.ds-search-bar .woocommerce-product-search .search-submit:hover { opacity: .85 !important; }
+.ds-search-bar .woocommerce-product-search .search-submit .icon,
+.ds-search-bar .woocommerce-product-search .search-submit svg { width: 20px !important; height: 20px !important; fill: #111 !important; }
+.ds-search-bar .search-results { display: none !important; } /* unused static placement — no JS populates it here */
+@media (max-width: 480px) {
+	.ds-search-bar .woocommerce-product-search select[name="search_term"] { display: none !important; }
+}
+</style>
+	<?php
+}
+
+/**
+ * Add "My Account" to the primary nav menu (which only otherwise contains
+ * "Shop") so it's reachable from the mobile hamburger panel — the Account
+ * icon was removed from the mobile top bar (see dirtshack_header_css,
+ * .icon-button-holder:has(.favorites-global)) to free up room for the
+ * horizontal logo. Desktop's own Account icon in the header is untouched;
+ * #site-navigation itself is hidden entirely on desktop already, so this
+ * only ever surfaces inside the mobile hamburger.
+ */
+add_filter( 'wp_nav_menu_items', 'dirtshack_mobile_account_menu_item', 10, 2 );
+function dirtshack_mobile_account_menu_item( $items, $args ) {
+	// Ohio's menu_nav.php renders up to TWO menus into the same nav: #menu-primary
+	// (theme_location=primary or an explicit menu=>ID — either way, menu_id=>
+	// 'menu-primary') and, when the "page_extended_mobile_menu" option is set, a
+	// second #mobile-menu that Ohio swaps in on mobile INSTEAD of #menu-primary
+	// (.header.-mobile .nav.with-mobile-menu #menu-primary{display:none}). Add to
+	// whichever one is actually being built so "My Account" shows regardless of
+	// that option's state.
+	$target_menu_ids = array( 'menu-primary', 'mobile-menu' );
+	if ( ! isset( $args->menu_id ) || ! in_array( $args->menu_id, $target_menu_ids, true ) || ! function_exists( 'wc_get_page_permalink' ) ) {
+		return $items;
+	}
+	$url = wc_get_page_permalink( 'myaccount' );
+	if ( ! $url ) {
+		return $items;
+	}
+	return $items . sprintf(
+		'<li class="mega-menu-item nav-item menu-item-depth-0"><a href="%s" class="menu-link -undash -unlink main-menu-link item-title"><span>%s</span></a></li>',
+		esc_url( $url ),
+		esc_html__( 'My Account', 'ohio-child' )
+	);
+}

@@ -151,6 +151,14 @@ function dirtshack_home_css() { ?>
     background-color: var(--d) !important;
     overflow: hidden !important;
 }
+/* Shorter hero on phones only (tablet ≥768px and desktop ≥1025px keep the
+   base/desktop clamp above/below) — frees up vertical space so the search
+   bar + first product row clear the fixed bottom nav sooner on load. Placed
+   after the base rule (equal specificity + !important) so source order
+   lets it win on phones. */
+@media (max-width: 767px) {
+    #ds-home .ds-hero { min-height: clamp(160px, 24vh, 220px) !important; }
+}
 #ds-home .ds-hero__overlay {
     position: absolute !important;
     inset: 0 !important;
@@ -537,6 +545,12 @@ if ( ! $ds_shop_url ) {
     ?>
     <section class="ds-section ds-section--grey">
         <div class="ds-wrap">
+            <?php if ( function_exists( 'dirtshack_search_bar_markup' ) ) : ?>
+            <!-- ── SEARCH BAR (replaces the header search icon) — folded into this
+                 section instead of its own band, so there's no double top/bottom
+                 padding between the hero and the product grid. ── -->
+            <?php dirtshack_search_bar_markup(); ?>
+            <?php endif; ?>
             <div class="ds-section__head">
                 <h2 class="ds-section__title">Featured Products</h2>
                 <a class="ds-link" href="<?php echo esc_url( $ds_shop_url ); ?>">View all &rarr;</a>
