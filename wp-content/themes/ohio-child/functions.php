@@ -955,6 +955,14 @@ function dirtshack_footer_css() {
 /* Hide the sticky next-product nav card on single product pages */
 .sticky-nav[data-js="sticky-nav-product"] { display: none !important; }
 
+/* Hide Ohio's sticky "Add to Cart" bar (single-product/sticky-product.php).
+   On mobile (<=768px) it goes full-width and fixed to the bottom — the same
+   screen real estate the DirtShack ecosystem nav strip now occupies. Revert
+   by deleting this rule (the theme option `woocommerce_product_sticky` still
+   controls rendering server-side; this just hides the rendered markup, so
+   there's nothing else to undo). */
+.sticky-product { display: none !important; }
+
 /* Hide Ohio's header social side-rail (the vertical "Follow Us" on the page edge) */
 .elements-bar { display: none !important; }
 
