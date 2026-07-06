@@ -1609,3 +1609,32 @@ function dirtshack_mobile_account_menu_item( $items, $args ) {
 		esc_html__( 'My Account', 'ohio-child' )
 	);
 }
+
+// ─── Google Analytics (GA4) — gtag.js ────────────────────────────────────────
+//
+// Injected file-based (deploy-safe) rather than via Ohio's DB-stored
+// "Header JavaScript" option. A SECOND GA4 property (G-H4Q3S7VS5R) is already
+// hardcoded in that option; the two coexist cleanly because gtag.js shares a
+// single window.dataLayer, so both configs register independently. Printed at
+// wp_head priority 2 so the tag sits near the top of <head>, as Google
+// recommends. Suppressed for logged-in admins so their sessions aren't tracked.
+//
+define( 'DIRTSHACK_GA4_ID', 'G-63RFMTT8K2' );
+
+add_action( 'wp_head', 'dirtshack_google_analytics', 2 );
+function dirtshack_google_analytics() {
+	if ( current_user_can( 'manage_options' ) ) {
+		return; // Don't track site admins.
+	}
+	$id = DIRTSHACK_GA4_ID;
+	?>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $id ); ?>"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', '<?php echo esc_js( $id ); ?>');
+	</script>
+	<?php
+}
