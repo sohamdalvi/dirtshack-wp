@@ -408,10 +408,11 @@ function dirtshack_braap_strip_body_youtube( $content ) {
 // collision), printed only on the surfaces that use them.
 add_action( 'wp_head', 'dirtshack_braap_css', 9999 );
 function dirtshack_braap_css() {
+	// The homepage Braap section was removed, so the front page no longer needs
+	// these card styles — only the Braap surfaces themselves do.
 	$on_braap = ( function_exists( 'is_post_type_archive' ) && is_post_type_archive( DIRTSHACK_BRAAP_CPT ) )
 		|| is_singular( DIRTSHACK_BRAAP_CPT )
-		|| is_tax( array( DIRTSHACK_BRAAP_TYPE_TAX, DIRTSHACK_BRAAP_CREATOR ) )
-		|| is_front_page(); // homepage Braap section reuses the card styles
+		|| is_tax( array( DIRTSHACK_BRAAP_TYPE_TAX, DIRTSHACK_BRAAP_CREATOR ) );
 	if ( ! $on_braap ) {
 		return;
 	}

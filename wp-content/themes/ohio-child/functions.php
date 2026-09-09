@@ -165,13 +165,12 @@ function dirtshack_perf_dequeue() {
         wp_dequeue_script( 'rcfwc-js' );
     }
 
-    // 5. Instagram feed (Smash Balloon) is rendered only in the homepage "From the Trail"
-    //    section, but the plugin enqueues its CSS/JS on every page (incl. cart). Keep it on the
-    //    front page only.
-    if ( ! is_front_page() ) {
-        wp_dequeue_script( 'sbi_scripts' );
-        wp_dequeue_style( 'sbi_styles' );
-    }
+    // 5. Instagram feed (Smash Balloon). The homepage "From the Trail" section that used it is
+    //    gone, so nothing on the site renders the feed any more — but the plugin still enqueues
+    //    its CSS/JS on every page. Drop it site-wide. (Deactivating the plugin in wp-admin would
+    //    make this unnecessary; the dequeue is here so the assets stay off either way.)
+    wp_dequeue_script( 'sbi_scripts' );
+    wp_dequeue_style( 'sbi_styles' );
 }
 
 // NOTE: We deliberately DO NOT dequeue 'wc-cart-fragments'. Ohio's own

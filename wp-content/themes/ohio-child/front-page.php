@@ -6,10 +6,8 @@
  *   0. Announcement bar  — rendered site-wide at wp_body_open (see functions.php)
  *   0. Sticky header     — Ohio header via get_header()
  *   1. Hero ~45vh        — one image, dark overlay, headline + two CTAs
- *   2. Shop by Category  — native WooCommerce product categories
- *   3. Marketplace card  — single CTA out to market.dirtshack.in
- *   4. Featured Products — WooCommerce "featured" flag (falls back to latest)
- *   5. Why DirtShack     — four icon blocks
+ *   2. Products          — latest published products, newest first (no flag needed)
+ *   3. Why DirtShack     — four icon blocks
  *   0. Footer            — Ohio footer via get_footer()
  *
  * Cache notes: every section renders from deterministic, page-cacheable queries.
@@ -96,29 +94,6 @@ function dirtshack_home_css() { ?>
     padding-bottom: 1px !important;
 }
 
-/* ── Buttons (neon-green, rounded) ── */
-#ds-home .ds-btn {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: .4rem !important;
-    padding: .85rem 1.6rem !important;
-    border-radius: 999px !important;
-    font-size: .82rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .05em !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    line-height: 1 !important;
-    border: 2px solid transparent !important;
-    cursor: pointer !important;
-    transition: opacity .18s, background .18s, color .18s !important;
-}
-#ds-home .ds-btn--primary { background: var(--g) !important; color: var(--d) !important; }
-#ds-home .ds-btn--primary:hover { opacity: .85 !important; }
-#ds-home .ds-btn--ghost { background: rgba(0,0,0,.25) !important; color: #fff !important; border-color: #fff !important; }
-#ds-home .ds-btn--ghost:hover { background: #fff !important; color: var(--d) !important; }
-
 /* ── Responsive product/category grid: 2 col mobile ── */
 #ds-home .ds-grid {
     display: grid !important;
@@ -128,15 +103,13 @@ function dirtshack_home_css() { ?>
     margin: 0 !important;
     padding: 0 !important;
 }
-/* Featured products: the query renders 8; show 4 on mobile, 6 on tablet, 8 on
-   desktop by hiding the extras per breakpoint. Cache-safe — the HTML is identical
-   for every visitor, only the CSS adapts (you can't vary the count server-side
-   behind a full-page cache). Keeps each tier to clean rows (2×2 / 2×3 / 2×4). */
-@media (max-width: 767px) {
-    #ds-home .ds-grid .ds-product:nth-child(n+5) { display: none !important; }
-}
+/* Product grid: the query renders 16; mobile and desktop show all 16, tablet
+   shows 15. Cache-safe — the HTML is identical for every visitor, only the CSS
+   adapts (you can't vary the count server-side behind a full-page cache). Keeps
+   each tier to clean rows (8×2 mobile / 5×3 tablet / 4×4 desktop) — the tablet
+   grid is 3-wide, so 16 would leave a single orphan card in the last row. */
 @media (min-width: 768px) and (max-width: 1024px) {
-    #ds-home .ds-grid .ds-product:nth-child(n+7) { display: none !important; }
+    #ds-home .ds-grid .ds-product:nth-child(n+16) { display: none !important; }
 }
 
 /* ── 1. Hero ── */
@@ -190,73 +163,7 @@ function dirtshack_home_css() { ?>
 }
 #ds-home .ds-accent { color: var(--g) !important; }
 
-/* Marketplace badge — top-right of the hero, styled as a clearly-EXTERNAL link
-   (translucent dark pill + neon-green border + ↗ outbound arrow, opens new tab). */
-#ds-home .ds-hero__market {
-    position: absolute !important;
-    top: .9rem !important;
-    right: clamp(1rem, 4vw, 2rem) !important;
-    z-index: 3 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: .4rem !important;
-    max-width: calc(100% - 2rem) !important;
-    padding: .5rem .9rem !important;
-    border-radius: 999px !important;
-    background: rgba(0,0,0,.55) !important;
-    border: 1.5px solid var(--g) !important;
-    color: #fff !important;
-    font-size: .68rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .04em !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    line-height: 1.1 !important;
-    -webkit-backdrop-filter: blur(4px) !important;
-    backdrop-filter: blur(4px) !important;
-    transition: background .18s, color .18s !important;
-}
-#ds-home .ds-hero__market:hover { background: var(--g) !important; color: var(--d) !important; }
-#ds-home .ds-hero__market .ds-ext { color: var(--g) !important; font-weight: 900 !important; font-size: 1.05em !important; }
-#ds-home .ds-hero__market:hover .ds-ext { color: var(--d) !important; }
-
-/* ── Marketplace card ── */
-#ds-home .ds-market {
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 1rem !important;
-    border-radius: var(--r) !important;
-    padding: 2rem 1.5rem !important;
-    background:
-        linear-gradient(120deg, rgba(17,17,17,.92) 0%, rgba(17,17,17,.65) 100%),
-        var(--d) !important;
-    border: 2px solid var(--g) !important;
-}
-#ds-home .ds-market__eyebrow {
-    font-size: .72rem !important;
-    font-weight: 800 !important;
-    letter-spacing: .15em !important;
-    text-transform: uppercase !important;
-    color: var(--g) !important;
-}
-#ds-home .ds-market__title {
-    margin: 0 !important;
-    font-size: clamp(1.3rem, 5vw, 1.75rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.15 !important;
-    color: #fff !important;
-}
-#ds-home .ds-market__sub {
-    margin: 0 !important;
-    font-size: .9rem !important;
-    line-height: 1.5 !important;
-    color: #d6d6d6 !important;
-    max-width: 46ch !important;
-}
-
-/* ── 4. Product card ── */
+/* ── 2. Product card ── */
 #ds-home .ds-product {
     display: flex !important;
     flex-direction: column !important;
@@ -347,7 +254,7 @@ function dirtshack_home_css() { ?>
     text-underline-offset: 3px !important;
 }
 
-/* ── 5. Why DirtShack — 2 col mobile ── */
+/* ── 3. Why DirtShack — 2 col mobile ── */
 #ds-home .ds-why-grid {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
@@ -374,101 +281,10 @@ function dirtshack_home_css() { ?>
 #ds-home .ds-why-section { padding-top: 26px !important; padding-bottom: 26px !important; }
 #ds-home .ds-why-section .ds-section__head { margin-bottom: 1rem !important; }
 
-/* ── Instagram feed (Smash Balloon) — restyle the plugin chrome to match the brand
-   (black / white / neon green) instead of its default grey + Instagram-blue look.
-   These elements are injected by the plugin's JS, but the CSS still applies. ── */
-#ds-home .ds-instagram #sb_instagram { margin: 0 auto !important; }
-
-/* Hide the plugin's profile header/bio — we already show the @dirtshack.in link
-   above the feed, so the avatar + bio block is redundant. */
-#ds-home .ds-instagram #sb_instagram .sbi_header,
-#ds-home .ds-instagram #sb_instagram .sb_instagram_header { display: none !important; }
-
-/* Rounded photos to match the rest of the cards */
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_item,
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo_wrap,
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo { border-radius: 10px !important; overflow: hidden !important; }
-
-/* Keep the tiles square, but a bit smaller with a clear gap between them.
-   .sbi_photo is forced to a 1:1 box (height:auto + aspect-ratio beat the inline
-   pixel height the plugin's JS sets). Widening the .sbi_item padding opens up the
-   gutter — which both separates the tiles and shrinks each square (border-box, so
-   padding eats into the fixed column width). */
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo {
-    aspect-ratio: 1 / 1 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    padding-bottom: 0 !important;
-}
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_photo_wrap { height: auto !important; }
-#ds-home .ds-instagram #sb_instagram #sbi_images .sbi_item {
-    height: auto !important;
-    padding: 12px !important;
-}
-
-/* "Load More" → dark pill (secondary) */
-#ds-home .ds-instagram #sb_instagram #sbi_load .sbi_load_btn,
-#ds-home .ds-instagram #sb_instagram .sbi_load_btn {
-    background: #1a1a1a !important;
-    color: #fff !important;
-    border: 1px solid #2a2a2a !important;
-    border-radius: 999px !important;
-    font-weight: 800 !important;
-    letter-spacing: .05em !important;
-    text-transform: uppercase !important;
-    transition: background .18s, opacity .18s !important;
-}
-#ds-home .ds-instagram #sb_instagram .sbi_load_btn:hover { background: #000 !important; }
-
-/* "Follow on Instagram" → neon-green pill (primary, matches the brand CTAs) */
-#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a,
-#ds-home .ds-instagram #sb_instagram a.sbi_follow_btn {
-    background: #C4E000 !important;
-    color: #111 !important;
-    border: 0 !important;
-    border-radius: 999px !important;
-    font-weight: 800 !important;
-    letter-spacing: .04em !important;
-    text-transform: uppercase !important;
-    transition: opacity .18s !important;
-}
-#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a:hover,
-#ds-home .ds-instagram #sb_instagram a.sbi_follow_btn:hover { opacity: .85 !important; }
-#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a .fa-instagram,
-#ds-home .ds-instagram #sb_instagram .sbi_follow_btn a svg,
-#ds-home .ds-instagram #sb_instagram .sbi_follow_btn svg { color: #111 !important; fill: #111 !important; }
-
-/* ── 6. Blog cards — 1 col mobile ── */
-#ds-home .ds-blog-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 1.25rem !important;
-}
-#ds-home .ds-post {
-    display: flex !important;
-    flex-direction: column !important;
-    background: #fff !important;
-    border: 1px solid var(--bd) !important;
-    border-radius: var(--r) !important;
-    overflow: hidden !important;
-    text-decoration: none !important;
-    color: var(--d) !important;
-    transition: box-shadow .2s, transform .2s !important;
-}
-#ds-home .ds-post:hover { box-shadow: 0 8px 28px rgba(0,0,0,.10) !important; transform: translateY(-2px) !important; }
-#ds-home .ds-post__img { width: 100% !important; aspect-ratio: 16 / 9 !important; overflow: hidden !important; background: #eee !important; display: block !important; }
-#ds-home .ds-post__img img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
-#ds-home .ds-post__body { padding: 1rem 1.1rem 1.2rem !important; }
-#ds-home .ds-post__date { font-size: .72rem !important; font-weight: 700 !important; letter-spacing: .06em !important; text-transform: uppercase !important; color: #888 !important; }
-#ds-home .ds-post__title { margin: .35rem 0 0 !important; font-size: 1.02rem !important; font-weight: 800 !important; line-height: 1.25 !important; color: var(--d) !important; }
-
 /* ── Tablet (≥768px): 3-col grids ── */
 @media (min-width: 768px) {
     #ds-home .ds-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 1.25rem !important; }
     #ds-home .ds-why-grid { grid-template-columns: repeat(4, 1fr) !important; }
-    #ds-home .ds-blog-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    #ds-home .ds-market { flex-direction: row !important; align-items: center !important; justify-content: space-between !important; padding: 2.25rem 2.5rem !important; }
-    #ds-home .ds-market__copy { display: flex !important; flex-direction: column !important; gap: .5rem !important; }
 }
 
 /* ── Desktop (≥1025px): 4-col product/category grids, 80px section padding ── */
@@ -509,28 +325,20 @@ if ( ! $ds_shop_url ) {
         </div>
     </section>
 
-    <!-- ── 2. FEATURED PRODUCTS ── -->
+    <!-- ── 2. PRODUCTS ── -->
     <?php
-    // Pull products flagged "featured" in WooCommerce (content stays editable via
-    // the featured flag — nothing hardcoded). Deterministic order. If the store
-    // has no featured products yet, fall back to the latest published products so
-    // the section never renders empty.
-    $ds_featured_ids = function_exists( 'wc_get_featured_product_ids' ) ? wc_get_featured_product_ids() : array();
-
+    // Pull the latest published products — no "featured" flag required, so the
+    // grid fills itself as the catalog grows and never depends on someone
+    // remembering to star a product. Newest first.
     $ds_args = array(
         'post_type'           => 'product',
         'post_status'         => 'publish',
-        'posts_per_page'      => 8,
+        'posts_per_page'      => 16,
+        'orderby'             => 'date',
+        'order'               => 'DESC',
         'ignore_sticky_posts' => true,
         'no_found_rows'       => true,
     );
-    if ( ! empty( $ds_featured_ids ) ) {
-        $ds_args['post__in'] = $ds_featured_ids;
-        $ds_args['orderby']  = 'post__in'; // stable, follows featured order
-    } else {
-        $ds_args['orderby'] = 'date';
-        $ds_args['order']   = 'DESC';
-    }
     // Only saleable products in the catalog (mirrors WooCommerce visibility).
     $ds_args['tax_query'] = array( array(
         'taxonomy' => 'product_visibility',
@@ -600,7 +408,7 @@ if ( ! $ds_shop_url ) {
     </section>
     <?php endif; ?>
 
-    <!-- ── 5. WHY DIRTSHACK (compact ribbon) ── -->
+    <!-- ── 3. WHY DIRTSHACK (compact ribbon) ── -->
     <section class="ds-section ds-section--dark ds-why-section">
         <div class="ds-wrap">
             <div class="ds-section__head">
