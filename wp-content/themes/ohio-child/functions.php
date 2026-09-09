@@ -261,6 +261,9 @@ function dirtshack_disable_emojis() {
 // "Braap" Videos custom post type (CPT + taxonomies + meta box + facade embeds).
 require get_stylesheet_directory() . '/inc/braap-videos.php';
 
+// "Made to Order" product indicator (admin flag + shop/homepage/single badges).
+require get_stylesheet_directory() . '/inc/made-to-order.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active

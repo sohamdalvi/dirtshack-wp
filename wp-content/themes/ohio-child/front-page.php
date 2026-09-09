@@ -568,6 +568,15 @@ if ( ! $ds_shop_url ) {
                             else : ?>
                                 <img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy">
                             <?php endif; ?>
+                            <?php
+                            // "Made to Order" corner ribbon — only on products flagged
+                            // for on-demand manufacture (self-contained helper, safe if
+                            // the module is ever absent). Ribbon is visual; the sr-only
+                            // label keeps it accessible.
+                            if ( function_exists( 'dirtshack_is_made_to_order' ) && dirtshack_is_made_to_order( $product ) ) {
+                                echo dirtshack_made_to_order_ribbon() . dirtshack_made_to_order_sr_label(); // phpcs:ignore WordPress.Security.EscapeOutput -- pre-escaped.
+                            }
+                            ?>
                         </span>
                         <span class="ds-product__body">
                             <span class="ds-product__name"><?php the_title(); ?></span>
