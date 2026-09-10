@@ -6,7 +6,7 @@
  *   0. Announcement bar  — rendered site-wide at wp_body_open (see functions.php)
  *   0. Sticky header     — Ohio header via get_header()
  *   1. Hero ~45vh        — one image, dark overlay, headline + two CTAs
- *   2. Products          — latest published products, newest first (no flag needed)
+ *   2. Products          — published products in WooCommerce sort order (newest first until sorted)
  *   3. Why DirtShack     — four icon blocks
  *   0. Footer            — Ohio footer via get_footer()
  *
@@ -327,15 +327,17 @@ if ( ! $ds_shop_url ) {
 
     <!-- ── 2. PRODUCTS ── -->
     <?php
-    // Pull the latest published products — no "featured" flag required, so the
-    // grid fills itself as the catalog grows and never depends on someone
-    // remembering to star a product. Newest first.
+    // Editor-controlled order: WooCommerce's own product sort order (the
+    // drag-to-sort handle under Products → Sorting) drives the grid, so the
+    // shop owner decides what leads the homepage. Products share menu_order 0
+    // until they're sorted, so newest-first is the date tiebreak — an untouched
+    // catalog looks exactly like it did before, and the grid still fills itself
+    // as the catalog grows without anyone having to star a product.
     $ds_args = array(
         'post_type'           => 'product',
         'post_status'         => 'publish',
         'posts_per_page'      => 16,
-        'orderby'             => 'date',
-        'order'               => 'DESC',
+        'orderby'             => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
         'ignore_sticky_posts' => true,
         'no_found_rows'       => true,
     );
