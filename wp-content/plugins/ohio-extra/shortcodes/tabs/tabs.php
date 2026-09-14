@@ -18,6 +18,7 @@ function ohio_tabs_func( $atts, $content = null ) {
 	$tabs_line_color = isset( $tabs_line_color ) ? OhioExtraFilter::string( $tabs_line_color ) : false;
 	$tabs_title_typo = isset( $tabs_title_typo ) ? OhioExtraFilter::string( $tabs_title_typo ) : false;
 	$tabs_active_title_typo = isset( $tabs_active_title_typo ) ? OhioExtraFilter::string( $tabs_active_title_typo ) : false;
+	$tabs_subtitle_typo = isset( $tabs_subtitle_typo ) ? OhioExtraFilter::string( $tabs_subtitle_typo ) : false;
 	$tabs_content_typo = isset( $tabs_content_typo ) ? OhioExtraFilter::string( $tabs_content_typo ) : false;
 	$border_radius = isset( $border_radius ) ? OhioExtraFilter::string( $border_radius, 'string', '') : '';
 
@@ -97,6 +98,13 @@ function ohio_tabs_func( $atts, $content = null ) {
 	$wrapper_classes .= $layout_classes;
 	$wrapper_classes .= $content_classes;
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	/**
 	* Assembling styles
 	*/
@@ -107,7 +115,7 @@ function ohio_tabs_func( $atts, $content = null ) {
 	OhioExtraParser::VC_typo_custom_font( $tabs_title_typo );
 
 	if ( $tab_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' .tabs-nav{';
+		$_selector = '#' . $wrapper_id . ' .tabs-nav-link .title, #' . $wrapper_id . ' .tabs-nav-link .icon{';
 		$_block_typo = $tab_title_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -128,8 +136,29 @@ function ohio_tabs_func( $atts, $content = null ) {
 	OhioExtraParser::VC_typo_custom_font( $tabs_active_title_typo );
 
 	if ( $tab_active_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' .tabs-nav .active{';
+		$_selector = '#' . $wrapper_id . ' .tabs-nav-link.active .title, #' . $wrapper_id . ' .tabs-nav-link.active .icon{';
 		$_block_typo = $tab_active_title_typo;
+		if ( !empty( $_block_typo['desktop'] ) ) {
+			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
+		}
+		if ( !empty( $_block_typo['tablet'] ) ) {
+		    $_style_block .= '@media screen and (min-width: 769px) and (max-width: 1180px){';
+		    $_style_block .= $_selector . $_block_typo['tablet'] . '}';
+		    $_style_block .= '}';
+		}
+		if ( !empty( $_block_typo['mobile'] ) ) {
+		    $_style_block .= '@media screen and (max-width: 768px){';
+		    $_style_block .= $_selector . $_block_typo['mobile'] . '}';
+		    $_style_block .= '}';
+		}
+	}
+
+	$tab_subtitle_typo = OhioExtraParser::VC_typo_to_CSS( $tabs_subtitle_typo );
+	OhioExtraParser::VC_typo_custom_font( $tabs_subtitle_typo );
+
+	if ( $tab_subtitle_typo ) {
+		$_selector = '#' . $wrapper_id . ' .tabs-nav-link .subtitle{';
+		$_block_typo = $tab_subtitle_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
 		}

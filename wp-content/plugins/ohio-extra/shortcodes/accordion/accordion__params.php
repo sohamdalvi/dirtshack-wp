@@ -133,6 +133,24 @@ function ohio_accordion_sc_map() {
 				)
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'accordion_tabs_type',
+					'value' => array(
+						'default',
+						'contained'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			),
+			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Tabs Border Color', 'ohio-extra' ),

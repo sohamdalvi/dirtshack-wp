@@ -1,7 +1,7 @@
 <?php
 
 /**
-* WPBakery Page Builder Ohio Service Table shortcode params
+* WPBakery Page Builder Ohio Service shortcode params
 */
 
 vc_lean_map( 'ohio_service_table', 'ohio_service_table_sc_map' );
@@ -9,7 +9,7 @@ vc_lean_map( 'ohio_service_table', 'ohio_service_table_sc_map' );
 function ohio_service_table_sc_map() {
 	return array(
 		'name' => __( 'Service Table', 'ohio-extra' ),
-		'description' => __( 'Table with services', 'ohio-extra' ),
+		'description' => __( 'with services', 'ohio-extra' ),
 		'base' => 'ohio_service_table',
 		'category' => __( 'Ohio', 'ohio-extra' ),
 		'icon' => OHIO_EXTRA_DIR_URL . 'assets/images/shortcodes/service_table_icon.svg',
@@ -81,7 +81,7 @@ function ohio_service_table_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Shape Border', 'ohio-extra' ),
+				'heading' => __( 'Border', 'ohio-extra' ),
 				'param_name' => 'border_width',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '0',
@@ -90,7 +90,7 @@ function ohio_service_table_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Shape Corners', 'ohio-extra' ),
+				'heading' => __( 'Corners', 'ohio-extra' ),
 				'param_name' => 'border_radius',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '5'
@@ -253,20 +253,26 @@ function ohio_service_table_sc_map() {
 					array(
 						'type' => 'dropdown',
 						'group' => __( 'Icon', 'ohio-extra' ),
-						'heading' => __( 'Icon', 'ohio-extra' ),
+						'heading' => __( 'Feature Status', 'ohio-extra' ),
 						'param_name' => 'feature_icon',
 						'value' => array(
-							__( 'Without icon', 'ohio-extra' ) => 'without_icon',
-							__( 'Enable icon', 'ohio-extra' ) => 'icon_plus',
-							__( 'Disable icon', 'ohio-extra' ) => 'icon_minus'
+							__( 'None', 'ohio-extra' ) => 'without_icon',
+							__( 'Included', 'ohio-extra' ) => 'icon_plus',
+							__( 'Excluded', 'ohio-extra' ) => 'icon_minus'
 						),
 					),
 					array(
 						'type' => 'textfield',
-						'heading' => __( 'Title', 'ohio-extra' ),
+						'heading' => __( 'Feature Text', 'ohio-extra' ),
 						'param_name' => 'feature_title',
 					),
-				),					
+					array(
+						'type' => 'textfield',
+						'heading' => __( 'Tooltip', 'ohio-extra' ),
+						'param_name' => 'feature_tooltip',
+						'description' => __( 'Optional text shown in a tooltip when hovering the feature title.', 'ohio-extra' ),
+					),
+				),
 			),
 
 			// Style.
@@ -291,43 +297,66 @@ function ohio_service_table_sc_map() {
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Features Typography', 'ohio-extra' ),
+				'heading' => __( 'Included Features Typography', 'ohio-extra' ),
 				'param_name' => 'features_title_typo'
 			),
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Disabled Features Typography', 'ohio-extra' ),
+				'heading' => __( 'Excluded Features Typography', 'ohio-extra' ),
 				'param_name' => 'features_title_disabled_typo'
+			),
+			array(
+				'type' => 'ohio_typography',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Tooltip Typography', 'ohio-extra' ),
+				'param_name' => 'features_tooltip_typo'
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Features Icon Color', 'ohio-extra' ),
+				'heading' => __( 'Included Features Icon Color', 'ohio-extra' ),
 				'param_name' => 'features_icons_color',
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Disabled Features Icon Color', 'ohio-extra' ),
+				'heading' => __( 'Excluded Features Icon Color', 'ohio-extra' ),
 				'param_name' => 'features_disabled_icons_color',
 			),
 			array(
 				'type' => 'ohio_colorpicker',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Tooltip Background Color', 'ohio-extra' ),
+				'param_name' => 'features_tooltip_bg_color',
+			),
+			array(
+				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra'),
-				'heading' => __( 'Table Background Color', 'ohio-extra' ),
+				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'table_bg_color'
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Table Background Color (Hover)', 'ohio-extra' ),
+				'heading' => __( 'Background Color (Hover)', 'ohio-extra' ),
 				'param_name' => 'table_bg_color_hover'
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Table Border Color', 'ohio-extra' ),
+				'heading' => __( 'Border Color', 'ohio-extra' ),
 				'param_name' => 'border_color',
 			),
 			array(

@@ -47,6 +47,13 @@ function ohio_team_members_group_func( $atts, $content = '' ) {
 	$wrapper_classes = '';
 	$wrapper_classes .= isset( $css_class ) ? ' ' . OhioExtraFilter::string( $css_class, 'attr', '' )  : '';
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	/**
 	* Assembling styles
 	*/

@@ -92,7 +92,7 @@ function ohio_tabs_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Direction', 'ohio-extra' ),
+				'heading' => __( 'Layout', 'ohio-extra' ),
 				'param_name' => 'tabs_layout',
 				'value' => array(
 					__( 'Horizontal', 'ohio-extra' ) => 'ontop',
@@ -104,7 +104,7 @@ function ohio_tabs_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Tabs Corners', 'ohio-extra' ),
+				'heading' => __( 'Corners', 'ohio-extra' ),
 				'param_name' => 'border_radius',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '5',
@@ -132,6 +132,12 @@ function ohio_tabs_sc_map() {
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Subtitle Typography', 'ohio-extra' ),
+				'param_name' => 'tabs_subtitle_typo'
+			),
+			array(
+				'type' => 'ohio_typography',
+				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Content Typography', 'ohio-extra' ),
 				'param_name' => 'tabs_content_typo',
 			),
@@ -152,6 +158,24 @@ function ohio_tabs_sc_map() {
 						'filled',
 						'button'
 					)
+				)
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'tabs_type',
+					'value' => array(
+						'filled',
+						'button'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
 				)
 			),
 			array(

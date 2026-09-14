@@ -4,10 +4,29 @@
 			<div class="details">
 				<i class="details-icon"></i>
 				<h1><?php _e( 'Dashboard', 'ohio-extra' ); ?></h1>
+				<?php
+					if ( apply_filters( 'ohio/has-license', false ) ):
+						echo '<label class="active"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m429-336 238-237-51-51-187 186-85-84-51 51 136 135Zm51 240q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg>Activated</label>';
+					else:
+						echo '<label class="inactive"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480.28-96Q401-96 331-126t-122.5-82.5Q156-261 126-330.96t-30-149.5Q96-560 126-629.5q30-69.5 82.5-122T330.96-834q69.96-30 149.5-30t149.04 30q69.5 30 122 82.5T834-629.28q30 69.73 30 149Q864-401 834-331t-82.5 122.5Q699-156 629.28-126q-69.73 30-149 30Zm-.28-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg>Not activated</label>';
+					endif;
+				?>
 			</div>
-			<div class="mode-switcher">
-				<a href="admin.php?page=ohio_hub" class="btn btn-flat"><?php _e( 'Dashboard', 'ohio-extra' ); ?></a>
-				<a href="admin.php?page=ohio_hub_settings" class="btn btn-outline"><?php _e( 'Theme Settings', 'ohio-extra' ); ?></a>
+			<div class="optional-panel">
+	            <a class="version" target="_blank" href="https://docs.clbthemes.com/ohio/release-notes/">
+	            	<?php _e( 'Version', 'ohio-extra' ); ?> 
+			        <?php
+		                $ohio_theme = wp_get_theme( get_template() );
+		                $ohio_version = $ohio_theme->get( 'Version' ) ? $ohio_theme->get( 'Version' ) : '3.0.0';
+		                echo $ohio_version;
+		            ?>
+	            </a>
+				<a target="_blank" href="https://docs.clbthemes.com/ohio/release-notes/" class="icon-button" data-tooltip-bottom="<?php _e( 'Release Notes', 'ohio-extra' ); ?>">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="m482-200 114-113-114-113-42 42 43 43q-28 1-54.5-9T381-381q-20-20-30.5-46T340-479q0-17 4.5-34t12.5-33l-44-44q-17 25-25 53t-8 57q0 38 15 75t44 66q29 29 65 43.5t74 15.5l-38 38 42 42Zm165-170q17-25 25-53t8-57q0-38-14.5-75.5T622-622q-29-29-65.5-43T482-679l38-39-42-42-114 113 114 113 42-42-44-44q27 0 55 10.5t48 30.5q20 20 30.5 46t10.5 52q0 17-4.5 34T603-414l44 44ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+				</a>
+				<a target="_blank" href="https://docs.clbthemes.com/ohio/" class="icon-button" data-tooltip-bottom="<?php _e( 'Help Docs', 'ohio-extra' ); ?>">
+					<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M513.5-254.5Q528-269 528-290t-14.5-35.5Q499-340 478-340t-35.5 14.5Q428-311 428-290t14.5 35.5Q457-240 478-240t35.5-14.5ZM442-394h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -16,7 +35,7 @@
 			<ul class="clb-nav-inner">
 				<li>
 					<a href="#tabs-1" class="selected">
-						<?php if ( get_option( 'ohio_license_code', false ) ): ?>
+						<?php if ( apply_filters( 'ohio/has-license', false ) ): ?>
 							<i class="icon active">
 								<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M360-144q-90 0-153-63t-63-153v-240q0-90 63-153t153-63h240q90 0 153 63t63 153v240q0 90-63 153t-153 63H360Zm69-209 204-203-51-51-153 152-68-67-50 51 118 118Zm-69 137h240q60 0 102-42t42-102v-240q0-60-42-102t-102-42H360q-60 0-102 42t-42 102v240q0 60 42 102t102 42Zm120-264Z"/></svg>
 							</i>
@@ -78,7 +97,7 @@
 				<!-- Offer Banner -->
 				<?php /*
 				<li>
-					<a class="offer-banner" href="https://1.envato.market/5Q25j" target="_blank">
+					<a class="offer-banner" href="https://ohio.clbthemes.com/pricing/" target="_blank">
 						<!-- <div class="offer-banner-title">Get Ohio License for $35</div> -->
 						<img src="https://colabrio.ams3.cdn.digitaloceanspaces.com/envato/40__Horizontal.png" alt="">
 						<div class="offer-banner-expire">

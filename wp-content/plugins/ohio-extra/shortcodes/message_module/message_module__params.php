@@ -249,13 +249,24 @@ function ohio_message_module_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Shape Background Color', 'ohio-extra' ),
+				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'bg_color',
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Shape Border Color', 'ohio-extra' ),
+				'heading' => __( 'Border Color', 'ohio-extra' ),
 				'param_name' => 'border_color',
 			),
 

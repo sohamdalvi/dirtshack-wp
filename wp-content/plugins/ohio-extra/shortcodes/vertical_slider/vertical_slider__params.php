@@ -46,7 +46,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Autoplay interval timeout', 'ohio-extra' ),
+				'heading' => __( 'Autoplay Interval Timeout', 'ohio-extra' ),
 				'param_name' => 'autoplay_timeout',
 				'description' => 'Autoplay interval timeout in seconds.',
 				'value' => '3000',
@@ -99,7 +99,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __( 'Pagination', 'ohio-extra' ),
-				'heading' => __( 'Pagination', 'ohio-extra' ),
+				'heading' => __( 'Show Pagination', 'ohio-extra' ),
 				'param_name' => 'pagination_show',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'
@@ -125,7 +125,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __( 'Pagination', 'ohio-extra' ),
-				'heading' => __( 'Navigation', 'ohio-extra' ),
+				'heading' => __( 'Show Navigation', 'ohio-extra' ),
 				'param_name' => 'navigation_show',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'
@@ -136,7 +136,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Pagination Color', 'ohio-extra' ),
+				'heading' => __( 'Pagination Color (Default)', 'ohio-extra' ),
 				'param_name' => 'pagination_color',
 				'dependency' => array(
 					'element' => 'pagination_show',
@@ -146,7 +146,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Navigation Color', 'ohio-extra' ),
+				'heading' => __( 'Navigation buttons color', 'ohio-extra' ),
 				'param_name' => 'navigation_color',
 				'dependency' => array(
 					'element' => 'navigation_show',
@@ -156,7 +156,7 @@ function ohio_vertical_slider_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Navigation Background Color', 'ohio-extra' ),
+				'heading' => __( 'Navigation buttons background', 'ohio-extra' ),
 				'param_name' => 'navigation_bg_color',
 				'dependency' => array(
 					'element' => 'navigation_show',

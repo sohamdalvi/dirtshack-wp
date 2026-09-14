@@ -21,13 +21,15 @@
         ## 12. Button Fill Color
         ## 13. Button Fill Color (Hover)
         ## 14. Button Corner Radius
+        ## 15. Button Border Width
 
     # Forms
-        ## 15. Form Corner Radius
+        ## 16. Form Corner Radius
+        ## 17. Form Border Width
 
     # Color Mode
-        ## 16. Dark Mode Fill Color
-        ## 17. Dark Mode Text Color
+        ## 18. Dark Mode Fill Color
+        ## 19. Dark Mode Text Color
 */
 
 
@@ -138,25 +140,37 @@ if ( $buttons_corners ) {
     OhioBuffer::append_to_variables_css_buffer( '--clb-button-border-radius', $buttons_corners );
 }
 
+## 15. Button Border Width
+$buttons_border_width = OhioOptions::get_global( 'page_buttons_border_width' );
+if ( $buttons_border_width ) {
+    OhioBuffer::append_to_variables_css_buffer( '--clb-button-border-width', $buttons_border_width );
+}
+
 
 # Forms
 
-## 15. Form Corner Radius
+## 16. Form Corner Radius
 $forms_corners = OhioOptions::get_global( 'page_forms_corners' );
 if ( $forms_corners ) {
     OhioBuffer::append_to_variables_css_buffer( '--clb-text-field-border-radius', $forms_corners );
 }
 
+## 17. Form Border Width
+$forms_border_width = OhioOptions::get_global( 'page_forms_border_width' );
+if ( $forms_border_width ) {
+    OhioBuffer::append_to_variables_css_buffer( '--clb-text-field-border-width', $forms_border_width );
+}
+
 
 # Color Mode
 
-## 16. Dark Mode Fill Color
+## 18. Dark Mode Fill Color
 $dark_mode_fill_color = OhioOptions::get_global( 'page_dark_mode_background_color' );
 if ( $dark_mode_fill_color ) {
     OhioBuffer::append_to_variables_css_buffer( '--clb-color-fill-dark-mode', $dark_mode_fill_color );
 }
 
-## 17. Dark Mode Text Color
+## 19. Dark Mode Text Color
 $dark_mode_text_color = OhioOptions::get_global( 'page_dark_mode_text_color' );
 if ( $dark_mode_text_color ) {
     OhioBuffer::append_to_variables_css_buffer( '--clb-color-white-dark-mode', $dark_mode_text_color );

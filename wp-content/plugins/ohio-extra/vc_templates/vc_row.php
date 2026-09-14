@@ -36,7 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Shortcode class
  * @var WPBakeryShortCode_Vc_Row $this
  */
-$el_class = $use_through_lines = $through_lines_color = $through_lines_typo = $side_background_title = $side_background_title_alignment = $side_background_title_color = $side_background_title_typo = $full_height = $parallax_speed_bg = $parallax_speed_video = $full_width = $equal_height = $flex_row = $columns_placement = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax = $css_animation = '';
+$el_class = $section_color_scheme = $dark_mode_scheme = $use_through_lines = $through_lines_color = $through_lines_typo = $side_background_title = $side_background_title_alignment = $side_background_title_color = $side_background_title_typo = $full_height = $parallax_speed_bg = $parallax_speed_video = $full_width = $equal_height = $flex_row = $columns_placement = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax = $css_animation = '';
 $disable_element = '';
 $output = $after_output = '';
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
@@ -77,6 +77,18 @@ if ( ! empty( $atts['gap'] ) ) {
 
 if ( ! empty( $atts['rtl_reverse'] ) ) {
 	$css_classes[] = 'vc_rtl-columns-reverse';
+}
+
+if ( 'light' === $section_color_scheme ) {
+	$css_classes[] = 'clb__light_section';
+} elseif ( 'dark' === $section_color_scheme ) {
+	$css_classes[] = 'clb__dark_section';
+}
+
+if ( 'light' === $dark_mode_scheme ) {
+	$css_classes[] = 'clb__dark_mode_light';
+} elseif ( 'dark' === $dark_mode_scheme ) {
+	$css_classes[] = 'clb__dark_mode_black';
 }
 
 $wrapper_attributes = array();

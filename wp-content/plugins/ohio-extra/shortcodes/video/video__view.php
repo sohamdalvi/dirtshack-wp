@@ -15,7 +15,7 @@ if ( $layout == 'with_preview' ) : ?>
 			    <i class="icon"><svg class="default" width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 20L13 10L0 0V20Z"></path></svg></i>
 			</button>
 			<?php if ( $title ) : ?>
-				<span class="video-button-caption">
+				<span class="h6 video-button-caption">
 					<?php echo $title; ?>
 				</span>
 			<?php endif; ?>
@@ -29,7 +29,7 @@ if ( $layout == 'with_preview' ) : ?>
 		    <i class="icon"><svg class="default" width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 20L13 10L0 0V20Z"></path></svg></i>
 		</button>
 		<?php if ( $title ) : ?>
-			<span class="video-button-caption">
+			<span class="h6 video-button-caption">
 				<?php echo $title; ?>
 			</span>
 		<?php endif; ?>

@@ -39,6 +39,12 @@ function ohio_tabs_inner_sc_map() {
 				'param_name' => 'title',
 			),
 			array(
+				'type' => 'textfield',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Subtitle', 'ohio-extra' ),
+				'param_name' => 'subtitle',
+			),
+			array(
 				'type' => 'el_id',
 				'param_name' => 'tab_id',
 				'settings' => array(

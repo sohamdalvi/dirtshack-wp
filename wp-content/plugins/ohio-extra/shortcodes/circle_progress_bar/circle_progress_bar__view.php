@@ -43,9 +43,9 @@
         <?php endif; ?>
 
         <?php if ( $title ): ?>
-			<h6 class="title">
+			<div class="h6 title">
 				<?php echo $title; ?>
-			</h6>
+			</div>
 		<?php endif; ?>
 
     </div>

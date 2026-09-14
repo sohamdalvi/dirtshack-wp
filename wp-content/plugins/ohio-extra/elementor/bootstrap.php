@@ -87,6 +87,18 @@ final class Ohio_Elementor_Support {
         add_action( 'elementor/controls/controls_registered', [ $this, 'init_controls' ] );
         add_action( 'elementor/elements/categories_registered', [ $this, 'init_categories' ] );
 
+        // Add the "Dark Mode Background" option to every native widget's own Background
+        // control (Advanced tab), mirroring the same option already available on
+        // Section / Container (see ohio theme's inc/init/theme.php). Hooking the shared
+        // 'common' controls stack (Elementor merges this into every widget automatically,
+        // including for the "Optimized Markup" experiment) means this does not need to be
+        // added per-widget, and a distinct control id ('ohio_native_dark_mode_scheme') is
+        // used so it never collides with the widget-specific 'dark_mode_scheme' control
+        // some of our own widgets (Tabs, Accordion, Banner, CTA, Countdown, Message,
+        // Pricing Table, Progress Bar, Recent Posts, Recent Projects, Service Table, Team
+        // Members, WooCategories) already register on their own Style tab.
+        add_action( 'elementor/element/common/_section_background/after_section_end', [ $this, 'add_native_widget_dark_mode_background_control' ], 10, 2 );
+
         // Hide not compatible features
         add_filter( 'option_elementor_disable_color_schemes', function( $checkbox ) {
             return 'yes';
@@ -176,9 +188,53 @@ final class Ohio_Elementor_Support {
         require_once( __DIR__ . '/controls/image-choose-box/image-choose-box-control.php' );
     }
 
+    /**
+     * Add native widget "Dark Mode Background" control
+     *
+     * Injects the same "Dark Mode Background" dropdown (None / Inherited / Lighter Tint)
+     * already available on Section and Container elements into every native Elementor
+     * widget's own Background control (Advanced tab > Background), right after the
+     * Background Color field. Elementor's SELECT control's 'prefix_class' +
+     * 'classes_dictionary' handles adding/removing the corresponding
+     * clb__dark_mode_light / clb__dark_mode_black wrapper class automatically - no
+     * extra render code is needed (same mechanism used on Section/Container).
+     *
+     * @access public
+     * @param \Elementor\Controls_Stack $element
+     */
+    public function add_native_widget_dark_mode_background_control( $element )
+    {
+        $element->start_injection( [
+            'of' => '_background_color',
+            'at' => 'after',
+        ] );
+
+        $element->add_control(
+            'ohio_native_dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $element->end_injection();
+    }
+
     public function init_categories( $manager )
     {
-        $manager->add_category( 100, [
+        $manager->add_category( 'ohio-theme', [
             'title' => __( 'Ohio Theme', 'ohio-extra' ),
             'icon' => 'eicon-pojome',
             'active' => true,

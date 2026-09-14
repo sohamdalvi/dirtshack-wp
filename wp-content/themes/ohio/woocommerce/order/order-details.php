@@ -12,7 +12,7 @@
  *
  * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 10.1.0
+ * @version 10.9.0
  *
  * @var bool $show_downloads Controls whether the downloads table should be rendered.
  */
@@ -110,6 +110,28 @@ if ( $show_downloads ) {
 						?>
 						</td>
 					</tr>
+				<?php endif; ?>
+				<?php
+				if ( ! empty( $actions ) ) :
+					?>
+				<tr>
+					<th class="order-actions--heading"><?php esc_html_e( 'Actions', 'woocommerce' ); ?>:</th>
+					<td>
+						<?php
+						$wp_button_class = wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '';
+						foreach ( $actions as $key => $action ) {
+							if ( empty( $action['aria-label'] ) ) {
+								/* translators: %1$s Action name, %2$s Order number. */
+								$action_aria_label = sprintf( __( '%1$s order number %2$s', 'woocommerce' ), $action['name'], $order->get_order_number() );
+							} else {
+								$action_aria_label = $action['aria-label'];
+							}
+							echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . ' order-actions-button " aria-label="' . esc_attr( $action_aria_label ) . '">' . esc_html( $action['name'] ) . '</a>';
+							unset( $action_aria_label );
+						}
+						?>
+					</td>
+				</tr>
 				<?php endif; ?>
 			</tfoot>
 		</table>

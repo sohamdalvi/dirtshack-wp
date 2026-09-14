@@ -11,6 +11,7 @@ function ohio_tabs_inner_func( $atts, $content_html = '' ) {
 
 	// Default values, parsing and filtering
 	$title = isset( $title ) ? OhioExtraFilter::string( $title, 'string', '' ) : '';
+	$subtitle = isset( $subtitle ) ? OhioExtraFilter::string( $subtitle, 'string', '' ) : '';
 
 	// Icon
 	$with_icon = isset( $with_icon ) ? OhioExtraFilter::boolean( $with_icon ) : false;

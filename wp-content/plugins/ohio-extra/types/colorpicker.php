@@ -29,7 +29,7 @@
 			<div class="brand-color">
 				<label>
 					<input type="checkbox" name="brand-color"<?php if ( $value == 'brand' ) { echo 'checked="checked"'; } ?>>
-					<?php esc_html_e( 'Use', 'ohio-extra' ); ?>&nbsp;<a target="_blank" href="<?php echo esc_url( admin_url( 'admin.php?page=theme-general-styling' ) ); ?>"><?php esc_html_e( 'Brand Color', 'ohio-extra' ); ?></a>
+					<?php esc_html_e( 'Use', 'ohio-extra' ); ?>&nbsp;<a target="_blank" href="<?php echo esc_url( admin_url( 'admin.php?page=theme-general-styling' ) ); ?>"><?php esc_html_e( 'Primary Color', 'ohio-extra' ); ?></a>
 					<div class="brand-color-holder">
 						<div class="marker" style="background:<?php echo ( $brand_color != 'empty' ) ? $brand_color : '#ffffff';?>"></div>
 						&nbsp;<?php echo $brand_color; ?>

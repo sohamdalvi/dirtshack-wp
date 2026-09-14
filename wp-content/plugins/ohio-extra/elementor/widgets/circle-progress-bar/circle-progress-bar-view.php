@@ -41,7 +41,7 @@
         <?php endif; ?>
 
         <?php if (!empty($settings['label'])): ?>
-            <h6 class="title"><?php echo $settings['label']; ?></h6>
+            <div class="h6 title"><?php echo $settings['label']; ?></div>
         <?php endif; ?>
 
     </div>

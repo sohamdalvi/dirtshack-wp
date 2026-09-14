@@ -22,11 +22,6 @@ class Ohio_Elementor_Counter_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-counter';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-counter-widget' ];
     }
@@ -395,7 +390,7 @@ class Ohio_Elementor_Counter_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Title Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} h6' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .h6' => 'color: {{VALUE}};'
                 ],
                 'separator' => 'before'
             ]
@@ -406,7 +401,7 @@ class Ohio_Elementor_Counter_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'name' => 'title_typography',
                 'label' => __( 'Title Typography', 'ohio-extra' ),
-                'selector' => '{{WRAPPER}} h6',
+                'selector' => '{{WRAPPER}} .h6',
             ]
         );
 

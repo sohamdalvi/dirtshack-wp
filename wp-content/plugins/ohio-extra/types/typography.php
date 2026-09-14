@@ -33,8 +33,8 @@
 ?>
 		<div class="ohio_extra_typography_block">
 			<input type="hidden" name="<?php echo esc_attr( $settings['param_name'] ); ?>" class="wpb_vc_param_value" value="<?php echo esc_attr( json_encode( $value ) ); ?>">
-			<div class="row">
-				<div class="vc_col-lg-3 column">
+			<div class="row-grid row-grid-4">
+				<div class="column">
 					<label>
 						<div class="title">
                             <?php esc_html_e( 'Font Size', 'ohio-extra' ); ?>
@@ -70,41 +70,45 @@
                         </div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title"><?php esc_html_e( 'Font Weight', 'ohio-extra' ); ?></div>
 						<div class="input-pixeles-wrap">
 							<?php $_weight = $value->weight ?? false; ?>
-							<select data-target="weight">
-								<option value="inherit"><?php esc_html_e( 'Inherit', 'ohio-extra' ); ?></option>
-								<option value="100"<?php if ( $_weight == 100 ) echo ' selected'; ?>><?php esc_html_e( '100 Thin', 'ohio-extra' ); ?></option>
-								<option value="200"<?php if ( $_weight == 200 ) echo ' selected'; ?>><?php esc_html_e( '200 Extra Light', 'ohio-extra' ); ?></option>
-								<option value="300"<?php if ( $_weight == 300 ) echo ' selected'; ?>><?php esc_html_e( '300 Light', 'ohio-extra' ); ?></option>
-								<option value="400"<?php if ( $_weight == 400 ) echo ' selected'; ?>><?php esc_html_e( '400 Normal', 'ohio-extra' ); ?></option>
-								<option value="500"<?php if ( $_weight == 500 ) echo ' selected'; ?>><?php esc_html_e( '500 Medium', 'ohio-extra' ); ?></option>
-								<option value="600"<?php if ( $_weight == 600 ) echo ' selected'; ?>><?php esc_html_e( '600 Semi Bold', 'ohio-extra' ); ?></option>
-								<option value="700"<?php if ( $_weight == 700 ) echo ' selected'; ?>><?php esc_html_e( '700 Bold', 'ohio-extra' ); ?></option>
-								<option value="800"<?php if ( $_weight == 800 ) echo ' selected'; ?>><?php esc_html_e( '800 Extra Bold', 'ohio-extra' ); ?></option>
-								<option value="900"<?php if ( $_weight == 900 ) echo ' selected'; ?>><?php esc_html_e( '900 Black', 'ohio-extra' ); ?></option>
-							</select>
+							<div class="edit_form_line">
+								<select class="wpb-form-select dropdown" data-target="weight">
+									<option value="inherit"><?php esc_html_e( 'Inherit', 'ohio-extra' ); ?></option>
+									<option value="100"<?php if ( $_weight == 100 ) echo ' selected'; ?>><?php esc_html_e( '100 Thin', 'ohio-extra' ); ?></option>
+									<option value="200"<?php if ( $_weight == 200 ) echo ' selected'; ?>><?php esc_html_e( '200 Extra Light', 'ohio-extra' ); ?></option>
+									<option value="300"<?php if ( $_weight == 300 ) echo ' selected'; ?>><?php esc_html_e( '300 Light', 'ohio-extra' ); ?></option>
+									<option value="400"<?php if ( $_weight == 400 ) echo ' selected'; ?>><?php esc_html_e( '400 Normal', 'ohio-extra' ); ?></option>
+									<option value="500"<?php if ( $_weight == 500 ) echo ' selected'; ?>><?php esc_html_e( '500 Medium', 'ohio-extra' ); ?></option>
+									<option value="600"<?php if ( $_weight == 600 ) echo ' selected'; ?>><?php esc_html_e( '600 Semi Bold', 'ohio-extra' ); ?></option>
+									<option value="700"<?php if ( $_weight == 700 ) echo ' selected'; ?>><?php esc_html_e( '700 Bold', 'ohio-extra' ); ?></option>
+									<option value="800"<?php if ( $_weight == 800 ) echo ' selected'; ?>><?php esc_html_e( '800 Extra Bold', 'ohio-extra' ); ?></option>
+									<option value="900"<?php if ( $_weight == 900 ) echo ' selected'; ?>><?php esc_html_e( '900 Black', 'ohio-extra' ); ?></option>
+								</select>
+							</div>
 						</div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title"><?php esc_html_e( 'Font Style', 'ohio-extra' ); ?></div>
 						<div class="input-pixeles-wrap">
 							<?php $_style = $value->style ?? false; ?>
-							<select data-target="font-style">
-								<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
-								<option value="normal"<?php if ( $_style == 'normal' ) echo ' selected'; ?>><?php esc_html_e( 'Normal', 'ohio-extra' ); ?></option>
-								<option value="italic"<?php if ( $_style == 'italic' ) echo ' selected'; ?>><?php esc_html_e( 'Italic', 'ohio-extra' ); ?></option>
-								<option value="oblique"<?php if ( $_style == 'oblique' ) echo ' selected'; ?>><?php esc_html_e( 'Oblique', 'ohio-extra' ); ?></option>
-							</select>
+							<div class="edit_form_line">
+								<select class="wpb-form-select dropdown" data-target="font-style">
+									<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
+									<option value="normal"<?php if ( $_style == 'normal' ) echo ' selected'; ?>><?php esc_html_e( 'Normal', 'ohio-extra' ); ?></option>
+									<option value="italic"<?php if ( $_style == 'italic' ) echo ' selected'; ?>><?php esc_html_e( 'Italic', 'ohio-extra' ); ?></option>
+									<option value="oblique"<?php if ( $_style == 'oblique' ) echo ' selected'; ?>><?php esc_html_e( 'Oblique', 'ohio-extra' ); ?></option>
+								</select>
+							</div>
 						</div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title"><?php esc_html_e( 'Color', 'ohio-extra' ); ?></div>
 						<div class="input-pixeles-wrap">
@@ -115,37 +119,41 @@
 						</div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title"><?php esc_html_e( 'Text Transform', 'ohio-extra' ); ?></div>
 						<div class="input-pixeles-wrap">
 							<?php $_transform = $value->transform ?? false; ?>
-							<select data-target="font-transform">
-								<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
-								<option value="uppercase"<?php if ( $_transform == 'uppercase' ) echo ' selected'; ?>><?php esc_html_e( 'Uppercase', 'ohio-extra' ); ?></option>
-								<option value="lowercase"<?php if ( $_transform == 'lowercase' ) echo ' selected'; ?>><?php esc_html_e( 'Lowercase', 'ohio-extra' ); ?></option>
-								<option value="capitalize"<?php if ( $_transform == 'capitalize' ) echo ' selected'; ?>><?php esc_html_e( 'Capitalize', 'ohio-extra' ); ?></option>
-								<option value="none"<?php if ( $_transform == 'none' ) echo ' selected'; ?>><?php esc_html_e( 'None', 'ohio-extra' ); ?></option>
-							</select>
+							<div class="edit_form_line">
+								<select class="wpb-form-select dropdown" data-target="font-transform">
+									<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
+									<option value="uppercase"<?php if ( $_transform == 'uppercase' ) echo ' selected'; ?>><?php esc_html_e( 'Uppercase', 'ohio-extra' ); ?></option>
+									<option value="lowercase"<?php if ( $_transform == 'lowercase' ) echo ' selected'; ?>><?php esc_html_e( 'Lowercase', 'ohio-extra' ); ?></option>
+									<option value="capitalize"<?php if ( $_transform == 'capitalize' ) echo ' selected'; ?>><?php esc_html_e( 'Capitalize', 'ohio-extra' ); ?></option>
+									<option value="none"<?php if ( $_transform == 'none' ) echo ' selected'; ?>><?php esc_html_e( 'None', 'ohio-extra' ); ?></option>
+								</select>
+							</div>
 						</div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title"><?php esc_html_e( 'Text Decoration', 'ohio-extra' ); ?></div>
 						<div class="input-pixeles-wrap">
 							<?php $_decoration = $value->decoration ?? false; ?>
-							<select data-target="font-decoration">
-								<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
-								<option value="overline"<?php if ( $_decoration == 'overline' ) echo ' selected'; ?>><?php esc_html_e( 'Overline', 'ohio-extra' ); ?></option>
-								<option value="underline"<?php if ( $_decoration == 'underline' ) echo ' selected'; ?>><?php esc_html_e( 'Underline', 'ohio-extra' ); ?></option>
-								<option value="line_through"<?php if ( $_decoration == 'line_through' ) echo ' selected'; ?>><?php esc_html_e( 'Line Through', 'ohio-extra' ); ?></option>
-								<option value="none"<?php if ( $_decoration == 'none' ) echo ' selected'; ?>><?php esc_html_e( 'None', 'ohio-extra' ); ?></option>
-							</select>
+							<div class="edit_form_line">
+								<select class="wpb-form-select dropdown" data-target="font-decoration">
+									<option value="inherit"><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
+									<option value="overline"<?php if ( $_decoration == 'overline' ) echo ' selected'; ?>><?php esc_html_e( 'Overline', 'ohio-extra' ); ?></option>
+									<option value="underline"<?php if ( $_decoration == 'underline' ) echo ' selected'; ?>><?php esc_html_e( 'Underline', 'ohio-extra' ); ?></option>
+									<option value="line_through"<?php if ( $_decoration == 'line_through' ) echo ' selected'; ?>><?php esc_html_e( 'Line Through', 'ohio-extra' ); ?></option>
+									<option value="none"<?php if ( $_decoration == 'none' ) echo ' selected'; ?>><?php esc_html_e( 'None', 'ohio-extra' ); ?></option>
+								</select>
+							</div>
 						</div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title">
                             <?php esc_html_e( 'Line Height', 'ohio-extra' ); ?>
@@ -181,7 +189,7 @@
                         </div>
 					</label>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<label>
 						<div class="title">
                             <?php esc_html_e( 'Letter Spacing', 'ohio-extra' ); ?>
@@ -218,8 +226,8 @@
 					</label>
 				</div>
 			</div>
-			<div class="row">
-				<div class="vc_col-lg-3 column">
+			<div class="row-grid row-grid-4">
+				<div class="column">
 					<div class="title"><?php esc_html_e( 'Font Family', 'ohio-extra' ); ?></div>
 					<div class="input-styles-wrap">
 						<span class="cbrio_custom_check">
@@ -228,7 +236,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="vc_col-lg-3 column custom-font-panel"<?php if ( !( $value->use_custom_font ?? false ) ) echo 'style="display: none;"';?>>
+				<div class="column custom-font-panel"<?php if ( !( $value->use_custom_font ?? false ) ) echo 'style="display: none;"';?>>
 					<div class="title">
 						<?php
 							if ( $fonts_type == 'google_fonts' ) {
@@ -241,7 +249,8 @@
 						?>
 					</div>
 					<div class="input-fonts-wrap">
-                        <select data-target="custom-font">
+                        <div class="edit_form_line">
+                        <select class="wpb-form-select dropdown" data-target="custom-font">
                             <?php if ($fonts_type == 'google_fonts') { ?>
                                 <optgroup label="<?php esc_html_e( 'Recommended for headings', 'ohio-extra' ); ?>">
                                     <option value="DM Sans:400,700"><?php esc_html_e( 'DM Sans', 'ohio-extra' ); ?></option>
@@ -264,6 +273,7 @@
                                 </option>
                             <?php } ?>
                         </select>
+                        </div>
                     </div>
 					<?php if ( $fonts_type == 'google_fonts' ) { ?>
                         <div class="tip"><?php echo sprintf( __( 'Visit %s', 'ohio-extra'), '<a href="https://fonts.google.com/" target="_blank">fonts.google.com</a>' ); ?></div>

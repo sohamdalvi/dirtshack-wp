@@ -14,13 +14,8 @@ function ohio_enqueue_admin_style()
     wp_enqueue_style( 'fontawesome-font', get_template_directory_uri() . '/assets/fonts/fa/css/all.css' );
     wp_enqueue_style( 'ionicons-font', get_template_directory_uri() . '/assets/fonts/ionicons/css/ionicons.min.css' );
     wp_enqueue_style( 'bootstrap-font', get_template_directory_uri() . '/assets/fonts/bootstrap/css/bootstrap.min.css' );
-    wp_enqueue_script( 'ohio-admin-scripts', get_template_directory_uri() . '/assets/js/admin.min.js' );
-
-    // WPBackery Select2
-    if ( function_exists( 'vc_is_inline' ) && vc_is_inline() ) {
-        wp_deregister_script( 'select2' );
-        wp_enqueue_style( 'select2-style', get_template_directory_uri() . '/assets/css/select2.min.css' );
-        wp_enqueue_script( 'jquery-select2', get_template_directory_uri() . '/assets/js/libs/jquery.select2.min.js', array( 'jquery') );
+    if ( ! ( function_exists( 'vc_is_inline' ) && vc_is_inline() ) ) { // TEMP DEBUG: isolate admin.min.js
+        wp_enqueue_script( 'ohio-admin-scripts', get_template_directory_uri() . '/assets/js/admin.min.js' );
     }
 }
 

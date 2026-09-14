@@ -70,7 +70,7 @@ function ohio_button_sc_map() {
 			array(
 				'type' => 'vc_link',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Text and URL', 'ohio-extra' ),
+				'heading' => __( 'Link URL', 'ohio-extra' ),
 				'param_name' => 'link',
 			),
 			array(

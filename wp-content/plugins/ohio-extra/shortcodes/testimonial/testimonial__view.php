@@ -12,7 +12,7 @@
 	<?php endif; ?>
 
 	<?php if ( $headline ) : ?>
-		<h6 class="testimonial-headline"><?php echo $headline; ?></h6>
+		<div class="testimonial-headline"><?php echo $headline; ?></div>
 	<?php endif;?>
 
 	<p><?php echo $quote; ?></p>
@@ -23,7 +23,7 @@
 		<?php endif; ?>
 
 		<div class="author">
-	        <h6 class="title -unspace"><?php echo $author; ?></h6>
+	        <div class="h6 title -unspace"><?php echo $author; ?></div>
 	        <p class="author-details -unspace"><?php echo $position; ?></p>
 	    </div>
 	</div>

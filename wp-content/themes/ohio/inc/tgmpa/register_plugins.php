@@ -8,7 +8,7 @@ function ohio_register_plugins() {
 			'slug' => 'js_composer',
 			'source' => 'https://plugins.clbthemes.com/js_composer.zip',
 			'required' => true,
-			'version' => '8.7.2',
+			'version' => '9.0.1',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
@@ -17,7 +17,7 @@ function ohio_register_plugins() {
 			'slug' => 'advanced-custom-fields-pro',
 			'source' => 'https://plugins.clbthemes.com/advanced-custom-fields-pro.zip',
 			'required' => true,
-			'version' => '6.7.1',
+			'version' => '6.8.9',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
@@ -36,7 +36,7 @@ function ohio_register_plugins() {
 			'slug' => 'slider-revolution',
 			'source' => 'https://plugins.clbthemes.com/slider-revolution.zip',
 			'required' => true,
-			'version' => '6.7.51',
+			'version' => '6.7.58',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
@@ -52,18 +52,18 @@ function ohio_register_plugins() {
 		array(
 			'name' => 'Ohio Extra',
 			'slug' => 'ohio-extra',
-			'source' => 'https://plugins.clbthemes.com/ohio-extra-v368.zip',
+			'source' => 'https://plugins.clbthemes.com/ohio-extra-v376.zip',
 			'required' => true,
-			'version' => '3.6.8',
+			'version' => '3.7.6',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
 		array(
 			'name' => 'Ohio Importer',
 			'slug' => 'ohio-importer',
-			'source' => 'https://plugins.clbthemes.com/ohio-importer-v133.zip',
+			'source' => 'https://plugins.clbthemes.com/ohio-importer-v136.zip',
 			'required' => true,
-			'version' => '1.3.3',
+			'version' => '1.3.6',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
@@ -82,7 +82,7 @@ function ohio_register_plugins() {
 			'slug' => 'envato-market',
 			'source' => 'http://envato.github.io/wp-envato-market/dist/envato-market.zip',
 			'required' => false,
-			'version' => '2.0.12',
+			'version' => '2.0.14',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),

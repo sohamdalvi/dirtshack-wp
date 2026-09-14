@@ -89,6 +89,13 @@ function ohio_countdown_func( $atts ) {
 		$wrapper_classes .= ' -with-divider';
 	}
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	/**
 	* Assembling styles
 	*/

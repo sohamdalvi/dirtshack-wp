@@ -22,11 +22,6 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-accordion';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-accordion-widget' ];
     }
@@ -207,6 +202,29 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
                     '{{WRAPPER}} .accordion:not(.-outlined):not(.-text):not(.-contained) .accordion-item .accordion-button' => 'background-color: {{VALUE}};',
                     '{{WRAPPER}} .accordion.-contained .accordion-item.active' => 'background-color: {{VALUE}};',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'condition' => [
+                    'block_layout' => [ 'default', 'contained'],
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
             ]
         );
 

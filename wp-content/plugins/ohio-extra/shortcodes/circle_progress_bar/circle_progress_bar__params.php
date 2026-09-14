@@ -97,7 +97,7 @@ vc_map( array(
 		array(
 			'type' => 'dropdown',
 			'group' => __( 'Icon', 'ohio-extra' ),
-			'heading' => __( 'Type', 'ohio-extra' ),
+			'heading' => __( 'Icon Type', 'ohio-extra' ),
 			'param_name' => 'icon_type',
 			'value' => array(
 				__( 'Icon', 'ohio-extra' ) => 'font_icon',

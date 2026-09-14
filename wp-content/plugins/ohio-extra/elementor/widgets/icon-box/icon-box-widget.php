@@ -16,11 +16,6 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-icon-box';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(

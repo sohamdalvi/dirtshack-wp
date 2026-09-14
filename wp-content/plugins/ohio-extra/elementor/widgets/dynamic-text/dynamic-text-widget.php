@@ -23,11 +23,6 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-dynamic-text';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-dynamic-text-widget' ];
     }

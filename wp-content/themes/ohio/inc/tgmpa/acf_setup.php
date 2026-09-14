@@ -47,6 +47,13 @@ function ohio_acf_add_option_pages() {
 		));
 
 		acf_add_options_sub_page(array(
+			'page_title' => esc_html__( 'Sidebar', 'ohio' ),
+			'menu_title' => esc_html__( 'Sidebar', 'ohio' ),
+			'menu_slug' => 'theme-general-sidebar',
+			'parent_slug' => '_ohio_fake'
+		));
+
+		acf_add_options_sub_page(array(
 			'page_title' => esc_html__( 'Pages', 'ohio' ),
 			'menu_title' => esc_html__( 'Pages', 'ohio' ),
 			'menu_slug' => 'theme-general-pages',
@@ -149,7 +156,8 @@ add_filter('acf/load_field/name=background_type', function( $field ) {
 			if ( in_array( $screen->base, [
 				'theme-settings_page_theme-general-pages',
 				'theme-settings_page_theme-general-header',
-				'theme-settings_page_theme-general-footer'
+				'theme-settings_page_theme-general-footer',
+				'theme-settings_page_theme-general-sidebar'
 			] ) ) {
 				unset($field['choices']['inherit']);
 			}
@@ -163,6 +171,7 @@ add_filter('acf/load_field/name=background_type', function( $field ) {
 			'theme-general-pages',
 			'theme-general-header',
 			'theme-general-footer',
+			'theme-general-sidebar',
 			'theme-general-menu',
 			'theme-general-maintenance'
 		] ) ) {

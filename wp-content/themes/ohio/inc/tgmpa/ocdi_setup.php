@@ -3,6 +3,15 @@
 function ohio_ocdi_import_files() {
 	return array(
 		array(
+			'import_file_name' => '<b>Landing Page</b> All Pages',
+			'categories' => array( esc_html__( 'Inner Pages', 'ohio' ) ),
+			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/100/content.xml',
+			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/100/container.xml',
+			'import_widget_file_url' => ' https://demo.clbthemes.com/v1/demo/100/widgets.json',
+			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/100/options.json',
+			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Pages_Inner.webp'
+		),
+		array(
 			'import_file_name' => '<b>Demo 1</b> Creative Agency',
 			'preview_url'  => 'https://ohio.clbthemes.com/demo1/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
@@ -592,15 +601,6 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/ProductArchive__Type1__Desktop.webp'
 		),
 		array(
-			'import_file_name' => '<b>Landing</b> All Pages',
-			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
-			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/100/content.xml',
-			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/100/container.xml',
-			'import_widget_file_url' => ' https://demo.clbthemes.com/v1/demo/100/widgets.json',
-			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/100/options.json',
-			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Pages_Inner.webp'
-		),
-		array(
 			'import_file_name' => '<b>Landing 2023</b> Home Page',
 			'preview_url'  => 'https://ohio.clbthemes.com/',
 			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
@@ -609,7 +609,7 @@ function ohio_ocdi_import_files() {
 			'import_widget_file_url' => ' https://demo.clbthemes.com/v1/demo/98/widgets.json',
 			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/98/options.json',
 			'import_sliders_file_url' => ' https://demo.clbthemes.com/v1/demo/98/slider.zip',
-			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_Desktop2023.webp'
+			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2023.webp'
 		),
 		array(
 			'import_file_name' => '<b>Landing 2025</b> Home Page',
@@ -620,6 +620,16 @@ function ohio_ocdi_import_files() {
 			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/99/options.json',
 			'import_sliders_file_url' => ' https://demo.clbthemes.com/v1/demo/99/slider.zip',
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2024.webp'
+		),
+		array(
+			'import_file_name' => '<b>Landing 2026</b> Home Page',
+			'preview_url'  => 'https://ohio.clbthemes.com/',
+			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
+			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/96/container.xml',
+			'import_widget_file_url' => ' https://demo.clbthemes.com/v1/demo/96/widgets.json',
+			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/96/options.json',
+			'import_sliders_file_url' => ' https://demo.clbthemes.com/v1/demo/96/slider.zip',
+			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2026.webp'
 		),
 		array(
 			'import_file_name' => '<b>UI Elements</b> Shortcodes and Widgets',

@@ -86,34 +86,40 @@ if ( $ohio_post['tilt_effect'] ) {
 		</figure>
 	</a>
 	<div class="card-details">
-		<div class="card-details-item">
-			<?php if ( $date_visibility || $reading_time_visibility ) : ?>
-				<div class="headline-meta -small-t">
-					<?php if ( $date_visibility ) : ?>
-						<div class="date"><?php echo esc_html( $ohio_post['date'] ); ?></div>
-					<?php endif; ?>
-					<?php if ( $reading_time_visibility ) : ?>
-						<span class="post-meta-estimate"><?php echo esc_html( $ohio_post['reading_estimate'] ) . ' ' . esc_html__( 'min read', 'ohio' ); ?>
-						</span>
+
+		<?php if ( $author_visibility || $date_visibility || $reading_time_visibility ) : ?>
+
+			<div class="card-details-item">
+				<?php if ( $date_visibility || $reading_time_visibility ) : ?>
+					<div class="headline-meta -small-t">
+						<?php if ( $date_visibility ) : ?>
+							<div class="date"><?php echo esc_html( $ohio_post['date'] ); ?></div>
+						<?php endif; ?>
+						<?php if ( $reading_time_visibility ) : ?>
+							<span class="post-meta-estimate"><?php echo esc_html( $ohio_post['reading_estimate'] ) . ' ' . esc_html__( 'min read', 'ohio' ); ?>
+							</span>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+				<div class="overlay-details -top -fade-up">
+					<?php if ( $author_visibility ) : ?>
+						<ul class="meta-holder -unlist">
+							<li class="meta-item">
+								<div class="avatar -small">
+									<?php echo get_avatar( $ohio_post['author_id'], '50', 'mystery', $ohio_post['author'], [ 'class' => 'author-avatar' ] ); ?>
+								</div>
+							</li>
+							<li class="meta-item">
+								<span class="prefix"><?php esc_html_e( 'Posted by', 'ohio' ); ?></span>
+								<span class="author"><?php echo esc_html( $ohio_post['author'] ); ?></span>
+							</li>
+						</ul>
 					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-			<div class="overlay-details -top -fade-up">
-				<?php if ( $author_visibility ) : ?>
-					<ul class="meta-holder -unlist">
-						<li class="meta-item">
-							<div class="avatar -small">
-								<?php echo get_avatar( $ohio_post['author_id'], '50', 'mystery', $ohio_post['author'], [ 'class' => 'author-avatar' ] ); ?>
-							</div>
-						</li>
-						<li class="meta-item">
-							<span class="prefix"><?php esc_html_e( 'Posted by', 'ohio' ); ?></span>
-							<span class="author"><?php echo esc_html( $ohio_post['author'] ); ?></span>
-						</li>
-					</ul>
-				<?php endif; ?>
 			</div>
-		</div>
+
+		<?php endif; ?>
+
 		<div class="card-details-item -<?php echo esc_attr( $ohio_post['alignment'] ); ?>">
 			<h4 class="heading title">
 				<?php if ( in_array( 'sticky', get_post_class( '', $ohio_post['post_id'] ) ) ) : ?>

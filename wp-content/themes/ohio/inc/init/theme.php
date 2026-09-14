@@ -289,7 +289,7 @@ function add_custom_section_controls( $element ) {
 		'background_lines_enabled',
 		[
 			'type' => \Elementor\Controls_Manager::SWITCHER,
-			'label' => __( 'Enable lines pattern?', 'ohio' ),
+			'label' => __( 'Enable Lines?', 'ohio' ),
 		]
 	);
 
@@ -344,6 +344,41 @@ function add_custom_section_controls( $element ) {
 
 add_action( 'elementor/element/section/section_typo/after_section_end', 'add_custom_section_controls', 10, 2 );
 add_action( 'elementor/element/container/section_shape_divider/after_section_end', 'add_custom_section_controls', 10, 2 );
+
+function add_dark_mode_background_control( $element ) {
+
+    $element->start_injection(
+        [
+            'of' => 'background_color',
+            'at' => 'after',
+        ]
+    );
+
+    $element->add_control(
+        'dark_mode_scheme',
+        [
+            'label' => __( 'Dark Mode Background', 'ohio' ),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'none',
+            'options' => [
+                'none' => __( 'None', 'ohio' ),
+                'dark' => __( 'Inherited', 'ohio' ),
+                'light' => __( 'Lighter Tint', 'ohio' ),
+            ],
+            'prefix_class' => '',
+            'classes_dictionary' => [
+                'none' => '',
+                'light' => 'clb__dark_mode_light',
+                'dark' => 'clb__dark_mode_black',
+            ],
+        ]
+    );
+
+    $element->end_injection();
+}
+
+add_action( 'elementor/element/section/section_background/after_section_end', 'add_dark_mode_background_control', 10, 2 );
+add_action( 'elementor/element/container/section_background/after_section_end', 'add_dark_mode_background_control', 10, 2 );
 
 function custom_section_HTML_attributes( $element ) {
     $settings = $element->get_settings();

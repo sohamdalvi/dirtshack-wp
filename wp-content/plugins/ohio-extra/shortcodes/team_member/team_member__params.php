@@ -196,6 +196,30 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-500px"></i> ' . __( '500px', 'ohio-extra' ),
+				'param_name' => 'fivehundredpx_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-amazon"></i> ' . __( 'Amazon', 'ohio-extra' ),
+				'param_name' => 'amazon_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-angellist"></i> ' . __( 'AngelList', 'ohio-extra' ),
+				'param_name' => 'angellist_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-apple"></i> ' . __( 'Apple', 'ohio-extra' ),
+				'param_name' => 'apple_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-artstation"></i> ' . __( 'ArtStation', 'ohio-extra' ),
 				'param_name' => 'artstation_link'
 			),
@@ -208,16 +232,46 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-bitbucket"></i> ' . __( 'Bitbucket', 'ohio-extra' ),
+				'param_name' => 'bitbucket_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-bluesky"></i> ' . __( 'Bluesky', 'ohio-extra' ),
+				'param_name' => 'bluesky_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-blogger"></i> ' . __( 'Blogger', 'ohio-extra' ),
+				'param_name' => 'blogger_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-codepen"></i> ' . __( 'CodePen', 'ohio-extra' ),
+				'param_name' => 'codepen_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-deviantart"></i> ' . __( 'DeviantArt', 'ohio-extra' ),
 				'param_name' => 'deviantart_link'
 			),
-            array(
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-diaspora"></i> ' . __( 'Diaspora', 'ohio-extra' ),
+				'param_name' => 'diaspora_link'
+			),
+			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-digg"></i> ' . __( 'Digg', 'ohio-extra' ),
 				'param_name' => 'digg_link'
 			),
-            array(
+			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-discord"></i> ' . __( 'Discord', 'ohio-extra' ),
@@ -232,8 +286,38 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-dropbox"></i> ' . __( 'Dropbox', 'ohio-extra' ),
+				'param_name' => 'dropbox_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-drupal"></i> ' . __( 'Drupal', 'ohio-extra' ),
+				'param_name' => 'drupal_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-etsy"></i> ' . __( 'Etsy', 'ohio-extra' ),
+				'param_name' => 'etsy_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-facebook-f"></i> ' . __( 'Facebook', 'ohio-extra' ),
 				'param_name' => 'facebook_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-fediverse"></i> ' . __( 'Fediverse', 'ohio-extra' ),
+				'param_name' => 'fediverse_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-figma"></i> ' . __( 'Figma', 'ohio-extra' ),
+				'param_name' => 'figma_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -244,8 +328,50 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-foursquare"></i> ' . __( 'Foursquare', 'ohio-extra' ),
+				'param_name' => 'foursquare_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-git"></i> ' . __( 'Git', 'ohio-extra' ),
+				'param_name' => 'git_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-github"></i> ' . __( 'GitHub', 'ohio-extra' ),
 				'param_name' => 'github_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-gitlab"></i> ' . __( 'GitLab', 'ohio-extra' ),
+				'param_name' => 'gitlab_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-goodreads"></i> ' . __( 'Goodreads', 'ohio-extra' ),
+				'param_name' => 'goodreads_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-google"></i> ' . __( 'Google', 'ohio-extra' ),
+				'param_name' => 'google_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-google-play"></i> ' . __( 'Google Play', 'ohio-extra' ),
+				'param_name' => 'googleplay_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-hacker-news"></i> ' . __( 'Hacker News', 'ohio-extra' ),
+				'param_name' => 'hackernews_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -262,8 +388,32 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-jsfiddle"></i> ' . __( 'JSFiddle', 'ohio-extra' ),
+				'param_name' => 'jsfiddle_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-kaggle"></i> ' . __( 'Kaggle', 'ohio-extra' ),
 				'param_name' => 'kaggle_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-kickstarter"></i> ' . __( 'Kickstarter', 'ohio-extra' ),
+				'param_name' => 'kickstarter_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-lastfm"></i> ' . __( 'LastFM', 'ohio-extra' ),
+				'param_name' => 'lastfm_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-line"></i> ' . __( 'Line', 'ohio-extra' ),
+				'param_name' => 'line_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -274,14 +424,62 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-mastodon"></i> ' . __( 'Mastodon', 'ohio-extra' ),
+				'param_name' => 'mastodon_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-medium-m"></i> ' . __( 'Medium', 'ohio-extra' ),
 				'param_name' => 'medium_link'
 			),
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
-				'heading' => '<i class="fa-brands fa-mixer"></i> ' . __( 'Mixer', 'ohio-extra' ),
-				'param_name' => 'mixer_link'
+				'heading' => '<i class="fa-brands fa-meetup"></i> ' . __( 'Meetup', 'ohio-extra' ),
+				'param_name' => 'meetup_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-facebook-messenger"></i> ' . __( 'Messenger', 'ohio-extra' ),
+				'param_name' => 'messenger_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-nextdoor"></i> ' . __( 'Nextdoor', 'ohio-extra' ),
+				'param_name' => 'nextdoor_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-npm"></i> ' . __( 'npm', 'ohio-extra' ),
+				'param_name' => 'npm_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-orcid"></i> ' . __( 'ORCID', 'ohio-extra' ),
+				'param_name' => 'orcid_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-patreon"></i> ' . __( 'Patreon', 'ohio-extra' ),
+				'param_name' => 'patreon_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-paypal"></i> ' . __( 'PayPal', 'ohio-extra' ),
+				'param_name' => 'paypal_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-peertube"></i> ' . __( 'PeerTube', 'ohio-extra' ),
+				'param_name' => 'peertube_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -298,6 +496,18 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-python"></i> ' . __( 'Python', 'ohio-extra' ),
+				'param_name' => 'python_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-qq"></i> ' . __( 'QQ', 'ohio-extra' ),
+				'param_name' => 'qq_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-quora"></i> ' . __( 'Quora', 'ohio-extra' ),
 				'param_name' => 'quora_link'
 			),
@@ -306,6 +516,60 @@ function ohio_team_member_sc_map() {
 				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-reddit"></i> ' . __( 'Reddit', 'ohio-extra' ),
 				'param_name' => 'reddit_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-researchgate"></i> ' . __( 'ResearchGate', 'ohio-extra' ),
+				'param_name' => 'researchgate_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-reverbnation"></i> ' . __( 'ReverbNation', 'ohio-extra' ),
+				'param_name' => 'reverbnation_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-rss"></i> ' . __( 'RSS', 'ohio-extra' ),
+				'param_name' => 'rss_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-salesforce"></i> ' . __( 'Salesforce', 'ohio-extra' ),
+				'param_name' => 'salesforce_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-sass"></i> ' . __( 'Sass', 'ohio-extra' ),
+				'param_name' => 'sass_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-sharp"></i> ' . __( 'Sharp', 'ohio-extra' ),
+				'param_name' => 'sharp_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-shopify"></i> ' . __( 'Shopify', 'ohio-extra' ),
+				'param_name' => 'shopify_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-skype"></i> ' . __( 'Skype', 'ohio-extra' ),
+				'param_name' => 'skype_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-slack"></i> ' . __( 'Slack', 'ohio-extra' ),
+				'param_name' => 'slack_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -322,8 +586,44 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-sourcetree"></i> ' . __( 'Sourcetree', 'ohio-extra' ),
+				'param_name' => 'sourcetree_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-spotify"></i> ' . __( 'Spotify', 'ohio-extra' ),
 				'param_name' => 'spotify_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-stack-exchange"></i> ' . __( 'Stack Exchange', 'ohio-extra' ),
+				'param_name' => 'stackexchange_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-stack-overflow"></i> ' . __( 'Stack Overflow', 'ohio-extra' ),
+				'param_name' => 'stackoverflow_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-strava"></i> ' . __( 'Strava', 'ohio-extra' ),
+				'param_name' => 'strava_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-stripe"></i> ' . __( 'Stripe', 'ohio-extra' ),
+				'param_name' => 'stripe_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-t2"></i> ' . __( 'T2', 'ohio-extra' ),
+				'param_name' => 't2_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -352,6 +652,18 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-trello"></i> ' . __( 'Trello', 'ohio-extra' ),
+				'param_name' => 'trello_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-tripadvisor"></i> ' . __( 'TripAdvisor', 'ohio-extra' ),
+				'param_name' => 'tripadvisor_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-tumblr"></i> ' . __( 'Tumblr', 'ohio-extra' ),
 				'param_name' => 'tumblr_link'
 			),
@@ -370,20 +682,80 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-ubuntu"></i> ' . __( 'Ubuntu', 'ohio-extra' ),
+				'param_name' => 'ubuntu_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-untappd"></i> ' . __( 'Untappd', 'ohio-extra' ),
+				'param_name' => 'untappd_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-usps"></i> ' . __( 'USPS', 'ohio-extra' ),
+				'param_name' => 'usps_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-viadeo"></i> ' . __( 'Viadeo', 'ohio-extra' ),
+				'param_name' => 'viadeo_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-vimeo"></i> ' . __( 'Vimeo', 'ohio-extra' ),
 				'param_name' => 'vimeo_link'
 			),
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
-				'heading' => '<i class="fa-brands fa-vine"></i> ' . __( 'Vine', 'ohio-extra' ),
-				'param_name' => 'vine_link'
+				'heading' => '<i class="fa-brands fa-waze"></i> ' . __( 'Waze', 'ohio-extra' ),
+				'param_name' => 'waze_link'
 			),
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
-				'heading' => '<i class="fa-brands fa-whatsapp"></i> ' . __( 'Whatsapp', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-weibo"></i> ' . __( 'Weibo', 'ohio-extra' ),
+				'param_name' => 'weibo_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-wechat"></i> ' . __( 'WeChat', 'ohio-extra' ),
+				'param_name' => 'wechat_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-weixin"></i> ' . __( 'Weixin', 'ohio-extra' ),
+				'param_name' => 'weixin_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-whatsapp"></i> ' . __( 'WhatsApp', 'ohio-extra' ),
 				'param_name' => 'whatsapp_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-wikipedia-w"></i> ' . __( 'Wikipedia', 'ohio-extra' ),
+				'param_name' => 'wikipedia_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-wordpress"></i> ' . __( 'WordPress', 'ohio-extra' ),
+				'param_name' => 'wordpress_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-wpexplorer"></i> ' . __( 'WP Explorer', 'ohio-extra' ),
+				'param_name' => 'wpexplorer_link'
 			),
 			array(
 				'type' => 'textfield',
@@ -394,14 +766,26 @@ function ohio_team_member_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-yahoo"></i> ' . __( 'Yahoo', 'ohio-extra' ),
+				'param_name' => 'yahoo_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
+				'heading' => '<i class="fa-brands fa-yelp"></i> ' . __( 'Yelp', 'ohio-extra' ),
+				'param_name' => 'yelp_link'
+			),
+			array(
+				'type' => 'textfield',
+				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-youtube"></i> ' . __( 'YouTube', 'ohio-extra' ),
 				'param_name' => 'youtube_link'
 			),
 			array(
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
-				'heading' => '<i class="fa-brands fa-500px"></i> ' . __( '500px', 'ohio-extra' ),
-				'param_name' => 'fivehundred_link'
+				'heading' => '<i class="fa-brands fa-zhihu"></i> ' . __( 'Zhihu', 'ohio-extra' ),
+				'param_name' => 'zhihu_link'
 			),
 
 			// Styles.

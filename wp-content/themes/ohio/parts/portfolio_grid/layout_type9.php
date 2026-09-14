@@ -62,7 +62,7 @@ if ( $project['tilt_effect'] ) {
                         <?php if ( strpos( $featured_video_url, 'youtube.com' ) || strpos( $featured_video_url, 'youtu.be' ) || strpos( $featured_video_url, 'vimeo.com' ) ) : ?>
                             <iframe src="<?php echo esc_url( $featured_video_url ) . '?&controls=0&autoplay=1&start=0&mute=1&muted=1&rel=0&autopause=0&loop=1'; ?>" frameborder="0"/></iframe>
                         <?php else : ?>
-                            <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop">
+                            <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop" playsinline>
                                 <source src="<?php echo esc_url( $featured_video_url ); ?>">
                             </video>
                         <?php endif; ?>
@@ -137,7 +137,7 @@ if ( $project['tilt_effect'] ) {
                 </div>
             </div>
         </div>
-        
+
         <div class="next-slide-preview cursor-as-pointer" <?php echo ' data-ohio-bg-image="' . esc_url( $project['prev_item_featured_image']) . '"'; ?> data-cursor-class="cursor-link"></div>
     </div>
 </div>

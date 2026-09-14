@@ -16,11 +16,6 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-call-to-action';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -223,7 +218,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'without',
                 'options' => [
-                    'without' => 'Without icon',
+                    'without' => 'None',
                     'left' => 'Left side',
                     'right' => 'Right side',
                 ],
@@ -341,6 +336,26 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
                     '{{WRAPPER}} .call-to-action' => 'background-color:{{VALUE}}'
                 ],
                 'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
             ]
         );
 

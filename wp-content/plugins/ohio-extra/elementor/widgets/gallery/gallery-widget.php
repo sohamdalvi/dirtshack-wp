@@ -27,11 +27,6 @@ class Ohio_Elementor_Gallery_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-gallery';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -580,7 +575,7 @@ class Ohio_Elementor_Gallery_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'bg_color',
             [
-                'label' => __( 'Overlay Color', 'ohio-extra' ),
+                'label' => __( 'Lightbox Background', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .clb-popup' => 'background-color: {{VALUE}}'

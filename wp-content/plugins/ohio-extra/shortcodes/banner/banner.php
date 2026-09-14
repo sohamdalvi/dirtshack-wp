@@ -14,10 +14,12 @@ function ohio_banner_func( $atts ) {
 	$block_type_full_align = isset( $block_type_full_align ) ? OhioExtraFilter::string( $block_type_full_align, 'string', 'left' ) : 'left';
 	$card_effect = isset( $card_effect ) ? OhioExtraFilter::string( $card_effect, 'string', 'none' ) : 'none';
 	$equal_height = isset( $equal_height ) ? OhioExtraFilter::boolean( $equal_height ) : true;
+	$stretch_to_fit = isset( $stretch_to_fit ) ? OhioExtraFilter::boolean( $stretch_to_fit ) : true;
 	$border_width = isset( $border_width ) ? OhioExtraFilter::string( $border_width, 'string', '') : '';
 	$border_color = isset( $border_color ) ? OhioExtraFilter::string( $border_color, 'string', '') : '';
 
 	$fill_color = isset( $fill_color ) ? OhioExtraFilter::string( $fill_color, 'string', '') : '';
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
 	$icon_color = isset( $icon_color ) ? OhioExtraFilter::string( $icon_color, 'string', '') : '';
 	$icon_button_color = isset( $icon_button_color ) ? OhioExtraFilter::string( $icon_button_color, 'string', '') : '';
 
@@ -25,15 +27,22 @@ function ohio_banner_func( $atts ) {
 	$tilt_effect = isset( $tilt_effect ) ? OhioExtraFilter::boolean( $tilt_effect ) : true;
 	$drop_shadow = isset( $drop_shadow ) ? OhioExtraFilter::boolean( $drop_shadow ) : false;
 	$drop_shadow_intensity = isset( $drop_shadow_intensity ) ? OhioExtraFilter::string( $drop_shadow_intensity, 'string', '') : '';
+	
 	$use_link = isset( $use_link ) ? OhioExtraFilter::boolean( $use_link ) : true;
+	$link_url = OhioExtraParser::VC_link_params( ( isset( $link_url ) ? $link_url : '' ), array( 'caption' => esc_html__( '', 'ohio-extra' ) ) );
+	$banner_button = isset( $banner_button ) ? OhioExtraFilter::string( $banner_button, 'string', false ) : false;
+	$banner_button = preg_replace( '/\&amp\;/', '&', $banner_button );
+	parse_str( $banner_button, $button_settings );
 	$show_button = isset( $show_button ) ? OhioExtraFilter::boolean( $show_button ) : false;
 	$button_animation = isset( $button_animation ) ? OhioExtraFilter::boolean( $button_animation ) : false;
-	$link_url = OhioExtraParser::VC_link_params( ( isset( $link_url ) ? $link_url : '' ), array( 'caption' => esc_html__( '', 'ohio-extra' ) ) );
+
 	$title = isset( $title ) ? OhioExtraFilter::string( $title ) : false;
 	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag ) : 'h3';
 	$title_typo = isset( $title_typo ) ? OhioExtraFilter::string( $title_typo ) : false;
+	$background_image = isset( $background_image ) ? OhioExtraFilter::string( $background_image ) : false;
 	$image = OhioExtraParser::generateImageAttsById( OhioExtraFilter::string( $background_image ), $title );
 	$subtitle = isset( $subtitle ) ? OhioExtraFilter::string( $subtitle ) : false;
+	$subtitle_position = ( isset( $subtitle_position ) ) ? OhioExtraFilter::string( $subtitle_position, 'string', 'before_title' ) : 'before_title';
 	$description = isset( $description ) ? rawurldecode( base64_decode( $description ) ) : '';
 	$description = OhioExtraFilter::string( $description, 'textarea', '' );
 	$description_typo = isset( $description_typo ) ? OhioExtraFilter::string( $description_typo ) : false;
@@ -137,6 +146,16 @@ function ohio_banner_func( $atts ) {
 	if ( !$equal_height ) {
 		$wrapper_classes .= ' -metro';
 	}
+
+	if ( !$stretch_to_fit ) {
+		$wrapper_classes .= ' -stretch';
+	}
+
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
 	
 	/**
 	* Assembling styles
@@ -148,7 +167,9 @@ function ohio_banner_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $title_typo );
 
 	if ( $banner_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' .title{';
+		$_selector = '';
+		$_selector .= '#' . $wrapper_id . ':not(.-with-overlay-image) .heading .title,';
+		$_selector .= '#' . $wrapper_id . '.-with-overlay-image .heading .title{';
 		$_block_typo = $banner_title_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -169,7 +190,9 @@ function ohio_banner_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $subtitle_typo );
 
 	if ( $banner_subtitle_typo ) {
-		$_selector = '#' . $wrapper_id . ' .subtitle{';
+		$_selector = '';
+		$_selector .= '#' . $wrapper_id . ':not(.-with-overlay-image) .heading .subtitle,';
+		$_selector .= '#' . $wrapper_id . '.-with-overlay-image .heading .subtitle{';
 		$_block_typo = $banner_subtitle_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -190,7 +213,9 @@ function ohio_banner_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $description_typo );
 
 	if ( $banner_description_typo ) {
-		$_selector = '#' . $wrapper_id . ' .overlay-details p{';
+		$_selector = '';
+		$_selector .= '#' . $wrapper_id . ':not(.-with-overlay-image) .overlay-details p,';
+		$_selector .= '#' . $wrapper_id . '.-with-overlay-image .overlay-details p{';
 		$_block_typo = $banner_description_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -267,6 +292,22 @@ function ohio_banner_func( $atts ) {
 	if ( isset( $drop_shadow_intensity ) && $drop_shadow_intensity != '' ) {
 		$_style_block .= '#' . $wrapper_id . '.-with-shadow .image-holder{';
 		$_style_block .= 'box-shadow: 0px 5px 15px 0px rgba(0, 0, 0,' . $drop_shadow_intensity . '%);';
+		$_style_block .= '}';
+	}
+
+	// Button
+
+	$button_css = OhioExtraParser::VC_button_to_css( $button_settings );
+	
+	if ( $button_css['css'] ) {
+		$_style_block .= '#' . $wrapper_id . ' .button{';
+		$_style_block .= $button_css['css'];
+		$_style_block .= '}';
+	}
+
+	if ( $button_css['hover-css'] ) {
+		$_style_block .= '#' . $wrapper_id . ' .button:hover{';
+		$_style_block .= $button_css['hover-css'];
 		$_style_block .= '}';
 	}
 	

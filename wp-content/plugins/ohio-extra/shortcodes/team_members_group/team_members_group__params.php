@@ -28,6 +28,17 @@ function ohio_team_members_group_sc_map() {
 				'heading' => __( 'Card background color', 'ohio-extra' ),
 				'param_name' => 'content_bg',
 			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			),
 			
 			// Design Options.
             array(

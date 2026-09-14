@@ -269,7 +269,7 @@
                             <?php endif; ?>
                             
                             <?php if ( !empty( $member['social_fivehundred'] ) ): ?>
-                                <a href="<?php echo $member['social_fivehundred']; ?>" target="_blank" rel="nofollow" aria-label="<?php esc_html_e( '500px', 'ohio-extra' ); ?>" class="network -unlink 500px">
+                                <a href="<?php echo $member['social_fivehundred']; ?>" target="_blank" rel="nofollow" aria-label="<?php esc_html_e( '500px', 'ohio-extra' ); ?>" class="network -unlink fivehundredpx">
                                     <i class="fa-brands fa-500px"></i>
                                 </a>
                             <?php endif; ?>

@@ -40,9 +40,62 @@
         }
     });
 
-    $('.ohio_extra_typography_block').each(function(_, el) {
-		vc.atts.colorpicker.init({}, $(el));
-	});
+    // A shortcode can carry several ohio_typography params at once (e.g. the
+    // Heading element has one per tab: Title Typography, Subtitle Typography...).
+    // All of their blocks exist in the DOM as soon as the edit panel opens, but
+    // only the active tab's block is actually visible - the others sit inside
+    // display:none tab panes until the user clicks over to them. Widgets are
+    // only initialized once a block is actually visible: eagerly for whichever
+    // tab is open by default, and lazily - on tab click - for the rest.
+    function ohioInitTypographyBlock($block) {
+        if ($block.data('ohio-typography-inited') || !$block.is(':visible')) {
+            return;
+        }
+        $block.data('ohio-typography-inited', true);
+
+        // vc.atts.colorpicker.init(settings, $holder) does two things with
+        // $holder: it scans it for ".color-group" to build the Pickr widget,
+        // and - separately - it runs $holder.find('label').on('click', ...) to
+        // focus the picker's button whenever any label inside $holder is
+        // clicked. That second part assumes $holder contains only the color
+        // field's own label. Our typography block wraps every field (Font
+        // Weight, Font Size, Text Transform, ...) in its own bare <label> for
+        // layout purposes, so passing the whole block made WPBakery bind that
+        // "click label -> steal focus into the color picker" handler to every
+        // field's label, not just the color field's - freezing every other
+        // input in the block. Scoping the call to just the color field's own
+        // label keeps that focus-assist working for the color field while
+        // leaving every other label alone.
+        var $colorLabel = $block.find('.color-group').closest('label');
+        if ($colorLabel.length) {
+            vc.atts.colorpicker.init({}, $colorLabel);
+        }
+
+        // Turn the plain <select> fields into WPBakery's own select2 dropdowns.
+        // vc.atts.dropdown.init() expects the immediate parent of a single
+        // "select.dropdown" element - not the select itself, and not a holder
+        // with several selects inside it - so each field gets its own
+        // .edit_form_line wrapper and its own init() call.
+        $block.find('.edit_form_line').each(function() {
+            vc.atts.dropdown.init({}, $(this));
+        });
+    }
+
+    function ohioInitVisibleTypographyBlocks() {
+        $('.ohio_extra_typography_block').each(function() {
+            ohioInitTypographyBlock($(this));
+        });
+    }
+
+    // Initialize whatever is visible right away (covers the default/active tab).
+    ohioInitVisibleTypographyBlocks();
+
+    // Re-scan after every WPBakery edit-panel tab switch so a block gets
+    // initialized the first time its own tab becomes visible. A short delay
+    // gives the panel time to actually flip display before we check :visible.
+    $(document).on('click', '[data-vc-ui-element="panel-tab-control"]', function() {
+        setTimeout(ohioInitVisibleTypographyBlocks, 50);
+    });
 
     $('#vc_ui-panel-edit-element .ohio_extra_typography_block .devices-select li').on('click', function() {
         let elclass = $(this).attr('class');

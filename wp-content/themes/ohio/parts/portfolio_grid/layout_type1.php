@@ -88,15 +88,15 @@ if ( $project['tilt_effect'] ) {
 <div class="portfolio-item card -layout1<?php echo esc_attr( $wrapper_classes); ?>" <?php if ( $project['in_popup'] ) { echo ' data-portfolio-popup="' . esc_attr( $project['popup_id'] ) . '"'; } ?> <?php if ( $project['boxed'] ) { echo esc_attr( $parallax_data ); } ?>>
     <div class="image-holder" <?php if ( !$project['boxed'] ) { echo esc_attr( $parallax_data ); } ?>>
         <a class="-unlink" href="<?php echo esc_url( $project['url'] ); ?>" <?php if ( $project['external'] ) { echo 'target="_blank"'; } ?> data-cursor-class="cursor-link">
-            
-            <?php if ( $featured_video && $project['show_featured_video'] ) : ?>
+
+            <?php if ( $featured_video && ( $project['show_featured_video'] ?? false ) ) : ?>
 
                 <?php if ( strpos( $featured_video_url, 'youtube.com' ) || strpos( $featured_video_url, 'youtu.be' ) || strpos( $featured_video_url, 'vimeo.com' ) ) : ?>
                     <div class="video-container">
                         <iframe src="<?php echo esc_url( $featured_video_url ) . '?&controls=0&autoplay=1&start=0&mute=1&muted=1&rel=0&autopause=0&loop=1'; ?>" frameborder="0"/></iframe>
                     </div>
                 <?php else : ?>
-                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop">
+                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop" playsinline>
                         <source src="<?php echo esc_url( $featured_video_url ); ?>">
                     </video>
                 <?php endif; ?>
@@ -118,7 +118,7 @@ if ( $project['tilt_effect'] ) {
                 <?php endif; ?>
 
             <?php endif; ?>
-            
+
         </a>
         <?php if ( $project['in_popup'] ) : ?>
             <div class="overlay-details -top -fade-down">
@@ -129,7 +129,7 @@ if ( $project['tilt_effect'] ) {
                 </button>
             </div>
         <?php endif; ?>
-        <?php if ( $featured_video && $project['show_video_button'] && !$project['show_featured_video'] ) : ?>
+        <?php if ( $featured_video && ( $project['show_video_button'] ?? false ) && !( $project['show_featured_video'] ?? false ) ) : ?>
             <div class="video-button -animation open-popup<?php echo esc_attr( $video_button_style_class ); ?>" data-video="<?php echo esc_url( $project['video']['link'] ); ?>">
                 <button class="icon-button<?php if ( $video_button_size != 'default' ) { echo ' -' . $video_button_size . ''; } ?>" aria-label="<?php esc_html_e( 'Play', 'ohio' ); ?>">
                     <i class="icon">

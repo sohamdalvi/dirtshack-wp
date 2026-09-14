@@ -49,7 +49,11 @@
 						<?php endif; ?>
 
 						<?php if ( $feature_object->feature_title ) : ?>
-							<?php echo $feature_object->feature_title; ?>
+							<?php if ( !empty( $feature_object->feature_tooltip ) ) : ?>
+								<span class="title has-tooltip -underline-dotted" data-tooltip="<?php echo esc_attr( $feature_object->feature_tooltip ); ?>" tabindex="0"><?php echo $feature_object->feature_title; ?></span>
+							<?php else: ?>
+								<span class="title"><?php echo $feature_object->feature_title; ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>

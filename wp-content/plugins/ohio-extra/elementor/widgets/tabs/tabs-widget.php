@@ -22,11 +22,6 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-tabs';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-tabs-widget' ];
     }
@@ -176,7 +171,8 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Title Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tabs-nav' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tabs-nav-link .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tabs-nav-link .icon' => 'color: {{VALUE}};',
                 ]
             ]
         );
@@ -186,7 +182,7 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'name' => 'tabs_typography',
                 'label' => __( 'Title Typography', 'ohio-extra' ),
-                'selector' => '{{WRAPPER}} .tabs-nav',
+                'selector' => '{{WRAPPER}} .tabs-nav-link .title',
             ]
         );
 
@@ -196,8 +192,30 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Title Color (Active)', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .tabs-nav .active' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .tabs-nav-link.active .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tabs-nav-link.active .icon' => 'color: {{VALUE}};',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'subtitle_color',
+            [
+                'label' => __( 'Subtitle Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .tabs-nav-link .subtitle' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'tabs_subtitle_typography',
+                'label' => __( 'Subtitle Typography', 'ohio-extra' ),
+                'selector' => '{{WRAPPER}} .tabs-nav-link .subtitle'
             ]
         );
 
@@ -251,6 +269,29 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'condition' => [
+                    'tabs_layout' => [ 'filled', 'button'],
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'tab_active_color',
             [
                 'label' => __( 'Tab Background (Active)', 'ohio-extra' ),
@@ -278,6 +319,19 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( 'Tab', 'ohio-extra' ),
                 'placeholder' => __( 'Title text', 'ohio-extra' ),
+                'label_block' => true,
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'list_subtitle',
+            [
+                'label' => __( 'Subtitle', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'placeholder' => __( 'Subtitle text', 'ohio-extra' ),
                 'label_block' => true,
                 'dynamic' => [
                     'active' => true,
@@ -350,6 +404,22 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $repeater->add_control(
+            'icon_type',
+            [
+                'label' => __( 'Icon Type', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'icon',
+                'options' => [
+                    'icon' => 'Icon',
+                    'html' => 'Custom HTML',
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'icon_icon',
             [
                 'label' => __( 'Icon', 'ohio-extra' ),
@@ -359,7 +429,21 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                     'library' => 'solid',
                 ],
                 'condition' => [
-                    'use_icon' => 'yes'
+                    'use_icon' => 'yes',
+                    'icon_type' => 'icon',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'icon_html',
+            [
+                'label' => __( 'Custom HTML', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '<i class="fa-regular fa-star"></i>',
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'html',
                 ],
             ]
         );
@@ -397,6 +481,13 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tabs_direction'] == 'vertical' ) {
             $this->addWrapperClass('-vertical');
+        }
+
+        foreach ( $settings['tabs'] as $item ) {
+
+            if ( !empty( $item['list_subtitle'] ) ) {
+                $this->addWrapperClass('-tabs-with-subtitle');
+            }
         }
 
         switch ( $settings['block_alignment'] ) {

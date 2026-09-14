@@ -23,7 +23,7 @@
 			<div class="subtitle">
 				<?php esc_html_e( 'Next Product', 'ohio' ); ?>
 			</div>
-			<h5 class="title">
+			<div class="h5 title">
 				<?php
 					$next_title = get_the_title( $next_post->ID );
 					if ( empty( $next_title ) ) {
@@ -32,7 +32,7 @@
 						echo esc_html( $next_title );
 					}
 				?>
-			</h5>
+			</div>
 		</div>
 	</div>
 </a>

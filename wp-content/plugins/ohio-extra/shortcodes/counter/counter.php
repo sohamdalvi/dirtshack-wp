@@ -126,7 +126,7 @@ function ohio_counter_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $title_typo );
 
 	if ( $counter_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' h6{';
+		$_selector = '#' . $wrapper_id . ' .h6{';
 		$_block_typo = $counter_title_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';

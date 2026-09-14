@@ -16,11 +16,6 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-banner';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -138,6 +133,19 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 ],
             ]
         );
+
+        $this->add_control(
+            'subtitle_position',
+            [
+                'label' => __( 'Subtitle Position', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'before_title' => __( 'Before Title', 'ohio-extra' ),
+                    'after_title' => __( 'After Title', 'ohio-extra' ),
+                ],
+                'default' => 'before_title',
+            ]
+        );
         
         $this->add_control(
             'description',
@@ -207,6 +215,22 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'label_off' => __( 'No', 'ohio-extra' ),
                 'return_value' => 'yes',
                 'default' => ''
+            ]
+        );
+
+        $this->add_control(
+            'stretch_to_fit',
+            [
+                'label' => __( 'Stretch to Fit', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'description' => __( 'Stretch the banner height to fit the parent element.', 'ohio-extra' ),
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                    'equal_height' => 'yes',
+                ],
             ]
         );
 
@@ -299,9 +323,40 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'show_button',
+            [
+                'label' => __( 'Show Button?', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'condition' => [
+                    'use_link' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_title',
+            [
+                'label' => __( 'Button Text', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'label_block' => true,
+                'condition' => [
+                    'use_link' => 'yes',
+                    'show_button' => 'yes',
+                ],
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $this->add_control(
             'link',
             [
-                'label' => __( 'URL', 'ohio-extra' ),
+                'label' => __( 'Link URL', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::URL,
                 'placeholder' => __( 'https://your-link.com', 'ohio-extra' ),
                 'show_external' => true,
@@ -320,24 +375,9 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
-            'show_button',
-            [
-                'label' => __( 'Show Icon Button?', 'ohio-extra' ),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __( 'Yes', 'ohio-extra' ),
-                'label_off' => __( 'No', 'ohio-extra' ),
-                'return_value' => 'yes',
-                'default' => '',
-                'condition' => [
-                    'use_link' => 'yes',
-                ],
-            ]
-        );
-
-        $this->add_control(
             'button_animation',
             [
-                'label' => __( 'Animate Icon Button?', 'ohio-extra' ),
+                'label' => __( 'Animate Button?', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __( 'Yes', 'ohio-extra' ),
                 'label_off' => __( 'No', 'ohio-extra' ),
@@ -345,6 +385,7 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => '',
                 'condition' => [
                     'use_link' => 'yes',
+                    'show_button' => 'yes',
                 ],
             ]
         );
@@ -365,7 +406,8 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Title Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .overlay-details .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner:not(.-with-overlay-image) .heading .title' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner.-with-overlay-image:not(:hover) .heading .title' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -385,7 +427,8 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Subtitle Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .subtitle' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner:not(.-with-overlay-image) .heading .subtitle' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner.-with-overlay-image:not(:hover) .heading .subtitle' => 'color: {{VALUE}};',
                 ],
                 'separator' => 'before'
             ]
@@ -406,7 +449,8 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Description Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .overlay-details p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner:not(.-with-overlay-image) .overlay-details p' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .banner.-with-overlay-image:not(:hover) .overlay-details p' => 'color: {{VALUE}};',
                 ],
                 'separator' => 'before'
             ]
@@ -449,7 +493,7 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'fill_color',
             [
-                'label' => __( 'Fill Color', 'ohio-extra' ),
+                'label' => __( 'Background Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .banner.-with-overlay-image .image-holder' => 'background-color: {{VALUE}}'
@@ -461,34 +505,31 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
-            'icon_color',
+            'dark_mode_scheme',
             [
-                'label' => __( 'Icon Color', 'ohio-extra' ),
-                'type' =>  \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .banner .overlay-details .icon-button' => 'color: {{VALUE}};'
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
                 ],
                 'condition' => [
-                    'use_link' => 'yes',
+                    'block_type_layout' => 'overlay_image',
                 ],
-            ]
-        );
-
-        $this->add_control(
-            'icon_button_color',
-            [
-                'label' => __( 'Icon Button Color', 'ohio-extra' ),
-                'type' =>  \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .banner .overlay-details .icon-button' => 'background-color: {{VALUE}};'
-                ],
-                'condition' => [
-                    'use_link' => 'yes',
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
                 ],
             ]
         );
 
         $this->end_controls_section();
+
+        $this->addButtonStyleSection();
     }
 
     protected function render()
@@ -531,6 +572,10 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['equal_height'] ) {
             $this->addWrapperClass( '-metro' );
+        }
+
+        if ( $settings['stretch_to_fit'] ) {
+            $this->addWrapperClass( '-stretch' );
         }
 
         if ( $settings['drop_shadow'] ) {

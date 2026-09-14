@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $post, $wp_embed;
 
 $project = OhioObjectParser::parse_to_project_object( $post );
@@ -15,6 +15,7 @@ if ( $video_type == 'custom' ) {
     $video_autoplay = OhioOptions::get( 'project_video_autoplay' );
     $video_muted = OhioOptions::get( 'project_video_muted' );
     $video_controls = OhioOptions::get( 'project_video_controls' );
+    $video_loop = OhioOptions::get( 'project_video_controls' );
 
     if ( $video_autoplay ) {
         $video_params .= ' autoplay=autoplay';
@@ -25,6 +26,9 @@ if ( $video_type == 'custom' ) {
     if ( $video_controls ) {
         $video_params .= ' controls=controls';
     }
+	if ( $video_loop ) {
+		$video_params .= ' loop';
+	}
 }
 
 if ( is_array( $project['images_full'] ) && count( $project['images_full'] ) > 0 ) {
@@ -54,7 +58,7 @@ wp_reset_query();
         <?php endif; ?>
         <div class="overlay"></div>
     </div>
- 
+
 <?php endif; ?>
 
 <?php if ( is_array( $project['images'] ) ) : ?>
@@ -91,7 +95,7 @@ wp_reset_query();
     <div class="share-bar -vertical">
         <div class="social-networks -small">
             <?php printf( '%s', $project['sharing_links_html'] ); ?>
-        </div>  
+        </div>
     </div>
-    
+
 <?php endif; ?>

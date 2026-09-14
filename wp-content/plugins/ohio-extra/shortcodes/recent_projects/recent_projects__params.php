@@ -93,7 +93,7 @@ function ohio_recent_projects_sc_map() {
 			array(
 				'type' => 'ohio_posts',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Projects', 'ohio-extra' ),
+				'heading' => __( 'Select Projects', 'ohio-extra' ),
 				'description' => __( 'Leave empty to choose all projects.', 'ohio-extra' ),
 				'param_name' => 'projects',
 				'value' => '',
@@ -503,6 +503,7 @@ function ohio_recent_projects_sc_map() {
 					'element' => 'card_layout',
 					'value' => array(
 						'grid_1',
+						'grid_2',
 						'grid_3',
 						'grid_4',
 						'grid_5',
@@ -985,6 +986,27 @@ function ohio_recent_projects_sc_map() {
 				)
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'card_layout',
+					'value' => array(
+						'grid_1',
+						'grid_7',
+						'grid_9',
+						'grid_10',
+						'grid_13'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			),
+			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Overlay Color', 'ohio-extra' ),
@@ -1064,7 +1086,7 @@ function ohio_recent_projects_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Pagination Color', 'ohio-extra' ),
+				'heading' => __( 'Slider Pagination Color', 'ohio-extra' ),
 				'param_name' => 'pagination_btn_color',
 				'dependency' => array(
 					'element' => 'card_layout',

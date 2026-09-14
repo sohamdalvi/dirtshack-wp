@@ -7,7 +7,7 @@
             ?>">
 
             <div class="accordion-button">
-                <h6 class="accordion-header">
+                <div class="h6 accordion-header">
 
                     <?php if ( !empty($item['use_icon']) && !empty($item['icon_icon']) ) {
                         \Elementor\Icons_Manager::render_icon( $item['icon_icon'], [ 'class' => 'icon' ] );
@@ -15,7 +15,7 @@
 
                     <?php echo $item['list_title']; ?>
 
-                </h6>
+                </div>
                 <button class="icon-button -extra-small" aria-label="<?php esc_html_e( 'Toggle', 'ohio-extra' ); ?>">
                     <i class="icon"></i>
                 </button>

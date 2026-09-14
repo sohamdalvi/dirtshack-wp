@@ -250,21 +250,22 @@
 
     function handleStickyNav() {
 
-        $(window).on('scroll', function() {
+        $(window).on('scroll', throttle(function() {
             var stickyNav = $('[data-js="sticky-nav"]');
             var scrollTop = $(window).scrollTop();
             var viewportHeight = $(window).height();
             var triggerStart = viewportHeight * 0.2;
-            var footerTop = $('.site-footer').offset().top;
-            
+            var siteContent = $('.site-content');
+            var contentBottom = siteContent.offset().top + siteContent.outerHeight();
+
             if (!Clb.isMobile) {
-                if (scrollTop > triggerStart && (scrollTop + viewportHeight) < footerTop) {
+                if (scrollTop > triggerStart && (scrollTop + viewportHeight) < contentBottom) {
                     stickyNav.stop(true, true).addClass('-faded');
                 } else {
                     stickyNav.stop(true, true).removeClass('-faded');
                 }
             }
-        });
+        }, 100));
     }
 
     /* # Hamburger Navigation */
@@ -353,16 +354,9 @@
 
 
                 if (subMenu.hasClass('sub-menu')) {
-                    // if (Clb.isMobileMenu) {
-                    //     subMenu.css('height', 0);
-                    // }
                     parent.find('active').removeClass('active');
                 } else {
                     var subMenuHeight = subMenu.data('sub-menu-height');
-
-                    // if (Clb.isMobileMenu) {
-                    //     subMenu.css('height', 0);
-                    // }
 
                     if ( $(this).parents('.sub-menu, .sub-sub-menu').length && Clb.isMobileMenu) {
 
@@ -433,10 +427,6 @@
 
             e.preventDefault();
         });
-
-        // if ($('#masthead nav > .mobile-wpml-select').length) {
-        //     $('#masthead nav > .mobile-wpml-select').insertAfter($('#mega-menu-wrap > ul > li').last());
-        // }
 
         $('#mega-menu-wrap .sub-sub-menu').each(function () {
             if ($(this).offset().left + $(this).outerWidth() > $(window).width()) {
@@ -557,39 +547,60 @@
 
     /* ## Accordion */
 
+    // Logical height of an accordion-collapse: inline style if set (that's
+    // the transition target), otherwise the current rendered height.
+    function getCollapseHeight($collapse) {
+        var el = $collapse[0];
+        var inline = el ? parseFloat(el.style.height) : NaN;
+        return isNaN(inline) ? $collapse.outerHeight() : inline;
+    }
+
+    // Grow/shrink every active-ancestor collapse by `delta` so outer accordions
+    // accommodate inner state changes. Using a known delta avoids reading
+    // animated geometry mid-transition.
+    function refreshAccordionAncestors(accordion, delta) {
+        if (!delta) return;
+        accordion.parents('.accordion-item.active').each(function () {
+            var $collapse = $(this).children('.accordion-collapse');
+            if (!$collapse.length) return;
+            $collapse.css('height', (getCollapseHeight($collapse) + delta) + 'px');
+        });
+    }
+
     function handleAccordionBox() {
         $('[data-ohio-accordion]').each(function () {
             var accordion = $(this);
-            var titles = $(this).find('.accordion-button');
-            var items = $(this).find('.accordion-item');
-            var contents = $(this).find('.accordion-collapse');
+            var items = accordion.children('.accordion-item');
+            var titles = items.children('.accordion-button');
 
             var toggle = function (num) {
+                var $item = items.eq(num);
+                var $itemCollapse = $item.children('.accordion-collapse');
+                var opened = items.filter('.active');
 
-                var opened = accordion.find('.active');
-                var content = contents.eq(num);
+                if (!$item.hasClass('active')) {
+                    var oldOpenedHeight = opened.length
+                        ? getCollapseHeight(opened.children('.accordion-collapse'))
+                        : 0;
 
-                // If not active
-                if (!items.eq(num).hasClass('active')) {
-                    // Activate this item
                     items.removeClass('active');
-                    items.eq(num).addClass('active');
+                    $item.addClass('active');
 
                     setTimeout(function () {
-                        content.css('height', ''); // Open new content
-                        var height = content.find('.accordion-body').outerHeight() + 'px';  // Save heights
-
-                        content.find('.accordion-collapse').css('height', ''); // Close new content
+                        $itemCollapse.css('height', '');
+                        var height = $itemCollapse.children('.accordion-body').outerHeight();
 
                         setTimeout(function () {
-                            opened.find('.accordion-collapse').css('height', ''); // Close old content
-                            opened.removeClass('.active') // Close old content
-                            content.css('height', height); // Open new content
+                            opened.children('.accordion-collapse').css('height', '');
+                            $itemCollapse.css('height', height + 'px');
+                            refreshAccordionAncestors(accordion, height - oldOpenedHeight);
                         }, 30);
                     }, 30);
                 } else {
-                    items.eq(num).removeClass('active');
-                    items.eq(num).find('.accordion-collapse').css('height', ''); // Close old content
+                    var itemHeight = getCollapseHeight($itemCollapse);
+                    $item.removeClass('active');
+                    $itemCollapse.css('height', '');
+                    refreshAccordionAncestors(accordion, -itemHeight);
                 }
             };
 
@@ -606,11 +617,28 @@
 
     function handleAccordionBoxSize() {
         setTimeout(function(){
-            $('[data-ohio-accordion]').each(function () {
-                var activeItem = $(this).find('.accordion-item.active');
-                var wrap = activeItem.find('.accordion-body');
-                activeItem.find('.accordion-collapse').css('height', wrap.outerHeight() + 'px');
+            // Innermost first so outer body measurements include inner heights.
+            var accordions = $('[data-ohio-accordion]').get().reverse();
+            // Suppress transitions during init: outerHeight() reflects the
+            // interpolated layout box during a CSS transition, so without this
+            // each outer's measurement would read its inner descendant as still
+            // mid-animation (≈ old height) and undersize the outer.
+            var $allCollapses = $('[data-ohio-accordion] > .accordion-item > .accordion-collapse');
+            $allCollapses.css('transition', 'none');
+
+            $.each(accordions, function (_, el) {
+                var $self = $(el);
+                var activeItem = $self.children('.accordion-item.active');
+                if (!activeItem.length) return;
+                var collapse = activeItem.children('.accordion-collapse');
+                var wrap = collapse.children('.accordion-body');
+                collapse.css('height', wrap.outerHeight() + 'px');
             });
+
+            // Force a reflow before restoring transitions so the just-set
+            // heights are committed without animating from 0.
+            if ($allCollapses.length) $allCollapses[0].offsetHeight;
+            $allCollapses.css('transition', '');
         }, 100);
     };
     $(window).on('ohio:handle_accordion_box_size', handleAccordionBoxSize);
@@ -893,7 +921,7 @@
 
         accordion.each(function(){
             var selfAccordion = $(this);
-            var items = selfAccordion.find('.horizontal-accordion-item');
+            var items = selfAccordion.children('.horizontal-accordion-item');
             var percent = Clb.isMobile ? 90 : 100 - (100 / (items.length - 1));
             var i = items.length,
                 z = 1,
@@ -926,7 +954,7 @@
                     currentItemIndex = items.index(currentItem);
                     openItem(items, currentItemIndex, currentItem, selfAccordion, percent);
 
-                    if (selfAccordion.find('.horizontal-accordion-item.moved').length) {
+                    if (selfAccordion.children('.horizontal-accordion-item.moved').length) {
                         selfAccordion.addClass('open');
                     } else {
                         setTimeout(function(){
@@ -943,7 +971,7 @@
             var movingItemsIndex = currentItemIndex;
 
             if (currentItem.hasClass('moved')) {
-                movedItems = selfAccordion.find('.horizontal-accordion-item.moved');
+                movedItems = selfAccordion.children('.horizontal-accordion-item.moved');
                 movingItems = movedItems.slice(currentItemIndex, movedItems.length);
 
                 movedItems.each(function(i){
@@ -1059,7 +1087,8 @@
                 bar = $(this),
                 line = bar.find('.progress-bar'),
                 progressEnd = parseInt(bar.attr("data-ohio-progress-bar")),
-                withTooltip = bar.find('[data-tooltip]').length;
+                tooltip = bar.find('.progress-percent.has-tooltip'),
+                withTooltip = tooltip.length;
 
             var scrollTop = $(document).scrollTop() + $(window).height();
 
@@ -1099,7 +1128,11 @@
                 for (var j = 0; j <= 40; j++) {
                     (function (count) {
                         setTimeout(function () {
-                            percent.html(Math.round((progressEnd / 40) * count));
+                            var value = Math.round((progressEnd / 40) * count);
+                            percent.html(value);
+                            if (withTooltip) {
+                                tooltip.attr('data-tooltip', value + '%');
+                            }
                         }, 30 * count);
                     })(j);
                 }
@@ -1305,6 +1338,15 @@
     /* ## Tabs  */
 
     function handleTabBox() {
+        // Convert a string to a URL-safe anchor slug
+        function toTabSlug(str) {
+            return (str || '')
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '')
+                .replace(/[\s_]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+        }
+
         $('[data-ohio-tabs]').each(function () {
             const box = $(this);
             const itemsWrap = box.children('.tabs-content');
@@ -1325,20 +1367,54 @@
 
             // Build tabs and icons
             if (!buttons.length) {
-                items.each(function () {
-                    const title = $(this).attr('data-title');
-                    const icon = $(this).attr('data-icon') || '';
+                items.each(function() {
+                    const $this = $(this);
+                    const title = $this.attr('data-title');
+                    const subtitle = $this.attr('data-subtitle');
+                    const icon = $this.attr('data-icon') || '';
 
-                    const button =  $(document.createElement('li'))
-                        .addClass('tabs-nav-link ' + tabClass)
-                        .attr('role', 'tab')
-                        .html('<i class="icon ' + icon + '"></i>' + title);
+                    const titleHtml = (title && title !== "0")
+                        ? `<span class="h6 title">${title}</span>`
+                        : '';
 
-                    buttonsWrap.append(button);
+                    // Check if subtitle exists
+                    const hasSubtitle = subtitle && subtitle !== "0";
+                    const subtitleHtml = hasSubtitle
+                        ? `<p class="subtitle">${subtitle}</p>`
+                        : '';
+
+                    // Dynamic class for the container
+                    const containerClass = hasSubtitle ? 'container -with-subtitle' : 'container';
+
+                    // Flexible Icon Parser: Detects raw HTML vs. simple class strings
+                    let iconHtml = '';
+                    if (icon) {
+                        if (icon.trim().startsWith('<')) {
+                            iconHtml = icon; // Inject raw custom HTML directly (e.g., <svg> or custom <i>)
+                        } else {
+                            iconHtml = `<i class="icon ${icon}"></i>`; // Standard fallback for class strings
+                        }
+                    }
+
+                    const buttonHtml = `
+                        ${iconHtml}
+                        <span class="${containerClass}">
+                            ${titleHtml}
+                            ${subtitleHtml}
+                        </span>
+                    `;
+
+                    const $button = $('<li>', {
+                        class: `tabs-nav-link ${tabClass}`,
+                        role: 'tab',
+                        html: buttonHtml
+                    });
+
+                    buttonsWrap.append($button);
                 });
 
                 buttons = buttonsWrap.find('.tabs-nav-link');
-                buttons.eq(0).addClass('active ' + tabActiveClass);
+                buttons.first().addClass(`active ${tabActiveClass}`);
             }
 
             if (!items.is('.active')) {
@@ -1347,38 +1423,87 @@
 
             items.addClass(options.itemClass);
 
+            // Assign anchor slugs to each button from item's data-anchor or slugified data-title
+            items.each(function(i) {
+                const $item = $(this);
+                const anchor = $item.attr('data-anchor') || toTabSlug($item.attr('data-title')) || ('tab-' + (i + 1));
+                buttons.eq(i).attr('data-tab-anchor', anchor);
+            });
+
             const refresh = function () {
                 const active = buttonsWrap.find('.active');
 
-                if (box.hasClass('-vertical') && !Clb.isMobile) {
+                if (!active.length) return;
+
+                // Determine if we should use Vertical (Height/TranslateY) or Horizontal (Width/TranslateX)
+                let isVertical;
+
+                if (box.hasClass('-tabs-with-subtitle')) {
+                    // Subtitles always stay vertical
+                    isVertical = true;
+                } else if (box.hasClass('-vertical')) {
+                    // Standard vertical layout: only vertical on desktop
+                    isVertical = !Clb.isMobile;
+                } else {
+                    // Everything else is horizontal
+                    isVertical = false;
+                }
+
+                if (isVertical) {
+                    // Vertical Indicator Logic
                     line.css({
+                        'width': '',
                         'height': active.outerHeight() + 'px',
                         'transform': 'translateY(' + (active.offset().top - buttonsWrap.offset().top) + 'px)'
                     });
                 } else {
+                    // Horizontal Indicator Logic
                     const lineWidth = active.outerWidth();
                     const lineTransform = active.offset().left - buttonsWrap.offset().left + buttonsWrap.scrollLeft();
 
                     line.css({
+                        'height': '',
                         'width': lineWidth + 'px',
                         'transform': 'translateX(' + lineTransform + 'px)'
                     });
                 }
             };
 
-            buttons.on('click', function () {
+            // Activate a tab by 0-based index; pass updateHash=false to skip hash update
+            const activateTab = function (index, updateHash) {
                 buttons.removeClass('active ' + tabActiveClass).addClass(tabClass);
                 items.removeClass('active');
 
-                $(this).addClass('active ' + tabActiveClass);
-                items.eq($(this).index() - 1).addClass('active');
+                buttons.eq(index).addClass('active ' + tabActiveClass);
+                items.eq(index).addClass('active');
 
                 if (Clb.isMobile) {
-                    buttonsWrap.animate({ scrollLeft: this.offsetLeft + 'px' }, { queue: false });
+                    const btn = buttons[index];
+                    if (btn) buttonsWrap.animate({ scrollLeft: btn.offsetLeft + 'px' }, { queue: false });
+                }
+
+                if (updateHash !== false && history.replaceState) {
+                    const anchor = buttons.eq(index).attr('data-tab-anchor');
+                    if (anchor) history.replaceState(null, '', '#' + anchor);
                 }
 
                 refresh();
+            };
+
+            buttons.on('click', function () {
+                activateTab(buttons.index(this), true);
             });
+
+            // Activate tab from URL hash on page load
+            const hash = window.location.hash ? window.location.hash.slice(1) : '';
+            if (hash) {
+                buttons.each(function(i) {
+                    if ($(this).attr('data-tab-anchor') === hash) {
+                        activateTab(i, false);
+                        return false; // break
+                    }
+                });
+            }
 
             refresh();
         });
@@ -1816,6 +1941,7 @@
                 items.parent().find('[data-aos]').attr('data-aos-offset', '20000000');
                 items.addClass('hidden');
 
+                const videos = items.find('video').toArray();
                 var images = items.find('img');
                 // Start preloading images used as background-image: url()...
                 var backgroundImages = items.find('[data-ohio-bg-image]')
@@ -1830,21 +1956,6 @@
                 containerTo.append(items);
                 images.removeAttr('loading');
                 $(document.body).append(dom.find('[data-lazy-to-footer]'));
-
-                var ensureImagesLoadedAndInitUI = function () {
-                    var allImagesHaveBeenLoaded = true;
-
-                    allImages.forEach(function (image) {
-                        if (!image.complete && allImagesHaveBeenLoaded) {
-                            allImagesHaveBeenLoaded = false;
-                            image.onload = ensureImagesLoadedAndInitUI;
-                        }
-                    });
-
-                    if (allImagesHaveBeenLoaded) {
-                        initUI();
-                    }
-                };
 
                 var initUI = function () {
                     items.removeClass('hidden');
@@ -1900,10 +2011,44 @@
                     $('body').trigger('ohio:lazy_load_complete');
                     $('body').trigger('ohio:cursor_mouseleave');
                 }
-                ensureImagesLoadedAndInitUI();
+                var waitForImages = function (images) {
+                    return Promise.all(images.map(function (image) {
+                        if (image.complete) return Promise.resolve();
+                        return new Promise(function (resolve) {
+                          function done() {
+                            image.removeEventListener('load', done);
+                            image.removeEventListener('error', done);
+                            resolve();
+                          }
+                          image.addEventListener('load', done);
+                          image.addEventListener('error', done);
+                        });
+                    }))
+                };
+
+                var waitForVideo = function (videos) {
+                  const CAN_PLAY = 3;
+
+                  return Promise.all(videos.map(function (video) {
+                    if (video.readyState >= CAN_PLAY) {
+                      return Promise.resolve();
+                    }
+
+                    return new Promise(resolve => {
+                      function done() {
+                        video.removeEventListener('canplay', done);
+                        video.removeEventListener('error', done);
+                        resolve();
+                      }
+                      video.addEventListener('canplay', done);
+                      video.addEventListener('error', done);
+                    });
+                  }))
+                }
+
+                Promise.all([waitForImages(allImages), waitForVideo(videos)]).then(initUI);
 
                 handleProjectInteractiveLinks();
-                handleMasonry();
                 if (Clb.isDesktop) {
                     handlePortfolioMovingDetailsGrid();
                 }
@@ -2122,39 +2267,6 @@
             stretch( $(this), true, $(this).hasClass('inner') );
         });
     }
-
-    // function boxedPageRowWidth() {
-    //     var boxedPage = $('.boxed-container');
-
-    //     if ( boxedPage.length && !Clb.body.hasClass('rtl') ) {
-    //         var boxedPageWidth = boxedPage.width();
-    //         var boxedContainerOffset = boxedPage.offset().left;
-    //         var siteContentWidth = $('.site-content > .page-container').outerWidth();
-    //         var stretchRowPaddings;
-    //         var rowOffset;
-    //         $('[data-vc-full-width], .page-container:not(.-full-w) .elementor-section-stretched, .page-container:not(.-full-w) .e-con-full.e-parent').each(function() {
-
-    //             $(this).css({
-    //                 'width': boxedPageWidth,
-    //                 'left': 'auto'
-    //             });
-
-    //             rowOffset = $(this).offset().left;
-    //             $(this).css({
-    //                 'left': (rowOffset - boxedContainerOffset) * -1
-    //             });
-
-    //             stretchRowPaddings = ( $(this).outerWidth() - siteContentWidth ) / 2;
-
-    //             if ($(this).hasClass('vc_row') && $(this).data('vc-full-width') && !$(this).data('vc-stretch-content')) {
-    //                 $(this).css({
-    //                     'padding-left': stretchRowPaddings,
-    //                     'padding-right': stretchRowPaddings,
-    //                 });
-    //             }
-    //         });
-    //     }
-    // }
 
     function handleMutationObserver() {
         var target = $('#sb_instagram #sbi_images, #order_review, .portfolio-grid, [data-lazy-load-scope="projects"]');
@@ -3950,14 +4062,6 @@
         $('.scroll-top').on("click", function () {
             $('html, body').animate({scrollTop: 0}, 800);
             return false;
-        });
-
-        /* Tooltips */
-        $('.tooltip').each(function () {
-            if ($(this).find('.tooltip-top, .tooltip-bottom').length) {
-                var content = $(this).find('.tooltip-text');
-                content.css('left', ($(this).outerWidth() / 2 - content.outerWidth() / 2) + 'px');
-            }
         });
 
         /* Message boxes */

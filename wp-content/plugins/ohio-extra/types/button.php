@@ -5,7 +5,10 @@
 	*/
 
 	if ( function_exists ( 'vc_add_shortcode_param' ) ) {
-		vc_add_shortcode_param( 'ohio_button', 'ohio_extra_button_settings_field', plugins_url( 'button.js' , __FILE__ ) );
+		// filemtime() cache-buster: WPBakery enqueues this as a plain
+		// <script src="..."> with no query string of its own, so the
+		// browser caches it indefinitely against this exact URL otherwise.
+		vc_add_shortcode_param( 'ohio_button', 'ohio_extra_button_settings_field', plugins_url( 'button.js' , __FILE__ ) . '?ver=' . filemtime( __DIR__ . '/button.js' ) );
 	}
 
 	function ohio_extra_button_settings_field( $settings, $value ) {
@@ -24,33 +27,39 @@
 		ob_start();
 
 ?>
-		<div class="ohio_extra_button_block row">
-			<input type="hidden" name="<?php echo OhioExtraFilter::string( $settings['param_name'], 'attr', '' ); ?>" class="wpb_vc_param_value" value="<?php echo OhioExtraFilter::string( $value, 'attr', '' ); ?>">
-			<div class="vc_col-lg-3 column type<?php if ( $settings['button_type_disabled'] ) { echo ' disabled" data-disabled="true'; } ?>">
+
+	<div class="ohio_extra_button_block">
+		<input type="hidden" name="<?php echo OhioExtraFilter::string( $settings['param_name'], 'attr', '' ); ?>" class="wpb_vc_param_value" value="<?php echo OhioExtraFilter::string( $value, 'attr', '' ); ?>">
+		<div class="row-grid row-grid-4">
+			<div class="column type<?php if ( $settings['button_type_disabled'] ) { echo ' disabled" data-disabled="true'; } ?>">
 				<label>
 					<div class="title"><?php _e( 'Type', 'ohio-extra' ); ?></div>
-					<select class="type">
-						<option value="default"<?php if ( $value_array['type'] == 'default' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Filled', 'ohio-extra' ); ?></option>
-						<option value="outline"<?php if ( $value_array['type'] == 'outline' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Outlined', 'ohio-extra' ); ?></option>
-						<option value="flat"<?php if ( $value_array['type'] == 'flat' ) { echo 'selected'; } ?>><?php esc_html_e( 'Flat', 'ohio-extra' ); ?></option>
-						
-						<?php if ( ! $settings['button_link_disabled'] ) : ?>
-							<option value="arrow_link"<?php if ( $value_array['type'] == 'arrow_link' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Text', 'ohio-extra' ); ?></option>
-						<?php endif; ?>
-					</select>
+					<div class="edit_form_line">
+						<select class="wpb-form-select dropdown type">
+							<option value="default"<?php if ( $value_array['type'] == 'default' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Filled', 'ohio-extra' ); ?></option>
+							<option value="outline"<?php if ( $value_array['type'] == 'outline' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Outlined', 'ohio-extra' ); ?></option>
+							<option value="flat"<?php if ( $value_array['type'] == 'flat' ) { echo 'selected'; } ?>><?php esc_html_e( 'Flat', 'ohio-extra' ); ?></option>
+
+							<?php if ( ! $settings['button_link_disabled'] ) : ?>
+								<option value="arrow_link"<?php if ( $value_array['type'] == 'arrow_link' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Text', 'ohio-extra' ); ?></option>
+							<?php endif; ?>
+						</select>
+					</div>
 				</label>
 			</div>
-			<div class="vc_col-lg-3 column size<?php if ( $settings['button_size_disabled'] ) { echo ' disabled" data-disabled="true'; } ?>">
+			<div class="column size<?php if ( $settings['button_size_disabled'] ) { echo ' disabled" data-disabled="true'; } ?>">
 				<label>
 					<div class="title"><?php esc_html_e( 'Size', 'ohio-extra' ); ?></div>
-					<select class="size">
-						<option value="default"<?php if ( $value_array['size'] == 'default' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
-						<option value="small"<?php if ( $value_array['size'] == 'small' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Small', 'ohio-extra' ); ?></option>
-						<option value="large"<?php if ( $value_array['size'] == 'large' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Large', 'ohio-extra' ); ?></option>
-					</select>
+					<div class="edit_form_line">
+						<select class="wpb-form-select dropdown size">
+							<option value="default"<?php if ( $value_array['size'] == 'default' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
+							<option value="small"<?php if ( $value_array['size'] == 'small' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Small', 'ohio-extra' ); ?></option>
+							<option value="large"<?php if ( $value_array['size'] == 'large' ) { echo 'selected="selected"'; } ?>><?php esc_html_e( 'Large', 'ohio-extra' ); ?></option>
+						</select>
+					</div>
 				</label>
 			</div>
-			<div class="vc_col-lg-6 column">
+			<div class="column">
 				<div class="left fullwidth button-checkbox<?php if ( $settings['button_full_disabled'] ) { echo ' disabled" data-disabled="true'; } ?>">
 					<label>
 						<input type="checkbox" name="fullwidth"<?php if ( $value_array['fullwidth'] ) { echo 'checked="checked"'; } ?>>
@@ -58,7 +67,8 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-3 column button-color">
+			<div class="column"></div>
+			<div class="column button-color">
 				<div class="title"><?php esc_html_e( 'Fill Color', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -71,7 +81,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-3 column button-hover-color">
+			<div class="column button-hover-color">
 				<div class="title"><?php esc_html_e( 'Fill Color (Hover)', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $hover_color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -84,8 +94,9 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-6 column"></div>
-			<div class="vc_col-lg-3 column text-color">
+			<div class="column"></div>
+			<div class="column"></div>
+			<div class="column text-color">
 				<div class="title"><?php esc_html_e( 'Text Color', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $text_color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -98,7 +109,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-3 column text-hover-color">
+			<div class="column text-hover-color">
 				<div class="title"><?php esc_html_e( 'Text Color (Hover)', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $text_hover_color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -111,8 +122,9 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-6 column"></div>
-			<div class="vc_col-lg-3 column border-color">
+			<div class="column"></div>
+			<div class="column"></div>
+			<div class="column border-color">
 				<div class="title"><?php esc_html_e( 'Border Color', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $border_color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -125,7 +137,7 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-3 column border-hover-color">
+			<div class="column border-hover-color">
 				<div class="title"><?php esc_html_e( 'Border Color (Hover)', 'ohio-extra' ); ?></div>
 				<div class="color-group left<?php if ( $border_hover_color == 'brand' ) { echo ' disabled'; } ?>">
 					<div class="wpb-color-picker"></div>
@@ -138,8 +150,10 @@
 					</label>
 				</div>
 			</div>
-			<div class="vc_col-lg-6 column"></div>
+			<div class="column"></div>
+			<div class="column"></div>
 		</div>
+	</div>
 <?php
 
 		$content = ob_get_contents();

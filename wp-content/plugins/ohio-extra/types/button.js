@@ -93,6 +93,35 @@
 		vc.atts.colorpicker.init({}, $(el));
 	});
 
+	// Turn the plain Type/Size <select> fields into WPBakery's own select2
+	// dropdowns. A button field can sit inside a tab that isn't active yet
+	// when the panel first opens (select2 doesn't size itself correctly if
+	// initialized while its container is display:none), so init is skipped
+	// until the block is actually visible, and retried after every tab
+	// switch - see typography.js for the same pattern in more detail.
+	function ohioInitButtonBlock($block) {
+		if ($block.data('ohio-button-inited') || !$block.is(':visible')) {
+			return;
+		}
+		$block.data('ohio-button-inited', true);
+
+		$block.find('.edit_form_line').each(function() {
+			vc.atts.dropdown.init({}, $(this));
+		});
+	}
+
+	function ohioInitVisibleButtonBlocks() {
+		$('.ohio_extra_button_block').each(function() {
+			ohioInitButtonBlock($(this));
+		});
+	}
+
+	ohioInitVisibleButtonBlocks();
+
+	$(document).on('click', '[data-vc-ui-element="panel-tab-control"]', function() {
+		setTimeout(ohioInitVisibleButtonBlocks, 50);
+	});
+
 	$('#vc_ui-panel-edit-element').on(
 		'change',
 		'.ohio_extra_button_block input, .ohio_extra_button_block select',

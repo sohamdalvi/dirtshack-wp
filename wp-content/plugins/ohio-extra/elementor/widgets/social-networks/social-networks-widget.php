@@ -16,11 +16,6 @@ class Ohio_Elementor_Social_Networks_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-social-networks';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(

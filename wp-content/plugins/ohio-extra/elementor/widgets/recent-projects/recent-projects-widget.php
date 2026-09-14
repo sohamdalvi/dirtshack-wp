@@ -30,11 +30,6 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-recent-projects';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -523,7 +518,7 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
                 'return_value' => 'yes',
                 'default' => 'yes',
                 'condition' => [
-                    'card_layout!' => [ 'grid_2', 'grid_8', 'grid_11', 'grid_12' ],
+                    'card_layout!' => [ 'grid_8', 'grid_11', 'grid_12' ],
                 ],
             ]
         );
@@ -1149,6 +1144,29 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'condition' => [
+                    'card_layout' => [ 'grid_1', 'grid_7', 'grid_9', 'grid_10', 'grid_13' ]
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'overlay_color',
             [
                 'label' => __( 'Overlay Color', 'ohio-extra' ),
@@ -1202,7 +1220,7 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'pagination_btn_color',
             [
-                'label' => __( 'Pagination Color', 'ohio-extra' ),
+                'label' => __( 'Slider Pagination Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .clb-slider-pagination' => 'color: {{VALUE}}',

@@ -63,7 +63,7 @@ function ohio_recent_posts_sc_map() {
 			array(
 				'type' => 'ohio_posts',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Posts', 'ohio-extra' ),
+				'heading' => __( 'Select Posts', 'ohio-extra' ),
 				'description' => __( 'Leave empty to choose all posts.', 'ohio-extra' ),
 				'param_name' => 'posts',
 				'value' => '',
@@ -478,7 +478,7 @@ function ohio_recent_posts_sc_map() {
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Categories Typography', 'ohio-extra' ),
+				'heading' => __( 'Category Typography', 'ohio-extra' ),
 				'param_name' => 'category_typo',
 			),
 			array(
@@ -508,11 +508,32 @@ function ohio_recent_posts_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Category Badge Color', 'ohio-extra' ),
+				'param_name' => 'category_badge_color',
+			),
+			array(
+				'type' => 'ohio_colorpicker',
+				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'card_background_color',
 				'dependency' => array(
 					'element' => 'card_boxed',
 					'value' => '1',
+				)
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'card_boxed',
+					'value' => '1'
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
 				)
 			),
 			array(

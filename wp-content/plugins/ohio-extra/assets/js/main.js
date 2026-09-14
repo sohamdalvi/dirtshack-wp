@@ -18,6 +18,21 @@ jQuery(function ($) {
             document.querySelector('.clb-nav-inner [href="#tabs-4"]').click();
         });
 
+        // Dashboard/Settings license activation notice - dismiss for 30 days via cookie
+        var $dashboardActivationNotice = $('.clb-hub .notice-ohio-info');
+
+        if ($dashboardActivationNotice.length) {
+            $dashboardActivationNotice.on('click', '.notice-dismiss', function () {
+                var expires = new Date();
+                expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000));
+                document.cookie = 'ohio_license_notice_dismissed=1; expires=' + expires.toUTCString() + '; path=/';
+
+                $dashboardActivationNotice.fadeOut(200, function () {
+                    $(this).remove();
+                });
+            });
+        }
+
         // Accordion
         var accordion = $('.clb-hub #accordion');
         var items = accordion.find('.accordionItem');
@@ -112,7 +127,7 @@ jQuery(function ($) {
                 return false;
             }
 
-            $(this).attr('loading', true).addClass('btn-spinner').text('Detaching..');
+            $(this).attr('loading', true).addClass('btn-spinner').text('Deactivating..');
 
             jQuery.post(window.ajaxurl, { 'action': 'ohio_remove_license_code' }, () => {
                 window.location.reload();

@@ -139,7 +139,7 @@ function ohio_call_to_action_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'Button', 'ohio-extra' ),
-				'heading' => __( 'Position', 'ohio-extra' ),
+				'heading' => __( 'Icon', 'ohio-extra' ),
 				'param_name' => 'icon_position',
 				'std' => 'left',
 				'value' => array(
@@ -209,6 +209,17 @@ function ohio_call_to_action_sc_map() {
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'bg_color',
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
 			),
 			array(
 				'type' => 'ohio_colorpicker',

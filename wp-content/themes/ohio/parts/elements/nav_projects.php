@@ -16,9 +16,9 @@
 			<div class="subtitle">
 				<?php esc_html_e( 'Next Project', 'ohio' ); ?>
 			</div>
-			<h5 class="title">
+			<div class="h5 title">
 				<?php echo wp_kses( $project['next']['title'], 'default' ); ?>
-			</h5>
+			</div>
 		</div>
 	</div>
 </a>

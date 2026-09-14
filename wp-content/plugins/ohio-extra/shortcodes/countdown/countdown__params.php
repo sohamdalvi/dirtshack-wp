@@ -128,6 +128,21 @@ function ohio_countdown_sc_map() {
 				)
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'layout',
+					'value' => 'boxed'
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			),
+			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Shape Border Color', 'ohio-extra' ),

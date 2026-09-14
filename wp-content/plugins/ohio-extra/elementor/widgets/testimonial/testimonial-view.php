@@ -5,9 +5,9 @@
     <?php endif; ?>
 
     <?php if ( !empty($settings['title']) ) : ?>
-        <h6 class="testimonial-headline heading-sm">
+        <div class="testimonial-headline">
             <?php echo $settings['title']; ?>
-        </h6>
+        </div>
     <?php endif;?>
 
     <p>
@@ -22,9 +22,9 @@
     <?php if ( !empty( $settings['author_name'] ) ) : ?>
         <div class="author">
             <?php if ( !empty( $settings['author_name'] ) ) : ?>
-                <h6 class="title -unspace">
+                <div class="h6 title -unspace">
                     <?php echo $settings['author_name']; ?>
-                </h6>
+                </div>
             <?php endif; ?>
 
             <?php if ( !empty( $settings['author_position'] ) ) : ?>

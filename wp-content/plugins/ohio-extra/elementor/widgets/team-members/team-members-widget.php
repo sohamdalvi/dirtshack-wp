@@ -22,11 +22,6 @@ class Ohio_Elementor_Team_Members_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-team-members';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-team-members-widget' ];
     }
@@ -145,6 +140,26 @@ class Ohio_Elementor_Team_Members_Widget extends Ohio_Elementor_Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .team-group .item-holder' => 'background-color: {{VALUE}}',
                 ]
+            ]
+        );
+
+        $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
             ]
         );
 

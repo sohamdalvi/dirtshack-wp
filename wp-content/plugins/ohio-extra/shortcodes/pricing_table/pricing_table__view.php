@@ -8,7 +8,7 @@
 <div class="ohio-widget pricing-table<?php echo esc_attr( $wrapper_classes ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>" <?php echo esc_attr( $animation_attrs ); ?> <?php echo esc_attr( $tilt_attrs ); ?>>
 	<div class="pricing-table-headline">
         <?php if ( $title ) : ?>
-			<h5 class="title"><?php echo $title; ?></h5>
+			<div class="h5 title"><?php echo $title; ?></div>
 		<?php endif; ?>
 
 		<?php if ( $subtitle ) : ?>
@@ -77,7 +77,11 @@
 						<?php endif; ?>
 
 						<?php if ( $feature_object->feature_title ) : ?>
-							<?php echo $feature_object->feature_title; ?>
+							<?php if ( !empty( $feature_object->feature_tooltip ) ) : ?>
+								<span class="title has-tooltip -underline-dotted" data-tooltip="<?php echo esc_attr( $feature_object->feature_tooltip ); ?>" tabindex="0"><?php echo $feature_object->feature_title; ?></span>
+							<?php else: ?>
+								<span class="title"><?php echo $feature_object->feature_title; ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 					</li>
 				<?php endforeach; ?>

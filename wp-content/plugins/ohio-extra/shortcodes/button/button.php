@@ -123,7 +123,6 @@ function ohio_button_func( $atts ) {
 		$wrapper_classes .= ' -primary';
 	}
 
-
 	if ( ! $link['caption'] ) {
         $wrapper_classes .= ' -without-text';
     }

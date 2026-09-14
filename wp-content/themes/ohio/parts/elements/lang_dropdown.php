@@ -13,8 +13,8 @@ if ( $have_wpml && $wpml_show_in_header ) {
 			foreach( $languages as $language ) {
 				$class = ( $language['active'] ) ? ' class="active" selected="selected"' : '';
 
-				printf( '<option%s value="%s"><img src="%s" alt="%s">%s</option>', $class, $language['url'],
-				$language['country_flag_url'], $language['code'], $language['native_name'] );
+				printf( '<option%s value="%s"><img src="%s" alt="%s">%s</option>', $class, $language['url'] ?? '',
+				$language['country_flag_url'] ?? '', $language['code'] ?? '', $language['native_name'] ?? '' );
 			}
 			?>
 		</select>

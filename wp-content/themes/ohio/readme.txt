@@ -12,7 +12,7 @@ Help Center: https://colabrio.ticksy.com
 ### Upload the "ohio" folder to the "/wp-content/themes/" directory;
 
 
-# Activiation and Usage
+# Activation and Usage
 
 ## 1. Activate the theme through the "Appearance > Themes" menu in WordPress;
 ## 2. Activate the theme license through the "Ohio Theme > Dashboard" menu in WordPress;
@@ -26,8 +26,140 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 # Release notes
 
+## [Ver 3.7.6] – Sep 07, 2026
 
-## [Ver 3.6.8] – March 25, 2026
+### Fixed
+- Minor style fixes and improvements;
+- Missing closing tag on Banner element;
+- Fatal error when Banner element is set as a button with no button link;
+- WPBakery 9.0 multiple field styles issue;
+- Portfolio and WooCommerce category types fix;
+- Compatibility with WooCommerce 11.1;
+- Import failing on WordPress 7.1;
+
+### Added
+- Dark Mode Background option extended to WPBakery Column, Inner Column, Section, and all native Elementor widgets;
+- Section Type option extended to Section;
+- Dynamic Typo/Lines Pattern option ported to WPBakery Row;
+- Google Fonts list updated;
+
+### Updated
+- Ohio Extra plugin to the 3.7.6 version;
+- Ohio Importer plugin to the 1.3.6 version;
+
+---------------------------
+
+## [Ver 3.7.5] – Aug 15, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Tooltip support for Pricing Table element;
+- Tooltip support for Services Table element;
+- Reworked progress bar tooltip, and cleaned up option labels;
+- WPBakery 9.0 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.7.5 version;
+
+---------------------------
+
+## [Ver 3.7.4] – Jul 30, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Undefined array key warnings in portfolio grid layout;
+- Missing GitHub icon in the hamburger menu;
+- Carousel outer-stage max-width calculation including item margins;
+
+### Added
+- New heading classes (.h1–.h6) available across shortcodes;
+- Sidebar added as a separate item under Theme Settings;
+- Updated social networks list;
+- Dashboard UI improvements, including release note links;
+
+### Updated
+- Ohio Extra plugin to the 3.7.4 version;
+- Ohio Importer plugin to the 1.3.5 version;
+
+---------------------------
+
+## [Ver 3.7.3] – Jul 02, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Admin dashboard checkbox styles issue;
+
+### Added
+- Freemius-based licensing integration;
+- Optional data-anchor attribute for Tabs element items;
+
+### Updated
+- Ohio Extra plugin to the 3.7.3 version;
+- Ohio Importer plugin to the 1.3.4 version;
+
+---------------------------
+
+## [Ver 3.7.2] – Jun 26, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Mega menu styles;
+- Undefined array key warning in language dropdown;
+- Compatibility with WooCommerce 10.9.0;
+
+### Added
+- Border Width option for Buttons and Forms settings;
+- Excerpt visibility option for Portfolio Minimal Grid element;
+- Icon Type option for Tabs element;
+
+### Updated
+- Ohio Extra plugin to the 3.7.2 version;
+
+### Notes
+- This update may automatically show project descriptions on your Minimal Grid shortcodes/widgets. If you don't want them to appear, simply turn them off in the shortcode/widget settings;
+
+---------------------------
+
+## [Ver 3.7.1] – May 25, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Video cover going fullscreen on lazy load / load more on iOS;
+- Banner button without text issue;
+- Elementor category visibility issue;
+
+### Added
+- Refreshed the design of Classic Shop template (Demo 19);
+- Reworked Banner element with new layout options (Stretch to Fit, subtitle position, button controls);
+- Option to loop self-hosted video in project gallery;
+
+### Updated
+- Ohio Extra plugin to the 3.7.1 version;
+
+---------------------------
+
+## [Ver 3.7] – May 04, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Mobile scrolling issues on iOS;
+- Username synchronization when activating with a different account;
+- Compatibility with WooCommerce 10.7;
+
+### Added
+- Support for nested accordion elements (Elementor);
+- Subtitle text option for the Tabs Element;
+- New importable demo: Landing Page 2026;
+- Refreshed design of Coming Soon template (Demo 30);
+
+### Updated
+- Ohio Extra plugin to the 3.7 version;
+
+---------------------------
+
+## [Ver 3.6.8] – Mar 25, 2026
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -42,8 +174,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-
-## [Ver 3.6.7] – March 07, 2026
+## [Ver 3.6.7] – Mar 07, 2026
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -59,11 +190,12 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.6.6] – February 24, 2026
+## [Ver 3.6.6] – Feb 24, 2026
 
 ### Fixed
 - Minor style fixes and improvements;
 - Page featured headline background issue;
+- Compatibility with WooCommerce 10.5;
 
 ### Added
 - Refreshed the design of Cloud Service template (Demo 5);
@@ -73,14 +205,13 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - New contained layout for the Accordion element;
 - Option to prepend a label to the Badge element;
 - Option to show/hide CTA buttons on mobiles;
-- Compatibility with WooCommerce 10.5;
 
 ### Updated
 - Ohio Extra plugin to the 3.6.6 version;
 
 ---------------------------
 
-## [Ver 3.6.5] – February 03, 2026
+## [Ver 3.6.5] – Feb 03, 2026
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -99,7 +230,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.6.4] – January 14, 2026
+## [Ver 3.6.4] – Jan 14, 2026
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -117,27 +248,27 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.6.3] – December 19, 2025
+## [Ver 3.6.3] – Dec 19, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
 - Maintenance page with boxed layout issue;
+- Compatibility with WooCommerce 10.4;
 
 ### Added
-- Added new Service Ver 1 template;
-- Added new Service Ver 2 template;
-- Added new Pricing Ver 1 template;
-- Added new Pricing Ver 2 template;
+- New Service Ver 1 template;
+- New Service Ver 2 template;
+- New Pricing Ver 1 template;
+- New Pricing Ver 2 template;
 - Option to set the sidebar gaps;
 - Option to set the size of the header's call-to-action button;
-- Compatibility with WooCommerce 10.4;
 
 ### Updated
 - Ohio Extra plugin to the 3.6.3 version;
 
 ---------------------------
 
-## [Ver 3.6.2] – October 29, 2025
+## [Ver 3.6.2] – Oct 29, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -148,20 +279,20 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.6.1] – October 27, 2025
+## [Ver 3.6.1] – Oct 27, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
 - Mobile hamburger menu issue;
 - Cross-Site Request Forgery (CSRF) vulnerability issue;
+- Compatibility with WooCommerce 10.3;
 
 ### Added
-- Added new Blog Magazine demo;
+- New Blog Magazine demo;
 - Option to set the wrap container width for a single post page;
 - Option to set the content's typography for a single post page;
 - Option to set the sidebar width;
 - Option to show/hide dividers for sidebar widgets;
-- Compatibility with WooCommerce 10.3;
 
 ### Updated
 - Ohio Extra plugin to the 3.6.1 version;
@@ -169,38 +300,38 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.6.0] – September 17, 2025
+## [Ver 3.6] – Sep 17, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
 - WooCommerce filters mobile visibility issue;
 - Blog category typography issue;
+- Compatibility with WooCommerce 10.1;
 
 ### Added
-- Added new Marquee element;
-- Added new Architectural Studio demo;
+- New Marquee element;
+- New Architectural Studio demo;
 - Option to order the Portfolio Projects element;
 - Option to order the Blog Posts element;
 - Option to output specific items in the Portfolio Projects element;
 - Option to output specific items in the Blog Posts element;
-- Option to set a background color for the project intro container.
-- Compatibility with WooCommerce 10.1;
+- Option to set a background color for the project intro container;
 
 ### Updated
-- Ohio Extra plugin to the 3.6.0 version;
+- Ohio Extra plugin to the 3.6 version;
 - Main language file ohio.pot;
 
 ---------------------------
 
-## [Ver 3.5.7] – July 25, 2025
+## [Ver 3.5.7] – Jul 25, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
 - Tabs jumping on mobile issue;
 - Portfolio lightbox meta items shrinking issue;
+- Compatibility with WooCommerce 10.0;
 
 ### Added
-- Compatibility with WooCommerce 10.0;
 
 ### Updated
 - Ohio Extra plugin to the 3.5.7 version;
@@ -208,15 +339,15 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.6] – June 27, 2025
+## [Ver 3.5.6] – Jun 27, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
 - Row stretching for RTL issue;
+- Compatibility with WooCommerce 9.9;
 
 ### Added
 - Elementor dynamic tags compatibility;
-- Compatibility with WooCommerce 9.9;
 
 ### Updated
 - Google Fonts list updated;
@@ -228,9 +359,9 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Fixed
 - Minor style fixes and improvements;
+- Compatibility with WooCommerce 9.8;
 
 ### Added
-- Compatibility with WooCommerce 9.8;
 - Compatibility with Yith WooCommerce Wishlist 4.5;
 - Web accessibility: basic compliance;
 
@@ -239,7 +370,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.4] – March 26, 2025
+## [Ver 3.5.4] – Mar 26, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -250,8 +381,8 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Shortcode icons new style;
 - Option to import Elementor templates with new Flexbox Containers structure;
 - Elementor option for setting the section color type of dynamic typography;
-- Elementor option for setting a custom stretching for the paranet container;
-- Elementor option for setting a custom offest for the paranet container;
+- Elementor option for setting a custom stretching for the parent container;
+- Elementor option for setting a custom offset for the parent container;
 - WooCommerce 9.7 compatibility;
 
 ### Updated
@@ -261,11 +392,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.3] – February 25, 2025
+## [Ver 3.5.3] – Feb 25, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
-- Related products visibility option aplying issue;
+- Related products visibility option applying issue;
 
 ### Updated
 - Ohio Extra plugin to the 3.5.3 version;
@@ -273,7 +404,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.2] – February 18, 2025
+## [Ver 3.5.2] – Feb 18, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -285,7 +416,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.1] – February 15, 2025
+## [Ver 3.5.1] – Feb 15, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -299,7 +430,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.5.0] – February 10, 2025
+## [Ver 3.5] – Feb 10, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -307,21 +438,21 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Added
 - Option to show/hide WooCommerce filter widgets;
-- Option to show/hide WooCommerce the sort by dropdown menu;
+- Option to show/hide the WooCommerce sort-by dropdown menu;
 - Option to show/hide subheader items on mobile;
 - Option to set corner radius value for grid elements;
 - Option to set corner radius value for form elements;
 - Option to set single product attributes layout;
 - Local option to set footer side gaps for a full-width page layout;
-- Option show/hide icon button in Banner Element;
-- Added new Banner Element layout;
-- Added new Apparel Shop demo;
+- Option to show/hide icon button in Banner Element;
+- New Banner Element layout;
+- New Apparel Shop demo;
 - Variation Swatches for WooCommerce compatibility;
 - WooCommerce 9.6 compatibility;
 
 ### Updated
 - Google Fonts list updated;
-- Ohio Extra plugin to the 3.5.0 version;
+- Ohio Extra plugin to the 3.5 version;
 - Ohio Importer plugin to the 1.2.9 version;
 - Main language file ohio.pot;
 
@@ -331,13 +462,13 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.9] – January 03, 2025
+## [Ver 3.4.9] – Jan 03, 2025
 
 ### Fixed
 - Minor style fixes and improvements;
-- Portfolio Grid Layout 11 category hover effect style issue fix;
-- Single post layout local option issue fix;
-- Countdown Element target time option issue fix;
+- Portfolio Grid Layout 11 category hover effect style issue;
+- Single post layout local option issue;
+- Countdown Element target time option issue;
 
 ### Added
 - Shortcodes ([ohio_current_year], [ohio_site_name]) usage in the footer copyright area;
@@ -350,7 +481,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.8] – December 16, 2024
+## [Ver 3.4.8] – Dec 16, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -358,7 +489,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 ### Added
 - Option to enable/disable active menu highlighting with primary color;
 - Option to set an image for menu item;
-- Option to set add a description for menu item;
+- Option to add a description for menu item;
 - Option to show/hide images for menu items on mobile devices;
 - Option to show/hide descriptions for menu items on mobile devices;
 
@@ -368,12 +499,12 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.7] – November 22, 2024
+## [Ver 3.4.7] – Nov 22, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Sticky product on mobile devices overlapping issue fix;
-- Woocommerce Checkout > Thankyou page style issue fix;
+- Sticky product on mobile devices overlapping issue;
+- WooCommerce Checkout > Thankyou page style issue;
 
 ### Added
 - Option to set standard menu items typography and color;
@@ -386,16 +517,16 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.6] – November 07, 2024
+## [Ver 3.4.6] – Nov 07, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Boxed page layout width issue fix;
-- Nested product categories in product breadcrumbs issue fix;
+- Boxed page layout width issue;
+- Nested product categories in product breadcrumbs issue;
 
 ### Added
-- Dashboard UI improved;
-- Added new header layout with boxed area;
+- Improved Dashboard UI;
+- New header layout with boxed area;
 - Options to enable/disable a wrap container for desktop menu;
 - Option to set the content position for fullscreen page headlines;
 - Extended option to customize the offer banner background;
@@ -407,11 +538,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.5] – October 02, 2024
+## [Ver 3.4.5] – Oct 02, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Sold individually product label position issue fix;
+- Sold individually product label position issue;
 
 ### Added
 - Offer banner feature;
@@ -422,20 +553,20 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.4] – September 17, 2024
+## [Ver 3.4.4] – Sep 17, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Search type option inheritance issue fix;
-- Sale individually product quantity label visibility issue fix;
-- Multiple paginators on the same page issue fix;
+- Search type option inheritance issue;
+- Sale individually product quantity label visibility issue;
+- Multiple paginators on the same page issue;
 
 ### Added
 - UI translation files in Portuguese, Turkish, Swedish, Norwegian, Danish;
 - Options to show/hide meta data for Blog Posts element;
 - Option to set an author inline layout for Testimonial element;
 - Option to add a description for Counter element;
-- Added new landing page demo template (Elementor version);
+- New landing page demo template (Elementor version);
 - WooCommerce 9.3 compatibility;
 
 ### Updated
@@ -443,27 +574,27 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.3] – July 30, 2024
+## [Ver 3.4.3] – Jul 30, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- RTL color scheme switcher issue fix;
-- Footer links color issue fix;
-- Default selection color issue fix;
+- RTL color scheme switcher issue;
+- Footer links color issue;
+- Default selection color issue;
 
 ### Added
-- Mobile menu transition with right hamburger improved;
+- Improved mobile menu transition for right-aligned hamburger;
 
 ### Updated
 - Ohio Extra plugin to the 3.4.3 version;
 
 ---------------------------
 
-## [Ver 3.4.2] – July 18, 2024
+## [Ver 3.4.2] – Jul 18, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Mobile menu background option applying issue fix;
+- Mobile menu background option applying issue;
 
 ### Added
 - Option to set an inverse variant for Clients Logo element;
@@ -475,11 +606,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.1] – July 06, 2024
+## [Ver 3.4.1] – Jul 06, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
-- Global links color applying issue fix;
+- Global links color applying issue;
 - Slider Revolution dark scheme overlay color issue;
 
 ### Updated
@@ -487,14 +618,14 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.4.0] – July 03, 2024
+## [Ver 3.4] – Jul 03, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
 
 ### Added
 - Dynamic CSS reworked with CSS custom properties (variables);
-- Added new improved Theme Settings UI;
+- Redesigned Theme Settings UI;
 - UI translation files in German, Italian, French, Spanish, Dutch;
 - Option to set the buttons color for the entire site;
 - Option to set the buttons (hover) color for the entire site;
@@ -511,7 +642,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Option to set the border width for shortcodes and widgets;
 
 ### Updated
-- Ohio Extra plugin to the 3.4.0 version;
+- Ohio Extra plugin to the 3.4 version;
 - Ohio Importer plugin to the 1.2.5 version;
 - Main language file ohio.pot;
 
@@ -521,7 +652,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.9] – June 21, 2024
+## [Ver 3.3.9] – Jun 21, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -537,7 +668,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.8] – April 09, 2024
+## [Ver 3.3.8] – Apr 09, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -556,7 +687,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.7] – February 24, 2024
+## [Ver 3.3.7] – Feb 24, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -569,12 +700,12 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.6] – February 21, 2024
+## [Ver 3.3.6] – Feb 21, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
 - Single post sharing buttons position on tables issue;
-- Single project healine color customization issue;
+- Single project headline color customization issue;
 - Word trim for project descriptions with Asian languages issue;
 - Typography options applying for a text logo issue;
 - Video element width animation issue;
@@ -588,7 +719,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.5] – January 06, 2024
+## [Ver 3.3.5] – Jan 06, 2024
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -603,7 +734,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.4] – December 12, 2023
+## [Ver 3.3.4] – Dec 12, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -620,7 +751,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.3] – November 17, 2023
+## [Ver 3.3.3] – Nov 17, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -639,11 +770,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Notes
 - After updating to this version, you might lose your Dashboard and Theme Settings interface localization.
-  Download Ohio's All Files & Documentation package at themeforest.com and check for the required pre-translated language file under Extras > Languages directory.
+  Download Ohio's All Files & Documentation package at themeforest.net and check for the required pre-translated language file under Extras > Languages directory.
 
 ---------------------------
 
-## [Ver 3.3.2] – October 25, 2023
+## [Ver 3.3.2] – Oct 25, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -665,12 +796,12 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Main language file ohio.pot;
 
 ### Notes
-- After updating to this version, a single blog post layout might be set to Standard. 
-  To change that navigate to Theme Settings > Post > General.
+- After updating to this version, a single blog post layout might be set to Standard.
+  To change that, navigate to Theme Settings > Post > General.
 
 ---------------------------
 
-## [Ver 3.3.1] – September 06, 2023
+## [Ver 3.3.1] – Sep 06, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -682,7 +813,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.3.0] – September 05, 2023
+## [Ver 3.3] – Sep 05, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -690,7 +821,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Writing a product review issue;
 
 ### Added
-- Added new social network (Threads);
+- New social network (Threads);
 - Wide archive blog layout;
 - Compact slider single project layout;
 - Button filter layout;
@@ -702,22 +833,22 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Option to show/hide post comments in the page headline;
 - Option to enable/disable hamburger menu caption;
 - Option to enable/disable hamburger menu caption background color;
-- Added new Design Studio demo;
+- New Design Studio demo;
 - WooCommerce 8.0 compatibility;
 
 ### Updated
 - Twitter icon updated to the new X;
 - Font Awesome icon pack updated to the 6.4.2 version;
-- Ohio Extra plugin to the 3.3.0 version;
+- Ohio Extra plugin to the 3.3 version;
 - Main language file ohio.pot;
 
 ### Notes
-- After updating to this version project excerpt might be visible. 
+- After updating to this version, project excerpt might be visible.
   To disable it open Portfolio Projects shortcode/widget and look for "Excerpt visibility" option.
 
 ---------------------------
 
-## [Ver 3.2.4] – June 09, 2023
+## [Ver 3.2.4] – Jun 09, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -735,18 +866,17 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.2.3] – April 27, 2023
+## [Ver 3.2.3] – Apr 27, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
 
 ### Added
-- Added new social network (Houzz);
+- New social network (Houzz);
 - Option to export/import Theme Settings;
+- Option to reset theme settings to defaults;
 - Option to show/hide video in the portfolio lightbox carousel;
 - Option to show/hide empty categories in the portfolio layout with a standard pagination;
-- Option to export/import theme settings;
-- Option to reset theme settings to defaults;
 - WooCommerce 7.6 compatibility;
 
 ### Updated
@@ -755,7 +885,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.2.2] – March 22, 2023
+## [Ver 3.2.2] – Mar 22, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -773,7 +903,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.2.1] – Fabruary 14, 2023
+## [Ver 3.2.1] – Feb 14, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -789,16 +919,16 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.2.0] – Fabruary 12, 2023
+## [Ver 3.2] – Feb 12, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
 
 ### Added
-- Added new Badge element;
+- New Badge element;
 - Option to enable/disable an equal height for product cards;
 - Option to add an icon/image for Message element;
-- Option to add an icon size for Message element;
+- Option to set an icon size for Message element;
 - Option to set a border radius for Video element;
 - Option to enable/disable a tilt effect for Video element;
 - Option to enable/disable a tilt effect for Services Table element;
@@ -839,12 +969,12 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - WooCommerce 7.3 compatibility;
 
 ### Updated
-- Ohio Extra plugin to the 3.2.0 version;
+- Ohio Extra plugin to the 3.2 version;
 - Main language file ohio.pot;
 
 ---------------------------
 
-## [Ver 3.1.9] – January 6, 2023
+## [Ver 3.1.9] – Jan 6, 2023
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -871,7 +1001,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.8] – November 22, 2022
+## [Ver 3.1.8] – Nov 22, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -886,7 +1016,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.7] – November 08, 2022
+## [Ver 3.1.7] – Nov 08, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -903,7 +1033,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.6] – October 20, 2022
+## [Ver 3.1.6] – Oct 20, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -921,7 +1051,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.5] – October 10, 2022
+## [Ver 3.1.5] – Oct 10, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -936,7 +1066,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.4] – September 27, 2022
+## [Ver 3.1.4] – Sep 27, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -959,7 +1089,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.3] – September 08, 2022
+## [Ver 3.1.3] – Sep 08, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -977,7 +1107,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.2] – August 31, 2022
+## [Ver 3.1.2] – Aug 31, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1004,7 +1134,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.1] – August 16, 2022
+## [Ver 3.1.1] – Aug 16, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1035,7 +1165,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.1.0] – June 22, 2022
+## [Ver 3.1] – Jun 22, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1051,7 +1181,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Updated
 - Google Fonts list updated;
-- Ohio Extra plugin to the 3.1.0 version;
+- Ohio Extra plugin to the 3.1 version;
 - Main language file ohio.pot;
 
 ---------------------------
@@ -1094,11 +1224,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Fixed
 - Minor style fixes and improvements;
+
+### Added
 - Option to show/hide social networks in mobile menu;
 - Option to set notification colors;
 - Option to set page wrapper width;
-
-### Added
 - Option to set footer links color;
 
 ### Updated
@@ -1164,7 +1294,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.0.2] – April 26, 2022
+## [Ver 3.0.2] – Apr 26, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1176,7 +1306,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.0.1] – April 25, 2022
+## [Ver 3.0.1] – Apr 25, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1191,7 +1321,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 3.0.0] – April 20, 2021
+## [Ver 3.0] – Apr 20, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1210,9 +1340,9 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Team Member element new hover effects;
 - Gallery element new hover effects;
 - Product archive element new hover effects;
-- Added new social network (Tripadvisor);
-- Added new portfolio archive layout;
-- Added new single blog post layout;
+- New social network (Tripadvisor);
+- New portfolio archive layout;
+- New single blog post layout;
 - Full RTL support;
 - Single product mobile gallery navigation;
 - Option to set global links hover color;
@@ -1265,17 +1395,17 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Option to choose a product quickview button color;
 - Option to show/hide a product sale tag;
 - Option to show/hide an account icon;
-- Added new Digital Agency demo template;
+- New Digital Agency demo template;
 
 ### Deprecated
 - Split Section shortcode;
 
 ### Updated
-- Ohio Extra plugin to the 3.0.0 version;
+- Ohio Extra plugin to the 3.0 version;
 
 ---------------------------
 
-## [Ver 2.4.4] – January 31, 2022
+## [Ver 2.4.4] – Jan 31, 2022
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1290,7 +1420,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.4.3] – December 6, 2021
+## [Ver 2.4.3] – Dec 6, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1307,7 +1437,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.4.2] – October 12, 2021
+## [Ver 2.4.2] – Oct 12, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1327,7 +1457,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.4.1] – August 16, 2021
+## [Ver 2.4.1] – Aug 16, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1342,7 +1472,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.4.0] – August 11, 2021
+## [Ver 2.4.0] – Aug 11, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1350,7 +1480,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Sticky product translation issue;
 
 ### Added
-- Added new socila network (Tripadvisor);
+- New social network (Tripadvisor);
 - WordPress 5.8 compatibility;
 - WooCommerce 5.5 compatibility;
 - PHP 8.0 compatibility;
@@ -1361,7 +1491,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.7] – June 16, 2021
+## [Ver 2.3.7] – Jun 16, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1381,7 +1511,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.6] – April 13, 2021
+## [Ver 2.3.6] – Apr 13, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1400,20 +1530,20 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.5] – March 24, 2021
+## [Ver 2.3.5] – Mar 24, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
 - Adding multiple products to the cart issue;
-- Mege menu structure (Elementor Pro compatibility) issue;
+- Mega menu structure (Elementor Pro compatibility) issue;
 - Polylang plugin compatibility issue;
 - Project lightbox for loaded projects issue;
 - Main menu ACF Pro custom fields visibility issue;
 
 ### Added
 - Option to show/hide language switcher in a hamburger menu;
-- BDroppy complatibility;
-- Ultimate Member complatibility;
+- BDroppy compatibility;
+- Ultimate Member compatibility;
 - WordPress 5.7 compatibility;
 
 ### Updated
@@ -1421,7 +1551,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.4] – February 23, 2021
+## [Ver 2.3.4] – Feb 23, 2021
 
 ### Fixed
 - Dark mode issue;
@@ -1429,7 +1559,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.3] – February 22, 2021
+## [Ver 2.3.3] – Feb 22, 2021
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1451,7 +1581,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.2] – December 28, 2020
+## [Ver 2.3.2] – Dec 28, 2020
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1461,14 +1591,14 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 ### Added
 - Adaptive images support;
 - Option to set page boxed layout margins;
-- Added new Simple App demo;
+- New Simple App demo;
 
 ### Updated
 - Ohio Extra plugin to the 2.2.3 version;
 
 ---------------------------
 
-## [Ver 2.3.1] – December 12, 2020
+## [Ver 2.3.1] – Dec 12, 2020
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1481,7 +1611,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Coming soon mode;
 - Light/dark mode support added for portfolio sliders;
 - WordPress 5.6 compatibility;
-— WooCommerce 4.8 compatibility;
+- WooCommerce 4.8 compatibility;
 
 ### Updated
 - Google Fonts list updated;
@@ -1494,7 +1624,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.3.0] – November 24, 2020
+## [Ver 2.3.0] – Nov 24, 2020
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1504,8 +1634,8 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Option to set left/right position for social networks;
 - Option to set left/right position for scroll to top;
 - Option to set left/right position for color mode switcher;
-- Added new Showcase Interactive demo;
-- Added new portfolio layout;
+- New Showcase Interactive demo;
+- New portfolio layout;
 - Color mode switching improved;
 
 ### Updated
@@ -1513,7 +1643,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.2.0] – November 4, 2020
+## [Ver 2.2.0] – Nov 4, 2020
 
 ### Fixed
 - Minor style fixes and improvements;
@@ -1525,8 +1655,8 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Option to enable/disable opening of the 1st level menu items as regular links;
 - Portfolio category taxonomy functionality;
 - Portfolio tag taxonomy functionality;
-- Added new Creative Agency demo;
-- Added new blog layout;
+- New Creative Agency demo;
+- New blog layout;
 - Demo Importer plugin enhanced with new demo installation options;
 
 ### Updated
@@ -1536,7 +1666,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.1.2] – October 16, 2020
+## [Ver 2.1.2] – Oct 16, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Mobile header issue;
@@ -1550,7 +1680,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.1.1] – October 14, 2020
+## [Ver 2.1.1] – Oct 14, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Elementor parallax with stretched row issue;
@@ -1568,7 +1698,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.1.0] – October 1, 2020
+## [Ver 2.1.0] – Oct 1, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Elementor editor with enabled preloader issue;
@@ -1597,7 +1727,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 2.0.0] – August 28, 2020
+## [Ver 2.0.0] – Aug 28, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Footer double logo issue;
@@ -1658,7 +1788,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.2.1] – August 12, 2020
+## [Ver 1.2.1] – Aug 12, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Mobile carousel navigation issue;
@@ -1669,7 +1799,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.2.0] – August 04, 2020
+## [Ver 1.2.0] – Aug 04, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Portfolio filter bar issue;
@@ -1700,7 +1830,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.1.1] – June 12, 2020
+## [Ver 1.1.1] – Jun 12, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Shop catalog add to cart button issue;
@@ -1741,7 +1871,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Shop catalog add to cart button issue;
 
 ### Added
-- Added new socila networks (TikTok, Twitch, Mixer);
+- New social networks (TikTok, Twitch, Mixer);
 - Schema.org breadcrumbs validation;
 
 ### Updated
@@ -1752,7 +1882,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.9] – April 28, 2020
+## [Ver 1.0.9] – Apr 28, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Horizontal Accordion Shortcode issue;
@@ -1771,7 +1901,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.8] – April 17, 2020
+## [Ver 1.0.8] – Apr 17, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - One-page menu mobile issue;
@@ -1791,7 +1921,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.7] – March 24, 2020
+## [Ver 1.0.7] – Mar 24, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Show Project link without lightbox preview issue;
@@ -1800,10 +1930,10 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ### Added
 - Caption cursor portfolio grid layout;
-- Added new single project layout;
+- New single project layout;
 - Custom fonts usage;
 - Option to enable/disable page fadein effect;
-- Option to choose parallax/scale slider image effect for a sinlge project;
+- Option to choose parallax/scale slider image effect for a single project;
 
 ### Updated
 - Ohio Extra plugin to the 1.0.6 version;
@@ -1811,7 +1941,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.6] – March 07, 2020
+## [Ver 1.0.6] – Mar 07, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Retina logo in the Ohio Logo Widget issue;
@@ -1833,14 +1963,14 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.5] – February 26, 2020
+## [Ver 1.0.5] – Feb 26, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Extended menu third level+ issue;
 
 ### Added
-- Added new importable demo (Ohio Landing Page);
-- Added new importable demo (Demo 3: Showcase Interactive);
+- New importable demo (Ohio Landing Page);
+- New importable demo (Demo 3: Showcase Interactive);
 - Portfolio layout with interactive links for Portfolio Page Template;
 - Portfolio layout with interactive links for Portfolio Projects Shortcode;
 - Fill background color global option;
@@ -1850,7 +1980,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.4] – February 19, 2020
+## [Ver 1.0.4] – Feb 19, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Adobe Fonts typography issue;
@@ -1863,7 +1993,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.3] – February 06, 2020
+## [Ver 1.0.3] – Feb 06, 2020
 ### Fixed
 - Minor style fixes and improvements;
 - Multiple lazy-load paginations issue;
@@ -1882,7 +2012,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.2] – January 21, 2020
+## [Ver 1.0.2] – Jan 21, 2020
 ### Fixed
 - Minor style fixes and improvements;
 
@@ -1897,7 +2027,7 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 ---------------------------
 
-## [Ver 1.0.1] – January 14, 2020
+## [Ver 1.0.1] – Jan 14, 2020
 ### Fixed
 - Minor style fixes and improvements;
 
@@ -1906,11 +2036,11 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 - Portfolio page with pre-made projects importable demo;
 
 ### Updated
-- YITH WooCommerce Wishlist 3.0.0 + compatibility;
+- YITH WooCommerce Wishlist 3.0 + compatibility;
 
 ---------------------------
 
-## [Ver 1.0.0] – January 11, 2020
+## [Ver 1.0.0] – Jan 11, 2020
 - Theme release
 
 # License

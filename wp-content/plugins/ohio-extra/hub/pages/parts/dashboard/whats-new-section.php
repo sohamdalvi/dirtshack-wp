@@ -3,27 +3,188 @@
 		<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480-492Zm-.21 396Q450-96 429-117.15T408-168h144q0 30-21.21 51t-51 21ZM732-432v-111H624v-66h108v-111h72v111h108v66H804v111h-72ZM192-216v-72h48v-240q0-87 53.5-153T432-763v-53q0-20 14-34t34-14q20 0 34 14t14 34v53q23 5 44.5 13.5T614-728q-12.81 12.73-23.06 27.73-10.25 15-17.94 32.27-20-13-43.5-20.5T480-696q-70 0-119 49t-49 119v240h336v-108q17 11 34.5 18.5T720-365v77h48v72H192Z"></path></svg>
 	</div>
 	<div class="col">
-		<h1><?php _e( 'What’s New', 'ohio-extra' ); ?></h1>
+		<h1><?php _e( 'What&#8217;s New', 'ohio-extra' ); ?></h1>
 		<p>
 			<a href="https://docs.clbthemes.com/ohio/update-issues/#before_update" target="_blank"><?php _e( 'Setup backups', 'ohio-extra' ); ?></a>
-			<?php _e( 'on a regular basis to avoid any issues while updating and avoid those situations, you’re dealing with the potential content loss.', 'ohio-extra' ); ?>
+			<?php _e( 'on a regular basis to avoid any issues while updating and avoid those situations, you&#8217;re dealing with the potential content loss.', 'ohio-extra' ); ?>
 		</p>
 	</div>
 </div>
 <div class="row changelog">
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.6</label></h2> Sep 07, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Missing closing tag on Banner element;
+- Fatal error when Banner element is set as a button with no button link;
+- WPBakery 9.0 multiple field styles issue;
+- Portfolio and WooCommerce category types fix;
+- Compatibility with WooCommerce 11.1;
+- Import failing on WordPress 7.1;
+
+### Added
+- Dark Mode Background option extended to WPBakery Column, Inner Column, Section, and all native Elementor widgets;
+- Section Type option extended to Section;
+- Dynamic Typo/Lines Pattern option ported to WPBakery Row;
+- Google Fonts list updated;
+
+### Updated
+- Ohio Extra plugin to the 3.7.6 version;
+- Ohio Importer plugin to the 1.3.6 version;
+</pre>
+</div>
 
 <!-- version -->
 <div class="clb-group">
-
-	<div class="clb-group-headline">
-	<h2><label>Ver 3.6.8</label></h2> March 25, 2026
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.5</label></h2> Aug 15, 2026
 </div>
 <pre>
 ### Fixed
 - Minor style fixes and improvements;
 
 ### Added
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo21/homedemo21-elementor/" target="_blank">Digital Studio</a> template (Demo 21);
+- Tooltip support for <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank" rel="noopener">Pricing Table</a> element;
+- Tooltip support for <a href="https://ohio.clbthemes.com/services-table-shortcode/" target="_blank" rel="noopener">Services Table</a> element;
+- Reworked progress bar tooltip, and cleaned up option labels;
+- WPBakery 9.0 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.7.5 version;
+</pre>
+</div>
+
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.4</label></h2> Jul 30, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Undefined array key warnings in portfolio grid layout;
+- Missing GitHub icon in the hamburger menu;
+- Carousel outer-stage max-width calculation including item margins;
+
+### Added
+- New heading classes (.h1–.h6) available across shortcodes;
+- Sidebar added as a separate item under Theme Settings;
+- Updated social networks list;
+- Dashboard UI improvements, including release note links;
+
+### Updated
+- Ohio Extra plugin to the 3.7.4 version;
+- Ohio Importer plugin to the 1.3.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.3</label></h2> Jul 02, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Admin dashboard checkbox styles issue;
+
+### Added
+- <a target="_blank" href="https://ohio.clbthemes.com/pricing/">Freemius-based licensing</a> integration;
+- Optional data-anchor attribute for <a target="_blank" href="https://ohio.clbthemes.com/tabs-widget/">Tabs</a> element items;
+
+### Updated
+- Ohio Extra plugin to the 3.7.3 version;
+- Ohio Importer plugin to the 1.3.4 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.2</label></h2> Jun 26, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mega menu styles;
+- Undefined array key warning in language dropdown;
+- Compatibility with WooCommerce 10.9.0;
+
+### Added
+- Border Width option for Buttons and Forms settings;
+- Excerpt visibility option for Portfolio <a href="https://ohio.clbthemes.com/portfolio/minimal-elementor/" target="_blank">Minimal Grid</a> element;
+- Icon Type option for Tabs element;
+
+### Updated
+- Ohio Extra plugin to the 3.7.2 version;
+</pre>
+<pre class="-warning">
+### Notes
+- This update may automatically show project descriptions on your <a href="https://ohio.clbthemes.com/portfolio/minimal-elementor/" target="_blank">Minimal Grid</a> shortcodes/widgets. If you don't want them to appear, simply turn them off in the shortcode/widget settings;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.1</label></h2> May 25, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Video cover going fullscreen on lazy load / load more on iOS;
+- Banner button without text issue;
+- Elementor category visibility issue;
+
+### Added
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo19/homedemo19-elementor/" target="_blank" rel="noopener">Classic Shop</a> template (Demo 19);
+- Reworked Banner element with new layout options (Stretch to Fit, subtitle position, button controls);
+- Option to loop self-hosted video in project gallery;
+
+### Updated
+- Ohio Extra plugin to the 3.7.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7</label></h2> May 04, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mobile scrolling issues on iOS;
+- Username synchronization when activating with a different account;
+- Compatibility with WooCommerce 10.7;
+
+### Added
+- Support for nested accordion elements (Elementor);
+- Subtitle text option for the Tabs Element;
+- New importable demo: Landing Page 2026;
+- Refreshed design of <a href="https://ohio.clbthemes.com/demo30/homedemo30-elementor/" target="_blank" rel="noopener">Coming Soon</a> template (Demo 30);
+
+### Updated
+- Ohio Extra plugin to the 3.7.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.6.8</label></h2> Mar 25, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo21/homedemo21-elementor/" target="_blank" rel="noopener">Digital Studio</a> template (Demo 21);
 - Improved sticky navigation UI for single projects, posts, and products;
 - Option to select slider's pagination type;
 
@@ -34,19 +195,18 @@
 
 <!-- version -->
 <div class="clb-group">
-
-	<div class="clb-group-headline">
-	<h2><label>Ver 3.6.7</label></h2> March 07, 2026
+<div class="clb-group-headline">
+	<h2><label>Ver 3.6.7</label></h2> Mar 07, 2026
 </div>
 <pre>
 ### Fixed
 - Minor style fixes and improvements;
 
 ### Added
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo9/homedemo9-elementor/" target="_blank">Mobile App</a> template (Demo 9);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo27/homedemo27-elementor/" target="_blank">Corporate</a> template (Demo 27);
-- Option to add an original price in the <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank">Pricing Table</a> element;
-- Option to set button position in the <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank">Pricing Table</a> element;
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo9/homedemo9-elementor/" target="_blank" rel="noopener">Mobile App</a> template (Demo 9);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo27/homedemo27-elementor/" target="_blank" rel="noopener">Corporate</a> template (Demo 27);
+- Option to add an original price in the <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank" rel="noopener">Pricing Table</a> element;
+- Option to set button position in the <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank" rel="noopener">Pricing Table</a> element;
 
 ### Updated
 - Ohio Extra plugin to the 3.6.7 version;
@@ -55,26 +215,25 @@
 
 <!-- version -->
 <div class="clb-group">
-
-	<div class="clb-group-headline">
-	<h2><label>Ver 3.6.6</label></h2> February 24, 2026
+<div class="clb-group-headline">
+	<h2><label>Ver 3.6.6</label></h2> Feb 24, 2026
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Page featured headline background issue;
-
-# Added
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo5/homedemo5-elementor/" target="_blank">Cloud Service</a> template (Demo 5);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo7/homedemo7-elementor/" target="_blank">Creative Studio</a> template (Demo 7);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo8/homedemo8-elementor/" target="_blank">Creative Agency</a> template (Demo 8);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo23/homedemo23-elementor/" target="_blank">Corporate</a> template (Demo 23);
-- New contained layout for the <a href="https://ohio.clbthemes.com/accordion-widget/" target="_blank">Accordion</a> element;
-- Option to prepend a label to the <a href="https://ohio.clbthemes.com/badge-widget" target="_blank">Badge</a> element;
-- Option to show/hide CTA buttons on mobiles;
 - Compatibility with WooCommerce 10.5;
 
-# Updated
+### Added
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo5/homedemo5-elementor/" target="_blank" rel="noopener">Cloud Service</a> template (Demo 5);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo7/homedemo7-elementor/" target="_blank" rel="noopener">Creative Studio</a> template (Demo 7);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo8/homedemo8-elementor/" target="_blank" rel="noopener">Creative Agency</a> template (Demo 8);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo23/homedemo23-elementor/" target="_blank" rel="noopener">Corporate</a> template (Demo 23);
+- New contained layout for the <a href="https://ohio.clbthemes.com/accordion-widget/" target="_blank" rel="noopener">Accordion</a> element;
+- Option to prepend a label to the <a href="https://ohio.clbthemes.com/badge-widget" target="_blank" rel="noopener">Badge</a> element;
+- Option to show/hide CTA buttons on mobiles;
+
+### Updated
 - Ohio Extra plugin to the 3.6.6 version;
 </pre>
 </div>
@@ -82,22 +241,22 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.5</label></h2> February 03, 2026
+	<h2><label>Ver 3.6.5</label></h2> Feb 03, 2026
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Page boxed layout mobile issue;
 
-# Added
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo3/homedemo3-elementor/" target="_blank">Interactive Showcase</a> template (Demo 3);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo6/homedemo6-elementor/" target="_blank">Interactive Showcase</a> template (Demo 6);
+### Added
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo3/homedemo3-elementor/" target="_blank" rel="noopener">Interactive Showcase</a> template (Demo 3);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo6/homedemo6-elementor/" target="_blank" rel="noopener">Interactive Showcase</a> template (Demo 6);
 - Option to set a badge background color (e.g. badges, tags, labels);
 - Option to use video covers (HTML5, YouTube, Vimeo) for the portfolio archive;
 - Option to enable/disable the icon button animation inside the banner element;
 - Option to set the border radius for the site footer;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.6.5 version;
 </pre>
 </div>
@@ -105,21 +264,21 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.4</label></h2> January 14, 2026
+	<h2><label>Ver 3.6.4</label></h2> Jan 14, 2026
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Repeater field width issue in Theme Settings;
 
-# Added
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo18/homedemo18-elementor/" target="_blank">Essentials Shop</a> template (Demo 18);
-- Refreshed the design of <a href="https://ohio.clbthemes.com/demo28/homedemo28-elementor/" target="_blank">Conference</a> template (Demo 28);
+### Added
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo18/homedemo18-elementor/" target="_blank" rel="noopener">Essentials Shop</a> template (Demo 18);
+- Refreshed the design of <a href="https://ohio.clbthemes.com/demo28/homedemo28-elementor/" target="_blank" rel="noopener">Conference</a> template (Demo 28);
 - Option to add background decorative text to the footer;
 - Option to align the background decorative text;
 - Option to set a typography for the background decorative text;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.6.4 version;
 </pre>
 </div>
@@ -127,23 +286,23 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.3</label></h2> December 19, 2025
+	<h2><label>Ver 3.6.3</label></h2> Dec 19, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Maintenance page with boxed layout issue;
-
-# Added
-- Added new <a href="https://ohio.clbthemes.com/service-ver1/" target="_blank">Service Ver 1</a> template;
-- Added new <a href="https://ohio.clbthemes.com/service-ver2/" target="_blank">Service Ver 2</a> template;
-- Added new <a href="https://ohio.clbthemes.com/pricing-ver1/" target="_blank">Pricing Ver 1</a> template;
-- Added new <a href="https://ohio.clbthemes.com/pricing-ver2/" target="_blank">Pricing Ver 2</a> template;
-- Option to set the sidebar gaps;
-- Option to set the size of the header's call-to-action button;
 - Compatibility with WooCommerce 10.4;
 
-# Updated
+### Added
+- New <a href="https://ohio.clbthemes.com/service-ver1/" target="_blank" rel="noopener">Service Ver 1</a> template;
+- New <a href="https://ohio.clbthemes.com/service-ver2/" target="_blank" rel="noopener">Service Ver 2</a> template;
+- New <a href="https://ohio.clbthemes.com/pricing-ver1/" target="_blank" rel="noopener">Pricing Ver 1</a> template;
+- New <a href="https://ohio.clbthemes.com/pricing-ver2/" target="_blank" rel="noopener">Pricing Ver 2</a> template;
+- Option to set the sidebar gaps;
+- Option to set the size of the header's call-to-action button;
+
+### Updated
 - Ohio Extra plugin to the 3.6.3 version;
 </pre>
 </div>
@@ -151,14 +310,14 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.2</label></h2> October 29, 2025
+	<h2><label>Ver 3.6.2</label></h2> Oct 29, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Portfolio lightbox title color issue;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.6.2 version;
 </pre>
 </div>
@@ -166,23 +325,23 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.1</label></h2> October 27, 2025
+	<h2><label>Ver 3.6.1</label></h2> Oct 27, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Mobile hamburger menu issue;
 - Cross-Site Request Forgery (CSRF) vulnerability issue;
+- Compatibility with WooCommerce 10.3;
 
-# Added
-- New Blog Magazine demo added;
+### Added
+- New <a href="https://ohio.clbthemes.com/demo35/" target="_blank" rel="noopener">Blog Magazine</a> demo;
 - Option to set the wrap container width for a single post page;
 - Option to set the content's typography for a single post page;
 - Option to set the sidebar width;
 - Option to show/hide dividers for sidebar widgets;
-- Compatibility with WooCommerce 10.3;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.6.1 version;
 - Main language file ohio.pot;
 </pre>
@@ -191,25 +350,25 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.6.0</label></h2> September 17, 2025
+	<h2><label>Ver 3.6.0</label></h2> Sep 17, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - WooCommerce filters mobile visibility issue;
 - Blog category typography issue;
+- Compatibility with WooCommerce 10.1;
 
-# Added
-- New Marquee element;
-- New Architectural Studio demo added;
+### Added
+- New <a href="https://ohio.clbthemes.com/marquee-shortcode/" target="_blank" rel="noopener">Marquee</a> element;
+- New <a href="https://ohio.clbthemes.com/demo34/homedemo34-elementor/" target="_blank" rel="noopener">Architectural Studio</a> demo;
 - Option to order the Portfolio Projects element;
 - Option to order the Blog Posts element;
 - Option to output specific items in the Portfolio Projects element;
 - Option to output specific items in the Blog Posts element;
-- Option to set a background color for the project intro container.
-- Compatibility with WooCommerce 10.1;
+- Option to set a background color for the project intro container;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.6.0 version;
 - Main language file ohio.pot;
 </pre>
@@ -218,18 +377,18 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.5.7</label></h2> July 25, 2025
+	<h2><label>Ver 3.5.7</label></h2> Jul 25, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Tabs jumping on mobile issue;
 - Portfolio lightbox meta items shrinking issue;
-
-# Added
 - Compatibility with WooCommerce 10.0;
 
-# Updated
+### Added
+
+### Updated
 - Ohio Extra plugin to the 3.5.7 version;
 - Ohio Importer plugin to the 1.3.3 version;
 </pre>
@@ -238,18 +397,18 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
-	<h2><label>Ver 3.5.6</label></h2> June 27, 2025
+	<h2><label>Ver 3.5.6</label></h2> Jun 27, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
 - Row stretching for RTL issue;
-
-# Added
-- Elementor dynamic tags compatibility added;
 - Compatibility with WooCommerce 9.9;
 
-# Updated
+### Added
+- Elementor dynamic tags compatibility;
+
+### Updated
 - Google Fonts list updated;
 - Ohio Extra plugin to the 3.5.6 version;
 </pre>
@@ -261,23 +420,2086 @@
 	<h2><label>Ver 3.5.5</label></h2> May 10, 2025
 </div>
 <pre>
-# Fixed
+### Fixed
 - Minor style fixes and improvements;
-
-# Added
 - Compatibility with WooCommerce 9.8;
+
+### Added
 - Compatibility with Yith WooCommerce Wishlist 4.5;
 - Web accessibility: basic compliance;
 
-# Updated
+### Updated
 - Ohio Extra plugin to the 3.5.5 version;
 </pre>
 </div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.5.4</label></h2> Mar 26, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Shortcode injection in lazy load endpoint issue;
+- Mobile menu color with dynamic typo issue;
+- Compatibility with WooCommerce 9.7;
+
+### Added
+- Shortcode icons new style;
+- Option to import Elementor templates with new Flexbox Containers structure;
+- Elementor option for setting the section color type of dynamic typography;
+- Elementor option for setting a custom stretching for the parent container;
+- Elementor option for setting a custom offset for the parent container;
+
+### Updated
+- Ohio Extra plugin to the 3.5.4 version;
+- Ohio Importer plugin to the 1.3.1 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.5.3</label></h2> Feb 25, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Related products visibility option applying issue;
+
+### Updated
+- Ohio Extra plugin to the 3.5.3 version;
+- Ohio Importer plugin to the 1.3.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.5.2</label></h2> Feb 18, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Filter slide-in position with sticky footer issue;
+- Product archive rating alignment issue;
+
+### Updated
+- Ohio Extra plugin to the 3.5.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.5.1</label></h2> Feb 15, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Incorrect translation loading for the ohio domain issue;
+- Full-width Elementor sections stretching issue;
+- Product sidebar position on mobile issue;
+- Gallery Element custom gutters applying issue;
+
+### Updated
+- Ohio Extra plugin to the 3.5.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.5.0</label></h2> Feb 10, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Desktop navigation shrinking in Safari issue;
+- Compatibility with WooCommerce 9.6;
+
+### Added
+- Option to show/hide WooCommerce filter widgets;
+- Option to show/hide the WooCommerce sort-by dropdown menu;
+- Option to show/hide subheader items on mobile;
+- Option to set corner radius value for grid elements;
+- Option to set corner radius value for form elements;
+- Option to set single product attributes layout;
+- Local option to set footer side gaps for a full-width page layout;
+- Option to show/hide icon button in Banner Element;
+- New <a href="http://ohio.clbthemes.com/banner-shortcode" target="_blank" rel="noopener">Banner</a> element layout;
+- New <a href="https://ohio.clbthemes.com/demo33/" target="_blank" rel="noopener">Apparel Shop</a> demo;
+- Variation Swatches for WooCommerce compatibility;
+
+### Updated
+- Google Fonts list updated;
+- Ohio Extra plugin to the 3.5.0 version;
+- Ohio Importer plugin to the 1.2.9 version;
+- Main language file ohio.pot;
+</pre>
+<pre class="-warning">
+### Notes
+- After updating to this version, new Filters button appears in the breadcrumbs area of WooCommerce websites.
+  Go to Widgets &gt; Shop tab to add or modify filter widgets for the filter slide-in.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.9</label></h2> Jan 03, 2025
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Portfolio Grid Layout 11 category hover effect style issue;
+- Single post layout local option issue;
+- Countdown Element target time option issue;
+- Compatibility with WooCommerce 9.5;
+
+### Added
+- Shortcodes (ohio_current_year, ohio_site_name) usage in the footer copyright area;
+- New Dashboard &gt; Plugins management tab;
+
+### Updated
+- Ohio Extra plugin to the 3.4.9 version;
+- Ohio Importer plugin to the 1.2.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.8</label></h2> Dec 16, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Option to enable/disable active menu highlighting with primary color;
+- Option to set an image for menu item;
+- Option to add a description for menu item;
+- Option to show/hide images for menu items on mobile devices;
+- Option to show/hide descriptions for menu items on mobile devices;
+
+### Updated
+- Ohio Extra plugin to the 3.4.8 version;
+- Font Awesome icon pack updated to the 6.7.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.7</label></h2> Nov 22, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Sticky product on mobile devices overlapping issue;
+- WooCommerce Checkout &gt; Thankyou page style issue;
+- Compatibility with WooCommerce 9.4;
+
+### Added
+- Option to set standard menu items typography and color;
+- Option to set standard submenu items typography and color;
+- Option to set an offer banner position;
+
+### Updated
+- Ohio Extra plugin to the 3.4.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.6</label></h2> Nov 07, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Boxed page layout width issue;
+- Nested product categories in product breadcrumbs issue;
+
+### Added
+- Improved Dashboard UI;
+- New header layout with boxed area;
+- Options to enable/disable a wrap container for desktop menu;
+- Option to set the content position for fullscreen page headlines;
+- Extended option to customize the offer banner background;
+
+### Updated
+- Ohio Extra plugin to the 3.4.6 version;
+- Ohio Importer plugin to the 1.2.7 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.5</label></h2> Oct 02, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Sold individually product label position issue;
+
+### Added
+- Offer banner feature;
+- Item image preview in the WordPress dashboard project list;
+
+### Updated
+- Ohio Extra plugin to the 3.4.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.4</label></h2> Sep 17, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Search type option inheritance issue;
+- Sale individually product quantity label visibility issue;
+- Multiple paginators on the same page issue;
+- Compatibility with WooCommerce 9.3;
+
+### Added
+- UI translation files in Portuguese, Turkish, Swedish, Norwegian, Danish;
+- Options to show/hide meta data for Blog Posts element;
+- Option to set an author inline layout for Testimonial element;
+- Option to add a description for Counter element;
+- New landing page demo template (Elementor version);
+
+### Updated
+- Ohio Extra plugin to the 3.4.4 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.3</label></h2> Jul 30, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- RTL color scheme switcher issue;
+- Footer links color issue;
+- Default selection color issue;
+
+### Added
+- Improved mobile menu transition for right-aligned hamburger;
+
+### Updated
+- Ohio Extra plugin to the 3.4.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.2</label></h2> Jul 18, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mobile menu background option applying issue;
+- Compatibility with WooCommerce 9.1;
+
+### Added
+- Option to set an inverse variant for Clients Logo element;
+
+### Updated
+- Ohio Extra plugin to the 3.4.2 version;
+- Ohio Importer plugin to the 1.2.6 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.1</label></h2> Jul 06, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Global links color applying issue;
+- Slider Revolution dark scheme overlay color issue;
+
+### Updated
+- Ohio Extra plugin to the 3.4.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.4.0</label></h2> Jul 03, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Dynamic CSS reworked with CSS custom properties (variables);
+- Redesigned Theme Settings UI;
+- UI translation files in German, Italian, French, Spanish, Dutch;
+- Option to set the buttons color for the entire site;
+- Option to set the buttons (hover) color for the entire site;
+- Option to set the overlay color for the entire site;
+- Option to set the dark mode text color for the entire site;
+- Option to set the dark mode fill color for the entire site;
+- Option to set the sidebar background for the entire site;
+- Option to set the corner radius value for the entire site;
+- Option to set the grid gutters value for the entire site;
+- Option to set the breadcrumbs position for the entire site;
+- Option to add extra buttons to the header menu;
+- Option to set the Light/Dark/Auto (System Colors) color scheme;
+- Option to display a cookie icon on the notice banner;
+- Option to set the border width for shortcodes and widgets;
+
+### Updated
+- Ohio Extra plugin to the 3.4.0 version;
+- Ohio Importer plugin to the 1.2.5 version;
+- Main language file ohio.pot;
+</pre>
+<pre class="-warning">
+### Notes
+- After updating to this version, you might lose your Theme Settings interface localization.
+  Download Ohio's All Files &amp; Documentation package and check for the required language file 
+  under Extras &gt; Languages directory.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.9</label></h2> Jun 21, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Wishlist icon fill on save for lazy-loaded items issue;
+
+### Added
+- WooCommerce 8.9 compatibility;
+- Excerpt field to Compact Slider project;
+
+### Updated
+- Ohio Extra plugin to the 3.3.9 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.8</label></h2> Apr 09, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Single product quickview gallery issue;
+- Hamburger scrolling with one-page menu issue;
+- Isotope spacing with a load more pagination issue;
+- Mobile shop filters overlay color issue;
+
+### Added
+- Product quantity input with a custom value;
+- WordPress 6.5 compatibility;
+- WooCommerce 8.7 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.3.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.7</label></h2> Feb 24, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Wide menu markers style issue;
+- Scroll-to-top custom typography applying issue;
+- Portfolio with populated gallery preview issue;
+
+### Updated
+- Ohio Extra plugin to the 3.3.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.6</label></h2> Feb 21, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Single post sharing buttons position on tables issue;
+- Single project headline color customization issue;
+- Word trim for project descriptions with Asian languages issue;
+- Typography options applying for a text logo issue;
+- Video element width animation issue;
+
+### Added
+- WordPress 6.4.3 compatibility;
+- WooCommerce 8.6 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.3.6 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.5</label></h2> Jan 06, 2024
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mobile hamburger menu icon position issue;
+- Carousel element width issue;
+
+### Added
+- WooCommerce 8.4 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.3.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.4</label></h2> Dec 12, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Aria-label attributes in interactive elements issue;
+- Main menu and sticky footer dynamic typo issue;
+
+### Added
+- Option to choose the color mode switcher layout;
+- Option to enable/disable a dark section mode for the page headline;
+
+### Updated
+- Ohio Extra plugin to the 3.3.4 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.3</label></h2> Nov 17, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Single product mobile appearance issue;
+- Custom color for the hamburger overlay issue;
+- Single project video cover visibility issue;
+- Tilt effect for lazy loaded images issue;
+- Single product image size customization issue;
+
+### Added
+- Option to enable/disable randomized project order;
+
+### Updated
+- Ohio Extra plugin to the 3.3.3 version;
+- Ohio Portfolio plugin to the 1.1.3 version;
+</pre>
+<pre class="-warning">
+### Notes
+- After updating to the current version, a single product image size might be set to defaults.
+  To change that navigate to Appearance &gt; Customize &gt; WooCommerce &gt; Product Images.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.2</label></h2> Oct 25, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Option to set a blog post layout for each post;
+- Option to choose the subscribe popup type;
+- Option to choose the subscribe popup featured image position;
+- Option to set the subscribe popup background color;
+- Option to set the subscribe popup height;
+- Option to set the subscribe popup width;
+- Option to set the subscribe popup close button color;
+- Option to show/hide the subscribe popup close link;
+- Option to set the color switcher typography for a specific page;
+- WooCommerce 8.2 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.3.2 version;
+- Main language file ohio.pot;
+</pre>
+<pre class="-warning">
+### Notes
+- After updating to the current version, a single blog post layout might be set to Standard. 
+  To change that navigate to Theme Settings &gt; Post &gt; General.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.1</label></h2> Sep 06, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- SVG logo size issue;
+- Cards overlay width issue;
+
+### Updated
+- Ohio Extra plugin to the 3.3.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.3.0</label></h2> Sep 05, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Product adding to cart with AJAX issue;
+- Writing a product review issue;
+
+### Added
+- New social network (Threads);
+- Wide archive blog layout;
+- Compact slider single project layout;
+- Button filter layout;
+- Typography transform and decoration properties;
+- Option to choose a portfolio filter layout;
+- Option to set a divider color for the blog archive grid;
+- Option to show/hide the post author in the page headline;
+- Option to show/hide the post date in the page headline;
+- Option to show/hide post comments in the page headline;
+- Option to enable/disable hamburger menu caption;
+- Option to enable/disable hamburger menu caption background color;
+- New Design Studio demo;
+- WooCommerce 8.0 compatibility;
+
+### Updated
+- Twitter icon updated to the new X;
+- Font Awesome updated to the 6.4.2 version;
+- Ohio Extra plugin to the 3.3.0 version;
+- Main language file ohio.pot;
+</pre>
+<pre class="-warning">
+### Notes
+After updating to the current version project excerpt might be visible. 
+To disable it open Portfolio Projects widget and look for "Excerpt visibility" option.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.5</label></h2> Jun 16, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Product adding to cart with AJAX issue;
+
+### Added
+- Option to show/hide the post author in the page headline;
+- Option to show/hide the post date in the page headline;
+- Option to show/hide post comments in the page headline;
+- WooCommerce 7.8 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.2.5 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.4</label></h2> Jun 09, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Video element animation (Safari) issue;
+- ACF update package not found issue;
+- Single tab options applying in Accordion element issue;
+
+### Added
+- Correct popup placement for Gallery element;
+- WooCommerce 7.7 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.2.4 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.3</label></h2> Apr 27, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- New social network (Houzz);
+- Option to export/import Theme Settings;
+- Option to reset theme settings to defaults;
+- Option to show/hide video in the portfolio lightbox carousel;
+- Option to show/hide empty categories in the portfolio layout with a standard pagination;
+- WooCommerce 7.6 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.2.3 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.2</label></h2> Mar 22, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Color mode switcher mobile issue;
+
+### Added
+- Option to show/hide the date of publication on blog items;
+- Option to set a custom cart image;
+- Option to set a custom my account image;
+- WooCommerce 7.5 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.2.2 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.1</label></h2> Feb 14, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Portfolio layout with caption cursor mobile issue;
+
+### Added
+- Option to enable/disable a drop shadow effect for Blog page template;
+- Option to enable/disable a drop shadow effect for Portfolio page template;
+
+### Updated
+- Ohio Extra plugin to the 3.2.1 version;
+- Main language file ohio.pot;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.2.0</label></h2> Feb 12, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- New Badge element;
+- Option to enable/disable an equal height for product cards;
+- Option to add an icon/image for Message element;
+- Option to set an icon size for Message element;
+- Option to set a border radius for Video element;
+- Option to enable/disable a tilt effect for Video element;
+- Option to enable/disable a tilt effect for Services Table element;
+- Option to enable/disable a tilt effect for Pricing Table element;
+- Option to enable/disable a contained layout for Pricing Table element;
+- Option to set a border radius for Pricing Table element;
+- Option to set a background color for Pricing Table element;
+- Option to enable/disable a highlighted text for Heading element;
+- Option to enable/disable a highlighted text animation for Heading element;
+- Option to set a highlighter height for Heading element;
+- Option to enable/disable a blur effect for Cookies notice;
+- Option to enable/disable a drop shadow effect for Banner element;
+- Option to set a drop shadow intensity for Banner element;
+- Option to enable/disable a drop shadow effect for Blog Posts element;
+- Option to set a drop shadow intensity for Blog Posts element;
+- Option to enable/disable a drop shadow effect for Button element;
+- Option to set a drop shadow intensity for Button element;
+- Option to enable/disable a drop shadow effect for CTA element;
+- Option to set a drop shadow intensity for CTA element;
+- Option to enable/disable a drop shadow effect for Compare element;
+- Option to set a drop shadow intensity for Compare element;
+- Option to enable/disable a drop shadow effect for Gallery element;
+- Option to set a drop shadow intensity for Gallery element;
+- Option to enable/disable a drop shadow effect for Message element;
+- Option to set a drop shadow intensity for Message element;
+- Option to enable/disable a drop shadow effect for Portfolio Projects element;
+- Option to set a drop shadow intensity for Portfolio Projects element;
+- Option to enable/disable a drop shadow effect for Pricing Table element;
+- Option to set a drop shadow intensity for Pricing Table element;
+- Option to enable/disable a drop shadow effect for Services Table element;
+- Option to set a drop shadow intensity for Services Table element;
+- Option to enable/disable a drop shadow effect for Shop Category Table element;
+- Option to set a drop shadow intensity for Shop Category Table element;
+- Option to enable/disable a drop shadow effect for Team Member element;
+- Option to set a drop shadow intensity for Team Member element;
+- Option to enable/disable a drop shadow effect for Video element;
+- Option to set a drop shadow intensity for Video element;
+- WooCommerce 7.3 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.2.0 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.9</label></h2> Jan 6, 2023
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Grouped product quantity switcher issue;
+- Elementor Pro contact form widget issue;
+
+### Added
+- Bootstrap icon font library;
+- Option to set an icon size value for Circle Progress element;
+- Option to set an icon size value for Counter element;
+- Option to set an icon size value for Icon Box element;
+- Option to set an icon size value for Services Table element;
+- Option to enable/disable Font Awesome 5 icons preloading;
+- Option to enable/disable Ionicons icons preloading;
+- Option to enable/disable Bootstrap icons preloading;
+- Option to enable/disable Linea icons preloading;
+- Option to enable/disable AJAX add to cart feature for a single product;
+- WooCommerce 7.2 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.9 version;
+- Ohio Importer plugin to the 1.2.4 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.8</label></h2> Nov 22, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Variation product add to cart quantity issue;
+
+### Added
+- Option to show/hide social networks on the specific page;
+- WooCommerce 7.1 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.7</label></h2> Nov 08, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Custom selects dark mode issue;
+- Single post share bar dark mode issue;
+- Blog page template sticky post output issue;
+
+### Added
+- WordPress 6.1 compatibility;
+- WooCommerce 7.0.1 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.6</label></h2> Oct 20, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Minimal product archive layout add to cart issue;
+
+### Added
+- Image transition portfolio hover effect;
+- Option to set a featured video cover for single projects;
+- Option to fit a featured video cover for single projects;
+- WooCommerce 7.0 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.6 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.5</label></h2> Oct 10, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- WooCommerce My Account sign in issue;
+- Mobile menu visibility issue;
+
+### Added
+- WooCommerce 6.9 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.4</label></h2> Sep 27, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- RTL row stretching issue;
+
+### Added
+- Option to add a custom content to the mobile menu overlay;
+- Option to set a video start time for YouTube/Vimeo players in a single project;
+- Option to set an autoplay mode for YouTube/Vimeo players in a single project;
+- Option to set a muted mode for YouTube/Vimeo players in a single project;
+- Option to show/hide controls for YouTube/Vimeo players in a single project;
+- Option to show/hide title for Vimeo player in a single project;
+- Option to show/hide author for Vimeo player in a single project;
+- WooCommerce 6.9 compatibility;
+- ACF Pro 6.0 styles issue;
+
+### Updated
+- Ohio Extra plugin to the 3.1.4 version;
+- Ohio Importer plugin to the 1.2.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.3</label></h2> Sep 08, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Shop archive layout theme settings defaults issue;
+- Related products wrapper classes issue;
+
+### Added
+- Option to show/hide product rating on an archive page;
+- Classic archive product layout;
+- Image transition product hover effect;
+
+### Updated
+- Ohio Extra plugin to the 3.1.3 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.2</label></h2> Aug 31, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Footer copyright bar typography options issue;
+- Elementor Pro header and footer usage issue;
+
+### Added
+- Option to show/hide stock badge on product page;
+- Option to open products sharing link in a new tab;
+- Option to open posts sharing link in a new tab;
+- Option to open projects sharing link in a new tab;
+- Option to set slider animation direction on mobile devices;
+- Split Screen single product layout;
+- Split Screen - Reflected single product layout;
+- Classic Gallery single product layout;
+- Classic Gallery - Reflected single product layout;
+- Grid Gallery single product layout;
+- Grid Gallery - Reflected single product layout;
+- YITH WooCommerce Featured Video compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.1.2 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.1</label></h2> Aug 16, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Footer copyright bar typography options issue;
+- Portfolio Next/Prev permalinks issue;
+- Global portfolio category visibility option issue;
+
+### Added
+- Option to show/hide scroll to top anchor on tablets;
+- Option to show/hide social networks on tablets;
+- Option to set footer logo height;
+- Option to set a muted mode for Vimeo player;
+- Option to show/hide author for Vimeo player;
+- Option to show/hide title for Vimeo player;
+- Option to show/hide controls for YouTube/Vimeo players;
+- Option to set a video start time for YouTube/Vimeo players;
+- WooCommerce Product Recommendations compatibility;
+- WooCommerce 6.8 compatibility;
+- WPML config for Ohio Extra plugin;
+- WPML config for Ohio Portfolio plugin;
+- WPML config for Ohio theme;
+
+### Updated
+- Ohio Extra plugin to the 3.1.1 version;
+- Ohio Portfolio plugin to the 1.1.2 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.1.0</label></h2> Jun 22, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Select dropdown color in the dark mode (Firefox only) issue;
+
+### Added
+- WebP image format compatibility;
+- Local page option to set a hamburger menu position;
+- Option to enable/disable round buttons animation effect;
+- Option to show/hide cart icon when it's empty;
+- Option to set custom sticky logo dark mode variant;
+- Option to set sticky logo height;
+
+### Updated
+- Google Fonts list updated;
+- Ohio Extra plugin to the 3.1.0 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.9</label></h2> May 25, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Notification option to enable/disable link opening in a new tab issue;
+
+### Added
+- Option to set notification button color;
+- Option to set notification link typography;
+- Option to set social networks color in the coming soon mode;
+- Option to set subscribe popup form details typography;
+- Option to set subscribe popup close link typography;
+
+### Updated
+- Ohio Extra plugin to the 3.0.9 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.8</label></h2> May 20, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Video button with preview caption position issue;
+- WooCommerce search result product output issue;
+
+### Added
+- WooCommerce 6.5 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 3.0.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.7</label></h2> May 17, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Option to show/hide social networks in mobile menu;
+- Option to set notification colors;
+- Option to set page wrapper width;
+- Option to set footer links color;
+
+### Updated
+- Ohio Extra plugin to the 3.0.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.6</label></h2> May 12, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Section decoration title option (WPBakery only) issue;
+- Project header with parallax scrolling effect issue;
+
+### Updated
+- Ohio Extra plugin to the 3.0.6 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.5</label></h2> May 09, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Single product tabs element height issue;
+- Single project with sticky footer styles issue;
+- Button element with custom image issue;
+
+### Added
+- Option to show/hide single project title;
+
+### Updated
+- Ohio Extra plugin to the 3.0.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.4</label></h2> May 05, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Single product tabs element height issue;
+- Single project with sticky footer styles issue;
+- Button element with custom image issue;
+
+### Added
+- Option to enable/disable text wrap for message element;
+
+### Updated
+- Ohio Extra plugin to the 3.0.4 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.3</label></h2> May 02, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Subheader typography option issue;
+- Sticky header height option issue;
+- Button component with appear transitions issue;
+- Compare component image quality issue;
+
+### Updated
+- Ohio Extra plugin to the 3.0.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.2</label></h2> Apr 26, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Portfolio page template filter alignment issue;
+- Single project buttons z-index issue;
+
+### Updated
+- Ohio Extra plugin to the 3.0.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.1</label></h2> Apr 25, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Split single post type mobile styles;
+- Blog items per row option issue;
+
+### Added
+- Option to enable/disable links underline effect;
+
+### Updated
+- Ohio Extra plugin to the 3.0.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.0.0</label></h2> Apr 20, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- PHP 8.0 compatibility;
+- WordPress 5.9.3 compatibility;
+- WooCommerce 6.4 compatibility;
+- Theme's main layouts reworked and improved;
+- Theme's CSS and JS files reworked and improved;
+- Figma design source files reworked and improved;
+- WPBakery/Elementor shortcodes/widgets reworked and improved;
+- Design Options tab added for all the custom WPBakery shortcodes;
+- Banner element new hover effects;
+- Team Member element new hover effects;
+- Gallery element new hover effects;
+- Product archive element new hover effects;
+- New social network (Tripadvisor);
+- New portfolio archive layout;
+- New single blog post layout;
+- Full RTL support;
+- Single product mobile gallery navigation;
+- Option to set global links hover color;
+- Option to enable/disable fixed header position;
+- Option to set a single post layout;
+- Option to set a thickness variation for Progress Bar element;
+- Option to set a thickness variation for Circle Progress Bar element;
+- Option to set an icon size and style variations for Circle Progress Bar element;
+- Option to set an icon size and style variations for Counter element;
+- Option to set an icon size and style variations for Services Table element;
+- Option to set an avatar size variation for Testimonial element;
+- Option to set a shape size variation for Video element;
+- Option to set a blurred type for Video element;
+- Option to set a size variation for Message element;
+- Option to set a size variation for Social Networks element;
+- Option to set a border radius for Banner element;
+- Option to set a border radius for Blog Posts element;
+- Option to set a border radius for Button element;
+- Option to set a border radius for Countdown element;
+- Option to set a border radius for Gallery element;
+- Option to set a border radius for Instagram Feed element;
+- Option to set a border radius for Message element;
+- Option to set a border radius for Portfolio Projects element;
+- Option to set a border radius for Progress Bar element;
+- Option to set a border radius for Service Table element;
+- Option to set a border radius for Shop Category element;
+- Option to set a border radius for Social Networks element;
+- Option to set a border radius for Team Group element;
+- Option to set a border radius for Team Member element;
+- Option to set a border radius for Testimonial element;
+- Option to set a border radius for Video element;
+- Option to enable/disable dividers for Countdown element;
+- Option to enable/disable a tilt effect for Banner element;
+- Option to set a hover effect for Gallery element;
+- Option to enable/disable a metro effect for Gallery element;
+- Option to set a hover effect for Team Member element;
+- Option to enable/disable a metro effect for Team Member element;
+- Option to enable/disable a tilt effect for Gallery element;
+- Option to set global buttons color;
+- Option to set up a hamburger menu content typography;
+- Option to set up a hamburger menu social networks typography;
+- Option to choose a hamburger menu social networks type;
+- Option to enable/disable portfolio tilt effect;
+- Option to set portfolio tilt effect perspective value;
+- Option to set portfolio revert effect;
+- Option to enable/disable products tilt effect;
+- Option to set products tilt effect perspective value;
+- Option to enable/disable a metro style for products;
+- Option to show/hide a video button for projects;
+- Option to choose a product quickview button color;
+- Option to show/hide a product sale tag;
+- Option to show/hide an account icon;
+- New Digital Agency demo template;
+
+### Deprecated
+- Split Section shortcode;
+
+### Updated
+- Ohio Extra plugin to the 3.0.0 version;
+</pre>
+<pre class="-warning">
+### Notes
+We've improved theme's components and strongly recommend you making the following after update:
+1. <a class="-dashed" href="https://docs.clbthemes.com/ohio/update-issues/#regenerate_css" target="_blank" rel="noopener">Regenerate CSS files</a> (for Elementor builder)
+2. Check the following Shortcodes/Widgets options for backward compatibility:
+- <strong>Button</strong>: Styles → General option (for Elementor builder);
+- <strong>Testimonial</strong>: General → Alignment option (for WPBakery builder); 
+- <strong>Tabs</strong>: General → Direction option (for WPBakery builder);
+- <strong>Heading</strong>: Subtitle → Divider option (for Elementor &amp; WPBakery builders); 
+- <strong>Countdown</strong>: General → Layout option (for Elementor &amp; WPBakery builders);
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.4.4</label></h2> Jan 31, 2022
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Option to enable/disable preloader for specific pages;
+- WordPress 5.9 compatibility;
+- WooCommerce 6.1 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.3.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.4.3</label></h2> Dec 6, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Testimonials Shortcode issue;
+- Missing VK icon issue;
+- Portfolio Projects Shortcode brand color option issue;
+
+### Added
+- WooCommerce 5.9 compatibility;
+- ACF Pro 5.11 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.3.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.4.2</label></h2> Oct 12, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Search page portfolio output issue;
+- Carousel widget animation issue;
+
+### Added
+- Increased the number of max symbols for the text fields in Theme Settings;
+- Option to add YouTube, Vimeo and custom video links in a single project;
+- Option to add page content top margin value;
+- Option to add page content bottom margin value;
+- WooCommerce 5.7 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.3.1 version;
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.4.1</label></h2> Aug 16, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Portfolio page template issue;
+- Mobile typography issue;
+
+### Added
+- Options to set global typography styles for H1 - H6 tags;
+
+### Updated
+- Main language file ohio.pot updated;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.4.0</label></h2> Aug 11, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Header with top logo height option issue;
+- Sticky product translation issue;
+
+### Added
+- New social network (Tripadvisor);
+- WordPress 5.8 compatibility;
+- WooCommerce 5.5 compatibility;
+- PHP 8.0 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.3.0 version;
+- Ohio Importer plugin to the 1.2.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.7</label></h2> Jun 16, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- WPML with 3+ languages issue;
+- Elementor Pro header and footer issue;
+- Portfolio global Theme Settings issue;
+- Theme Settings saving issue;
+- Subscribe window with gallery lightbox issue;
+- Call to action shortcode issue;
+
+### Added
+- Option to show/hide cart totals;
+- WooCommerce 5.4 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.2.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.6</label></h2> Apr 13, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Contact Form 7 forms issue;
+- Custom CSS code editor issue;
+- Portfolio load more pagination issue;
+- Sticky footer style issue;
+- Products double tap on mobile devices issue;
+- Products page adding to cart quantity issue issue;
+
+### Added
+- WooCommerce 5.1 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.2.6 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.5</label></h2> Mar 24, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Adding multiple products to the cart issue;
+- Mega menu structure (Elementor Pro compatibility) issue;
+- Polylang plugin compatibility issue;
+- Project lightbox for loaded projects issue;
+- Main menu ACF Pro custom fields visibility issue;
+
+### Added
+- Option to show/hide language switcher in a hamburger menu;
+- BDroppy compatibility;
+- Ultimate Member compatibility;
+- WordPress 5.7 compatibility;
+
+### Updated
+- Ohio Extra plugin to the 2.2.5 version;
+</pre>
+<pre class="-warning">
+### Notes
+- We updated Header and Menu layouts to make it compatible with Elementor Pro plugin. 
+Ensure that you cleared your browser's cache, if you will have any style issues after update.
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.4</label></h2> Feb 23, 2021
+</div>
+<pre>
+### Fixed
+- Dark mode issue;
+- Open link in a new tab header button issue;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.3</label></h2> Feb 22, 2021
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- iOS/MacOS Countdown Widget crashing issue;
+- Ohio Portfolio plugin translation issue;
+- Sticky footer z-index issue;
+- Search button issue;
+- Custom fields visibility in the main menu issue;
+- RTL Dark/Light mode switcher issue;
+- Portfolio Vimeo video embedding issue;
+- Double logo issue;
+
+### Added
+- Hide "Join the conversation" link when comments are disabled;
+
+### Updated
+- Ohio Extra plugin to the 2.2.4 version;
+- Ohio Portfolio plugin to the 1.1.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.2</label></h2> Dec 28, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Counter Widget duplication issue;
+- WPBakery shortcodes custom fonts issue;
+
+### Added
+- Adaptive images support;
+- Option to set page boxed layout margins;
+- New Simple App demo;
+
+### Updated
+- Ohio Extra plugin to the 2.2.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.1</label></h2> Dec 12, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Wide menu window horizontal scroll issue (in Safari);
+- Horizontal accordion style issue;
+
+### Added
+- Option to enable/disable color mode switcher on specific pages;
+- Option to choose default/outline portfolio video button type;
+- Coming soon mode;
+- Light/dark mode support added for portfolio sliders;
+- WordPress 5.6 compatibility added
+- WooCommerce 4.8 compatibility;
+
+### Updated
+- Google Fonts list updated;
+- Ohio Importer plugin to the 1.2.1 version;
+- Ohio Extra plugin to the 2.2.2 version;
+</pre>
+<pre class="-warning">
+### Notes
+- Ensure that your portfolio slider colors are still the same after update. 
+  If not, set the required color mode by navigating to Page Settings → General → Dark mode;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.3.0</label></h2> Nov 24, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Theme settings displaying in the Elementor preview mode issue;
+
+### Added
+- Option to set left/right position for social networks;
+- Option to set left/right position for scroll to top;
+- Option to set left/right position for color mode switcher;
+- New Showcase Interactive demo;
+- New portfolio layout;
+- Color mode switching improved;
+
+### Updated
+- Ohio Extra plugin to the 2.2.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.2.0</label></h2> Nov 4, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Product lightbox review link issue;
+
+### Added
+- 500px social network;
+- Option to enable/disable standard header;
+- Option to enable/disable opening of the 1st level menu items as regular links;
+- Portfolio category taxonomy functionality;
+- Portfolio tag taxonomy functionality;
+- New Creative Agency demo;
+- New blog layout;
+- Demo Importer plugin enhanced with new demo installation options;
+
+### Updated
+- Ohio Portfolio plugin to the 1.1.0 version;
+- Ohio Importer plugin to the 1.2.0 version;
+- Ohio Extra plugin to the 2.2.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.1.2</label></h2> Oct 16, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mobile header issue;
+
+### Added
+- Menu with center hamburger;
+
+### Updated
+- WooCommerce 4.6.0 compatibility;
+- Ohio Extra plugin to the 2.1.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.1.1</label></h2> Oct 14, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Elementor parallax with stretched row issue;
+- Variable product lightbox issue;
+- Cross sales products issue;
+
+### Added
+- Theme Settings strings added to the language file;
+- Option to set a highlight text color;
+- Option to set the dark mode site background color;
+- Option to enable/disable portfolio tilt hover effect;
+
+### Updated
+- Ohio Extra plugin to the 2.1.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.1.0</label></h2> Oct 1, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Elementor editor with enabled preloader issue;
+- Dark mode logo issue;
+- Author avatar in the archive and blog post issue;
+- Sticky product in the variable product issue;
+- Product grid with lazy load pagination issue;
+
+### Added
+- Kaggle, Medium and Xing networks;
+- Product page back link button;
+- Option to set the dark mode for a specific page;
+- Option to set the number of related products;
+- Option to save color mode value;
+- Option to show/hide social networks;
+- Option to set portfolio lightbox description length;
+- Option to open social networks in a current/new tab;
+- User dashboard;
+- Theme activation feature;
+- Theme Settings UI improved;
+
+### Updated
+- WooCommerce 4.5.2 compatibility;
+- Ohio Importer plugin to the 1.1.0 version;
+- Ohio Extra plugin to the 2.1.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 2.0.0</label></h2> Aug 28, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Footer double logo issue;
+- Portfolio filters with load more pagination issue;
+- Fullscreen Slider Shortcode safari style issue;
+- WooCommerce VAT price issue;
+
+### Added
+- Option to set portfolio project video button background color;
+- Option to set portfolio grid video button background color;
+- Elementor core integration;
+- Elementor Accordion widget;
+- Elementor Horizontal Accordion widget;
+- Elementor Banner widget;
+- Elementor Button widget;
+- Elementor Carousel widget;
+- Elementor Circle Progress widget;
+- Elementor Clients Logo widget;
+- Elementor Compare widget;
+- Elementor Contact Form widget;
+- Elementor Countdown widget;
+- Elementor Counter widget;
+- Elementor Dynamic Text widget;
+- Elementor Gallery widget;
+- Elementor Google Maps widget;
+- Elementor Heading widget;
+- Elementor Icon Box widget;
+- Elementor Instagram widget;
+- Elementor Pricing Table widget;
+- Elementor Process widget;
+- Elementor Progress Bar widget;
+- Elementor Blog Posts widget;
+- Elementor Portfolio Projects widget;
+- Elementor Service Table widget;
+- Elementor Social Networks widget;
+- Elementor Tabs widget;
+- Elementor Team Member widget;
+- Elementor Team Group widget;
+- Elementor Testimonial widget;
+- Elementor Vertical Slider widget;
+- Elementor Video widget;
+- Elementor Shop Categories widget;
+- Elementor importable home pages (Demo1 - Demo30);
+- Elementor importable about pages (About Ver1 - About Ver6);
+- Elementor importable contact pages (Contact Ver1 - Contact Ver6);
+- Elementor importable blog page;
+- Elementor importable portfolio page;
+- Elementor importable portfolio projects;
+- Elementor importable products;
+- Elementor importable landing page;
+- Elementor importable all demo pages;
+- Elementor importable widgets (UI elements);
+
+### Updated
+- WooCommerce 4.4 compatibility;
+- Ohio Importer plugin to the 1.0.8 version;
+- Ohio Extra plugin to the 2.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.2.1</label></h2> Aug 12, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Mobile carousel navigation issue;
+- Custom fonts issue;
+
+### Updated
+- WordPress 5.5 compatibility;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.2.0</label></h2> Aug 04, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Portfolio filter bar issue;
+- Product variation on a single product page issue;
+- Circle Progress Shortcode icon issue;
+- Product add to cart in old Safari browsers issue;
+- Mobile menu issue;
+- Carousel Shortcode mobile navigation issue;
+- Product page rating bar issue;
+- Category page headline issue;
+
+### Added
+- Product variation details in the cart/checkout;
+- Option to define header content wrapper width;
+- Option to define footer content wrapper width;
+- Option to define header full-width layout spacing;
+- Option to define footer full-width layout spacing;
+- Option to set a custom project URL slug;
+- WPForms plugin compatibility;
+- Importable single projects;
+
+### Updated
+- Font Awesome 5.14 compatibility;
+- WooCommerce 4.3.0 compatibility;
+- Ohio Importer plugin to the 1.0.7 version;
+- Ohio Extra plugin to the 1.2.0 version;
+- Ohio Portfolio plugin to the 1.0.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.1.1</label></h2> Jun 12, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Shop catalog add to cart button issue;
+- Custom fonts usage in shortcodes only issue;
+- Alt attribute in portfolio projects issue;
+- Carousel Shortcode on mobile devices issue;
+- Portfolio lightbox project image duplication issue;
+- Contact Form Shortcode preloader issue;
+- Add to Cart in old Safari versions issue;
+
+### Added
+- Option to enable/disable autoplay in the Video Shortcode;
+- Option to show/hide feature image on a single project;
+- Option to set recent post items per row;
+- Discord, Pinterest, SoundCloud, Spotify, Teamspeak, Telegram networks;
+- Option to set logo height for desktop and mobile devices;
+- Option to enable/disable Next/Prev product navigation;
+- Option to enable/disable color mode switcher on mobile devices;
+- Option to enable/disable multi-level menu indicator;
+- Option to enable/disable animation repeating for portfolio items;
+- Option to enable/disable animation repeating for blog items;
+- Option to enable/disable animation repeating for product items;
+- Compare Shortcode with vertical direction;
+- Option to disable global settings while importing;
+
+### Updated
+- Ohio Importer plugin to the 1.0.6 version;
+- Ohio Extra plugin to the 1.1.0 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.1.0</label></h2> May 07, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Gallery Shortcode pagination issue;
+- Clients Logo Shortcode issue;
+- Portfolio tags visibility issue;
+- Shop catalog add to cart button issue;
+
+### Added
+- New social networks (TikTok, Twitch, Mixer);
+- Schema.org breadcrumbs validation;
+
+### Updated
+- Theme's language .POT file updated (translate issue);
+- Font Awesome updated to the 5.13 version;
+- Ohio Extra plugin to the 1.0.9 version;
+- WooCommerce 4.1.0 compatibility;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.9</label></h2> Apr 28, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Horizontal Accordion Shortcode issue;
+- Mobile sticky header issue;
+- Pricing Table Shortcode brand color issue;
+- Icon Box Shortcode Font Awesome issue;
+
+### Added
+- Option to set logo size;
+- Option to enable/disable product gallery zoom effect;
+- Option to choose mobile menu;
+
+### Updated
+- Google Fonts list updated;
+- Ohio Extra plugin to the 1.0.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.8</label></h2> Apr 17, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- One-page menu mobile issue;
+- Menu Widget links color issue;
+- Portfolio carousel issue;
+- Portfolio slider parallax effect issue;
+- Tabs Shortcode mobile issue;
+- Next-Prev project navigation issue;
+
+### Added
+- Project page revisions;
+
+### Updated
+- Ohio Importer plugin to the 1.0.5 version;
+- Ohio Extra plugin to the 1.0.7 version;
+- Ohio Portfolio plugin to the 1.0.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.7</label></h2> Mar 24, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Show Project link without lightbox preview issue;
+- WPML switcher issue;
+- Portfolio Projects Shortcode thumbnail size option issue;
+
+### Added
+- Caption cursor portfolio grid layout;
+- New single project layout;
+- Custom fonts usage;
+- Option to enable/disable page fadein effect;
+- Option to choose parallax/scale slider image effect for a single project;
+
+### Updated
+- Ohio Extra plugin to the 1.0.6 version;
+- WooCommerce 4.0.0 compatibility;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.6</label></h2> Mar 07, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Retina logo in the Ohio Logo Widget issue;
+- Centered menu with custom links issue;
+- Sticky header with centered menu issue;
+- Double logo issue on mobile devices issue;
+
+### Added
+- Importable products;
+- Hamburger menu centered layout;
+- Hamburger menu creative layout;
+- Show/hide social networks in hamburger menu option;
+- Show/hide social networks in mobile menu option;
+- Hamburger menu layout local page option;
+- Light/dark color mode switcher option;
+
+### Updated
+- Ohio Extra plugin to the 1.0.5 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.5</label></h2> Feb 26, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Extended menu third level+ issue;
+
+### Added
+- New importable demo (Ohio Landing Page);
+- New importable demo (Demo 3: Showcase Interactive);
+- Portfolio layout with interactive links for Portfolio Page Template;
+- Portfolio layout with interactive links for Portfolio Projects Shortcode;
+- Fill background color global option;
+
+### Updated
+- Ohio Extra plugin to the 1.0.4 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.4</label></h2> Feb 19, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Adobe Fonts typography issue;
+- Color switcher with enabled dark mode issue;
+- Demo import on the new host issue;
+
+### Updated
+- Ohio Importer plugin to the 1.0.3 version;
+- Ohio Extra plugin to the 1.0.3 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.3</label></h2> Feb 06, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Multiple lazy-load paginations issue;
+- Search page results pagination issue;
+- Social networks links issue;
+- Header language switcher issue;
+
+### Added
+- Main demo website importable demo;
+- Percentage preloader type;
+- Light logo variant for the dark mode option;
+
+### Updated
+- Ohio Extra plugin to the 1.0.2 version;
+- WooCommerce 3.9.0 compatibility;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.2</label></h2> Jan 21, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Option to choose hamburger position on mobile devices;
+- Option to set active/inactive state for Accordion Shortcode items;
+- Option to switch social networks type from text values to icons;
+
+### Updated
+- Ohio Extra plugin to the 1.0.1 version;
+- Ohio Importer plugin to the 1.0.2 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.1</label></h2> Jan 14, 2020
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+
+### Added
+- Blog page with pre-made posts importable demo;
+- Portfolio page with pre-made projects importable demo;
+
+### Updated
+- YITH WooCommerce Wishlist 3.0.0 + compatibility;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 1.0.0</label></h2> Jan 11, 2020
+</div>
+<pre>
+- Theme release 🎉
+</pre>
+</div>
+
 </div>
 
 
 <a target="_blank" href="https://docs.clbthemes.com/ohio/release-notes/" class="btn btn-flat"><?php _e( 'All Changelog', 'ohio-extra' ); ?></a>
-
-
 
 

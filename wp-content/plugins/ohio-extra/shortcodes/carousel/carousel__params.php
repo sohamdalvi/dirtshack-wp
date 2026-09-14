@@ -164,7 +164,7 @@ function ohio_carousel_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Number of Visible Items (Desktop)', 'ohio-extra' ),
+				'heading' => __( 'Desktop', 'ohio-extra' ),
 				'param_name' => 'item_desktop',
 				'value' => array(
 					__( '1 item', 'ohio-extra' ) => '1',
@@ -182,7 +182,7 @@ function ohio_carousel_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Number of Visible Items (Tablet)', 'ohio-extra' ),
+				'heading' => __( 'Tablet', 'ohio-extra' ),
 				'param_name' => 'item_tablet',
 				'value' => array(
 					__( '1 item', 'ohio-extra' ) => '1',
@@ -200,7 +200,7 @@ function ohio_carousel_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Number of Visible Items (Mobile)', 'ohio-extra' ),
+				'heading' => __( 'Mobile', 'ohio-extra' ),
 				'param_name' => 'item_mobile',
 				'value' => array(
 					__( '1 item', 'ohio-extra' ) => '1',

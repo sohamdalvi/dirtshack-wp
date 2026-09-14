@@ -404,6 +404,26 @@
                 "add_theme_inherited" => false
             ],
             [
+                "key" => "field_5937e3aaf346255",
+                "label" => __( 'Border Width', 'ohio' ),
+                "name" => "global_page_buttons_border_width",
+                "type" => "text",
+                "instructions" => __( 'Set the global border width value for all buttons.', 'ohio' ),
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda32383",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "prepend" => __( 'Use CSS units', 'ohio' ),
+                "placeholder" => "2px",
+                "default_value" => "",
+                "add_theme_inherited" => false
+            ],
+            [
                 "key" => "field_54224ad293587",
                 "label" => __( 'Forms <span class="new-badge"></span>', 'ohio' ),
                 "name" => "",
@@ -431,6 +451,26 @@
                 ],
                 "prepend" => __( 'Use CSS units', 'ohio' ),
                 "placeholder" => "8px",
+                "add_theme_inherited" => false
+            ],
+            [
+                "key" => "field_54224ad2935872",
+                "label" => __( 'Border Width', 'ohio' ),
+                "name" => "global_page_forms_border_width",
+                "type" => "text",
+                "instructions" => __( 'Set the global border width value for forms fields. (input, select, textarea).', 'ohio' ),
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda32383",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "prepend" => __( 'Use CSS units', 'ohio' ),
+                "placeholder" => "2px",
+                "default_value" => "",
                 "add_theme_inherited" => false
             ],
             [

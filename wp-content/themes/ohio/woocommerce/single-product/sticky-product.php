@@ -29,7 +29,7 @@ $ajax_cart = OhioOptions::get( 'woocommerce_product_ajax_cart', true );
         <?php endif; ?>
 
         <div class="sticky-product-details">
-            <h6 class="woo-product-name title"><?php the_title(); ?></h6>
+            <div class="woo-product-name h6 title"><?php the_title(); ?></div>
             <div class="woo-category category-holder">
                 <?php
                 $cats = get_the_terms( $post->ID, 'product_cat' );

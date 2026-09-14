@@ -27,11 +27,6 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-recent-posts';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -716,7 +711,7 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'category_color',
             [
-                'label' => __( 'Categories Color', 'ohio-extra' ),
+                'label' => __( 'Category Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'separator' => 'before',
                 'selectors' => [
@@ -729,7 +724,7 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'category_typography',
-                'label' => __( 'Categories Typography', 'ohio-extra' ),
+                'label' => __( 'Category Typography', 'ohio-extra' ),
                 'selector' => '{{WRAPPER}} .blog-item .category-holder',
             ]
         );
@@ -756,11 +751,22 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'category_badge_color',
+            [
+                'label' => __( 'Category Badge Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .blog-item .category-holder .tag' => 'background-color: {{VALUE}};',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
             'card_background_color',
             [
                 'label' => __( 'Background Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
-                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .blog-item.-contained .card-details' => 'background-color: {{VALUE}}',
                     '{{WRAPPER}} .blog-item.-layout4 .image-holder' => 'background-color: {{VALUE}}'
@@ -769,11 +775,30 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'overlay_color',
             [
                 'label' => __( 'Overlay Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
-                'separator' => 'before',
                 'selectors' => [
                     '{{WRAPPER}} .blog-item.-img-overlay .image-holder::after' => 'background: {{VALUE}}',
                     '{{WRAPPER}} .blog-item.-img-overlay .overlay' => 'background: {{VALUE}}'

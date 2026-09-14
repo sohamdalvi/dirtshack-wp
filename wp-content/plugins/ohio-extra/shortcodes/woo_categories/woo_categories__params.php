@@ -79,7 +79,7 @@ function ohio_woo_categories_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Shape Border', 'ohio-extra' ),
+				'heading' => __( 'Border', 'ohio-extra' ),
 				'param_name' => 'border_width',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '0',
@@ -94,7 +94,7 @@ function ohio_woo_categories_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Shape Corners', 'ohio-extra' ),
+				'heading' => __( 'Corners', 'ohio-extra' ),
 				'param_name' => 'border_radius',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '5'
@@ -183,7 +183,7 @@ function ohio_woo_categories_sc_map() {
 			array(
 				'type' => 'vc_link',
 				'group' => __( 'Button', 'ohio-extra' ),
-				'heading' => __( 'Link', 'ohio-extra' ),
+				'heading' => __( 'Link URL', 'ohio-extra' ),
 				'param_name' => 'button_link',
 				'dependency' => array(
 					'element' => 'add_link',
@@ -210,7 +210,7 @@ function ohio_woo_categories_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'Button', 'ohio-extra' ),
-				'heading' => __( 'Position', 'ohio-extra' ),
+				'heading' => __( 'Icon', 'ohio-extra' ),
 				'param_name' => 'icon_position',
 				'std' => 'left',
 				'value' => array(
@@ -278,7 +278,7 @@ function ohio_woo_categories_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Shape Background Color', 'ohio-extra' ),
+				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'background_color',
 				'dependency' => array(
 					'element' => 'layout',
@@ -288,9 +288,26 @@ function ohio_woo_categories_sc_map() {
 				)
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'layout',
+					'value' => array(
+						'boxed'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			),
+			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Shape Border Color', 'ohio-extra' ),
+				'heading' => __( 'Border Color', 'ohio-extra' ),
 				'param_name' => 'border_color',
 				'dependency' => array(
 					'element' => 'layout',

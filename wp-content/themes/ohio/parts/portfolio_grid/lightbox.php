@@ -85,9 +85,9 @@
                 <?php endif; ?>
             </div>
             <div class="project-title">
-                <h2 class="headline title">
+                <div class="h2 headline title">
                     <?php echo esc_html( $project['title'] ); ?>
-                </h2>   
+                </div>   
             </div>
             <?php if ( $show_description ) : ?>
                 <div class="project-details">
@@ -102,21 +102,21 @@
 
                     <?php if ( $project['strategy'] ) : ?>
                         <li>
-                            <h6 class="title"><?php esc_html_e( 'Strategy', 'ohio' ); ?></h6>
+                            <div class="h6 title"><?php esc_html_e( 'Strategy', 'ohio' ); ?></div>
                             <p><?php echo wp_kses( $project['strategy'], 'default' ); ?></p>
                         </li>
                     <?php endif; ?>
 
                     <?php if ( $project['design'] ) : ?>
                         <li>
-                            <h6 class="title"><?php esc_html_e( 'Design', 'ohio' ); ?></h6>
+                            <div class="h6 title"><?php esc_html_e( 'Design', 'ohio' ); ?></div>
                             <p><?php echo wp_kses( $project['design'], 'default' ); ?></p>
                         </li>
                     <?php endif; ?>
 
                     <?php if ( $project['client'] ) : ?>
                         <li>
-                            <h6 class="title"><?php esc_html_e( 'Client', 'ohio' ); ?></h6>
+                            <div class="h6 title"><?php esc_html_e( 'Client', 'ohio' ); ?></div>
                             <p><?php echo wp_kses( $project['client'], 'default' ); ?></p>
                         </li>
                     <?php endif; ?>
@@ -124,7 +124,7 @@
                     <?php if ( $project['custom_fields'] ) : ?>
                         <?php foreach ( $project['custom_fields'] as $custom_field ) : ?>
                         <li>
-                            <h6 class="title"><?php echo esc_html( $custom_field['title'] ); ?></h6>
+                            <div class="h6 title"><?php echo esc_html( $custom_field['title'] ); ?></div>
                             <p><?php echo esc_html( $custom_field['value'] ); ?></p>
                         </li>
                         <?php endforeach; ?>
@@ -132,7 +132,7 @@
 
                     <?php if ( $project['raw_tags'] ) { ?>
                         <li>
-                            <h6 class="title"><?php esc_html_e( 'Tags', 'ohio' ); ?></h6>
+                            <div class="h6 title"><?php esc_html_e( 'Tags', 'ohio' ); ?></div>
                             <p>
                                 <?php if ( $project['raw_tags'] ) : ?>
                                     <?php foreach ( $project['raw_tags'] as $i => $tag ) : ?>

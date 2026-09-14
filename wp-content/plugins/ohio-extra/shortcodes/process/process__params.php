@@ -42,7 +42,7 @@ function ohio_process_sc_map() {
 			array(
 				'type' => 'textfield',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Step number', 'ohio-extra' ),
+				'heading' => __( 'Number', 'ohio-extra' ),
 				'param_name' => 'number',
 				'value' => 'Step 1.',
 			),

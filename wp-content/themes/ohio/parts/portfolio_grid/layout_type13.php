@@ -88,7 +88,7 @@ if ( $project['tilt_effect'] ) {
 <div class="portfolio-item card -layout13<?php echo esc_attr( $wrapper_classes); ?>" <?php if ( $project['in_popup'] ) { echo ' data-portfolio-popup="' . esc_attr( $project['popup_id'] ) . '"'; } ?>>
     <div class="card-image" <?php echo esc_attr( $parallax_data ); ?>>
         <a class="-unlink image-holder" href="<?php echo esc_url( $project['url'] ); ?>" <?php if ( $project['external'] ) { echo 'target="_blank"'; } ?> data-cursor-class="cursor-link">
-            
+
             <?php if ( $featured_video && $project['show_featured_video'] ) : ?>
 
                 <?php if ( strpos( $featured_video_url, 'youtube.com' ) || strpos( $featured_video_url, 'youtu.be' ) || strpos( $featured_video_url, 'vimeo.com' ) ) : ?>
@@ -96,7 +96,7 @@ if ( $project['tilt_effect'] ) {
                         <iframe src="<?php echo esc_url( $featured_video_url ) . '?&controls=0&autoplay=1&start=0&mute=1&muted=1&rel=0&autopause=0&loop=1'; ?>" frameborder="0"/></iframe>
                     </div>
                 <?php else : ?>
-                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop">
+                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop" playsinline>
                         <source src="<?php echo esc_url( $featured_video_url ); ?>">
                     </video>
                 <?php endif; ?>

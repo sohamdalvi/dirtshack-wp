@@ -35,7 +35,11 @@
 							<?php endif; ?>
 
 							<?php if ( !empty( $item['list_title'] ) ) : ?>
-								<?php echo $item['list_title']; ?>
+								<?php if ( !empty( $item['list_tooltip'] ) ) : ?>
+									<span class="title has-tooltip -underline-dotted" data-tooltip="<?php echo esc_attr( $item['list_tooltip'] ); ?>" tabindex="0"><?php echo $item['list_title']; ?></span>
+								<?php else: ?>
+									<span class="title"><?php echo $item['list_title']; ?></span>
+								<?php endif; ?>
 							<?php endif; ?>
 						</li>
 					<?php endforeach; ?>

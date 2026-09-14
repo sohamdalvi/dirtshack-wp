@@ -22,11 +22,6 @@ class Ohio_Elementor_Circle_Progress_Bar_Widget extends Ohio_Elementor_Widget_Ba
         return 'ohio-icon-sc-circle-progress-bar';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'ohio-elementor-circle-progress-bar-widget' ];
     }

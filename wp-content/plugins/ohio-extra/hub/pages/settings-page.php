@@ -5,6 +5,7 @@
         'theme-general-typography' => __( 'Typography', 'ohio-extra' ),
         'theme-general-menu' => __( 'Menu', 'ohio-extra' ),
         'theme-general-header' => __( 'Header', 'ohio-extra' ),
+        'theme-general-sidebar' => __( 'Sidebar', 'ohio-extra' ),
         'theme-general-pages' => __( 'Pages', 'ohio-extra' ),
         'theme-general-footer' => __( 'Footer', 'ohio-extra' ),
         'theme-general-blog' => __( 'Blog', 'ohio-extra' ),
@@ -63,6 +64,11 @@
             case 'theme-general-header':
                 ?>
                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M211-144q-29 0-48-19t-19-48v-538q0-30 19-48.5t48-18.5h538q30 0 48.5 18.5T816-749v538q0 29-18.5 48T749-144H211Zm5-504h528v-96H216v96Zm528 72H216v360h528v-360Zm-528-72v72-72Zm0 0v-96 96Zm0 72v360-360Z"/></svg>
+                <?php
+                break;
+            case 'theme-general-sidebar':
+                ?>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M648-324v-312L480-480l168 156ZM211-144q-27.64 0-47.32-19.68T144-211v-538q0-27.64 19.68-47.32T211-816h538q27.64 0 47.32 19.68T816-749v538q0 27.64-19.68 47.32T749-144H211Zm125-72v-528H216v528h120Zm72 0h336v-528H408v528Zm-72 0H216h120Z"/></svg>
                 <?php
                 break;
             case 'theme-general-pages':
@@ -135,19 +141,49 @@
     }
 ?>
 
+<?php $license_info = apply_filters( 'ohio/ui-license-info', [ 'is_active' => false ] ); ?>
+
 <div class="clb-hub clb-page">
+
+	<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
+
+		<?php if ( $license_info['is_active'] && empty( $_COOKIE['ohio_license_notice_dismissed'] ) ) : ?>
+			<div class="o-notice notice notice-ohio-info is-dismissible">
+				<div class="holder">
+					<p>As of July 1, 2026, Envato introduced <b>a flat 50% author fee, significantly increasing commissions</b> for creators.<br> To keep our support and updates sustainable, we’ve adjusted our rates* and introduced even more flexible licensing tiers:</p>
+					<div class="_button-group">
+						<a class="btn btn-info" target="_blank" href="https://ohio.clbthemes.com/pricing/">
+							<?php _e( 'Discover Our New, Flexible Pricing', 'ohio-extra' ); ?>
+						</a>
+	                    <a target="_blank" href="https://ohio.clbthemes.com/pricing/?coupon=OHIO25" class="coupon">
+	                        Save 25% with Code: <b>OHIO25</b>
+	                    </a>
+					</div>
+					<p class="small">
+						*No changes will apply to our existing customers — your current licensing and ongoing support remain fully locked in.
+					</p>
+				</div>
+				<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'ohio-extra' ); ?></span></button>
+			</div>
+		<?php endif; ?>
+
+	<?php endif; ?>
+
     <div class="clb-hub-intro">
         <div class="clb-hub-container">
             <div class="details">
                 <i class="details-icon"></i>
                 <h1><?php _e( 'Theme Settings', 'ohio-extra' ); ?></h1>
+                <?php
+                    if ( apply_filters( 'ohio/has-license', false ) ):
+                        echo '<label class="active"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m429-336 238-237-51-51-187 186-85-84-51 51 136 135Zm51 240q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg>Activated</label>';
+                    else:
+                        echo '<label class="inactive"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480.28-96Q401-96 331-126t-122.5-82.5Q156-261 126-330.96t-30-149.5Q96-560 126-629.5q30-69.5 82.5-122T330.96-834q69.96-30 149.5-30t149.04 30q69.5 30 122 82.5T834-629.28q30 69.73 30 149Q864-401 834-331t-82.5 122.5Q699-156 629.28-126q-69.73 30-149 30Zm-.28-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg>Not activated</label>';
+                    endif;
+                ?>
             </div>
             <div class="mode-switcher-holder">
                 <?php ohio_show_sync_langs_options_button(); ?>
-                <div class="mode-switcher">
-                    <a href="admin.php?page=ohio_hub" class="btn btn-outline"><?php _e( 'Dashboard', 'ohio-extra' ); ?></a>
-                    <a href="admin.php?page=ohio_hub_settings" class="btn btn-flat"><?php _e( 'Theme Settings', 'ohio-extra' ); ?></a>
-                </div>
                 <div id="fake-publishing-action" class="button-publish-holder">
                     <button class="btn button-publish">
                         <?php _e( 'Save Changes', 'ohio-extra' ); ?>
@@ -268,11 +304,11 @@
                                     <div class="settings-backup">
                                         <form id="import_theme_settings">
                                             <input id="settings_import_file" hidden accept=".json" name="settings" type="file" />
-                                            <a id="settings_import_file_trigger" class="btn btn-flat">
+                                            <a id="settings_import_file_trigger" class="btn btn-warning">
                                                 <i class="bi bi-file-earmark-arrow-down"></i>
                                                 <?php _e( 'Import Settings', 'ohio-extra' ); ?>
                                             </a>
-                                            <button id="settings_import_submit" type="submit"  style="display: none;" class="btn btn-flat">
+                                            <button id="settings_import_submit" type="submit" style="display: none;" class="btn btn-warning">
                                                 <i class="bi bi-file-earmark-arrow-down"></i>
                                                 <?php _e( 'Import', 'ohio-extra' ); ?>
                                             </button>
@@ -300,7 +336,7 @@
                                 </div>
                                 <div class="clb-group-footer">
                                     <div class="settings-backup">
-                                        <a id="reset_theme_settings" href="#" data-nonce="<?php echo wp_create_nonce( 'ohio_reset_theme_settings' ); ?>"  class="btn btn-flat">
+                                        <a id="reset_theme_settings" href="#" data-nonce="<?php echo wp_create_nonce( 'ohio_reset_theme_settings' ); ?>"  class="btn btn-warning">
                                             <i class="bi bi-x-circle"></i>
                                             <?php _e( 'Reset Settings to Defaults', 'ohio-extra' ); ?>
                                         </a>

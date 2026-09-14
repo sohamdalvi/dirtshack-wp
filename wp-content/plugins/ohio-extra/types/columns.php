@@ -5,7 +5,10 @@
 	*/
 
 	if ( function_exists ( 'vc_add_shortcode_param' ) ) {
-		vc_add_shortcode_param( 'ohio_columns', 'ohio_extra_columns_settings_field', plugins_url( 'columns.js' , __FILE__ ) );
+		// filemtime() cache-buster: WPBakery enqueues this as a plain
+		// <script src="..."> with no query string of its own, so the
+		// browser caches it indefinitely against this exact URL otherwise.
+		vc_add_shortcode_param( 'ohio_columns', 'ohio_extra_columns_settings_field', plugins_url( 'columns.js' , __FILE__ ) . '?ver=' . filemtime( __DIR__ . '/columns.js' ) );
 	}
 
 	function ohio_extra_columns_settings_field( $settings, $value ) {
@@ -25,43 +28,51 @@
 
 		ob_start();
 ?>
-		<div class="ohio_extra_columns_block row">
+		<div class="ohio_extra_columns_block">
 			<input type="hidden" name="<?php echo OhioExtraFilter::string( $settings['param_name'], 'attr', '' ); ?>" class="wpb_vc_param_value" value="<?php echo OhioExtraFilter::string( $value, 'attr', '' ); ?>">
-			<div class="vc_col-lg-4 column col-large">
-				<div class="wpb_element_label"><?php esc_html_e( 'Desktop', 'ohio-extra' ); ?></div>
-				<select class="nor-col-large">
-					<option value="1"<?php if ( $large == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
-					<option value="2"<?php if ( $large == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
-					<option value="3"<?php if ( $large == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
-					<option value="4"<?php if ( $large == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
-					<option value="5"<?php if ( $large == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
-					<option value="6"<?php if ( $large == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
-					<option value="12"<?php if ( $large == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
-				</select>
-			</div>
-			<div class="vc_col-lg-4 column col-small">
-				<div class="wpb_element_label"><?php esc_html_e( 'Tablet', 'ohio-extra' ); ?></div>
-				<select class="nor-col-small">
-					<option value="1"<?php if ( $small == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
-					<option value="2"<?php if ( $small == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
-					<option value="3"<?php if ( $small == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
-					<option value="4"<?php if ( $small == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
-					<option value="5"<?php if ( $small == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
-					<option value="6"<?php if ( $small == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
-					<option value="12"<?php if ( $small == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
-				</select>
-			</div>
-			<div class="vc_col-lg-4 column col-extra_small">
-				<div class="wpb_element_label"><?php esc_html_e( 'Mobile', 'ohio-extra' ); ?></div>
-				<select class="nor-col-extra-small">
-					<option value="1"<?php if ( $extra_small == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
-					<option value="2"<?php if ( $extra_small == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
-					<option value="3"<?php if ( $extra_small == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
-					<option value="4"<?php if ( $extra_small == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
-					<option value="5"<?php if ( $extra_small == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
-					<option value="6"<?php if ( $extra_small == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
-					<option value="12"<?php if ( $extra_small == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
-				</select>
+			<div class="row-grid row-grid-3">
+				<div class="column col-large">
+					<div class="wpb_element_label"><?php esc_html_e( 'Desktop', 'ohio-extra' ); ?></div>
+					<div class="edit_form_line">
+						<select class="wpb-form-select dropdown nor-col-large">
+							<option value="1"<?php if ( $large == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
+							<option value="2"<?php if ( $large == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
+							<option value="3"<?php if ( $large == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
+							<option value="4"<?php if ( $large == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
+							<option value="5"<?php if ( $large == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
+							<option value="6"<?php if ( $large == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
+							<option value="12"<?php if ( $large == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
+						</select>
+					</div>
+				</div>
+				<div class="column col-small">
+					<div class="wpb_element_label"><?php esc_html_e( 'Tablet', 'ohio-extra' ); ?></div>
+					<div class="edit_form_line">
+						<select class="wpb-form-select dropdown nor-col-small">
+							<option value="1"<?php if ( $small == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
+							<option value="2"<?php if ( $small == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
+							<option value="3"<?php if ( $small == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
+							<option value="4"<?php if ( $small == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
+							<option value="5"<?php if ( $small == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
+							<option value="6"<?php if ( $small == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
+							<option value="12"<?php if ( $small == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
+						</select>
+					</div>
+				</div>
+				<div class="column col-extra_small">
+					<div class="wpb_element_label"><?php esc_html_e( 'Mobile', 'ohio-extra' ); ?></div>
+					<div class="edit_form_line">
+						<select class="wpb-form-select dropdown nor-col-extra-small">
+							<option value="1"<?php if ( $extra_small == '1' ) { echo ' selected="true"'; } ?>>1 column</option>
+							<option value="2"<?php if ( $extra_small == '2' ) { echo ' selected="true"'; } ?>>2 columns</option>
+							<option value="3"<?php if ( $extra_small == '3' ) { echo ' selected="true"'; } ?>>3 columns</option>
+							<option value="4"<?php if ( $extra_small == '4' ) { echo ' selected="true"'; } ?>>4 columns</option>
+							<option value="5"<?php if ( $extra_small == '5' ) { echo ' selected="true"'; } ?>>5 columns</option>
+							<option value="6"<?php if ( $extra_small == '6' ) { echo ' selected="true"'; } ?>>6 columns</option>
+							<option value="12"<?php if ( $extra_small == '12' ) { echo ' selected="true"'; } ?>>12 columns</option>
+						</select>
+					</div>
+				</div>
 			</div>
 		</div>
 <?php

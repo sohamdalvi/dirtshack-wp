@@ -16,11 +16,6 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-service-table';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -95,7 +90,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'border_width',
             [
-                'label' => __( 'Table Border', 'ohio-extra' ),
+                'label' => __( 'Border', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => 'px',
                 'range' => [
@@ -118,7 +113,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'border_radius',
             [
-                'label' => __( 'Table Corners', 'ohio-extra' ),
+                'label' => __( 'Corners', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', 'rem', 'vw' ],
                 'range' => [
@@ -374,7 +369,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'features_list',
             [
-                'label' => __( 'Features list', 'ohio-extra' ),
+                'label' => __( 'Features', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::REPEATER,
                 'fields' => $this->getFeaturesControls(),
                 'default' => [],
@@ -459,7 +454,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'bg_color',
             [
-                'label' => __( 'Table Background Color', 'ohio-extra' ),
+                'label' => __( 'Background Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table' => 'background-color: {{VALUE}}',
@@ -469,9 +464,29 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'bg_hover_color',
             [
-                'label' => __( 'Table Background Color (Hover)', 'ohio-extra' ),
+                'label' => __( 'Background Color (Hover)', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table:hover' => 'background-color: {{VALUE}}',
@@ -482,7 +497,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'border_color',
             [
-                'label' => __( 'Table Border Color', 'ohio-extra' ),
+                'label' => __( 'Border Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table:hover' => 'border-color:{{VALUE}}'
@@ -553,19 +568,19 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'feature_color',
             [
-                'label' => __( 'Features Color', 'ohio-extra' ),
+                'label' => __( 'Included Features Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table-features .exist' => 'color: {{VALUE}}',
                 ]
             ]
         );
-        
+
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'feature_typography',
-                'label' => __( 'Features Typography', 'ohio-extra' ),
+                'label' => __( 'Included Features Typography', 'ohio-extra' ),
                 'selector' => '{{WRAPPER}} .service-table-features .exist',
             ]
         );
@@ -574,7 +589,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'feature_dis_color',
             [
-                'label' => __( 'Disabled Features Color', 'ohio-extra' ),
+                'label' => __( 'Excluded Features Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table-features .missing' => 'color: {{VALUE}}',
@@ -587,7 +602,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'feature_dis_typography',
-                'label' => __( 'Disabled Features Typography', 'ohio-extra' ),
+                'label' => __( 'Excluded Features Typography', 'ohio-extra' ),
                 'selector' => '{{WRAPPER}} .service-table-features .missing',
             ]
         );
@@ -595,7 +610,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'icons_color',
             [
-                'label' => __( 'Features Icon Color', 'ohio-extra' ),
+                'label' => __( 'Included Features Icon Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table-features .exist .icon' => 'color: {{VALUE}}',
@@ -607,11 +622,44 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'icons_dis_color',
             [
-                'label' => __( 'Disabled Features Icon Color', 'ohio-extra' ),
+                'label' => __( 'Excluded Features Icon Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .service-table-features .missing .icon' => 'color: {{VALUE}}',
                 ],
+            ]
+        );
+
+        $this->add_control(
+            'tooltip_bg_color',
+            [
+                'label' => __( 'Tooltip Background Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .service-table-features .has-tooltip::before' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .service-table-features .has-tooltip::after' => 'border-top-color: {{VALUE}}',
+                ],
+                'separator' => 'before'
+            ]
+        );
+
+        $this->add_control(
+            'tooltip_text_color',
+            [
+                'label' => __( 'Tooltip Text Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .service-table-features .has-tooltip::before' => 'color: {{VALUE}}',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'tooltip_typography',
+                'label' => __( 'Tooltip Typography', 'ohio-extra' ),
+                'selector' => '{{WRAPPER}} .service-table-features .has-tooltip::before',
             ]
         );
 
@@ -662,12 +710,12 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         $repeater->add_control(
             'list_type',
             [
-                'label' => __( 'Icon', 'ohio-extra' ),
+                'label' => __( 'Feature Status', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'without'  => __( 'Without icon', 'ohio-extra' ),
-                    'enabled'  => __( '"Enabled" icon', 'ohio-extra' ),
-                    'disabled' => __( '"Disabled" icon', 'ohio-extra' ),
+                    'without'  => __( 'None', 'ohio-extra' ),
+                    'enabled'  => __( 'Included', 'ohio-extra' ),
+                    'disabled' => __( 'Excluded', 'ohio-extra' ),
                 ],
                 'default' => 'without',
                 'label_block' => true,
@@ -679,13 +727,26 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
 
         $repeater->add_control(
             'list_title', [
-                'label' => __( 'Headline', 'ohio-extra' ),
+                'label' => __( 'Feature Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( 'Feature', 'ohio-extra' ),
                 'label_block' => true,
             ]
         );
-        
+
+        $repeater->add_control(
+            'list_tooltip', [
+                'label' => __( 'Tooltip', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '',
+                'label_block' => true,
+                'description' => __( 'Optional text shown in a tooltip when hovering the feature text.', 'ohio-extra' ),
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
         return $repeater->get_controls();
     }
 }

@@ -1041,6 +1041,60 @@
                 "return_format" => "value"
             ],
             [
+                "key" => "field_59390deb012f8sidebar",
+                "label" => __( 'Sidebar', 'ohio' ),
+                "name" => "",
+                "type" => "tab",
+                "instructions" => "",
+                "required" => 0,
+                "conditional_logic" => 0,
+                "placement" => "top",
+                "endpoint" => 0
+            ],
+            [
+                "key" => "field_59390deaf218b",
+                "label" => __( 'Sidebar', 'ohio' ),
+                "name" => "sidebar_position",
+                "type" => "radio",
+                "instructions" => __( 'Show a sidebar on this page.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => 0,
+                "choices" => [
+                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
+                    "left" => __( 'Left', 'ohio' ),
+                    "right" => __( 'Right', 'ohio' ),
+                    "without" => __( 'Disable', 'ohio' )
+                ],
+                "default_value" => [
+                    "inherit"
+                ],
+                "allow_null" => 0,
+                "multiple" => 0,
+                "ui" => 0,
+                "layout" => "horizontal",
+                "ajax" => 0,
+                "return_format" => "value",
+                "placeholder" => ""
+            ],
+            [
+                "key" => "field_592345234958934",
+                "label" => __( 'Sidebar Layout', 'ohio' ),
+                "name" => "sidebar_layout",
+                "type" => "radio",
+                "instructions" => __( 'Choose the layout type for the sidebar on this page.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => 0,
+                "choices" => [
+                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
+                    "default" => __( 'Default', 'ohio' ),
+                    "boxed" => __( 'Boxed', 'ohio' ),
+                ],
+                "default_value" => [
+                    "inherit"
+                ],
+                "return_format" => "value"
+            ],
+            [
                 "key" => "field_59390deb012f8",
                 "label" => __( 'Page', 'ohio' ),
                 "name" => "",
@@ -1219,7 +1273,7 @@
                 "append" => "",
                 "maxlength" => 200
             ],
-            [ 
+            [
                 "key" => "field_59390deb0171egrp",
                 "label" => __( 'Background', 'ohio' ),
                 "name" => "",
@@ -1447,7 +1501,7 @@
                 "label" => __( 'Height', 'ohio' ),
                 "name" => "header_title_height",
                 "type" => "ohio_responsive_height",
-                "instructions" => __( 'Set the page healine height for this page.', 'ohio' ),
+                "instructions" => __( 'Set the page headline height for this page.', 'ohio' ),
                 "required" => 0,
                 "conditional_logic" => [
                     [
@@ -1630,55 +1684,6 @@
                 "ui" => 1,
                 "ui_on_text" => __( 'Yes', 'ohio' ),
                 "ui_off_text" => __( 'No', 'ohio' )
-            ],
-            [
-                "key" => "field_5937a0a621s71ebs6d23",
-                "label" => '<h4>' . __( 'Sidebar', 'ohio' ) . '</h4>',
-                "name" => "",
-                "type" => "message"
-            ],
-            [
-                "key" => "field_59390deaf218b",
-                "label" => __( 'Sidebar', 'ohio' ),
-                "name" => "sidebar_position",
-                "type" => "radio",
-                "instructions" => __( 'Show a sidebar on this page.', 'ohio' ),
-                "required" => 0,
-                "conditional_logic" => 0,
-                "choices" => [
-                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
-                    "left" => __( 'Left', 'ohio' ),
-                    "right" => __( 'Right', 'ohio' ),
-                    "without" => __( 'Disable', 'ohio' )
-                ],
-                "default_value" => [
-                    "inherit"
-                ],
-                "allow_null" => 0,
-                "multiple" => 0,
-                "ui" => 0,
-                "layout" => "horizontal",
-                "ajax" => 0,
-                "return_format" => "value",
-                "placeholder" => ""
-            ],
-            [
-                "key" => "field_592345234958934",
-                "label" => __( 'Sidebar Layout', 'ohio' ),
-                "name" => "sidebar_layout",
-                "type" => "radio",
-                "instructions" => __( 'Choose the layout type for the sidebar on this page.', 'ohio' ),
-                "required" => 0,
-                "conditional_logic" => 0,
-                "choices" => [
-                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
-                    "default" => __( 'Default', 'ohio' ),
-                    "boxed" => __( 'Boxed', 'ohio' ),
-                ],
-                "default_value" => [
-                    "inherit"
-                ],
-                "return_format" => "value"
             ],
             [
                 "key" => "field_592s45f15af5g9ts",

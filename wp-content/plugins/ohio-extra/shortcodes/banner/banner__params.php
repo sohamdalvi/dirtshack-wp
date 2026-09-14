@@ -109,6 +109,17 @@ function ohio_banner_sc_map() {
 				'param_name' => 'subtitle'
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Subtitle Position', 'ohio-extra' ),
+				'param_name' => 'subtitle_position',
+				'value' => array(
+					__( 'Before Title', 'ohio-extra' ) => 'before_title',
+					__( 'After Title', 'ohio-extra' ) => 'after_title'
+				),
+				'std' => 'before_title',
+			),
+			array(
 				'type' => 'textarea_raw_html',
 				'group' => __( 'General', 'ohio-extra' ),
 				'heading' => __( 'Description', 'ohio-extra' ),
@@ -118,7 +129,7 @@ function ohio_banner_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Border', 'ohio-extra' ),
+				'heading' => __( 'Outline', 'ohio-extra' ),
 				'param_name' => 'border_width',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '0'
@@ -139,7 +150,23 @@ function ohio_banner_sc_map() {
 				'description' => __( 'Convert a rectangular image into a cropped square.', 'ohio-extra' ),
 				'param_name' => 'equal_height',
 				'value' => array(
-					'Yes' => '0'
+					__( 'Yes', 'ohio-extra' ) => '0'
+				)
+			),
+			array(
+				'type' => 'checkbox',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Stretch to Fit', 'ohio-extra' ),
+				'description' => __( 'Stretch the banner height to fit the parent element.', 'ohio-extra' ),
+				'param_name' => 'stretch_to_fit',
+				'value' => array(
+					__( 'Yes', 'ohio-extra' ) => '0'
+				),
+				'dependency' => array(
+					'element' => 'equal_height',
+					'value' => array(
+						'0'
+					)
 				),
 			),
 			array(
@@ -148,7 +175,7 @@ function ohio_banner_sc_map() {
 				'heading' => __( 'Tilt Effect', 'ohio-extra' ),
 				'param_name' => 'tilt_effect',
 				'value' => array(
-					'Yes' => '0'
+					__( 'Yes', 'ohio-extra' ) => '0'
 				),
 			),
 			array(
@@ -214,7 +241,7 @@ function ohio_banner_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __( 'Link', 'ohio-extra' ),
-				'heading' => __( 'Show Icon Button?', 'ohio-extra' ),
+				'heading' => __( 'Show Button?', 'ohio-extra' ),
 				'param_name' => 'show_button',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '0'
@@ -229,7 +256,7 @@ function ohio_banner_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __( 'Link', 'ohio-extra' ),
-				'heading' => __( 'Animate Icon Button?', 'ohio-extra' ),
+				'heading' => __( 'Animate Button?', 'ohio-extra' ),
 				'param_name' => 'button_animation',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '0'
@@ -265,7 +292,7 @@ function ohio_banner_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Fill Color', 'ohio-extra' ),
+				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'fill_color',
 				'dependency' => array(
 					'element' => 'block_type_layout',
@@ -273,6 +300,23 @@ function ohio_banner_sc_map() {
 						'overlay_image'
 					)
 				),
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'block_type_layout',
+					'value' => array(
+						'overlay_image'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
 			),
 			array(
 				'type' => 'ohio_colorpicker',
@@ -287,16 +331,16 @@ function ohio_banner_sc_map() {
 				'param_name' => 'border_color',
 			),
 			array(
-				'type' => 'ohio_colorpicker',
+				'type' => 'ohio_button',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Icon Color', 'ohio-extra' ),
-				'param_name' => 'icon_color',
-			),
-			array(
-				'type' => 'ohio_colorpicker',
-				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Icon Button Color', 'ohio-extra' ),
-				'param_name' => 'icon_button_color',
+				'param_name' => 'banner_button',
+				'heading' => __( 'Button', 'ohio-extra' ),
+				'dependency' => array(
+					'element' => 'use_link',
+					'value' => array(
+						'1'
+					)
+				),
 			),
 			
 			// Design Options.

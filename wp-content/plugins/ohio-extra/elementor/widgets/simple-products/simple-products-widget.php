@@ -19,12 +19,7 @@ class Ohio_Elementor_Simple_Products_Widget extends Ohio_Elementor_Widget_Base {
     {
         return 'ohio-icon-sc-simple-products';
     }
-
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
+    
     protected function register_controls()
     {
         $this->start_controls_section(

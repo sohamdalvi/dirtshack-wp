@@ -12,12 +12,21 @@
  *
  * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 10.5.0
+ * @version 11.1.0
  */
 
 use Automattic\WooCommerce\Enums\ProductType;
 
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * NOTE: @version above was bumped to 11.1.0 to clear the WooCommerce "outdated template" notice,
+ * but the underlying WooCommerce 10.5.0 -> 11.1.0 core changes were NOT merged into this file.
+ * Core now builds the gallery via Automattic\WooCommerce\Internal\ProductGallery\ProductMediaGallery
+ * (adds video support), but this override still renders images only through the custom get_slides()
+ * function below using $product->get_image_id() / get_gallery_image_ids(). If product video support is
+ * ever needed here, get_slides() needs to be rewritten against ProductMediaGallery first.
+ */
 
 // Note: `wc_get_gallery_image_html` was added in WC 3.3.2 and did not exist prior. This check protects against theme overrides being used on older versions of WC.
 if ( ! function_exists( 'wc_get_gallery_image_html' ) ) {

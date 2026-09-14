@@ -109,7 +109,7 @@ function ohio_pricing_table_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Gutters', 'ohio-extra' ),
+				'heading' => __( 'Boxed Layout', 'ohio-extra' ),
 				'param_name' => 'boxed_layout',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use CSS units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a> Go to Theme Settings to <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-appearance">set gutters value</a> for the entire site.', 'ohio-extra' ),
 				'value' => array(
@@ -216,20 +216,26 @@ function ohio_pricing_table_sc_map() {
 					array(
 						'type' => 'dropdown',
 						'group' => __( 'Icon', 'ohio-extra' ),
-						'heading' => __( 'Icon', 'ohio-extra' ),
+						'heading' => __( 'Feature Status', 'ohio-extra' ),
 						'param_name' => 'feature_icon',
 						'value' => array(
-							__( 'Without icon', 'ohio-extra' ) => 'without_icon',
-							__( 'Enable icon', 'ohio-extra' ) => 'icon_plus',
-							__( 'Disable icon', 'ohio-extra' ) => 'icon_minus'
+							__( 'None', 'ohio-extra' ) => 'without_icon',
+							__( 'Included', 'ohio-extra' ) => 'icon_plus',
+							__( 'Excluded', 'ohio-extra' ) => 'icon_minus'
 						),
 					),
 					array(
 						'type' => 'textfield',
-						'heading' => __( 'Headline', 'ohio-extra' ),
+						'heading' => __( 'Feature Text', 'ohio-extra' ),
 						'param_name' => 'feature_title',
 					),
-				),					
+					array(
+						'type' => 'textfield',
+						'heading' => __( 'Tooltip', 'ohio-extra' ),
+						'param_name' => 'feature_tooltip',
+						'description' => __( 'Optional text shown in a tooltip when hovering the feature text.', 'ohio-extra' ),
+					),
+				),
 			),
 			
 			// Button.
@@ -245,7 +251,7 @@ function ohio_pricing_table_sc_map() {
 			array(
 				'type' => 'vc_link',
 				'group' => __( 'Button', 'ohio-extra' ),
-				'heading' => __( 'Link', 'ohio-extra' ),
+				'heading' => __( 'Link URL', 'ohio-extra' ),
 				'param_name' => 'button_link',
 				'dependency' => array(
 					'element' => 'add_link',
@@ -364,26 +370,38 @@ function ohio_pricing_table_sc_map() {
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Features Typography', 'ohio-extra' ),
+				'heading' => __( 'Included Features Typography', 'ohio-extra' ),
 				'param_name' => 'features_title_typo'
 			),
 			array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Disabled Features Typography', 'ohio-extra' ),
+				'heading' => __( 'Excluded Features Typography', 'ohio-extra' ),
 				'param_name' => 'features_title_disabled_typo'
+			),
+			array(
+				'type' => 'ohio_typography',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Tooltip Typography', 'ohio-extra' ),
+				'param_name' => 'features_tooltip_typo'
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Features Icon Color', 'ohio-extra' ),
+				'heading' => __( 'Included Features Icon Color', 'ohio-extra' ),
 				'param_name' => 'features_icons_color',
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Disabled Features Icon Color', 'ohio-extra' ),
+				'heading' => __( 'Excluded Features Icon Color', 'ohio-extra' ),
 				'param_name' => 'features_disabled_icons_color',
+			),
+			array(
+				'type' => 'ohio_colorpicker',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Tooltip Background Color', 'ohio-extra' ),
+				'param_name' => 'features_tooltip_bg_color',
 			),
 			array(
 				'type' => 'ohio_colorpicker',
@@ -401,6 +419,23 @@ function ohio_pricing_table_sc_map() {
 					'value' => array(
 						'1'
 					)
+				)
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'dependency' => array(
+					'element' => 'boxed_layout',
+					'value' => array(
+						'1'
+					)
+				),
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
 				)
 			),
 			array(

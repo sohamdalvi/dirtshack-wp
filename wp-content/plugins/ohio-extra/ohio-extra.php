@@ -4,7 +4,7 @@
 	Plugin URI: https://clbthemes.com
 	Description: Supercharge your WordPress site with WPBakery Page Builder shortcodes, Elementor widgets and ACF PRO extended theme settings and additional widgets.
 
-	Version: 3.6.8
+	Version: 3.7.6
 	Author: Colabrio
 	Author URI: https://clbthemes.com
 
@@ -41,9 +41,9 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 
 	// Styles and JS scripts
 	function ohio_extra_admin_style_and_scripts() {
-		wp_enqueue_style( 'ohio-extra-styles', plugin_dir_url( __FILE__ ) . 'assets/css/ohio-extra.css', [], '3.6.8' );
-		wp_enqueue_style( 'ohio-admin-wpbakery-styles', plugin_dir_url( __FILE__ ) . 'assets/css/wpbakery.css', [], '3.6.8' );
-		wp_enqueue_script( 'ohio-extra-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/min/main.min.js', [], '3.6.8' );
+		wp_enqueue_style( 'ohio-extra-styles', plugin_dir_url( __FILE__ ) . 'assets/css/ohio-extra.css', [], '3.7.6' );
+		wp_enqueue_style( 'ohio-admin-wpbakery-styles', plugin_dir_url( __FILE__ ) . 'assets/css/wpbakery.css', [], '3.7.6' );
+		wp_enqueue_script( 'ohio-extra-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/min/main.min.js', [], '3.7.6' );
 	}
 	add_action( 'admin_enqueue_scripts', 'ohio_extra_admin_style_and_scripts' );
 
@@ -223,9 +223,76 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
         add_action( 'vc_after_init', function() {
 
     		// Custom setting for default row
+			$darkModeData = array(
+				'type' => 'dropdown',
+				'group' => __( 'Dark Mode', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			);
+			vc_update_shortcode_param( 'vc_row', $darkModeData );
+
+			$columnDarkModeData = array(
+				'type' => 'dropdown',
+				'group' => __( 'Dark Mode', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			);
+			vc_update_shortcode_param( 'vc_column', $columnDarkModeData );
+			vc_update_shortcode_param( 'vc_column_inner', $columnDarkModeData );
+
+			$sectionDarkModeData = array(
+				'type' => 'dropdown',
+				'group' => __( 'Dark Mode', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
+			);
+			vc_update_shortcode_param( 'vc_section', $sectionDarkModeData );
+
+			$dynamicTypoData = array(
+				'type' => 'dropdown',
+				'group' => __( 'Dynamic Typo', 'ohio-extra' ),
+				'heading' => __( 'Section Type', 'ohio-extra' ),
+				'param_name' => 'section_color_scheme',
+				'value' => array(
+					__( 'Default', 'ohio-extra' ) => 'default',
+					__( 'Light', 'ohio-extra' ) => 'light',
+					__( 'Dark', 'ohio-extra' ) => 'dark'
+				)
+			);
+			vc_update_shortcode_param( 'vc_row', $dynamicTypoData );
+
+			$sectionDynamicTypoData = array(
+				'type' => 'dropdown',
+				'group' => __( 'Dynamic Typo', 'ohio-extra' ),
+				'heading' => __( 'Section Type', 'ohio-extra' ),
+				'param_name' => 'section_color_scheme',
+				'value' => array(
+					__( 'Default', 'ohio-extra' ) => 'default',
+					__( 'Light', 'ohio-extra' ) => 'light',
+					__( 'Dark', 'ohio-extra' ) => 'dark'
+				)
+			);
+			vc_update_shortcode_param( 'vc_section', $sectionDynamicTypoData );
+
 			$useLinesData = array(
 				'type' => 'ohio_check',
-				'heading' => __( 'Enable lines pattern?', 'ohio-extra' ),
+				'group' => __( 'Lines Pattern', 'ohio-extra' ),
+				'heading' => __( 'Enable Lines?', 'ohio-extra' ),
 				'param_name' => 'use_through_lines',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '0'
@@ -236,16 +303,15 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 			$sideTitleData = array(
 				'type' => 'textfield',
 				'group' => __( 'Side Title', 'ohio-extra' ),
-				'heading' => __( 'Side title', 'ohio-extra' ),
+				'heading' => __( 'Side Title', 'ohio-extra' ),
 				'param_name' => 'side_background_title',
-				'description' => __( 'Use short headers only.', 'ohio-extra' ),
 			);
 			vc_update_shortcode_param( 'vc_row', $sideTitleData );
 
 			$sideTitleAlignmentData = array(
 				'type' => 'dropdown',
 				'group' => __( 'Side Title', 'ohio-extra' ),
-				'heading' => __( 'Side title position', 'ohio-extra' ),
+				'heading' => __( 'Position', 'ohio-extra' ),
 				'param_name' => 'side_background_title_alignment',
 				'value' => array(
 					__( 'Left', 'ohio-extra' ) => 'left',
@@ -257,7 +323,7 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 			$sideTitleTypoData = array(
 				'type' => 'ohio_typography',
 				'group' => __( 'Side Title', 'ohio-extra' ),
-				'heading' => __( 'Side title typography', 'ohio-extra' ),
+				'heading' => __( 'Typography', 'ohio-extra' ),
 				'param_name' => 'title_typo'
 			);
 			vc_update_shortcode_param( 'vc_row', $sideTitleTypoData );

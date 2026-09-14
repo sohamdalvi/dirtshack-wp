@@ -56,6 +56,7 @@ function ohio_recent_posts_func( $atts ) {
 	$category_typo = isset( $category_typo ) ? OhioExtraFilter::string( $category_typo, 'string', '' ) : '';
 	$read_more_typo = isset( $read_more_typo ) ? OhioExtraFilter::string( $read_more_typo, 'string', '' ) : '';
 	$reading_time_typo = isset( $reading_time_typo ) ? OhioExtraFilter::string( $reading_time_typo, 'string', '' ) : '';
+	$category_badge_color = isset( $category_badge_color ) ? OhioExtraFilter::string( $category_badge_color, 'string', false ) : false;
 	$card_background_color = isset( $card_background_color ) ? OhioExtraFilter::string( $card_background_color, 'string', false ) : false;
 	$overlay_color = isset( $overlay_color ) ? OhioExtraFilter::string( $overlay_color, 'string', false ) : false;
 	$animation_type = isset( $animation_type ) ? OhioExtraFilter::string( $animation_type, 'string', 'default' ) : 'default';
@@ -117,6 +118,13 @@ function ohio_recent_posts_func( $atts ) {
 
 	if ( $masonry_grid ) {
 		$wrapper_classes .= ' ohio-masonry';
+	}
+
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
 	}
 
 	$column_class = OhioExtraParser::VC_columns_to_CSS( $columns_in_row );
@@ -342,6 +350,13 @@ function ohio_recent_posts_func( $atts ) {
 		    $_style_block .= $_selector . $_block_typo['mobile'] . '}';
 		    $_style_block .= '}';
 		}
+	}
+
+	$category_badge_color = OhioExtraParser::VC_color_to_CSS( $category_badge_color, '{{color}}' );
+	if ( $category_badge_color ) {
+		$_style_block .= '#' . $wrapper_id . ' .blog-item .category-holder .tag{';
+		$_style_block .= 'background-color:' . $category_badge_color . ';';
+		$_style_block .= '}';
 	}
 
 	$card_background_color = OhioExtraParser::VC_color_to_CSS( $card_background_color, '{{color}}' );

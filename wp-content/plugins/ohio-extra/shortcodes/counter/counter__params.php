@@ -168,7 +168,7 @@ function ohio_counter_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'Icon', 'ohio-extra' ),
-				'heading' => __( 'Shape Border', 'ohio-extra' ),
+				'heading' => __( 'Icon Border', 'ohio-extra' ),
 				'param_name' => 'icon_border_width',
 				'dependency' => array(
 					'element' => 'icon_layout',
@@ -184,7 +184,7 @@ function ohio_counter_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'Icon', 'ohio-extra' ),
-				'heading' => __( 'Shape Corners', 'ohio-extra' ),
+				'heading' => __( 'Icon Corners', 'ohio-extra' ),
 				'param_name' => 'icon_corners',
 				'dependency' => array(
 					'element' => 'icon_layout',

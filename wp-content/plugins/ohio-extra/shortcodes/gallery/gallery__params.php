@@ -209,7 +209,7 @@ function ohio_gallery_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'Pagination', 'ohio-extra' ),
-				'heading' => __( 'Items Per Page', 'ohio-extra' ),
+				'heading' => __( 'Number of items per page', 'ohio-extra' ),
 				'param_name' => 'pagination_items_per_page',
 				'description' => __( 'Set a number of grid items output per page.', 'ohio-extra' ),
 				'value' => '6',
@@ -337,7 +337,7 @@ function ohio_gallery_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Overlay Color', 'ohio-extra' ),
+				'heading' => __( 'Lightbox Background', 'ohio-extra' ),
 				'param_name' => 'gallery_bg_color',
 			),
 			array(

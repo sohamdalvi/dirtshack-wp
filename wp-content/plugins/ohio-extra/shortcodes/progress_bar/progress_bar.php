@@ -72,6 +72,13 @@ function ohio_progress_bar_func( $atts ) {
 		$wrapper_classes .= ' -tooltip';
 	}
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	// Wrapper classes
 	$inner_classes = '';
 
@@ -159,9 +166,11 @@ function ohio_progress_bar_func( $atts ) {
 
 	$tooltip_color = OhioExtraParser::VC_color_to_CSS( $tooltip_color, '{{color}}' );
 	if ( $tooltip_color ) {
-		$_style_block .= '#' . $wrapper_id . ' .tooltip,';
-		$_style_block .= '#' . $wrapper_id . ' .tooltip::before{';
+		$_style_block .= '#' . $wrapper_id . ' .has-tooltip::before{';
 		$_style_block .= 'background-color:' . $tooltip_color . ';';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .has-tooltip::after{';
+		$_style_block .= 'border-top-color:' . $tooltip_color . ';';
 		$_style_block .= '}';
 	}
 

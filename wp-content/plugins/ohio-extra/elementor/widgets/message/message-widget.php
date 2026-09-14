@@ -16,11 +16,6 @@ class Ohio_Elementor_Message_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-message';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -459,7 +454,7 @@ class Ohio_Elementor_Message_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'background_color',
             [
-                'label' => __( 'Shape Background Color', 'ohio-extra' ),
+                'label' => __( 'Background Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .alert' => 'background-color: {{VALUE}}',
@@ -469,9 +464,29 @@ class Ohio_Elementor_Message_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'border_color',
             [
-                'label' => __( 'Shape Border Color', 'ohio-extra' ),
+                'label' => __( 'Border Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .alert' => 'border-color:{{VALUE}}'

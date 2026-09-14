@@ -269,7 +269,7 @@ function ohio_team_member_inner_sc_map() {
 				'type' => 'textfield',
 				'group' => __( 'Social Links', 'ohio-extra' ),
 				'heading' => '<i class="fa-brands fa-500px"></i> ' . __( '500px', 'ohio-extra' ),
-				'param_name' => 'fivehundred_link'
+				'param_name' => 'fivehundredpx_link'
 			),
 
 			// Styles.

@@ -10,7 +10,7 @@ $social_link_type = OhioOptions::get_global( 'page_hamburger_menu_social_network
 $social_link_type_class = '';
 
 if ( $social_link_type != 'default' ) {
-	$social_link_type_class = '-'.$social_link_type;
+	$social_link_type_class = ' -'.$social_link_type;
 }
 ?>
 
@@ -50,7 +50,7 @@ if ( $social_link_type != 'default' ) {
 			<?php endwhile; ?>
 
 			<?php if ( $fullscreen_have_social ) : ?>
-				<div class="details-column social-networks <?php echo esc_attr( $social_link_type_class ); ?>">
+				<div class="details-column social-networks<?php echo esc_attr( $social_link_type_class ); ?>">
 					<?php get_template_part( 'parts/elements/social_networks' ); ?>
 				</div>
 			<?php endif; ?>

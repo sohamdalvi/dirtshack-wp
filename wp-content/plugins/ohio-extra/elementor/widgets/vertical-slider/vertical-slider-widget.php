@@ -27,11 +27,6 @@ class Ohio_Elementor_Vertical_Slider_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-vertical-slider';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(
@@ -213,7 +208,7 @@ class Ohio_Elementor_Vertical_Slider_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'pagination_color_global',
             [
-                'label' => __( 'Pagination Color', 'ohio-extra' ),
+                'label' => __( 'Pagination Color (Default)', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .clb-slider-count' => 'color: {{VALUE}}',

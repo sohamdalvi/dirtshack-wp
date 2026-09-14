@@ -24,7 +24,7 @@
         </div>
     </div>
 	<?php if ( $title ): ?>
-    	<h6 class="title"><?php echo $title ?></h6>
+    	<div class="h6 title"><?php echo $title ?></div>
 	<?php endif; ?>
 	<?php if ( $description ): ?>
     	<p class="-unspace"><?php echo $description ?></h6>

@@ -17,6 +17,7 @@ require_once $ohio_inc_directory . 'tgmpa/vc_setup.php';
 require_once $ohio_inc_directory . 'tgmpa/acf_setup.php';
 require_once $ohio_inc_directory . 'tgmpa/woocommerce_setup.php';
 require_once $ohio_inc_directory . 'tgmpa/ocdi_setup.php';
+require_once $ohio_inc_directory . 'tgmpa/licensing_setup.php';
 
 // Parts
 require_once $ohio_inc_directory . 'template_tags.php'; // custom tags template

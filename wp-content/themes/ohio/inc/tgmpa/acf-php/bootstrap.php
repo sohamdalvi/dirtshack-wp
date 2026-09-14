@@ -26,6 +26,7 @@ require('global_post_pages.php');
 require('global_performance.php');
 require('global_product.php');
 require('global_product_pages.php');
+require('global_sidebar.php');
 require('global_typography.php');
 
 require('page.php');

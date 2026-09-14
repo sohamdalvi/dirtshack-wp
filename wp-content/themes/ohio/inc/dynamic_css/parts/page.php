@@ -281,6 +281,7 @@ if ( $widgets_title_typo ) {
 	$_selector = [
 		'.widget-title',
 		'.widget h2',
+		'.widget .wp-block-heading',
 		'.widget .wp-block-search__label',
 		'.widget .wc-block-product-search__label'
 	];

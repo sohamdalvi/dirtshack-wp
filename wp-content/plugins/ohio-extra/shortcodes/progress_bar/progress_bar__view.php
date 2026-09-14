@@ -8,7 +8,7 @@
 <div class="ohio-widget progress<?php echo esc_attr( $wrapper_classes ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>" <?php echo esc_attr( $animation_attrs ); ?>>
 	<div class="progress-heading">
 		<?php if ( !empty( $name ) ) : ?>
-			<h6 class="label"><?php echo $name; ?></h6>
+			<div class="h6 label"><?php echo $name; ?></div>
 		<?php endif; ?>
 		<?php if ( !$percent_in_tooltip ) : ?>
 			<span class="progress-percent">
@@ -18,11 +18,11 @@
 	</div>
 	<div class="progress-holder<?php echo esc_attr( $inner_classes ); ?>">
         <div class="progress-bar" role="progressbar" aria-label="Progress bar">
+
         	<?php if ( $percent_in_tooltip ) : ?>
-				<span class="progress-percent tooltip">
-	                <span class="percent">0</span>%
-	            </span>
+				<span class="progress-percent has-tooltip -visible -small" data-tooltip="0%" tabindex="0"></span>
 			<?php endif; ?>
+
         </div>
     </div>
 </div>

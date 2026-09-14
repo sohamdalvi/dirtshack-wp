@@ -217,6 +217,13 @@ function ohio_recent_projects_func( $atts ) {
 		}
 	}
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	$filter_classes = '';
 	switch ( $filter_align ) {
 		case 'right':

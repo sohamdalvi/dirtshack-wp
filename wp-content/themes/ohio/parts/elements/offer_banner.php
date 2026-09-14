@@ -53,12 +53,12 @@ switch ( $offer_banner_position ) {
 
 ?>
 
-<?php if ( $offer_banner_as_link ): ?>
+<?php if ( $offer_banner_as_link && $offer_banner_button_link ): ?>
 	<a target="<?php echo esc_html( $offer_banner_button_link['target'] ); ?>" href="<?php echo esc_url( $offer_banner_button_link['url'] ); ?>">
 <?php endif; ?>
 
 	<div class="offer-banner<?php echo esc_attr( $extra_classes ); ?>" data-flipping-interval="<?php echo esc_attr( $flipping_interval ); ?>" data-slow-on-scroll data-dir="ltr" data-speed="<?php echo esc_attr( $offer_banner_scrolling_effect_speed ); ?>">
-		
+
 		<div class="container">
 
 			<?php if ( $offer_banner_effect == 'scrolling' ): ?>
@@ -96,6 +96,6 @@ switch ( $offer_banner_position ) {
 		</div>
 	</div>
 
-<?php if ( $offer_banner_as_link ): ?>
+<?php if ( $offer_banner_as_link && $offer_banner_button_link ): ?>
 	</a>
 <?php endif; ?>

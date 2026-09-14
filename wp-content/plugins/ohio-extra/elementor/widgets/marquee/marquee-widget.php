@@ -3,7 +3,7 @@
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 
-class Ohio_Elementor_Marquee_Widget extends \Elementor\Widget_Base {
+class Ohio_Elementor_Marquee_Widget extends Ohio_Elementor_Widget_Base {
 
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );

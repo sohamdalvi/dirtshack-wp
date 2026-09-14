@@ -75,7 +75,7 @@ function ohio_badge_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Badge Border', 'ohio-extra' ),
+				'heading' => __( 'Border', 'ohio-extra' ),
 				'param_name' => 'border_width',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '2',
@@ -129,13 +129,13 @@ function ohio_badge_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Shape Color', 'ohio-extra' ),
+				'heading' => __( 'Badge Color', 'ohio-extra' ),
 				'param_name' => 'badge_color',
 			),
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Label Fill Color', 'ohio-extra' ),
+				'heading' => __( 'Label Color', 'ohio-extra' ),
 				'param_name' => 'text_before_color',
 			),
 			array(

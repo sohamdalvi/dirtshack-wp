@@ -328,8 +328,21 @@
 						}
 
                         var sliderHeight = sliderItems.height();
-                        
-                        slider.find('> .clb-slider-outer-stage').css('max-width', itemWidth * settings.items + 'px');
+
+                        // Calculate max-width accounting for item margins (only for visible items, excluding last item margin)
+                        var totalWidth = 0;
+                        var visibleItems = sliderItems.slice(0, settings.items);
+                        visibleItems.each(function(index) {
+                            var itemMargin = parseFloat($(this).css('margin-right')) || 0;
+                            // Only add margin if not the last visible item
+                            if (index < settings.items - 1) {
+                                totalWidth += $(this).outerWidth() + itemMargin;
+                            } else {
+                                totalWidth += $(this).outerWidth();
+                            }
+                        });
+
+                        slider.find('> .clb-slider-outer-stage').css('max-width', totalWidth + 'px');
                     }
                 }
 
@@ -830,7 +843,21 @@
                         var sliderHeight = sliderItems.height();
                         slider.find('> .clb-slider-stage').css({
                             'width': stageWidth + 'px'
-                        });  
+                        });
+
+                        // Calculate max-width accounting for item margins (only for visible items, excluding last item margin)
+                        var totalWidth = 0;
+                        var visibleItems = sliderItems.slice(0, resizeSettings.items);
+                        visibleItems.each(function(index) {
+                            var itemMargin = parseFloat($(this).css('margin-right')) || 0;
+                            // Only add margin if not the last visible item
+                            if (index < resizeSettings.items - 1) {
+                                totalWidth += $(this).outerWidth() + itemMargin;
+                            } else {
+                                totalWidth += $(this).outerWidth();
+                            }
+                        });
+                        slider.find('> .clb-slider-outer-stage').css('max-width', totalWidth + 'px');  
                     }
 					
 					if (resizeSettings.verticalScroll) {

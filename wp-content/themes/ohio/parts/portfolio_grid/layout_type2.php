@@ -87,13 +87,13 @@ if ( $project['tilt_effect'] ) {
         <a class="-unlink" href="<?php echo esc_url( $project['url'] ); ?>" <?php if ( $project['external'] ) { echo 'target="_blank"'; } ?> data-cursor-class="cursor-link">
 
             <?php if ( $featured_video && $project['show_featured_video'] ) : ?>
-                
+
                 <?php if ( strpos( $featured_video_url, 'youtube.com' ) || strpos( $featured_video_url, 'youtu.be' ) || strpos( $featured_video_url, 'vimeo.com' ) ) : ?>
                     <div class="video-container">
                         <iframe src="<?php echo esc_url( $featured_video_url ) . '?&controls=0&autoplay=1&start=0&mute=1&muted=1&rel=0&autopause=0&loop=1'; ?>" frameborder="0"/></iframe>
                     </div>
                 <?php else : ?>
-                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop">
+                    <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop" playsinline>
                         <source src="<?php echo esc_url( $featured_video_url ); ?>">
                     </video>
                 <?php endif; ?>
@@ -115,7 +115,7 @@ if ( $project['tilt_effect'] ) {
                 <?php endif; ?>
 
             <?php endif; ?>
-            
+
         </a>
         <?php if ( $project['in_popup'] ) : ?>
             <div class="overlay-details -top -fade-down">
@@ -156,6 +156,11 @@ if ( $project['tilt_effect'] ) {
                                 <?php esc_html_e( 'Show project', 'ohio' ); ?>
                             </a>
                         </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ( $project['excerpt_visible'] ) : ?>
+                    <div class="project-details">
+                        <p><?php echo esc_html( $project['short_description'] ); ?></p>
                     </div>
                 <?php endif; ?>
             </div>

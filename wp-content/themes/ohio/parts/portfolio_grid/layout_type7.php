@@ -49,14 +49,14 @@ if ( $project['tilt_effect'] ) {
 ?>
 
 <div class="portfolio-item -with-slider -with-gradient -layout7<?php echo esc_attr( $fullscreen_class ); ?>" <?php if ( $project['in_popup'] ) { echo ' data-portfolio-popup="' . esc_attr( $project['popup_id'] ) . '"'; } ?>>
-    
+
     <?php if ( $featured_video && $project['show_featured_video'] ) : ?>
 
         <div class="portfolio-item-image -full-w -full-h">
             <?php if ( strpos( $featured_video_url, 'youtube.com' ) || strpos( $featured_video_url, 'youtu.be' ) || strpos( $featured_video_url, 'vimeo.com' ) ) : ?>
                 <iframe src="<?php echo esc_url( $featured_video_url ) . '?&controls=0&autoplay=1&start=0&mute=1&muted=1&rel=0&autopause=0&loop=1'; ?>" frameborder="0"/></iframe>
             <?php else : ?>
-                <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop">
+                <video preload="metadata" muted="muted" autoplay="autoplay" loop="loop" playsinline>
                     <source src="<?php echo esc_url( $featured_video_url ); ?>">
                 </video>
             <?php endif; ?>

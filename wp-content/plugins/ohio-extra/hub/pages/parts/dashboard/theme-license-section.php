@@ -8,7 +8,33 @@
     $support_timestamp = get_option( 'ohio_license_support_until' );
     $diff_timestamp = $support_timestamp - time();
     $days = ceil( $diff_timestamp / 60 / 60 / 24 );
+
+	$license_info = apply_filters( 'ohio/ui-license-info', [ 'is_active' => false ] );
 ?>
+
+<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
+
+	<?php if ( $license_info['is_active'] && empty( $_COOKIE['ohio_license_notice_dismissed'] ) ) : ?>
+		<div class="o-notice notice notice-ohio-info is-dismissible">
+			<div class="holder">
+				<p>As of July 1, 2026, Envato introduced <b>a flat 50% author fee, significantly increasing commissions</b> for creators.<br> To keep our support and updates sustainable, we’ve adjusted our rates* and introduced even more flexible licensing tiers:</p>
+				<div class="_button-group">
+					<a class="btn btn-info" target="_blank" href="https://ohio.clbthemes.com/pricing/">
+						<?php _e( 'Discover Our New, Flexible Pricing', 'ohio-extra' ); ?>
+					</a>
+					<a target="_blank" href="https://ohio.clbthemes.com/pricing/?coupon=OHIO25" class="coupon">
+						Save 25% with Code: <b>OHIO25</b>
+					</a>
+				</div>
+				<p class="small">
+					*No changes will apply to our existing customers — your current licensing and ongoing support remain fully locked in.
+				</p>
+			</div>
+			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'ohio-extra' ); ?></span></button>
+		</div>
+	<?php endif; ?>
+
+<?php endif; ?>
 
 <div class="clb-headline">
 	<div class="col clb-headline-icon">
@@ -21,14 +47,14 @@
 		?>
 	</div>
 	<div class="col">
-		<h1><?php printf( esc_html__( '👋 Hey, %1$s', 'ohio-extra' ), $current_user->display_name ); ?></h1>
+		<h1><?php printf( esc_html__( 'Hey, %1$s', 'ohio-extra' ), $current_user->display_name ); ?> 👋</h1>
 		<p>
-			<?php _e( 'Thank you for choosing Ohio. Now it\'s time to create something awesome.', 'ohio-extra' ); ?>
+			<?php _e( 'Thank you for installing Ohio. Let\'s get started.', 'ohio-extra' ); ?>
 		</p>
 	</div>
 </div>
 
-<?php if ( get_option( 'ohio_license_code', false ) ): ?>
+<?php if ( $license_info['is_active'] ): ?>
 
 	<div class="row">
 		<div class="-col-8">
@@ -235,7 +261,7 @@
 								</div>
 								<div class="accordionItem_content visible">
 									<p>
-										Here’s <a href="https://demo.clbthemes.com/get_figma" target="_blank">the link to clone and get</a> the Figma source files.
+										Here’s <a href="<?php echo apply_filters( 'ohio/get-figma-url', '' ); ?>" target="_blank">the link to clone and get</a> the Figma source files.
 									</p>
 								</div>
 							</div>
@@ -381,10 +407,17 @@
 			<div class="clb-group">
 				<div class="clb-group-headline">
 					<h2><?php _e( 'Theme License', 'ohio-extra' ); ?></h2>
-					<a href="#remove" class="btn btn-flat" id="ohio-remove-theme-license">
-						<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m754-308-56-55q41.78-11.3 67.89-43.65Q792-439 792-480q0-50-35-85t-85-35H528v-72h144q79.68 0 135.84 56.22 56.16 56.23 56.16 136Q864-425 834.5-379T754-308ZM618-444l-72-72h78v72h-6ZM768-90 90-768l51-51 678 678-51 51ZM432-288H288q-79.68 0-135.84-56.16T96-480q0-63.93 38-113.97Q172-644 242-673l70 73h-23q-51 0-86 35t-35 85q0 50 35 85t85 35h144v72Zm-96-156v-72h56l71 72H336Z"/></svg>
-						<?php _e( 'Detach', 'ohio-extra' ); ?>
+					<?php if ( apply_filters( 'ohio/is-dedicated-license-tab', false ) ) : ?>
+					<a href="./admin.php?page=ohio_hub-account" class="btn btn-flat" onclick="this.classList.add('btn-spinner')">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M223.5-423.5Q200-447 200-480t23.5-56.5Q247-560 280-560t56.5 23.5Q360-513 360-480t-23.5 56.5Q313-400 280-400t-56.5-23.5ZM280-240q-100 0-170-70T40-480q0-100 70-170t170-70q67 0 121.5 33t86.5 87h352l120 120-180 180-80-60-80 60-85-60h-47q-32 54-86.5 87T280-240Zm0-80q56 0 98.5-34t56.5-86h125l58 41 82-61 71 55 75-75-40-40H435q-14-52-56.5-86T280-640q-66 0-113 47t-47 113q0 66 47 113t113 47Z"/></svg>
+						<?php _e( 'Manage License', 'ohio-extra' ); ?>
 					</a>
+					<?php else : ?>
+					<a href="#remove" class="btn btn-warning" id="ohio-remove-theme-license">
+						<svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m754-308-56-55q41.78-11.3 67.89-43.65Q792-439 792-480q0-50-35-85t-85-35H528v-72h144q79.68 0 135.84 56.22 56.16 56.23 56.16 136Q864-425 834.5-379T754-308ZM618-444l-72-72h78v72h-6ZM768-90 90-768l51-51 678 678-51 51ZM432-288H288q-79.68 0-135.84-56.16T96-480q0-63.93 38-113.97Q172-644 242-673l70 73h-23q-51 0-86 35t-35 85q0 50 35 85t85 35h144v72Zm-96-156v-72h56l71 72H336Z"/></svg>
+						<?php _e( 'Deactivate', 'ohio-extra' ); ?>
+					</a>
+					<?php endif; ?>
 				</div>
 				<div class="clb-group-content -nospace">
 
@@ -399,7 +432,9 @@
 							</div>
 
 							<!-- tip -->
+							<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
 							<a class="tip" target="_blank" href="https://themeforest.net/licenses/terms/regular"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480-240q20 0 34-14t14-34q0-20-14-34t-34-14q-20 0-34 14t-14 34q0 20 14 34t34 14Zm-36-153h73q0-37 6.5-52.5T555-485q35-34 48.5-58t13.5-53q0-55-37.5-89.5T484-720q-51 0-88.5 27T343-620l65 27q9-28 28.5-43.5T482-652q28 0 46 16t18 42q0 23-15.5 41T496-518q-35 32-43.5 52.5T444-393Zm36 297q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg></a>
+							<?php endif; ?>
 						</div>
 					</div>
 
@@ -407,7 +442,7 @@
 					<div class="row -vertical">
 						<div class="holder">
 							<div class="caption"><?php _e( 'Registration Date:', 'ohio-extra' ); ?></div>
-							<?php echo get_option( 'ohio_license_sold_at', '-' ); ?>
+							<?php echo $license_info['created']; ?>
 						</div>
 					</div>
 
@@ -415,16 +450,16 @@
 					<div class="row -vertical">
 						<div class="holder">
 							<div class="caption"><?php _e( 'License Key:', 'ohio-extra' ); ?></div>
-							<span class="-small-t"><?php echo get_option( 'ohio_license_code', '-' ); ?></span>
+							<span class="-small-t"><?php echo $license_info['secret_key']; ?></span>
 						</div>
 					</div>
 
 					<!-- row -->
-					<?php if ( get_option( 'ohio_buyer_username' ) ): ?>
+					<?php if ( $license_info['buyer'] ): ?>
 						<div class="row -vertical">
 							<div class="holder">
 								<div class="caption"><?php _e( 'License Owner:', 'ohio-extra' ); ?></div>
-								<?php echo get_option( 'ohio_buyer_username'); ?>
+								<?php echo $license_info['buyer']; ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -433,10 +468,12 @@
 					<div class="row -vertical">
 						<div class="holder">
 							<div class="caption"><?php _e( 'Linked Domain:', 'ohio-extra' ); ?></div>
-							<a href="<?php echo '//' . $_SERVER['HTTP_HOST']; ?>"><?php echo $_SERVER['HTTP_HOST']; ?>/</a> 
+							<a href="<?php echo $license_info['url']; ?>"><?php echo $license_info['url']; ?></a> 
 
 							<!-- tip -->
+							<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
 							<a class="tip" target="_blank" href="https://themeforest.net/licenses/terms/regular"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480-240q20 0 34-14t14-34q0-20-14-34t-34-14q-20 0-34 14t-14 34q0 20 14 34t34 14Zm-36-153h73q0-37 6.5-52.5T555-485q35-34 48.5-58t13.5-53q0-55-37.5-89.5T484-720q-51 0-88.5 27T343-620l65 27q9-28 28.5-43.5T482-652q28 0 46 16t18 42q0 23-15.5 41T496-518q-35 32-43.5 52.5T444-393Zm36 297q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg></a>
+							<?php endif; ?>
 						</div>
 					</div>
 
@@ -444,10 +481,12 @@
 					<div class="row -vertical -highlighted">
 						<div class="holder">
 							<div class="caption"><?php _e( 'Have a project?', 'ohio-extra' ); ?></div>
-							<a class="-unlink" target="_blank" href="https://1.envato.market/5Q25j">Buy a New License</a>
+							<a class="-unlink" target="_blank" href="https://ohio.clbthemes.com/pricing/">Buy a New License</a>
 
 							<!-- tip -->
+							<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
 							<a class="tip" target="_blank" href="https://themeforest.net/licenses/terms/regular"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480-240q20 0 34-14t14-34q0-20-14-34t-34-14q-20 0-34 14t-14 34q0 20 14 34t34 14Zm-36-153h73q0-37 6.5-52.5T555-485q35-34 48.5-58t13.5-53q0-55-37.5-89.5T484-720q-51 0-88.5 27T343-620l65 27q9-28 28.5-43.5T482-652q28 0 46 16t18 42q0 23-15.5 41T496-518q-35 32-43.5 52.5T444-393Zm36 297q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg></a>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
@@ -499,9 +538,6 @@
 					<div class="clb-group -warning">
 						<div class="clb-group-headline">
 							<h2><?php _e( 'Support Expired', 'ohio-extra' ); ?></h2>
-							<a target="_blank" href="https://1.envato.market/5Q25j" class="btn" id="ohio-remove-theme-license">
-								<?php _e( 'Renew Support', 'ohio-extra' ); ?>
-							</a>
 						</div>
 						<div class="clb-group-content -nospace">
 							<div class="row -vertical">
@@ -519,6 +555,11 @@
 									<a class="tip" target="_blank" href="https://help.market.envato.com/hc/en-us/articles/207886473-Extend-or-renew-Item-Support"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M480-240q20 0 34-14t14-34q0-20-14-34t-34-14q-20 0-34 14t-14 34q0 20 14 34t34 14Zm-36-153h73q0-37 6.5-52.5T555-485q35-34 48.5-58t13.5-53q0-55-37.5-89.5T484-720q-51 0-88.5 27T343-620l65 27q9-28 28.5-43.5T482-652q28 0 46 16t18 42q0 23-15.5 41T496-518q-35 32-43.5 52.5T444-393Zm36 297q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg></a>
 								</div>
 							</div>
+						</div>
+						<div class="clb-group-footer">
+							<a target="_blank" href="https://ohio.clbthemes.com/pricing/" class="btn" id="ohio-remove-theme-license">
+								<?php _e( 'Renew Support', 'ohio-extra' ); ?>
+							</a>
 						</div>
 					</div>
 

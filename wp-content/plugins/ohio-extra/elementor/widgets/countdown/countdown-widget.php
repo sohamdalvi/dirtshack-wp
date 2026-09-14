@@ -23,11 +23,6 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-countdown';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     public function get_script_depends() {
         return [ 'jquery-countdown', 'ohio-elementor-countdown-widget' ];
     }
@@ -117,7 +112,7 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'border_width',
             [
-                'label' => __( 'Shape Border', 'ohio-extra' ),
+                'label' => __( 'Border', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => 'px',
                 'range' => [
@@ -142,7 +137,7 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'border_radius',
             [
-                'label' => __( 'Shape Corners', 'ohio-extra' ),
+                'label' => __( 'Corners', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => [ 'px', 'em', 'rem', 'vw' ],
                 'range' => [
@@ -221,7 +216,7 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'box_color',
             [
-                'label' => __( 'Shape Background Color', 'ohio-extra' ),
+                'label' => __( 'Background Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .-contained .countdown-item .number' => 'background-color: {{VALUE}};'
@@ -234,9 +229,32 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'dark_mode_scheme',
+            [
+                'label' => __( 'Dark Mode Background', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => __( 'None', 'ohio-extra' ),
+                    'dark' => __( 'Inherited', 'ohio-extra' ),
+                    'light' => __( 'Lighter Tint', 'ohio-extra' ),
+                ],
+                'condition' => [
+                    'block_layout' => 'boxed'
+                ],
+                'prefix_class' => '',
+                'classes_dictionary' => [
+                    'none' => '',
+                    'light' => 'clb__dark_mode_light',
+                    'dark' => 'clb__dark_mode_black',
+                ],
+            ]
+        );
+
+        $this->add_control(
             'border_color',
             [
-                'label' => __( 'Shape Border Color', 'ohio-extra' ),
+                'label' => __( 'Border Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .-contained .countdown-item .number' => 'border-color:{{VALUE}}'

@@ -22,7 +22,7 @@
         </div>
     </div>
 	<?php if ( !empty( $settings['title'] ) ): ?>
-    	<h6 class="title"><?php echo $settings['title']; ?></h6>
+    	<div class="h6 title"><?php echo $settings['title']; ?></div>
 	<?php endif; ?>
 	<?php if ( !empty( $settings['description'] ) ): ?>
     	<p class="-unspace"><?php echo $settings['description']; ?></h6>

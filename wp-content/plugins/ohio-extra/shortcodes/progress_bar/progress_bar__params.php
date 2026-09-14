@@ -118,8 +118,19 @@ function ohio_progress_bar_sc_map() {
 			array(
 				'type' => 'ohio_colorpicker',
 				'group' => __( 'Styles', 'ohio-extra' ),
-				'heading' => __( 'Track Color', 'ohio-extra' ),
+				'heading' => __( 'Track Background', 'ohio-extra' ),
 				'param_name' => 'bar_bg_color'
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Dark Mode Background', 'ohio-extra' ),
+				'param_name' => 'dark_mode_scheme',
+				'value' => array(
+					__( 'None', 'ohio-extra' ) => 'none',
+					__( 'Inherited', 'ohio-extra' ) => 'dark',
+					__( 'Lighter Tint', 'ohio-extra' ) => 'light'
+				)
 			),
 			array(
 				'type' => 'ohio_colorpicker',

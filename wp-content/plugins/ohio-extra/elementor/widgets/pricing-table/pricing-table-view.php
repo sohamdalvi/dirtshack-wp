@@ -2,7 +2,7 @@
 
 	<div class="pricing-table-headline">
         <?php if ( !empty( $settings['headline']) ) : ?>
-			<h5 class="title"><?php echo $settings['headline']; ?></h5>
+			<div class="h5 title"><?php echo $settings['headline']; ?></div>
 		<?php endif; ?>
 
 		<?php if ( !empty( $settings['subtitle']) ) : ?>
@@ -66,9 +66,15 @@
 							<i class="icon"><svg class="default" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></i>
 						<?php endif; ?>
 
+
 						<?php if ( !empty( $item['list_title'] ) ) : ?>
-							<span class="title"><?php echo $item['list_title']; ?></span>
+							<?php if ( !empty( $item['list_tooltip'] ) ) : ?>
+								<span class="title has-tooltip -underline-dotted" data-tooltip="<?php echo esc_attr( $item['list_tooltip'] ); ?>" tabindex="0"><?php echo $item['list_title']; ?></span>
+							<?php else: ?>
+								<span class="title"><?php echo $item['list_title']; ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
+
 					</li>
 				<?php endforeach; ?>
 

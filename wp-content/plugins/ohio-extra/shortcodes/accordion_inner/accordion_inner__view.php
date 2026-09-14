@@ -7,12 +7,12 @@
 ?>
 <div class="accordion-item<?php echo esc_attr( $wrapper_classes ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
 	<div class="accordion-button">
-        <h6 class="accordion-header">
+        <div class="h6 accordion-header">
         	<?php if ( $with_icon && $icon_as_icon) : ?>
 				<i class="icon <?php echo $icon_as_icon; ?>"></i>
 			<?php endif; ?>
         	<?php echo $heading; ?>
-    	</h6>
+    	</div>
         <button class="icon-button -extra-small" aria-label="<?php esc_html_e( 'Toggle', 'ohio-extra' ); ?>">
             <i class="icon"></i>
         </button>

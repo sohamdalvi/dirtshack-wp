@@ -248,20 +248,20 @@ function ohio_update_supported_until() {
 // License message
 add_action( 'admin_notices', 'ohio_hub_license_notice' );
 function ohio_hub_license_notice() {
-    if ( ! get_option( 'ohio_license_code', '' ) ): ?>
-    <div class="notice o-notice activation warning is-dismissible -hidden">
-        <i class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M74.62-140 480-840l405.38 700H74.62ZM178-200h604L480-720 178-200Zm302-47.69q13.73 0 23.02-9.29t9.29-23.02q0-13.73-9.29-23.02T480-312.31q-13.73 0-23.02 9.29T447.69-280q0 13.73 9.29 23.02t23.02 9.29Zm-30-104.62h60v-200h-60v200ZM480-460Z"/></svg>
-        </i>
+    // The Dashboard tab (theme-license-section.php) renders its own dismissible
+    // version of this notice, so skip the global one there to avoid duplicates.
+    if ( isset( $_GET['page'] ) && $_GET['page'] === 'ohio_hub' ) return;
+
+    if ( ! apply_filters( 'ohio/has-license', false ) ): ?>
+    <div class="o-notice notice notice-warning activation is-dismissible -hidden">
         <div class="holder">
-            <p class="title"><?php _e( 'License activation is required!', 'ohio-extra' ); ?></p>
-            <?php _e( 'Activate your license to be able to use all the built-in features.', 'ohio-extra' ); ?>
+            <h3><?php _e( 'Complete your Ohio activation', 'ohio-extra' ); ?></h3>
+            <p><?php _e( 'Activate your theme license to unlock demo imports, built-in features, and dedicated professional support.', 'ohio-extra' ); ?></p>
             <div class="_button-group">
                 <a class="btn" href="admin.php?page=ohio_hub">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M684-180v-108H576v-72h108v-108h72v108h108v72H756v108h-72ZM432-288H288q-79.68 0-135.84-56.23Q96-400.45 96-480.23 96-560 152.16-616q56.16-56 135.84-56h144v72H288q-50 0-85 35t-35 85q0 50 35 85t85 35h144v72Zm-96-156v-72h288v72H336Zm528-36h-72q0-50-35-85t-85-35H528v-72h144q79.68 0 135.84 56.16T864-480Z"/></svg>
                     <?php _e( 'Connect & Activate', 'ohio-extra' ); ?>
                 </a>
-                <a class="btn btn-flat" target="_blank" href="https://1.envato.market/5Q25j"><?php _e( 'Buy License', 'ohio-extra' ); ?></a>
+                <a class="btn btn-flat" target="_blank" href="https://ohio.clbthemes.com/pricing/"><?php _e( 'Buy License', 'ohio-extra' ); ?></a>
             </div>
         </div>
     </div>

@@ -29,7 +29,7 @@
 			<div class="subtitle">
 				<?php esc_html_e( 'Next Post', 'ohio' ); ?>
 			</div>
-			<h5 class="title">
+			<div class="h5 title">
 				<?php
 					$next_title = get_the_title( $next_post->ID );
 					if ( empty( $next_title ) ) {
@@ -38,7 +38,7 @@
 						echo wp_kses( $next_title, 'default' );
 					}
 				?>
-			</h5>
+			</div>
 		</div>
 	</div>
 </a>

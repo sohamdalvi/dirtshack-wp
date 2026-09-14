@@ -311,6 +311,28 @@
                 "maxlength" => ""
             ],
             [
+                "key" => "field_5939gkyp45y34k45wq3",
+                "label" => __( 'Loop', 'ohio' ),
+                "name" => "project_video_loop",
+                "type" => "true_false",
+                "instructions" => __( 'Used to make video play again automatically after it ends.', 'ohio' ),
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59391f242354h235",
+                            "operator" => "==",
+                            "value" => "custom"
+                        ]
+                    ]
+                ],
+                "required" => 0,
+                "message" => "",
+                "default_value" => 0,
+                "ui" => 1,
+                "ui_on_text" => __( 'Yes', 'ohio' ),
+                "ui_off_text" => __( 'No', 'ohio' )
+            ],
+            [
                 "key" => "field_59391f245sasfas",
                 "label" => __( 'Cover Mode', 'ohio' ),
                 "name" => "project_video_cover",

@@ -16,11 +16,6 @@ class Ohio_Elementor_Testimonial_Widget extends Ohio_Elementor_Widget_Base {
         return 'ohio-icon-sc-testimonial';
     }
 
-    public function get_categories()
-    {
-        return [ 100 ];
-    }
-
     protected function register_controls()
     {
         $this->start_controls_section(

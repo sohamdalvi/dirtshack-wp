@@ -17,7 +17,7 @@
 		ob_start();
 
 ?>
-		<div class="ohio_extra_portfolio_types_block">
+		<div class="ohio_extra_portfolio_types_block multiple-select">
 			<input type="hidden" name="<?php echo esc_attr( $settings['param_name'] ); ?>" class="wpb_vc_param_value" value="<?php echo esc_attr( $value ); ?>">
 			<select multiple="multiple">
 				<?php

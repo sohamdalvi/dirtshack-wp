@@ -59,6 +59,8 @@ function ohio_pricing_table_func( $atts ) {
 	$features_icons_color = isset( $features_icons_color ) ? OhioExtraFilter::string( $features_icons_color ) : false;
 	$features_disabled_titles_color = isset( $features_disabled_titles_color ) ? OhioExtraFilter::string( $features_disabled_titles_color ) : false;
 	$features_disabled_icons_color = isset( $features_disabled_icons_color ) ? OhioExtraFilter::string( $features_disabled_icons_color ) : false;
+	$features_tooltip_bg_color = isset( $features_tooltip_bg_color ) ? OhioExtraFilter::string( $features_tooltip_bg_color ) : false;
+	$features_tooltip_typo = isset( $features_tooltip_typo ) ? OhioExtraFilter::string( $features_tooltip_typo ) : false;
 
 	// Design options
     $content_styles = isset( $content_styles ) ? OhioExtraFilter::string( $content_styles ) : false;
@@ -125,6 +127,13 @@ function ohio_pricing_table_func( $atts ) {
 	$wrapper_classes .= isset( $css_class ) ? ' ' . OhioExtraFilter::string( $css_class, 'attr', '' )  : '';
 	$wrapper_classes .= $content_classes;
 
+	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
+	if ( 'light' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_light';
+	} elseif ( 'dark' === $dark_mode_scheme ) {
+		$wrapper_classes .= ' clb__dark_mode_black';
+	}
+
 	/**
 	* Features
 	*/
@@ -140,6 +149,11 @@ function ohio_pricing_table_func( $atts ) {
 				$features_value[$feature_key]->feature_icon = OhioExtraFilter::string( $feature_value->feature_icon, 'attr' );
 			} else {
 				$features_value[$feature_key]->feature_icon = false;
+			}
+			if ( isset( $feature_value->feature_tooltip ) ) {
+				$features_value[$feature_key]->feature_tooltip = OhioExtraFilter::string( $feature_value->feature_tooltip );
+			} else {
+				$features_value[$feature_key]->feature_tooltip = false;
 			}
 		}
 	}
@@ -165,7 +179,7 @@ function ohio_pricing_table_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $title_typo );
 
 	if ( $table_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' h5.title:not(.price-number){';
+		$_selector = '#' . $wrapper_id . ' .h5.title:not(.price-number){';
 		$_block_typo = $table_title_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -355,6 +369,37 @@ function ohio_pricing_table_func( $atts ) {
 		$_style_block .= '#' . $wrapper_id . ' .pricing-table-features .missing .icon{';
 		$_style_block .= 'color:' . $features_disabled_icons_color . ';';
 		$_style_block .= '}';
+	}
+
+	$features_tooltip_bg_color = OhioExtraParser::VC_color_to_CSS( $features_tooltip_bg_color, '{{color}}' );
+	if ( $features_tooltip_bg_color ) {
+		$_style_block .= '#' . $wrapper_id . ' .pricing-table-features .has-tooltip::before{';
+		$_style_block .= 'background-color:' . $features_tooltip_bg_color . ';';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .pricing-table-features .has-tooltip::after{';
+		$_style_block .= 'border-top-color:' . $features_tooltip_bg_color . ';';
+		$_style_block .= '}';
+	}
+
+	$table_tooltip_typo = OhioExtraParser::VC_typo_to_CSS( $features_tooltip_typo );
+	OhioExtraParser::VC_typo_custom_font( $features_tooltip_typo );
+
+	if ( $table_tooltip_typo ) {
+		$_selector = '#' . $wrapper_id . ' .pricing-table-features .has-tooltip::before{';
+		$_block_typo = $table_tooltip_typo;
+		if ( !empty( $_block_typo['desktop'] ) ) {
+			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
+		}
+		if ( !empty( $_block_typo['tablet'] ) ) {
+		    $_style_block .= '@media screen and (min-width: 769px) and (max-width: 1180px){';
+		    $_style_block .= $_selector . $_block_typo['tablet'] . '}';
+		    $_style_block .= '}';
+		}
+		if ( !empty( $_block_typo['mobile'] ) ) {
+		    $_style_block .= '@media screen and (max-width: 768px){';
+		    $_style_block .= $_selector . $_block_typo['mobile'] . '}';
+		    $_style_block .= '}';
+		}
 	}
 
 	// Button
