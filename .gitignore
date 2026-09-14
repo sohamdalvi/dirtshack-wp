@@ -14,7 +14,8 @@ wp-content/cache/
 wp-content/wpo-cache/
 wp-content/upgrade/
 wp-content/languages/
-wp-content/mu-plugins/
+wp-content/mu-plugins/*
+!wp-content/mu-plugins/dirtshack-gst-report.php
 wp-content/object-cache.php
 wp-content/advanced-cache.php
 debug.log

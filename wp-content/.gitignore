@@ -25,7 +25,8 @@ plugins/*
 themes/twentytwenty*/
 
 # ─── mu-plugins: exclude LocalWP SSO ─────────────────────────
-mu-plugins/
+mu-plugins/*
+!mu-plugins/dirtshack-gst-report.php
 
 # ─── Languages (regenerated on demand) ───────────────────────
 languages/
