@@ -269,6 +269,9 @@ require get_stylesheet_directory() . '/inc/invoice-date.php';
 // Customer GSTIN on orders (admin field + validation + PDF invoice; read by GST report).
 require get_stylesheet_directory() . '/inc/customer-gstin.php';
 
+// "Shipped" order status (between Processing and Completed).
+require get_stylesheet_directory() . '/inc/order-status-shipped.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active
