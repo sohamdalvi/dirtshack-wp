@@ -8,8 +8,11 @@
  *   DirtShack Pune
  *   GSTN: 27AIQPD6061J1ZZ
  *
- * The plugin's shop name / address settings are left unchanged, so the invoice
- * still prints the full legal name and address.
+ * The customer's shipping address sits top-right next to the logo, and this
+ * shop block moves below it on the left (pdf-templates/packing-slip.php).
+ *
+ * The plugin's shop name / address settings and the invoice template are left
+ * unchanged, so the invoice still prints the full legal name and address.
  *
  * @package ohio-child
  */
@@ -31,4 +34,14 @@ function dirtshack_packing_slip_shop_name( $name, $document ) {
 add_filter( 'wpo_wcpdf_shop_address', 'dirtshack_packing_slip_shop_address', 10, 2 );
 function dirtshack_packing_slip_shop_address( $address, $document ) {
 	return dirtshack_is_packing_slip( $document ) ? DIRTSHACK_PACKING_SLIP_ADDRESS : $address;
+}
+
+/** Use the child theme's packing slip layout; every other document keeps the plugin template. */
+add_filter( 'wpo_wcpdf_template_file', 'dirtshack_packing_slip_template', 10, 2 );
+function dirtshack_packing_slip_template( $file_path, $type ) {
+	$custom = get_stylesheet_directory() . '/pdf-templates/packing-slip.php';
+	if ( 'packing-slip' === $type && 'packing-slip.php' === basename( $file_path ) && file_exists( $custom ) ) {
+		return $custom;
+	}
+	return $file_path;
 }
