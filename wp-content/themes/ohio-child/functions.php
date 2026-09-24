@@ -275,6 +275,9 @@ require get_stylesheet_directory() . '/inc/order-status-shipped.php';
 // Packing slip header: "DirtShack Pune" + GSTN instead of the full shop address.
 require get_stylesheet_directory() . '/inc/packing-slip-header.php';
 
+// Bulk packing slips: two per A4 page with a cut line.
+require get_stylesheet_directory() . '/inc/packing-slip-bulk.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active

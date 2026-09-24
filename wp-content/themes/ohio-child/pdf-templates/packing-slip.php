@@ -5,8 +5,8 @@
  * Copy of the plugin's templates/Simple/packing-slip.php (v5.16.3) with the
  * customer's shipping address and the shop name/GSTN block swapped: the
  * customer address sits top-right next to the logo, the shop block below it on
- * the left. Loaded for packing slips only via inc/packing-slip-header.php; the
- * invoice still uses the plugin's own template.
+ * the left. Item SKU and weight are not printed. Loaded for packing slips only via
+ * inc/packing-slip-header.php; the invoice still uses the plugin's own template.
  *
  * @package ohio-child
  */
@@ -118,12 +118,6 @@
 					<p class="item-name"><?php echo esc_html( $item['name'] ); ?></p>
 					<?php do_action( 'wpo_wcpdf_before_item_meta', $this->get_type(), $item, $this->order ); ?>
 					<div class="item-meta">
-						<?php if ( ! empty( $item['sku'] ) ) : ?>
-							<p class="sku"><span class="label"><?php $this->sku_title(); ?></span> <?php echo esc_html( $item['sku'] ); ?></p>
-						<?php endif; ?>
-						<?php if ( ! empty( $item['weight'] ) ) : ?>
-							<p class="weight"><span class="label"><?php $this->weight_title(); ?></span> <?php echo esc_html( $item['weight'] ); ?><?php echo esc_html( get_option( 'woocommerce_weight_unit' ) ); ?></p>
-						<?php endif; ?>
 						<!-- ul.wc-item-meta -->
 						<?php if ( ! empty( $item['meta'] ) ) : ?>
 							<?php echo wp_kses_post( $item['meta'] ); ?>
