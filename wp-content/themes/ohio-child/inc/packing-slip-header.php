@@ -11,6 +11,9 @@
  * The customer's shipping address sits top-right next to the logo, and this
  * shop block moves below it on the left (pdf-templates/packing-slip.php).
  *
+ * The Product / Quantity table header is printed without the black fill, to
+ * save printer ink.
+ *
  * The plugin's shop name / address settings and the invoice template are left
  * unchanged, so the invoice still prints the full legal name and address.
  *
@@ -44,4 +47,13 @@ function dirtshack_packing_slip_template( $file_path, $type ) {
 		return $custom;
 	}
 	return $file_path;
+}
+
+/** No black fill on the items table header: black bold text with a rule below it (saves ink). */
+add_filter( 'wpo_wcpdf_template_styles', 'dirtshack_packing_slip_styles', 10, 2 );
+function dirtshack_packing_slip_styles( $css, $document ) {
+	if ( dirtshack_is_packing_slip( $document ) ) {
+		$css .= "\n.order-details thead th { color: black; background-color: transparent; border-top: 0; border-bottom: 1.5pt solid black; }\n";
+	}
+	return $css;
 }
