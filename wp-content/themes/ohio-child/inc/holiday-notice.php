@@ -10,12 +10,13 @@
  * - cart and checkout
  * - the order-received page and the Processing / On hold order emails
  *
- * The top bar and product pages are page-cached (WP Super Cache), so there the
- * notice is printed whenever it is set up and not yet over, carrying its start/end
- * timestamps; a tiny inline script shows or hides it by the visitor's clock. That
- * way it switches on and off on its dates without waiting for the cache to expire.
- * Cart, checkout, the order-received page and emails are never cached, so they
- * check the dates on the server. Saving the settings clears the page cache.
+ * The top bar and product pages are page-cached (WP Super Cache, and Cloudflare in
+ * front of it for up to 4 hours), so there the notice is printed whenever it is set
+ * up and not yet over, carrying its start/end timestamps; a tiny inline script shows
+ * or hides it by the visitor's clock. That way it switches on and off on its dates
+ * without waiting for the cache to expire. Cart, checkout, the order-received page
+ * and emails are never cached, so they check the dates on the server. Saving the
+ * settings clears WP Super Cache and, once its API token is set up, Cloudflare.
  *
  * Dates are whole days in the store's timezone (Settings → General), inclusive.
  *
@@ -226,11 +227,72 @@ function dirtshack_holiday_settings_save() {
 		WC_Admin_Settings::add_error( __( '"Show until" is before "Show from", so the notice will never show.', 'ohio-child' ) );
 	}
 
-	// Cached pages carry the old notice (or none) until the cache is cleared.
+	// Cached pages carry the old notice (or none) until the caches are cleared:
+	// WP Super Cache on the server first, then Cloudflare's copy in front of it.
 	if ( function_exists( 'wp_cache_clear_cache' ) ) {
 		wp_cache_clear_cache();
-		WC_Admin_Settings::add_message( __( 'Page cache cleared so the change shows on the site right away.', 'ohio-child' ) );
+		WC_Admin_Settings::add_message( __( 'WP Super Cache cleared.', 'ohio-child' ) );
 	}
+
+	$cloudflare = dirtshack_cloudflare_purge();
+	if ( is_wp_error( $cloudflare ) ) {
+		/* translators: %s: error from Cloudflare */
+		WC_Admin_Settings::add_error( sprintf( __( 'Could not clear the Cloudflare cache (%s). Purge it in the Cloudflare dashboard, or the home page and product pages update within 4 hours.', 'ohio-child' ), $cloudflare->get_error_message() ) );
+	} elseif ( $cloudflare ) {
+		WC_Admin_Settings::add_message( $cloudflare );
+	} else {
+		WC_Admin_Settings::add_message( __( 'Cloudflare cache is not cleared automatically (no API token set up), so the home page and product pages can take up to 4 hours to update.', 'ohio-child' ) );
+	}
+}
+
+/**
+ * Clear Cloudflare's copy of the shop's pages. Cloudflare caches pages for up to
+ * 4 hours, separately from WP Super Cache. Needs, in wp-config.php:
+ *
+ *   define( 'DIRTSHACK_CF_ZONE_ID', '…' );   // Cloudflare → dirtshack.in → Overview → API → Zone ID
+ *   define( 'DIRTSHACK_CF_API_TOKEN', '…' ); // API token with only Zone → Cache Purge → Purge
+ *
+ * Clears the whole shop host; if the Cloudflare plan doesn't allow that, just the
+ * home and shop pages.
+ *
+ * @return string|WP_Error|null A message saying what was cleared, the error, or null when not set up.
+ */
+function dirtshack_cloudflare_purge() {
+	if ( ! defined( 'DIRTSHACK_CF_ZONE_ID' ) || ! defined( 'DIRTSHACK_CF_API_TOKEN' ) ) {
+		return null;
+	}
+
+	$host     = wp_parse_url( home_url(), PHP_URL_HOST );
+	$attempts = [
+		/* translators: %s: host name */
+		sprintf( __( 'Cloudflare cache cleared for all of %s, so the change shows on the site right away.', 'ohio-child' ), $host ) => [ 'hosts' => [ $host ] ],
+		__( 'Cloudflare cache cleared for the home and shop pages. Product pages can take up to 4 hours to update.', 'ohio-child' ) => [ 'files' => array_values( array_unique( [ home_url( '/' ), wc_get_page_permalink( 'shop' ) ] ) ) ],
+	];
+
+	$error = null;
+	foreach ( $attempts as $cleared => $body ) {
+		$response = wp_remote_post(
+			'https://api.cloudflare.com/client/v4/zones/' . rawurlencode( DIRTSHACK_CF_ZONE_ID ) . '/purge_cache',
+			[
+				'timeout' => 15,
+				'headers' => [
+					'Authorization' => 'Bearer ' . DIRTSHACK_CF_API_TOKEN,
+					'Content-Type'  => 'application/json',
+				],
+				'body'    => wp_json_encode( $body ),
+			]
+		);
+		if ( is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$result = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( ! empty( $result['success'] ) ) {
+			return $cleared;
+		}
+		$error = new WP_Error( 'cloudflare', $result['errors'][0]['message'] ?? wp_remote_retrieve_response_message( $response ) );
+	}
+	return $error;
 }
 
 /** One-line status shown at the top of the settings tab. */
