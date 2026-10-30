@@ -251,12 +251,17 @@ function dirtshack_holiday_status() {
 		: sprintf( __( 'Status: showing now, until the end of %s.', 'ohio-child' ), $date( $notice['until'] ) );
 }
 
+/**
+ * The section id must differ from the tab id: WooCommerce fires
+ * woocommerce_settings_{section id} while printing the section, and
+ * woocommerce_settings_{tab id} is what prints this tab, so the same id recurses.
+ */
 function dirtshack_holiday_settings() {
 	return [
 		[
 			'title' => __( 'Holiday notice', 'ohio-child' ),
 			'type'  => 'title',
-			'id'    => 'dirtshack_holiday',
+			'id'    => 'dirtshack_holiday_options',
 			'desc'  => __( 'Tell shoppers about shipping delays during holidays or other breaks. Shoppers see it before they pay (product page, cart, checkout) and again after (order-received page and confirmation email).', 'ohio-child' )
 				. '<br><strong>' . esc_html( dirtshack_holiday_status() ) . '</strong>',
 		],
@@ -336,7 +341,7 @@ function dirtshack_holiday_settings() {
 		],
 		[
 			'type' => 'sectionend',
-			'id'   => 'dirtshack_holiday',
+			'id'   => 'dirtshack_holiday_options',
 		],
 	];
 }
