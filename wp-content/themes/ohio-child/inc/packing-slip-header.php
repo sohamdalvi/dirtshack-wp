@@ -12,7 +12,8 @@
  * shop block moves below it on the left (pdf-templates/packing-slip.php).
  *
  * The Product / Quantity table header is printed without the black fill, to
- * save printer ink.
+ * save printer ink. Variation attributes (Size: XL, Colour: …) are not listed
+ * under the items; any other item meta still is.
  *
  * The plugin's shop name / address settings and the invoice template are left
  * unchanged, so the invoice still prints the full legal name and address.
@@ -62,4 +63,30 @@ function dirtshack_packing_slip_styles( $css, $document ) {
 		$css .= ".item-meta { font-size: 9pt; line-height: 9pt; }\n";
 	}
 	return $css;
+}
+
+/**
+ * Drop variation attribute lines (Size: XL, Colour: …) from packing slip items.
+ * WooCommerce lists them under the item only when they aren't already in the
+ * product name, so only some products showed them. Other item meta is kept.
+ */
+add_filter( 'wpo_wcpdf_order_item_data', 'dirtshack_packing_slip_hide_variant_meta', 10, 3 );
+function dirtshack_packing_slip_hide_variant_meta( $data, $order, $type ) {
+	if ( 'packing-slip' !== $type || empty( $data['variation_id'] ) || empty( $data['meta'] ) || ! $data['item'] instanceof WC_Order_Item_Product ) {
+		return $data;
+	}
+
+	$product    = $data['item']->get_product();
+	$attributes = $product && $product->is_type( 'variation' ) ? array_keys( $product->get_variation_attributes( false ) ) : [];
+
+	$lines = [];
+	foreach ( $data['item']->get_formatted_meta_data() as $meta ) {
+		if ( in_array( $meta->key, $attributes, true ) || 0 === strpos( $meta->key, 'pa_' ) ) {
+			continue;
+		}
+		$lines[] = '<strong class="wc-item-meta-label">' . wp_kses_post( $meta->display_key ) . ':</strong> ' . wp_kses_post( make_clickable( trim( $meta->display_value ) ) );
+	}
+	$data['meta'] = $lines ? '<ul class="wc-item-meta"><li>' . implode( '</li><li>', $lines ) . '</li></ul>' : '';
+
+	return $data;
 }
