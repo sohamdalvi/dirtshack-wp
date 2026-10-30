@@ -281,6 +281,9 @@ require get_stylesheet_directory() . '/inc/packing-slip-bulk.php';
 // Create a customer account from a guest order (order action + Orders bulk action).
 require get_stylesheet_directory() . '/inc/customer-from-order.php';
 
+// Holiday / shipping-delay notice (WooCommerce → Settings → Holiday notice).
+require get_stylesheet_directory() . '/inc/holiday-notice.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active
