@@ -49,11 +49,17 @@ function dirtshack_packing_slip_template( $file_path, $type ) {
 	return $file_path;
 }
 
-/** No black fill on the items table header: black bold text with a rule below it (saves ink). */
+/**
+ * No black fill on the items table header: black bold text with a rule below it (saves ink).
+ * Text is larger than the plugin's 9pt default so the slip reads easily in the parcel.
+ */
 add_filter( 'wpo_wcpdf_template_styles', 'dirtshack_packing_slip_styles', 10, 2 );
 function dirtshack_packing_slip_styles( $css, $document ) {
 	if ( dirtshack_is_packing_slip( $document ) ) {
 		$css .= "\n.order-details thead th { color: black; background-color: transparent; border-top: 0; border-bottom: 1.5pt solid black; }\n";
+		$css .= "body, h3, h4 { font-size: 11pt; }\n";
+		$css .= "td.shipping-address { width: 50%; font-size: 12pt; }\n";
+		$css .= ".item-meta { font-size: 9pt; line-height: 9pt; }\n";
 	}
 	return $css;
 }

@@ -5,7 +5,9 @@
  * Copy of the plugin's templates/Simple/packing-slip.php (v5.16.3) with the
  * customer's shipping address and the shop name/GSTN block swapped: the
  * customer address sits top-right next to the logo, the shop block below it on
- * the left. Item SKU and weight are not printed. Loaded for packing slips only via
+ * the left. The customer's mobile number (shipping phone, else billing phone) is
+ * always printed under their address, whatever the plugin's "Display phone"
+ * setting. Item SKU and weight are not printed. Loaded for packing slips only via
  * inc/packing-slip-header.php; the invoice still uses the plugin's own template.
  *
  * @package ohio-child
@@ -33,8 +35,9 @@
 			<?php if ( isset( $this->settings['display_email'] ) ) : ?>
 				<div class="billing-email"><?php $this->billing_email(); ?></div>
 			<?php endif; ?>
-			<?php if ( isset( $this->settings['display_phone'] ) ) : ?>
-				<div class="shipping-phone"><?php $this->shipping_phone( ! $this->show_billing_address() ); ?></div>
+			<?php $customer_phone = $this->get_shipping_phone( true ); ?>
+			<?php if ( ! empty( $customer_phone ) ) : ?>
+				<div class="shipping-phone">Mobile: <?php echo esc_html( $customer_phone ); ?></div>
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -73,7 +76,7 @@
 				<?php do_action( 'wpo_wcpdf_before_billing_address', $this->get_type(), $this->order ); ?>
 				<p><?php $this->billing_address(); ?></p>
 				<?php do_action( 'wpo_wcpdf_after_billing_address', $this->get_type(), $this->order ); ?>
-				<?php if ( isset( $this->settings['display_phone'] ) && ! empty( $this->get_billing_phone() ) ) : ?>
+				<?php if ( isset( $this->settings['display_phone'] ) && ! empty( $this->get_billing_phone() ) && $this->get_billing_phone() !== $customer_phone ) : ?>
 					<div class="billing-phone"><?php $this->billing_phone(); ?></div>
 				<?php endif; ?>
 			<?php endif; ?>

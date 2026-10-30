@@ -67,6 +67,10 @@ function dirtshack_packing_slips_bulk_css() {
 		.ds-slip-half h1.document-type-label { margin: 2mm 0 3mm 0; }
 		.ds-slip-half table.order-data-addresses { margin-bottom: 4mm; }
 		.ds-slip-half div.bottom-spacer { height: 0; }
+		.ds-slip-half .item-meta { margin-top: 1mm; }
+		.ds-slip-half .wc-item-meta li { margin: 0; }
+		.ds-slip-half .wc-item-meta p, .ds-slip-half .wc-item-meta dd, .ds-slip-half .item-meta p { margin-top: 0; }
+		.ds-slip-half .customer-notes { margin-top: 3mm; }
 		.ds-slip-half #footer { position: absolute; bottom: 0; left: 0; right: 0; height: auto; padding-top: 1.5mm; }
 		.ds-slip-full #footer { position: static; height: auto; margin-top: 10mm; padding-top: 2mm; }
 		.ds-cut-line { height: 0; margin: 0.5cm 0; border-top: 0.3mm dashed #000; }
