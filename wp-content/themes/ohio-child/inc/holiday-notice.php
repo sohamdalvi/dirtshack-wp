@@ -216,6 +216,10 @@ add_action( 'woocommerce_update_options_' . DIRTSHACK_HOLIDAY_TAB, 'dirtshack_ho
 function dirtshack_holiday_settings_save() {
 	woocommerce_update_options( dirtshack_holiday_settings() );
 
+	if ( 'yes' === get_option( 'dirtshack_holiday_enabled' ) && '' === trim( (string) get_option( 'dirtshack_holiday_message', '' ) ) ) {
+		WC_Admin_Settings::add_error( __( 'Enable is ticked but the Message is empty, so nothing will show. Type the message shoppers should see.', 'ohio-child' ) );
+	}
+
 	$start = get_option( 'dirtshack_holiday_start' );
 	$end   = get_option( 'dirtshack_holiday_end' );
 	if ( $start && $end && $end < $start ) {
@@ -235,7 +239,9 @@ function dirtshack_holiday_status() {
 	$date   = fn( $ts ) => wp_date( get_option( 'date_format' ), $ts );
 
 	if ( ! $notice ) {
-		return __( 'Status: off.', 'ohio-child' );
+		return 'yes' === get_option( 'dirtshack_holiday_enabled', 'no' )
+			? __( 'Status: not showing, because the Message is empty.', 'ohio-child' )
+			: __( 'Status: off.', 'ohio-child' );
 	}
 	if ( time() > $notice['until'] ) {
 		/* translators: %s: date */
@@ -273,12 +279,11 @@ function dirtshack_holiday_settings() {
 			'default' => 'no',
 		],
 		[
-			'title'       => __( 'Message', 'ohio-child' ),
-			'desc'        => __( 'One or two short lines. Say when orders will ship, e.g. "Diwali break: orders placed 11–15 Nov will ship from 16 Nov." Links are allowed.', 'ohio-child' ),
-			'id'          => 'dirtshack_holiday_message',
-			'type'        => 'textarea',
-			'placeholder' => 'Diwali break: orders placed 11–15 Nov will ship from 16 Nov.',
-			'css'         => 'width: 100%; max-width: 600px; height: 70px;',
+			'title' => __( 'Message', 'ohio-child' ),
+			'desc'  => __( 'One or two short lines. Say when orders will ship, e.g. "Diwali break: orders placed 11–15 Nov will ship from 16 Nov." Links are allowed.', 'ohio-child' ),
+			'id'    => 'dirtshack_holiday_message',
+			'type'  => 'textarea',
+			'css'   => 'width: 100%; max-width: 600px; height: 70px;',
 		],
 		[
 			'title' => __( 'Show from', 'ohio-child' ),
