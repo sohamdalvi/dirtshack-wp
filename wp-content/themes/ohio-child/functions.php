@@ -287,6 +287,11 @@ require get_stylesheet_directory() . '/inc/holiday-notice.php';
 // Product video guides: YouTube links → "Video guide" tab + summary link (uses the Braap facade).
 require get_stylesheet_directory() . '/inc/product-video.php';
 
+// Customer Gallery: customer photos from Cloudflare R2 (synced from Facebook by
+// workers/customer-gallery) on product pages, a [customer_gallery] page, and
+// Products → Customer Gallery in the admin. Off until DIRTSHACK_GALLERY_URL is set.
+require get_stylesheet_directory() . '/inc/customer-gallery.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active

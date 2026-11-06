@@ -1,0 +1,12 @@
+{
+  "name": "dirtshack-customer-gallery",
+  "private": true,
+  "type": "module",
+  "description": "Copies customer photos from the DirtShack Facebook album into Cloudflare R2, listed per shop product.",
+  "scripts": {
+    "test": "node --test 'test/*.test.js'"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

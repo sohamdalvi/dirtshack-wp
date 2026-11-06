@@ -43,6 +43,11 @@ wp-content/webtoffee_export/
 !database/migrations/*.sql
 lite-backup.sql*
 
+# ─── Cloudflare Workers (local build/dev state and secrets) ──
+workers/*/node_modules/
+workers/*/.wrangler/
+workers/*/.dev.vars*
+
 # ─── OS / editor files ───────────────────────────────────────
 .DS_Store
 .idea/

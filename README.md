@@ -20,6 +20,8 @@ dirtshack-wp/
 │   └── migrations/          # Hand-written, versioned SQL migration scripts
 ├── deploy/
 │   └── deploy.sh            # rsync-over-SSH deploy script (see ARCHITECTURE.md)
+├── workers/
+│   └── customer-gallery/    # Cloudflare Worker: Facebook album → R2 customer photos
 ├── .gitignore
 └── README.md
 ```

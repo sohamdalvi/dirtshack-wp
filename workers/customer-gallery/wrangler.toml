@@ -1,0 +1,37 @@
+# DirtShack Customer Gallery — Cloudflare Worker.
+#
+# Every hour it reads the "Customer Gallery" album on the DirtShack Facebook Page,
+# copies photos whose caption names a shop product slug into the R2 bucket below,
+# and writes one JSON list per product (products/<slug>.json) for the shop's
+# product pages to load. Setup and deploy steps: README.md.
+#
+# Secrets (never put these in this file):
+#   npx wrangler secret put FB_PAGE_TOKEN   Facebook Page token (read-only)
+#   npx wrangler secret put SYNC_SECRET     turns on POST /sync ("Sync now")
+
+name = "dirtshack-customer-gallery"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+
+# Hourly, at 17 minutes past the hour.
+[triggers]
+crons = ["17 * * * *"]
+
+[[r2_buckets]]
+binding = "GALLERY"
+bucket_name = "dirtshack-customer-gallery"
+
+[vars]
+# The album's ID: the number after "set=a." in the album's Facebook address.
+# "CUSTOMER GALLERY" album on the Dirt Shack Page (Page ID 781377831718849).
+FB_ALBUM_ID = "122187502280968781"
+# Public address of the R2 bucket (its custom domain), no trailing slash.
+GALLERY_URL = "https://gallery.dirtshack.in"
+# The WooCommerce shop, for checking product slugs.
+SHOP_URL = "https://shop.dirtshack.in"
+FB_GRAPH_VERSION = "v27.0"
+# Outside requests one run may make. The free plan allows 50.
+MAX_SUBREQUESTS = "45"
+
+[observability]
+enabled = true
