@@ -167,34 +167,48 @@ function dirtshack_holiday_css() {
 	?>
 <style id="ds-holiday-css">
 .ds-holiday[hidden] { display: none !important; }
-.ds-holiday a { text-decoration: underline !important; }
+.ds-holiday a { color: inherit !important; text-decoration: underline !important; }
+/* Truck icon in the text colour, before the first line. */
+.ds-holiday__text::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 1.25em !important;
+    height: 1.25em !important;
+    margin-right: .5em !important;
+    vertical-align: -.28em !important;
+    background: currentColor !important;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2'/%3E%3Cpath d='M15 18H9'/%3E%3Cpath d='M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14'/%3E%3Ccircle cx='17' cy='18' r='2'/%3E%3Ccircle cx='7' cy='18' r='2'/%3E%3C/svg%3E") center / contain no-repeat !important;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2'/%3E%3Cpath d='M15 18H9'/%3E%3Cpath d='M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14'/%3E%3Ccircle cx='17' cy='18' r='2'/%3E%3Ccircle cx='7' cy='18' r='2'/%3E%3C/svg%3E") center / contain no-repeat !important;
+}
+/* Brand lime, so it stands apart from the dark header right below it. */
 .ds-holiday--bar {
-    background: var(--ds-dark, #111) !important;
-    color: #fff !important;
-    border-bottom: 2px solid var(--ds-yellow, #C4E000) !important;
-    font-size: .85rem !important;
+    background: var(--ds-yellow, #C4E000) !important;
+    color: var(--ds-dark, #111) !important;
+    font-size: .95rem !important;
+    font-weight: 700 !important;
     line-height: 1.4 !important;
 }
 .ds-holiday--bar .ds-holiday__text {
     max-width: var(--ds-max, 1280px) !important;
     margin: 0 auto !important;
-    padding: .6rem var(--ds-pad, 1.5rem) !important;
+    padding: .75rem var(--ds-pad, 1.5rem) !important;
     text-align: center !important;
 }
-.ds-holiday--bar a { color: var(--ds-yellow, #C4E000) !important; }
 .ds-holiday--box {
-    background: #f6fadf !important;
+    background: #eef7c2 !important;
     color: var(--ds-dark, #111) !important;
-    border-left: 4px solid var(--ds-yellow, #C4E000) !important;
+    border: 1px solid var(--ds-yellow, #C4E000) !important;
+    border-left-width: 5px !important;
     border-radius: 6px !important;
-    padding: .85rem 1.1rem !important;
+    padding: .9rem 1.1rem !important;
     margin: 0 0 1.5rem !important;
     font-size: .95rem !important;
+    font-weight: 600 !important;
     line-height: 1.45 !important;
 }
-.ds-holiday--box a { color: inherit !important; }
 @media (max-width: 768px) {
-    .ds-holiday--bar .ds-holiday__text { padding: .55rem 1rem !important; font-size: .8rem !important; }
+    .ds-holiday--bar { font-size: .85rem !important; }
+    .ds-holiday--bar .ds-holiday__text { padding: .6rem 1rem !important; }
 }
 </style>
 	<?php
