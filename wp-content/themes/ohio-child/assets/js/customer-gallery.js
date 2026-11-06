@@ -19,7 +19,6 @@
 	'use strict';
 
 	var PAGE_SIZE = 24; // Gallery page: thumbnails per "Show more".
-	var FACEBOOK_RE = /^https:\/\/(www\.|m\.)?facebook\.com\//;
 	var ICONS = {
 		close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg>',
 		prev: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>',
@@ -130,12 +129,8 @@
 		var text = el( 'p', 'ds-cglb__text' );
 		var meta = el( 'p', 'ds-cglb__meta' );
 		var products = el( 'span', 'ds-cglb__products' );
-		var fb = el( 'a', 'ds-cglb__fb', 'See on Facebook' );
-		fb.target = '_blank';
-		fb.rel = 'noopener';
 		var count = el( 'span', 'ds-cglb__count' );
 		meta.appendChild( products );
-		meta.appendChild( fb );
 		meta.appendChild( count );
 		caption.appendChild( text );
 		caption.appendChild( meta );
@@ -148,7 +143,7 @@
 		document.body.appendChild( dialog );
 
 		box = {
-			dialog: dialog, img: img, text: text, products: products, fb: fb, count: count,
+			dialog: dialog, img: img, text: text, products: products, count: count,
 			prev: prev, next: next, photos: [], index: 0, opener: null, describe: null
 		};
 
@@ -237,10 +232,6 @@
 		} );
 		box.products.hidden = ! info.products.length;
 
-		box.fb.hidden = ! FACEBOOK_RE.test( photo.fb || '' );
-		if ( ! box.fb.hidden ) {
-			box.fb.href = photo.fb;
-		}
 		box.count.textContent = n > 1 ? ( box.index + 1 ) + ' / ' + n : '';
 		box.prev.hidden = box.next.hidden = n < 2;
 
