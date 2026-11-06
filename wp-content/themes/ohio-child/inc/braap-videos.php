@@ -365,11 +365,24 @@ function dirtshack_braap_player( $post_id ) {
 	if ( '' === $poster ) {
 		$poster = sprintf( '<img src="%s" alt="" loading="lazy" />', esc_url( dirtshack_braap_thumb_url( $vid ) ) );
 	}
-	$label = sprintf( 'Play video: %s', get_the_title( $post_id ) );
+	return dirtshack_yt_facade( $vid, $poster, sprintf( 'Play video: %s', get_the_title( $post_id ) ) );
+}
+
+/**
+ * Facade markup for one YouTube video ID: the poster with a play button over it.
+ * Shared by the single Braap page and the product page's video guide tab; style
+ * it with dirtshack_yt_facade_css().
+ *
+ * @param string $vid         11-char YouTube video ID.
+ * @param string $poster_html Pre-escaped <img> for the poster.
+ * @param string $label       Accessible name, e.g. "Play video: …".
+ * @return string
+ */
+function dirtshack_yt_facade( $vid, $poster_html, $label ) {
 	ob_start();
 	?>
 	<div class="ds-ytfacade" data-ytid="<?php echo esc_attr( $vid ); ?>" role="button" tabindex="0" aria-label="<?php echo esc_attr( $label ); ?>">
-		<span class="ds-ytfacade__thumb"><?php echo $poster; // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+		<span class="ds-ytfacade__thumb"><?php echo $poster_html; // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 		<span class="ds-ytfacade__play" aria-hidden="true">
 			<svg viewBox="0 0 68 48" width="68" height="48"><path class="ds-yt-bg" d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4a8 8 0 0 0-5.6 5.7A83 83 0 0 0 .5 24a83 83 0 0 0 1 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 67.5 24a83 83 0 0 0-1-16.3z"/><path d="M27 34V14l18 10z" fill="#fff"/></svg>
 		</span>
@@ -440,8 +453,7 @@ function dirtshack_braap_css() {
 .ds-braap-card__play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
 .ds-braap-card__play svg { filter:drop-shadow(0 2px 6px rgba(0,0,0,.45)); transition:transform .2s; }
 .ds-braap-card:hover .ds-braap-card__play svg { transform:scale(1.08); }
-.ds-yt-bg { fill:#212121; fill-opacity:.85; }
-.ds-braap-card:hover .ds-yt-bg, .ds-ytfacade:hover .ds-yt-bg { fill:#C4E000; fill-opacity:1; }
+.ds-braap-card:hover .ds-yt-bg { fill:#C4E000; fill-opacity:1; }
 .ds-braap-card:hover .ds-braap-card__play svg path[fill="#fff"] { fill:#111; }
 .ds-braap-card__body { padding:.85rem 1rem 1rem; display:flex; flex-direction:column; gap:.4rem; flex:1; }
 .ds-braap-card__tags { display:flex; flex-wrap:wrap; gap:.35rem; }
@@ -463,18 +475,6 @@ function dirtshack_braap_css() {
 .ds-braap-creator { margin-top:1.5rem; font-size:.85rem; color:#555; }
 .ds-braap-creator a { color:#111; font-weight:700; border-bottom:2px solid var(--g,#C4E000); text-decoration:none; }
 
-/* ── Click-to-load facade (single page) ── */
-.ds-ytfacade { position:relative; display:block; width:100%; aspect-ratio:16/9; background:#000; border-radius:var(--r,16px); overflow:hidden; cursor:pointer; }
-.ds-ytfacade__thumb, .ds-ytfacade__thumb img { display:block; width:100%; height:100%; }
-.ds-ytfacade__thumb img { object-fit:cover; transition:transform .35s, opacity .2s; }
-.ds-ytfacade:hover .ds-ytfacade__thumb img { transform:scale(1.03); }
-.ds-ytfacade__play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
-.ds-ytfacade__play svg { filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)); transition:transform .2s; }
-.ds-ytfacade:hover .ds-ytfacade__play svg { transform:scale(1.08); }
-.ds-ytfacade:focus-visible { outline:3px solid #C4E000; outline-offset:3px; }
-/* The injected iframe fills the facade box */
-.ds-ytfacade iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-
 /* ── Tablet ≥768px: 3 col ── */
 @media (min-width:768px) {
 	.ds-braap__inner { padding:60px var(--padx); }
@@ -485,6 +485,31 @@ function dirtshack_braap_css() {
 	.ds-braap__inner { padding:80px var(--padx); }
 	.ds-braap-grid { grid-template-columns:repeat(4,1fr); gap:1.5rem; }
 }
+</style>
+	<?php
+	// The cards' play button uses .ds-yt-bg too, so every Braap surface gets these.
+	dirtshack_yt_facade_css();
+}
+
+/**
+ * Styles for the click-to-load facade (dirtshack_yt_facade). Printed by every
+ * surface that shows one: the Braap pages above and the product video guide tab.
+ */
+function dirtshack_yt_facade_css() {
+	?>
+<style id="ds-ytfacade-css">
+.ds-yt-bg { fill:#212121; fill-opacity:.85; }
+.ds-ytfacade:hover .ds-yt-bg { fill:#C4E000; fill-opacity:1; }
+.ds-ytfacade { position:relative; display:block; width:100%; aspect-ratio:16/9; background:#000; border-radius:var(--r,16px); overflow:hidden; cursor:pointer; }
+.ds-ytfacade__thumb, .ds-ytfacade__thumb img { display:block; width:100%; height:100%; }
+.ds-ytfacade__thumb img { object-fit:cover; transition:transform .35s, opacity .2s; }
+.ds-ytfacade:hover .ds-ytfacade__thumb img { transform:scale(1.03); }
+.ds-ytfacade__play { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.ds-ytfacade__play svg { filter:drop-shadow(0 2px 8px rgba(0,0,0,.5)); transition:transform .2s; }
+.ds-ytfacade:hover .ds-ytfacade__play svg { transform:scale(1.08); }
+.ds-ytfacade:focus-visible { outline:3px solid #C4E000; outline-offset:3px; }
+/* The injected iframe fills the facade box */
+.ds-ytfacade iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
 </style>
 	<?php
 }

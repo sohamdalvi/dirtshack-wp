@@ -284,6 +284,9 @@ require get_stylesheet_directory() . '/inc/customer-from-order.php';
 // Holiday / shipping-delay notice (WooCommerce → Settings → Holiday notice).
 require get_stylesheet_directory() . '/inc/holiday-notice.php';
 
+// Product video guides: YouTube links → "Video guide" tab + summary link (uses the Braap facade).
+require get_stylesheet_directory() . '/inc/product-video.php';
+
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
 // The original "Shop" page (slug "shop", ID 10) is an empty leftover. The active

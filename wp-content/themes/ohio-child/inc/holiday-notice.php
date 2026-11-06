@@ -269,30 +269,51 @@ function dirtshack_cloudflare_purge() {
 		__( 'Cloudflare cache cleared for the home and shop pages. Product pages can take up to 4 hours to update.', 'ohio-child' ) => [ 'files' => array_values( array_unique( [ home_url( '/' ), wc_get_page_permalink( 'shop' ) ] ) ) ],
 	];
 
-	$error = null;
+	$result = null;
 	foreach ( $attempts as $cleared => $body ) {
-		$response = wp_remote_post(
-			'https://api.cloudflare.com/client/v4/zones/' . rawurlencode( DIRTSHACK_CF_ZONE_ID ) . '/purge_cache',
-			[
-				'timeout' => 15,
-				'headers' => [
-					'Authorization' => 'Bearer ' . DIRTSHACK_CF_API_TOKEN,
-					'Content-Type'  => 'application/json',
-				],
-				'body'    => wp_json_encode( $body ),
-			]
-		);
-		if ( is_wp_error( $response ) ) {
-			return $response;
-		}
-
-		$result = json_decode( wp_remote_retrieve_body( $response ), true );
-		if ( ! empty( $result['success'] ) ) {
+		$result = dirtshack_cloudflare_purge_request( $body );
+		if ( true === $result ) {
 			return $cleared;
 		}
-		$error = new WP_Error( 'cloudflare', $result['errors'][0]['message'] ?? wp_remote_retrieve_response_message( $response ) );
+		// Only a refusal from Cloudflare is worth a narrower retry; a network failure isn't.
+		if ( 'cloudflare' !== $result->get_error_code() ) {
+			return $result;
+		}
 	}
-	return $error;
+	return $result;
+}
+
+/**
+ * One purge_cache call to Cloudflare (same wp-config.php setup as above).
+ *
+ * @param array $body Purge request, e.g. [ 'files' => [ $url ] ] or [ 'hosts' => [ $host ] ].
+ * @return true|WP_Error|null True when cleared, the error, or null when not set up.
+ */
+function dirtshack_cloudflare_purge_request( array $body ) {
+	if ( ! defined( 'DIRTSHACK_CF_ZONE_ID' ) || ! defined( 'DIRTSHACK_CF_API_TOKEN' ) ) {
+		return null;
+	}
+
+	$response = wp_remote_post(
+		'https://api.cloudflare.com/client/v4/zones/' . rawurlencode( DIRTSHACK_CF_ZONE_ID ) . '/purge_cache',
+		[
+			'timeout' => 15,
+			'headers' => [
+				'Authorization' => 'Bearer ' . DIRTSHACK_CF_API_TOKEN,
+				'Content-Type'  => 'application/json',
+			],
+			'body'    => wp_json_encode( $body ),
+		]
+	);
+	if ( is_wp_error( $response ) ) {
+		return $response;
+	}
+
+	$result = json_decode( wp_remote_retrieve_body( $response ), true );
+	if ( ! empty( $result['success'] ) ) {
+		return true;
+	}
+	return new WP_Error( 'cloudflare', $result['errors'][0]['message'] ?? wp_remote_retrieve_response_message( $response ) );
 }
 
 /** One-line status shown at the top of the settings tab. */
