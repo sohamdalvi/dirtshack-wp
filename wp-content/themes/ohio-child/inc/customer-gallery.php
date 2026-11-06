@@ -16,7 +16,7 @@
  *     and found photos (assets/js/customer-gallery.js). The page HTML is the
  *     same with or without photos, so new photos never need a page-cache purge.
  *   - [customer_gallery] shortcode: every photo, filterable by product. Put it
- *     on a page with the slug "customer-gallery" and product pages link to it.
+ *     on a page with the slug "customer-gallery".
  *   - Products → Customer Gallery (admin): last sync, errors, captions without a
  *     product slug, the slug of every product, and "Sync now".
  *
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 /** Admin screen: Products → Customer Gallery. */
 const DIRTSHACK_GALLERY_ADMIN_PAGE = 'ds-customer-gallery';
 
-/** Slug of the page holding [customer_gallery]; product pages link to it when it exists. */
+/** Slug of the page holding [customer_gallery]; the admin screen links to it when it exists. */
 const DIRTSHACK_GALLERY_PAGE_SLUG = 'customer-gallery';
 
 // ─── Settings ────────────────────────────────────────────────────────────────
@@ -137,7 +137,6 @@ function dirtshack_gallery_product_section() {
 	$done = true;
 
 	$wrap  = ( class_exists( 'OhioOptions' ) && ! OhioOptions::get( 'page_add_wrapper', true ) ) ? ' -full-w' : '';
-	$page  = dirtshack_gallery_page_url();
 	$arrow = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="%s" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
 	?>
 	<div class="page-container ds-cgallery-wrap<?php echo esc_attr( $wrap ); ?>" hidden>
@@ -148,9 +147,6 @@ function dirtshack_gallery_product_section() {
 			data-name="<?php echo esc_attr( $product->get_name() ); ?>">
 			<div class="ds-cgallery__head">
 				<h2 id="ds-cgallery-title" class="ds-cgallery__title"><?php esc_html_e( 'Customer Gallery', 'ohio-child' ); ?> <span class="ds-cgallery__count"></span></h2>
-				<?php if ( $page ) : ?>
-					<a class="ds-cgallery__all" href="<?php echo esc_url( $page ); ?>"><?php esc_html_e( 'See all customer photos', 'ohio-child' ); ?></a>
-				<?php endif; ?>
 			</div>
 			<div class="ds-cgallery__strip">
 				<button type="button" class="ds-cgallery__nav ds-cgallery__nav--prev" aria-label="<?php esc_attr_e( 'Scroll photos left', 'ohio-child' ); ?>" hidden><?php printf( $arrow, 'M15 5l-7 7 7 7' ); // phpcs:ignore WordPress.Security.EscapeOutput -- fixed markup. ?></button>
@@ -282,7 +278,6 @@ function dirtshack_gallery_css() {
 	.ds-cgallery__foot{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin-top:1.25rem}
 	.ds-cgallery__more{appearance:none;margin:0;padding:.65em 1.4em;border:2px solid var(--ds-dark,#111);border-radius:999px;background:transparent;color:var(--ds-dark,#111);font:inherit;font-weight:700;line-height:1.2;text-transform:none;letter-spacing:normal;cursor:pointer;box-shadow:none;height:auto;min-width:0}
 	.ds-cgallery__more:hover{background:var(--ds-dark,#111);color:var(--ds-yellow,#C4E000)}
-	.ds-cgallery__all{font-weight:700;color:var(--ds-dark,#111);text-decoration:none;border-bottom:2px solid var(--ds-yellow,#C4E000)}
 	.ds-cgallery__filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.5rem}
 	.ds-cgallery__chip{appearance:none;margin:0;padding:.45em 1em;border:1.5px solid var(--ds-dark,#111);border-radius:999px;background:#fff;color:var(--ds-dark,#111);font:inherit;font-size:.9rem;line-height:1.2;text-transform:none;letter-spacing:normal;cursor:pointer;box-shadow:none;height:auto;min-width:0}
 	.ds-cgallery__chip[aria-pressed="true"]{background:var(--ds-dark,#111);color:var(--ds-yellow,#C4E000)}
@@ -523,9 +518,9 @@ function dirtshack_gallery_admin_page() {
 	echo '<h2>' . esc_html__( 'Gallery page', 'ohio-child' ) . '</h2><p>';
 	if ( $page ) {
 		/* translators: %s: page address */
-		echo wp_kses( sprintf( __( 'All photos are shown at <a href="%s">%s</a>, and product pages link there.', 'ohio-child' ), esc_url( $page ), esc_html( $page ) ), array( 'a' => array( 'href' => true ) ) );
+		echo wp_kses( sprintf( __( 'All photos are shown at <a href="%s">%s</a>.', 'ohio-child' ), esc_url( $page ), esc_html( $page ) ), array( 'a' => array( 'href' => true ) ) );
 	} else {
-		echo esc_html__( 'To show every photo on one page, create a page with the slug "customer-gallery" and put [customer_gallery] in it. Product pages then link to it.', 'ohio-child' );
+		echo esc_html__( 'To show every photo on one page, create a page with the slug "customer-gallery" and put [customer_gallery] in it.', 'ohio-child' );
 	}
 	echo '</p>';
 

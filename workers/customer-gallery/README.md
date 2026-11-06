@@ -126,8 +126,8 @@ Then:
   same as before. The page HTML doesn't change when photos do, so new photos
   never need a cache purge.
 - **Gallery page:** create a page with the slug `customer-gallery` containing
-  `[customer_gallery]`. It shows every photo with a filter per product, and product
-  pages link to it. `[customer_gallery product="bar-ends"]` starts filtered, as
+  `[customer_gallery]`. It shows every photo with a filter per product.
+  `[customer_gallery product="bar-ends"]` starts filtered, as
   does `?product=bar-ends` in the address.
 - **Products → Customer Gallery** in the admin shows the last sync, errors,
   captions without a product slug (with links to fix them on Facebook), every
