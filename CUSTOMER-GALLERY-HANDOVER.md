@@ -1,7 +1,7 @@
 # Customer Gallery: handover
 
 Status on **6 Nov 2026**: **live** on shop.dirtshack.in. The repo changes are
-**not committed yet**.
+committed on `main` as `15df197` and pushed.
 
 ## What it is
 
@@ -77,20 +77,13 @@ shop.dirtshack.in product pages + /customer-gallery/ page
 - [x] `/customer-gallery/` page published (product filters, links to products).
 - [x] WP Super Cache cleared and Cloudflare purged for `shop.dirtshack.in`; verified live.
 - [x] Live now: 2 photos (Rear Lift Strap; KLX230 Pair Valve Delete Kit).
+- [x] Repo work committed on `main` as `15df197` (Customer Gallery: Facebook album photos on product pages) and pushed.
 
 ## Left / open
 
-1. **Commit the repo work.** Uncommitted:
-   - `workers/` (all new)
-   - `inc/customer-gallery.php`
-   - `assets/js/customer-gallery.js`
-   - `functions.php` (the require line)
-   - `README.md` (folder map)
-   - `.gitignore` (Worker local files)
-   - this handover file
-2. **`enduro-footpegs` photo:** not shown, because no product with that slug exists on the shop (404). Either publish that product or change the caption to an existing slug.
-3. **Optional:** add real captions to the album photos. They're just the slug now, so no caption text shows on the site.
-4. **Meta app stays in Development mode.** That's fine for reading your own Page. Only publish it if a sync ever reports a permissions error.
+1. **`enduro-footpegs` photo:** not shown, because no product with that slug exists on the shop (404). Either publish that product or change the caption to an existing slug.
+2. **Optional:** add real captions to the album photos. They're just the slug now, so no caption text shows on the site.
+3. **Meta app stays in Development mode.** That's fine for reading your own Page. Only publish it if a sync ever reports a permissions error.
 
 ## Things learned the hard way
 
