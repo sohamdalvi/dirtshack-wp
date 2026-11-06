@@ -54,6 +54,11 @@
                         ]
                     ]
                 ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "default_value" => "",
                 "placeholder" => "1144px by default",
                 "prepend" => __( 'Use CSS units', 'ohio' ),
@@ -147,6 +152,11 @@
                             "value" => "hamburger"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ]
             ],
             [

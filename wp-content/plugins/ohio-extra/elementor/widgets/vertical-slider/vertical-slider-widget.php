@@ -4,7 +4,7 @@ class Ohio_Elementor_Vertical_Slider_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_register_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/jquery.clb-slider.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/libs/slider.js', [ 'jquery' ], false, true );
         wp_register_script( 'ohio-elementor-vertical-slider-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
@@ -90,7 +90,7 @@ class Ohio_Elementor_Vertical_Slider_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( '5', 'ohio-extra' ),
                 'label_block' => true,
-                'description' => 'Autoplay interval timeout in seconds.',
+                'description' => __( 'Autoplay interval timeout in seconds.', 'ohio-extra' ),
                 'condition' => [
                     'autoplay' => 'yes',
                 ],
@@ -360,7 +360,7 @@ class Ohio_Elementor_Vertical_Slider_Widget extends Ohio_Elementor_Widget_Base {
                 'options' => [
                     'cover' => 'Cover',
                     'contain' => 'Contain',
-                    'no-repeat' => 'No repeat',
+                    'no-repeat' => __( 'No repeat', 'ohio-extra' ),
                     'repeat' => 'Repeat',
                 ],
                 'separator' => 'after'

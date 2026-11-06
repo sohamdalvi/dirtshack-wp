@@ -31,7 +31,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 	<?php do_action( 'woocommerce_before_variations_form' ); ?>
 
 	<?php if ( empty( $available_variations ) && false !== $available_variations ) : ?>
-		<button type="submit" class="single_add_to_cart_button btn btn-small alt" disabled="true" data-product-added-text="<?php echo esc_attr( 'Product Added' ); ?>">
+		<button type="submit" class="single_add_to_cart_button btn btn-small alt" disabled="true" data-product-added-text="<?php echo esc_attr__( 'Product Added', 'ohio' ); ?>">
 			<?php esc_html_e( 'This product is currently out of stock and unavailable.', 'ohio' ); ?>
 		</button>
 	<?php else : ?>

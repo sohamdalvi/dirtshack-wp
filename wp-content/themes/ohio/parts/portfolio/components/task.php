@@ -3,8 +3,14 @@
 ?>
 
 <?php if ( !empty( $project['task'] ) ) : ?>
-    <div class="project-task">
-        <div class="h6 title"><?php esc_html_e( 'Task', 'ohio' ); ?></div>
-        <p class="-unspace"><?php echo wp_kses( $project['task'], 'default' ); ?></p>
+
+    <div class="project-task heading">
+        <div class="subtitle">
+            <?php esc_html_e( 'Task', 'ohio' ); ?>
+        </div>
+        <p class="title h4 -unspace">
+            <?php echo wp_kses( $project['task'], 'basic_html' ); ?>
+        </p>
     </div>
+
 <?php endif; ?>

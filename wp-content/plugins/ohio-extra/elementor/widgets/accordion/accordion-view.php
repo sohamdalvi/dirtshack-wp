@@ -9,8 +9,22 @@
             <div class="accordion-button">
                 <div class="h6 accordion-header">
 
-                    <?php if ( !empty($item['use_icon']) && !empty($item['icon_icon']) ) {
-                        \Elementor\Icons_Manager::render_icon( $item['icon_icon'], [ 'class' => 'icon' ] );
+                    <?php if ( !empty( $item['use_icon'] ) ) {
+                        $icon_type = !empty( $item['icon_type'] ) ? $item['icon_type'] : 'icon';
+
+                        if ( $icon_type == 'image' && !empty( $item['icon_image']['url'] ) ) {
+                            $image_id = !empty( $item['icon_image']['id'] ) ? $item['icon_image']['id'] : 0;
+                            echo '<img class="icon" src="' . esc_url( $item['icon_image']['url'] ) . '"';
+                            if ( $image_id ) {
+                                echo ' srcset="' . esc_attr( wp_get_attachment_image_srcset( $image_id, 'large' ) ) . '"';
+                                echo ' sizes="' . esc_attr( wp_get_attachment_image_sizes( $image_id, 'large' ) ) . '"';
+                            }
+                            echo ' alt="' . esc_attr__( 'Icon', 'ohio-extra' ) . '">';
+                        } elseif ( $icon_type == 'html' && !empty( $item['icon_html'] ) ) {
+                            echo OhioExtraParser::VC_icon_html( $item['icon_html'], 'icon' );
+                        } elseif ( $icon_type == 'icon' && !empty( $item['icon_icon'] ) ) {
+                            \Elementor\Icons_Manager::render_icon( $item['icon_icon'], [ 'class' => 'icon' ] );
+                        }
                     } ?>
 
                     <?php echo $item['list_title']; ?>

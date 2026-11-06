@@ -44,9 +44,15 @@
 			<a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" 
 				<?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
 
+				<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ): ?>
+					<?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+				<?php endif; ?>
+
 				<?php echo $settings['button_title']; ?>
 
-				<?php if ( $settings['button_style_type'] == 'link' ): ?>
+				<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ): ?>
+					<?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+				<?php elseif ( empty( $settings['button_icon_use'] ) && $settings['button_style_type'] == 'link' ): ?>
 					<i class="ion-right ion"><svg class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7H16M16 7L11 1M16 7L11 13" stroke-width="2"/></svg></i>
 				<?php endif; ?>
 			</a>
@@ -87,9 +93,15 @@
 		<a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" 
 			<?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
 
+			<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ): ?>
+				<?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+			<?php endif; ?>
+
 			<?php echo $settings['button_title']; ?>
 
-			<?php if ( $settings['button_style_type'] == 'link' ): ?>
+			<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ): ?>
+				<?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+			<?php elseif ( empty( $settings['button_icon_use'] ) && $settings['button_style_type'] == 'link' ): ?>
 				<i class="ion-right ion"><svg class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7H16M16 7L11 1M16 7L11 13" stroke-width="2"/></svg></i>
 			<?php endif; ?>
 		</a>

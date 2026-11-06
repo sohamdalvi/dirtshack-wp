@@ -106,6 +106,27 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'tabs_nav_link_width',
+            [
+                'label' => __( 'Tab Width', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'vw', '%' ],
+                'range' => [
+                    'px' => [ 'min' => 0, 'max' => 1000 ],
+                    'em' => [ 'min' => 0, 'max' => 60 ],
+                    'vw' => [ 'min' => 0, 'max' => 100 ],
+                    '%' => [ 'min' => 0, 'max' => 100 ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tabs.-vertical .tabs-nav' => 'width: {{SIZE}}{{UNIT}}; flex-shrink: 0;',
+                ],
+                'condition' => [
+                    'tabs_direction' => 'vertical',
+                ],
+            ]
+        );
+
         $this->add_control(
             'border_radius',
             [
@@ -199,7 +220,7 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
-            'subtitle_color',
+            'tab_subtitle_color',
             [
                 'label' => __( 'Subtitle Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
@@ -213,9 +234,31 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_group_control(
             \Elementor\Group_Control_Typography::get_type(),
             [
-                'name' => 'tabs_subtitle_typography',
+                'name' => 'tabs_tab_subtitle_typography',
                 'label' => __( 'Subtitle Typography', 'ohio-extra' ),
                 'selector' => '{{WRAPPER}} .tabs-nav-link .subtitle'
+            ]
+        );
+
+        // Description: control keys kept from the former "Subtitle" option so saved styles carry over
+        $this->add_control(
+            'subtitle_color',
+            [
+                'label' => __( 'Description Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .tabs-nav-link .description' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'tabs_subtitle_typography',
+                'label' => __( 'Description Typography', 'ohio-extra' ),
+                'selector' => '{{WRAPPER}} .tabs-nav-link .description'
             ]
         );
 
@@ -327,11 +370,25 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $repeater->add_control(
-            'list_subtitle',
+            'list_tab_subtitle',
             [
                 'label' => __( 'Subtitle', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'placeholder' => __( 'Subtitle text', 'ohio-extra' ),
+                'label_block' => true,
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        // Description: key kept from the former "Subtitle" option so saved values carry over
+        $repeater->add_control(
+            'list_subtitle',
+            [
+                'label' => __( 'Description', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXTAREA,
+                'placeholder' => __( 'Description text', 'ohio-extra' ),
                 'label_block' => true,
                 'dynamic' => [
                     'active' => true,
@@ -411,7 +468,7 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'icon',
                 'options' => [
                     'icon' => 'Icon',
-                    'html' => 'Custom HTML',
+                    'html' => __( 'Custom HTML', 'ohio-extra' ),
                 ],
                 'condition' => [
                     'use_icon' => 'yes',
@@ -454,7 +511,7 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'CSS Class', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::TEXT,
                 'separator' => 'before',
-                'description' => 'Style particular content element differently - add a class name and refer to it in custom CSS.'
+                'description' => __( 'Style particular content element differently - add a class name and refer to it in custom CSS.', 'ohio-extra' )
             ]
         );
 
@@ -483,11 +540,23 @@ class Ohio_Elementor_Tabs_Widget extends Ohio_Elementor_Widget_Base {
             $this->addWrapperClass('-vertical');
         }
 
+        $has_subtitle = $has_description = false;
         foreach ( $settings['tabs'] as $item ) {
-
-            if ( !empty( $item['list_subtitle'] ) ) {
-                $this->addWrapperClass('-tabs-with-subtitle');
+            if ( !empty( $item['list_tab_subtitle'] ) ) {
+                $has_subtitle = true;
             }
+            // Description is stored under the former "Subtitle" key
+            if ( !empty( $item['list_subtitle'] ) ) {
+                $has_description = true;
+            }
+        }
+
+        if ( $has_subtitle ) {
+            $this->addWrapperClass( '-tabs-with-subtitle' );
+        }
+
+        if ( $has_description ) {
+            $this->addWrapperClass( '-tabs-with-description' );
         }
 
         switch ( $settings['block_alignment'] ) {

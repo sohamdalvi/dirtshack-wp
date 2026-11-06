@@ -22,8 +22,10 @@ function ohio_accordion_inner_func( $atts, $content_html = '' ) {
 
 	// Icon
 	$with_icon = isset( $with_icon ) ? OhioExtraFilter::boolean( $with_icon ) : false;
+	$icon_type = isset( $icon_type ) ? OhioExtraFilter::string( $icon_type, 'string', 'font_icon' ) : 'font_icon';
 	$icon_as_icon = isset( $icon_as_icon ) ? OhioExtraFilter::string( $icon_as_icon, 'attr' ) : false;
-	if ( $with_icon && $icon_as_icon ) {
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
+	if ( $with_icon && $icon_type == 'font_icon' && $icon_as_icon ) {
 		$GLOBALS['ohio_icon_fonts'][] = $icon_as_icon;
 	}
 

@@ -43,7 +43,7 @@ if ( $previous_btn ) {
 
 ?>
 
-<div class="page-container<?php echo esc_attr( $wrap_container_class ); ?>">
+<div class="page-container grid-gallery<?php echo esc_attr( $wrap_container_class ); ?>">
 
     <?php wc_get_template_part( "single-product/sticky", "product" ); ?>
     <?php wc_get_template_part( "single-product/views/breadcrumbs" ); ?>

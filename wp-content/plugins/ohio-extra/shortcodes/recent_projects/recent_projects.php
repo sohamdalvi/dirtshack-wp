@@ -140,6 +140,7 @@ function ohio_recent_projects_func( $atts ) {
 	if ( $is_slider ) {
 
 		$slider_attrs .= ' data-portfolio-grid-slider=true';
+		OhioHelper::add_required_script( 'slider' );
 
 		if ( $loop_mode ) {
 			$slider_attrs .= ' data-slider-loop=' . esc_attr( $loop_mode ) . '';

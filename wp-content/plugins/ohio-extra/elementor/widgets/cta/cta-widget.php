@@ -32,7 +32,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Title', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Are you ready?',
+                'default' => __( 'Are you ready?', 'ohio-extra' ),
                 'label_block' => true,
                 'dynamic' => [
                     'active' => true,
@@ -47,6 +47,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'h2',
                 'options' => [
+                    'div' => 'div',
                     'h1' => 'h1',
                     'h2' => 'h2',
                     'h3' => 'h3',
@@ -185,7 +186,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Link Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Read More',
+                'default' => __( 'Read More', 'ohio-extra' ),
                 'label_block' => true,
                 'dynamic' => [
                     'active' => true,
@@ -219,8 +220,8 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'without',
                 'options' => [
                     'without' => 'None',
-                    'left' => 'Left side',
-                    'right' => 'Right side',
+                    'left' => __( 'Left side', 'ohio-extra' ),
+                    'right' => __( 'Right side', 'ohio-extra' ),
                 ],
             ]
         );
@@ -233,7 +234,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'icon',
                 'options' => [
                     'icon' => 'Icon',
-                    'image' => 'Custom Image',
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
                 ],
                 'condition' => [
                     'icon_position!' => 'without'
@@ -391,7 +392,7 @@ class Ohio_Elementor_CTA_Widget extends Ohio_Elementor_Widget_Base {
             $this->addWrapperClass( '-with-shadow' );
         }
 
-        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'] );
+        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'], 'h3', true );
 
         include( plugin_dir_path( __FILE__ ) . 'cta-view.php' );
     }

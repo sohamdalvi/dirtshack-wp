@@ -145,6 +145,7 @@ class OhioObjectParser {
                 if ( isset( $galleries_matches[1] ) ) {
                     $galleries_matches = explode( ',', $galleries_matches[1] ?? '' );
                     $post_object['media']['gallery'] = '<div data-cursor-class="cursor-link" class="slider blog-slider" data-ohio-slider-simple="true">';
+                    OhioHelper::add_required_script( 'slider' );
                     if ( $_post->metro ) {
                         foreach ( $galleries_matches as $attachment_ID ) {
                             $_img = wp_get_attachment_image_url( $attachment_ID, $size );
@@ -211,7 +212,7 @@ class OhioObjectParser {
             $project_object['title'] = '[' . get_the_date( get_option( 'date_format' ), $_post->ID ) . ']';
         }
         $show_description = OhioOptions::get( 'project_show_description', true, $_post->ID );
-        $project_description = trim( OhioOptions::get_local( 'project_description', $_post->ID ) );
+        $project_description = trim( OhioOptions::get_local( 'project_description', $_post->ID ) ?? '' );
 
         // The description visibility setting is not checked in the project template, so it's set to empty string here if false
         $project_object['description'] = $show_description ? $project_description : '';
@@ -256,7 +257,7 @@ class OhioObjectParser {
                 );
 
                 if ( $value && (is_string( $value ) || is_numeric( $value ) ) ) {
-                    $_prepared_image['id'] = $_prepared_full_image['url'] = $value;
+                    $_prepared_image['id'] = $_prepared_full_image['id'] = $value;
 
                     $_prepared_image['url'] = wp_get_attachment_url( $value );
                     $_prepared_full_image['url'] = wp_get_attachment_url( $value, 'full' );
@@ -503,28 +504,28 @@ class OhioObjectParser {
             foreach( $project_object['sharing_links'] as $share_link ) {
 
                 if ( $share_link == 'twitter' ) : ?>
-                    <a class="-unlink" href="https://x.com/intent/tweet?text=<?php echo urlencode( $project_object['title'] ); ?>,+<?php echo rawurlencode( get_permalink() ); ?>" <?php echo esc_attr( $target_blank ); ?> class="twitter" aria-label="<?php echo esc_attr( 'X', 'ohio-extra' ); ?>">
+                    <a class="-unlink" href="https://x.com/intent/tweet?text=<?php echo urlencode( $project_object['title'] ); ?>,+<?php echo rawurlencode( get_permalink() ); ?>" <?php echo esc_attr( $target_blank ); ?> class="twitter" aria-label="<?php echo esc_attr__( 'X', 'ohio' ); ?>">
                         <i class="network fa-brands fa-x-twitter"></i>
                         <span class="social-text"><?php esc_html_e( 'X', 'ohio' ); ?></span>
                     </a>
                 <?php endif;
 
                 if ( $share_link == 'facebook' ) : ?>
-                    <a class="-unlink" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>" <?php echo esc_attr( $target_blank ); ?> class="facebook" aria-label="<?php echo esc_attr( 'Facebook', 'ohio-extra' ); ?>">
+                    <a class="-unlink" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( get_permalink() ); ?>" <?php echo esc_attr( $target_blank ); ?> class="facebook" aria-label="<?php echo esc_attr__( 'Facebook', 'ohio' ); ?>">
                         <i class="network fa-brands fa-facebook-f"></i>
                         <span class="social-text"><?php esc_html_e( 'Facebook', 'ohio' ); ?></span>
                     </a>
                 <?php endif;
 
                 if ( $share_link == 'linkedin' ) : ?>
-                    <a class="-unlink" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>&title=<?php echo urlencode( $project_object['title'] ); ?>&source=<?php echo urlencode( get_bloginfo( 'name' ) ); ?>" <?php echo esc_attr( $target_blank ); ?> class="linkedin" aria-label="<?php echo esc_attr( 'LinkedIn', 'ohio-extra' ); ?>">
+                    <a class="-unlink" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo rawurlencode( get_permalink() ); ?>&title=<?php echo urlencode( $project_object['title'] ); ?>&source=<?php echo urlencode( get_bloginfo( 'name' ) ); ?>" <?php echo esc_attr( $target_blank ); ?> class="linkedin" aria-label="<?php echo esc_attr__( 'LinkedIn', 'ohio' ); ?>">
                         <i class="network fa-brands fa-linkedin"></i>
                         <span class="social-text"><?php esc_html_e( 'LinkedIn', 'ohio' ); ?></span>
                     </a>
                 <?php endif;
 
                 if ( $share_link == 'pinterest' ) : ?>
-                    <a class="-unlink" href="http://pinterest.com/pin/create/button/?url=<?php echo rawurlencode( get_permalink() ); ?>&description=<?php echo urlencode( $project_object['title'] ); ?>" <?php echo esc_attr( $target_blank ); ?> class="pinterest" aria-label="<?php echo esc_attr( 'Pinterest', 'ohio-extra' ); ?>">
+                    <a class="-unlink" href="http://pinterest.com/pin/create/button/?url=<?php echo rawurlencode( get_permalink() ); ?>&description=<?php echo urlencode( $project_object['title'] ); ?>" <?php echo esc_attr( $target_blank ); ?> class="pinterest" aria-label="<?php echo esc_attr__( 'Pinterest', 'ohio' ); ?>">
                         <i class="network fa-brands fa-pinterest"></i>
                         <span class="social-text"><?php esc_html_e( 'Pinterest', 'ohio' ); ?></span>
                     </a>

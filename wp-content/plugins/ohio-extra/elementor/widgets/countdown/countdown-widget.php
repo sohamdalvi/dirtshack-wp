@@ -4,7 +4,7 @@ class Ohio_Elementor_Countdown_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_register_script( 'jquery-countdown', get_template_directory_uri() . '/assets/js/libs/jquery.countdown.min.js', [ 'jquery' ], '2.1.0', true );
+        wp_register_script( 'jquery-countdown', get_template_directory_uri() . '/assets/js/libs/countdown.min.js', [ 'jquery' ], '2.1.0', true );
         wp_register_script( 'ohio-elementor-countdown-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 

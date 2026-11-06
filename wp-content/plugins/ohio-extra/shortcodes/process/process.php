@@ -10,7 +10,7 @@ function ohio_process_func( $atts ) {
 	if ( isset( $atts ) && is_array( $atts ) ) extract( $atts );
 
 	// Default values, parsing and filtering
-	$number = isset( $number ) ? OhioExtraFilter::string( $number, 'string', 'Step 1.' ) : 'Step 1.';
+	$number = isset( $number ) ? OhioExtraFilter::string( $number, 'string', __( 'Step 1.', 'ohio-extra' ) ) : __( 'Step 1.', 'ohio-extra' );
 	$number_typo = isset( $number_typo ) ? OhioExtraFilter::string( $number_typo ) : false;
 	$title = isset( $title ) ? OhioExtraFilter::string( $title, 'string', '' ) : '';
 	$title_typo = isset( $title_typo ) ? OhioExtraFilter::string( $title_typo ) : false;

@@ -9,6 +9,9 @@ add_shortcode( 'ohio_carousel', 'ohio_carousel_func' );
 function ohio_carousel_func( $atts, $content = '' ) {
 	if ( isset( $atts ) && is_array( $atts ) ) extract( $atts );
 
+	// Required scripts
+	OhioHelper::add_required_script( 'slider' );
+
 	// Default values, parsing and filtering
 	$loop = isset( $loop ) ? OhioExtraFilter::boolean( $loop ) : true;
 	$preloader = isset( $preloader ) ? OhioExtraFilter::boolean( $preloader ) : true;

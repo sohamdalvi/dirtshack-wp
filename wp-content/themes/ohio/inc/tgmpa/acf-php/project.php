@@ -283,7 +283,7 @@
                 "required" => 0,
                 "conditional_logic" => 0,
                 "default_value" => "",
-                "placeholder" => "Video URL",
+                "placeholder" => __( 'Video URL', 'ohio' ),
                 "prepend" => "",
                 "append" => "",
                 "maxlength" => ""
@@ -324,6 +324,11 @@
                             "value" => "custom"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "required" => 0,
                 "message" => "",

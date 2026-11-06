@@ -63,6 +63,11 @@
                         ]
                     ]
                 ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "default_value" => "",
                 "placeholder" => "1344px by default",
                 "prepend" => __( 'Use CSS units', 'ohio' ),

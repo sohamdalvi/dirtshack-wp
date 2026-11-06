@@ -73,12 +73,12 @@ class acf_field_ohio_responsive_height extends acf_field {
 		$mobile = ( isset( $value_array[2] ) ) ? OhioExtraFilter::string( $value_array[2], 'attr', '' ) : '';
 ?>
 
-		<div class="ohio-acf-columns-field-content row" data-uniqid="<?php echo $uniqid; ?>">
+		<div class="ohio-acf-columns-field-content row-grid row-grid-3" data-uniqid="<?php echo $uniqid; ?>">
 
 			<!-- Hidden field -->
 			<?php acf_hidden_input( $hidden ); ?>
 
-			<div class="vc_col-lg-4 column col-desktop">
+			<div class="column col-desktop">
 				<label for="desktop"><?php esc_html_e( 'Desktop', 'ohio-extra' ); ?></label>
 				<div class="acf-input">
 					<div class="acf-input-append">px</div>
@@ -87,7 +87,7 @@ class acf_field_ohio_responsive_height extends acf_field {
 					</div>
 				</div>
 			</div>
-			<div class="vc_col-lg-4 column col-tablet">
+			<div class="column col-tablet">
 				<label for="tablet"><?php esc_html_e( 'Tablet', 'ohio-extra' ); ?></label>
 				<div class="acf-input">
 					<div class="acf-input-append">px</div>
@@ -96,7 +96,7 @@ class acf_field_ohio_responsive_height extends acf_field {
 					</div>
 				</div>
 			</div>
-			<div class="vc_col-lg-4 column col-mobile">
+			<div class="column col-mobile">
 				<label for=""><?php esc_html_e( 'Mobile', 'ohio-extra' ); ?></label>
 				<div class="acf-input">
 					<div class="acf-input-append">px</div>

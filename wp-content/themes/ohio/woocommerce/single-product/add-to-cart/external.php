@@ -22,7 +22,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 <form class="cart external-product woo_c-cart-form" action="<?php echo esc_url( $product_url ); ?>" method="get">
 	<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
-	<a href="<?php echo esc_url( $product_url ); ?>" class="single_add_to_cart_button button alt" data-product-added-text="<?php echo esc_attr( 'Product Added' ); ?>">
+	<a href="<?php echo esc_url( $product_url ); ?>" class="single_add_to_cart_button button alt" data-product-added-text="<?php echo esc_attr__( 'Product Added', 'ohio' ); ?>">
 		<?php echo esc_html( $button_text ); ?>
 	</a>
 

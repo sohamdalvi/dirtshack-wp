@@ -214,14 +214,14 @@ add_filter('acf/get_fields', function( $fields, $parent ) {
 // Header title additional "Featured image" option
 
 add_filter('acf/prepare_field/name=page_header_title', function( $field ) {
-	$field['sub_fields'][0]['choices']['featured'] = 'Featured Image';
+	$field['sub_fields'][0]['choices']['featured'] = __( 'Featured Image', 'ohio' );
 	return $field;
 });
 
 // Global post header title additional "Featured image" option
 
 add_filter('acf/prepare_field/name=global_post_page_header_title', function( $field ) {
-	$field['sub_fields'][0]['choices']['featured'] = 'Featured Image';
+	$field['sub_fields'][0]['choices']['featured'] = __( 'Featured Image', 'ohio' );
 	return $field;
 });
 

@@ -82,6 +82,28 @@
                 "default_value" => ""
             ],
             [
+                "key" => "field_5l92k30j57f235kj",
+                "label" => __( 'Contained Menu', 'ohio' ),
+                "name" => "global_page_header_contained_menu",
+                "type" => "true_false",
+                "instructions" => __( 'Wrap the menu in a light grey overlay container.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda3374d",
+                            "operator" => "!=",
+                            "value" => "hamburger"
+                        ]
+                    ]
+                ],
+                "message" => "",
+                "default_value" => 0,
+                "ui" => 1,
+                "ui_on_text" => __( 'Yes', 'ohio' ),
+                "ui_off_text" => __( 'No', 'ohio' )
+            ],
+            [
                 "key" => "field_59374453f44415",
                 "label" => __( 'Counter Symbols', 'ohio' ),
                 "name" => "global_page_header_counters_visibility",
@@ -146,6 +168,29 @@
                 "ui" => 1,
                 "ui_on_text" => __( 'Yes', 'ohio' ),
                 "ui_off_text" => __( 'No', 'ohio' )
+            ],
+            [
+                "key" => "field_59374452035868",
+                "label" => __( 'Active Menu Background', 'ohio' ),
+                "name" => "global_page_header_active_menu_background",
+                "type" => "ohio_color",
+                "instructions" => __( 'Set a background color for the active/hover menu item (e.g. a light grey pill behind the current page link).', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda3374d",
+                            "operator" => "!=",
+                            "value" => "hamburger"
+                        ]
+                    ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
+                "default_value" => ""
             ],
             [
                 "key" => "field_593s23s15af5g9tmod",
@@ -437,15 +482,7 @@
                 "key" => "field_5932305978235",
                 "label" => '<h4>' . __( 'Styles', 'ohio' ) . '</h4>',
                 "name" => "",
-                "conditional_logic" => [
-                    [
-                        [
-                            "field" => "field_59229bda3374d",
-                            "operator" => "!=",
-                            "value" => "full"
-                        ]
-                    ]
-                ],
+                "conditional_logic" => 0,
                 "type" => "message"
             ],
             [

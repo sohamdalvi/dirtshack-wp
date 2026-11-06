@@ -44,7 +44,8 @@ wp_reset_query();
     </div>
 <?php endif; ?>
 
-<div class="project-page project -layout4<?php echo esc_attr( $page_container_class ); ?>">
+<div class="project-page project -layout4<?php echo esc_attr( $page_container_class ); ?><?php echo esc_attr( apply_filters( 'ohio_project_page_class', '' ) ); ?>">
+    <?php do_action( 'ohio_project_page_notice' ); ?>
     <div class="page-container -full-w<?php echo esc_attr( $page_offset_class ); ?>">
         <div class="vc_row">
             <div class="vc_col-md-6 project-content -sticky-block">

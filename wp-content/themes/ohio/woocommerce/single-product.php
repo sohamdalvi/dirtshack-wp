@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	OhioHelper::add_required_script( 'accordion' );
 	OhioHelper::add_required_script( 'tabs' );
+	OhioHelper::add_required_script( 'slider' );
 
 	$wrap_container = OhioOptions::get( 'page_add_wrapper', true );
 

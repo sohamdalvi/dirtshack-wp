@@ -8,7 +8,8 @@
         <?php foreach ( $settings['tabs'] as $item ) : ?>
             <div class="tabs-content-item <?php echo esc_attr( $item['custom_class'] ); ?>"
                 data-title="<?php echo esc_attr( $item['list_title'] ); ?>"
-                data-subtitle="<?php echo esc_attr( $item['list_subtitle'] ); ?>"
+                data-subtitle="<?php echo esc_attr( isset( $item['list_tab_subtitle'] ) ? $item['list_tab_subtitle'] : '' ); ?>"
+                data-description="<?php echo esc_attr( $item['list_subtitle'] ); ?>"
                 <?php
                 // Dynamic evaluation based on selected icon configuration type
                 if ( ! empty( $item['use_icon'] ) && $item['use_icon'] === 'yes' ) {

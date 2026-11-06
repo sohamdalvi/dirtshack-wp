@@ -72,12 +72,12 @@ class acf_field_ohio_columns extends acf_field {
 		$extra_small = ( isset( $value_array[2] ) ) ? OhioExtraFilter::string( $value_array[2], 'attr', '' ) : '1';
 ?>
 
-		<div class="ohio-acf-columns-field-content row" data-uniqid="<?php echo $uniqid; ?>">
+		<div class="ohio-acf-columns-field-content row-grid row-grid-3" data-uniqid="<?php echo $uniqid; ?>">
 
 			<!-- Hidden field -->
 			<?php acf_hidden_input( $hidden ); ?>
 
-			<div class="vc_col-lg-4 column col-large">
+			<div class="column col-large">
 				<label for="large"><?php esc_html_e( 'Desktop', 'ohio-extra' ); ?></label>
 				<select class="nor-col-large" name="large">
 					<?php if ( isset( $field['use_inherit'] ) && $field['use_inherit'] ) : ?>
@@ -92,7 +92,7 @@ class acf_field_ohio_columns extends acf_field {
 					<option value="12"<?php if ( $large == '12' ) { echo ' selected="true"'; } ?>><?php _e( '12 columns', 'ohio-extra' ); ?></option>
 				</select>
 			</div>
-			<div class="vc_col-lg-4 column col-medium">
+			<div class="column col-medium">
 				<label for=""><?php esc_html_e( 'Tablet', 'ohio-extra' ); ?></label>
 				<select class="nor-col-medium" name="medium">
 					<?php if ( isset( $field['use_inherit'] ) && $field['use_inherit'] ) : ?>
@@ -107,7 +107,7 @@ class acf_field_ohio_columns extends acf_field {
 					<option value="12"<?php if ( $small == '12' ) { echo ' selected="true"'; } ?>><?php _e( '12 columns', 'ohio-extra' ); ?></option>
 				</select>
 			</div>
-			<div class="vc_col-lg-4 column col-small">
+			<div class="column col-small">
 				<label for=""><?php esc_html_e( 'Mobile', 'ohio-extra' ); ?></label>
 				<select class="nor-col-small" name="small">
 					<?php if ( isset( $field['use_inherit'] ) && $field['use_inherit'] ) : ?>

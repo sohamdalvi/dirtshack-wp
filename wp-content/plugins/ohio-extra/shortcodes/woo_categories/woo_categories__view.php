@@ -11,7 +11,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.25 7c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25zm10.75 5c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2 0c0-5.514-4.486-10-10-10s-10 4.486-10 10 4.486 10 10 10 10-4.486 10-10zm-13-2v2h2v6h2v-8h-4z"></path></svg>
             </i>
             <div class="clb-blank-note-inner">
-                <?php echo esc_html( 'Please, install and activate the WooCommerce plugin to use Woo Categories element.' ); ?>
+                <?php echo esc_html__( 'Please, install and activate the WooCommerce plugin to use Woo Categories element.', 'ohio-extra' ); ?>
             </div>
         </div>
     <?php endif; ?>
@@ -44,14 +44,26 @@
                         <?php if ( $add_link ) : ?>
 
                             <a class="button<?php echo $button_css['classes']; ?>" href="<?php echo esc_url( $category->url ); ?>"<?php if ( $button_link['blank'] ) echo ' target="_blank"'; ?>>
-                                <?php if ( $icon_use && $icon_as_icon && $icon_position == 'left' ): ?>
-                                    <i class="icon -left <?php echo $icon_as_icon; ?>"></i>
+                                <?php if ( $icon_use && $icon_position == 'left' ) : ?>
+                                	<?php if ( $icon_type == 'user_image' && $icon_image_atts ) : ?>
+                                		<img class="icon -left -image" <?php echo $icon_image_atts; ?> />
+                                	<?php elseif ( $icon_type == 'custom_html' && $icon_as_html ) : ?>
+                                		<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon -left' ); ?>
+                                	<?php elseif ( $icon_type == 'font_icon' && $icon_as_icon ) : ?>
+                                		<i class="icon -left <?php echo $icon_as_icon; ?>"></i>
+                                	<?php endif; ?>
                                 <?php endif; ?>
 
                                 <?php echo $button_link['caption']; ?>
 
-                                <?php if ( $icon_use && $icon_as_icon && $icon_position == 'right' ): ?>
-                                    <i class="icon -right <?php echo $icon_as_icon; ?>"></i>
+                                <?php if ( $icon_use && $icon_position == 'right' ) : ?>
+                                	<?php if ( $icon_type == 'user_image' && $icon_image_atts ) : ?>
+                                		<img class="icon -right -image" <?php echo $icon_image_atts; ?> />
+                                	<?php elseif ( $icon_type == 'custom_html' && $icon_as_html ) : ?>
+                                		<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon -right' ); ?>
+                                	<?php elseif ( $icon_type == 'font_icon' && $icon_as_icon ) : ?>
+                                		<i class="icon -right <?php echo $icon_as_icon; ?>"></i>
+                                	<?php endif; ?>
                                 <?php endif; ?>
                             </a>
 

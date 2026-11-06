@@ -17,17 +17,17 @@
 	<?php if ( $license_info['is_active'] && empty( $_COOKIE['ohio_license_notice_dismissed'] ) ) : ?>
 		<div class="o-notice notice notice-ohio-info is-dismissible">
 			<div class="holder">
-				<p>As of July 1, 2026, Envato introduced <b>a flat 50% author fee, significantly increasing commissions</b> for creators.<br> To keep our support and updates sustainable, we’ve adjusted our rates* and introduced even more flexible licensing tiers:</p>
+				<p><?php echo wp_kses_post( __( 'As of July 1, 2026, Envato introduced <b>a flat 50% author fee, significantly increasing commissions</b> for creators.<br> To keep our support and updates sustainable, we’ve adjusted our rates* and introduced even more flexible licensing tiers:', 'ohio-extra' ) ); ?></p>
 				<div class="_button-group">
-					<a class="btn btn-info" target="_blank" href="https://ohio.clbthemes.com/pricing/">
+					<a class="btn btn-info" target="_blank" href="https://ohio.clbthemes.com/pricing-upgrade/?coupon=OHIOBLOCKS20">
 						<?php _e( 'Discover Our New, Flexible Pricing', 'ohio-extra' ); ?>
 					</a>
-					<a target="_blank" href="https://ohio.clbthemes.com/pricing/?coupon=OHIO25" class="coupon">
-						Save 25% with Code: <b>OHIO25</b>
+					<a target="_blank" href="https://ohio.clbthemes.com/pricing-upgrade/?coupon=OHIOBLOCKS20" class="coupon">
+						<?php echo wp_kses_post( __( 'Save 20% with Code: <b>OHIOBLOCKS20</b>', 'ohio-extra' ) ); ?>
 					</a>
 				</div>
 				<p class="small">
-					*No changes will apply to our existing customers — your current licensing and ongoing support remain fully locked in.
+					<?php esc_html_e( '*No changes will apply to our existing customers — your current licensing and ongoing support remain fully locked in.', 'ohio-extra' ); ?>
 				</p>
 			</div>
 			<button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php _e( 'Dismiss this notice.', 'ohio-extra' ); ?></span></button>
@@ -261,7 +261,7 @@
 								</div>
 								<div class="accordionItem_content visible">
 									<p>
-										Here’s <a href="<?php echo apply_filters( 'ohio/get-figma-url', '' ); ?>" target="_blank">the link to clone and get</a> the Figma source files.
+										<?php printf( wp_kses_post( __( 'Here’s <a href="%s" target="_blank">the link to clone and get</a> the Figma source files.', 'ohio-extra' ) ), esc_url( apply_filters( 'ohio/get-figma-url', '' ) ) ); ?>
 									</p>
 								</div>
 							</div>
@@ -275,24 +275,24 @@
 									<h6><?php _e( 'How to update ACF PRO, Slider Revolution or WPBakery Page Builder plugins?', 'ohio-extra' ); ?></h6>
 								</div>
 								<div class="accordionItem_content">
-									<p>If you’ve received an alert about a plugin that needs to be updated, this could be because the new version of the plugin was recently released.</p>
+									<p><?php esc_html_e( 'If you’ve received an alert about a plugin that needs to be updated, this could be because the new version of the plugin was recently released.', 'ohio-extra' ); ?></p>
 									<div class="o-notice warning">
 										<i class="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M74.62-140 480-840l405.38 700H74.62ZM178-200h604L480-720 178-200Zm302-47.69q13.73 0 23.02-9.29t9.29-23.02q0-13.73-9.29-23.02T480-312.31q-13.73 0-23.02 9.29T447.69-280q0 13.73 9.29 23.02t23.02 9.29Zm-30-104.62h60v-200h-60v200ZM480-460Z"/></svg></i>
 										<div class="holder">
-											Unless you have purchased the plugin separately, we will provide the latest version of the bundled plugin as soon as it’s been tested with our theme.
+											<?php esc_html_e( 'Unless you have purchased the plugin separately, we will provide the latest version of the bundled plugin as soon as it’s been tested with our theme.', 'ohio-extra' ); ?>
 										</div>
 									</div>
-									<p>To get the latest version follow these steps:</p>
+									<p><?php esc_html_e( 'To get the latest version follow these steps:', 'ohio-extra' ); ?></p>
 									<ul>
-										<li>From the WordPress dashboard go to <em>Plugins → Installed Plugins</em> menu;</li>
-										<li>Click the <strong>Update Required</strong> alert link;</li>
-										<li>Mark all the plugins that you want to update and click the <strong>Apply</strong> button;</li>
+										<li><?php echo wp_kses_post( __( 'From the WordPress dashboard go to <em>Plugins → Installed Plugins</em> menu;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Click the <strong>Update Required</strong> alert link;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Mark all the plugins that you want to update and click the <strong>Apply</strong> button;', 'ohio-extra' ) ); ?></li>
 									</ul>
-									<p>If there are no <strong>Update Required</strong> alerts try to:</p>
+									<p><?php echo wp_kses_post( __( 'If there are no <strong>Update Required</strong> alerts try to:', 'ohio-extra' ) ); ?></p>
 									<ul>
-										<li>Remove the required plugin under <em>Plugins</em> menu;</li>
-										<li>Install the required plugin under <em>Appearance > Install Plugins</em> menu;</li>
-										<li>You should get the latest available versions of bundled plugins directly from our server.</li>
+										<li><?php echo wp_kses_post( __( 'Remove the required plugin under <em>Plugins</em> menu;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Install the required plugin under <em>Appearance > Install Plugins</em> menu;', 'ohio-extra' ) ); ?></li>
+										<li><?php esc_html_e( 'You should get the latest available versions of bundled plugins directly from our server.', 'ohio-extra' ); ?></li>
 									</ul>
 								</div>
 							</div>
@@ -303,20 +303,20 @@
 									<div class="accordionItem_control btn-round btn-round-small btn-round-light">
 										<i class="dashicons dashicons-plus-alt2"></i>
 									</div>
-									<h6>Going to import a demo, wondering if I will lose my changes?</h6>
+									<h6><?php esc_html_e( 'Going to import a demo, wondering if I will lose my changes?', 'ohio-extra' ); ?></h6>
 								</div>
 								<div class="accordionItem_content">
 									<p>
-										Demo content with posts, custom post types, pages, categories, tags, media files, local page settings and <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> will get imported.
+										<?php echo wp_kses_post( __( 'Demo content with posts, custom post types, pages, categories, tags, media files, local page settings and <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> will get imported.', 'ohio-extra' ) ); ?>
 									</p>
 									<div class="o-notice warning">
 										<i class="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M74.62-140 480-840l405.38 700H74.62ZM178-200h604L480-720 178-200Zm302-47.69q13.73 0 23.02-9.29t9.29-23.02q0-13.73-9.29-23.02T480-312.31q-13.73 0-23.02 9.29T447.69-280q0 13.73 9.29 23.02t23.02 9.29Zm-30-104.62h60v-200h-60v200ZM480-460Z"/></svg></i>
 										<div class="holder">
-											Note, <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> override with each new import. Toggle Theme Settings checkbox in the popup to import a demo without global options.
+											<?php echo wp_kses_post( __( 'Note, <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> override with each new import. Toggle Theme Settings checkbox in the popup to import a demo without global options.', 'ohio-extra' ) ); ?>
 										</div>
 									</div>
 									<p>
-										With new import, existing data such as posts, pages, categories, tags, media files, etc., will not be replaced or modified.
+										<?php esc_html_e( 'With new import, existing data such as posts, pages, categories, tags, media files, etc., will not be replaced or modified.', 'ohio-extra' ); ?>
 									</p>
 								</div>
 							</div>
@@ -327,11 +327,11 @@
 									<div class="accordionItem_control btn-round btn-round-small btn-round-light">
 										<i class="dashicons dashicons-plus-alt2"></i>
 									</div>
-									<h6>Can't update anything, constantly getting timed out.</h6>
+									<h6><?php esc_html_e( 'Can\'t update anything, constantly getting timed out.', 'ohio-extra' ); ?></h6>
 								</div>
 								<div class="accordionItem_content">
 									<p>
-										It's time to contact your <strong>Hosting Provider</strong> and ask to get helped;
+										<?php echo wp_kses_post( __( 'It\'s time to contact your <strong>Hosting Provider</strong> and ask to get helped;', 'ohio-extra' ) ); ?>
 									</p>
 								</div>
 							</div>
@@ -342,11 +342,11 @@
 									<div class="accordionItem_control btn-round btn-round-small btn-round-light">
 										<i class="dashicons dashicons-plus-alt2"></i>
 									</div>
-									<h6>Why WPML plugin doesn't come with your theme? You said it’s WPML-support.</h6>
+									<h6><?php esc_html_e( 'Why WPML plugin doesn\'t come with your theme? You said it’s WPML-support.', 'ohio-extra' ); ?></h6>
 								</div>
 								<div class="accordionItem_content">
 									<p>
-										WPML-support means that Ohio is fully compatible with the plugin, but you need to buy the plugin license separatly to be able to use it.
+										<?php esc_html_e( 'WPML-support means that Ohio is fully compatible with the plugin, but you need to buy the plugin license separatly to be able to use it.', 'ohio-extra' ); ?>
 									</p>
 								</div>
 							</div>
@@ -357,18 +357,18 @@
 									<div class="accordionItem_control btn-round btn-round-small btn-round-light">
 										<i class="dashicons dashicons-plus-alt2"></i>
 									</div>
-									<h6>I want to use Google Analytics on my website, it there a built-in option?</h6>
+									<h6><?php esc_html_e( 'I want to use Google Analytics on my website, it there a built-in option?', 'ohio-extra' ); ?></h6>
 								</div>
 								<div class="accordionItem_content">
 									<p>
-										You can add a Google Analytics Tracking Code directly to your site:
+										<?php esc_html_e( 'You can add a Google Analytics Tracking Code directly to your site:', 'ohio-extra' ); ?>
 									</p>
 									<ul>
-										<li>From <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> go to <em>Custom CSS & JS → Custom JS → Header Custom JS</em>;</li>
-										<li>Paste your <a target="_blank" href="https://support.google.com/analytics/answer/9539598?hl=en">Google Tracking Code</a>;</li>
-										<li>Click the <strong>Save Changes</strong> button to apply and publish your changes.</li>
+										<li><?php echo wp_kses_post( __( 'From <a target="_blank" href="./admin.php?page=ohio_hub_settings">Theme Settings</a> go to <em>Custom CSS & JS → Custom JS → Header Custom JS</em>;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Paste your <a target="_blank" href="https://support.google.com/analytics/answer/9539598?hl=en">Google Tracking Code</a>;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Click the <strong>Save Changes</strong> button to apply and publish your changes.', 'ohio-extra' ) ); ?></li>
 									</ul>
-									<p>Another option is using third-party plugins, like <a target="_blank" href="https://wordpress.org/plugins/google-analytics-for-wordpress/">Google Analytics</a> by MonsterInsights.
+									<p><?php echo wp_kses_post( __( 'Another option is using third-party plugins, like <a target="_blank" href="https://wordpress.org/plugins/google-analytics-for-wordpress/">Google Analytics</a> by MonsterInsights.', 'ohio-extra' ) ); ?>
 									</p>
 								</div>
 							</div>
@@ -383,13 +383,13 @@
 								</div>
 								<div class="accordionItem_content ">
 									<p>
-										Make the following steps:
+										<?php esc_html_e( 'Make the following steps:', 'ohio-extra' ); ?>
 									</p>
 									<ul>
-										<li>From the WordPress dashboard go to <em>Settings → Reading</em>;</li>
-										<li>Toggle <strong>A static page (select below)</strong>;
-										<li>Select the required page from the <strong>Homepage</strong> dropdown menu;</li>
-										<li>Click the <strong>Save Changes</strong> to apply and publish your changes.</li>
+										<li><?php echo wp_kses_post( __( 'From the WordPress dashboard go to <em>Settings → Reading</em>;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Toggle <strong>A static page (select below)</strong>;', 'ohio-extra' ) ); ?>
+										<li><?php echo wp_kses_post( __( 'Select the required page from the <strong>Homepage</strong> dropdown menu;', 'ohio-extra' ) ); ?></li>
+										<li><?php echo wp_kses_post( __( 'Click the <strong>Save Changes</strong> to apply and publish your changes.', 'ohio-extra' ) ); ?></li>
 									</ul>
 								</div>
 							</div>
@@ -428,7 +428,7 @@
 							<div class="label-holder">
 								<label class="active"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m429-336 238-237-51-51-187 186-85-84-51 51 136 135Zm51 240q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Zm0-72q130 0 221-91t91-221q0-130-91-221t-221-91q-130 0-221 91t-91 221q0 130 91 221t221 91Zm0-312Z"/></svg><?php _e( 'Activated', 'ohio-extra' ); ?></label>
 
-								<span><?php echo get_option( 'ohio_license_type', 'Regular License' ); ?></span>
+								<span><?php echo get_option( 'ohio_license_type', __( 'Regular License', 'ohio-extra' ) ); ?></span>
 							</div>
 
 							<!-- tip -->
@@ -481,7 +481,7 @@
 					<div class="row -vertical -highlighted">
 						<div class="holder">
 							<div class="caption"><?php _e( 'Have a project?', 'ohio-extra' ); ?></div>
-							<a class="-unlink" target="_blank" href="https://ohio.clbthemes.com/pricing/">Buy a New License</a>
+							<a class="-unlink" target="_blank" href="https://ohio.clbthemes.com/pricing/"><?php esc_html_e( 'Buy a New License', 'ohio-extra' ); ?></a>
 
 							<!-- tip -->
 							<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) ) : ?>
@@ -494,7 +494,7 @@
 
 			<!-- Support -->
 
-			<?php if ( !empty( $support_timestamp ) && is_numeric( $support_timestamp ) ) : ?>
+			<?php if ( apply_filters( 'ohio/has-external-license-documentation', true ) && !empty( $support_timestamp ) && is_numeric( $support_timestamp ) ) : ?>
 
 				<?php if ( $diff_timestamp > 0 ) : ?>
 

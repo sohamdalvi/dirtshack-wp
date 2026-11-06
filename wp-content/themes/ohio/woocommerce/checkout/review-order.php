@@ -12,7 +12,7 @@
  *
  * @see https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 11.0.0
+ * @version 11.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -49,7 +49,8 @@ defined( 'ABSPATH' ) || exit;
 						<?php
 							$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
 
-							$ohio_product_name = wp_kses_post( $_product->get_name() );
+							$cart_item_name    = WC()->cart->get_item_product_name( $cart_item, $_product );
+							$ohio_product_name = wp_kses_post( $cart_item_name );
 							if ( $product_permalink ) {
 								$ohio_product_name = sprintf( '<a class="woo-product-name titles-typo title" href="%s">%s</a>', esc_url( $product_permalink ), $ohio_product_name );
 							}

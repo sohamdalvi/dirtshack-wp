@@ -97,7 +97,9 @@ wp_reset_query();
     </div>
 <?php endif; ?>
 
-<div class="project-page project -layout9<?php echo esc_attr( $page_container_class . $scroll_effect_class ); ?>">
+<?php if ( $is_slider ) { OhioHelper::add_required_script( 'slider' ); } ?>
+<div class="project-page project -layout9<?php echo esc_attr( $page_container_class . $scroll_effect_class ); ?><?php echo esc_attr( apply_filters( 'ohio_project_page_class', '' ) ); ?>">
+    <?php do_action( 'ohio_project_page_notice' ); ?>
     <div class="project-gallery -with-slider">
         <div class="project-slider -slider-fs<?php if ( ! $is_slider ) { echo esc_attr( ' -single' ); } if ( $pagination_type == 'boxed' ) echo esc_attr( ' -with-boxed-pagination' ); ?>" <?php echo $is_slider ? 'data-portfolio-grid-slider' : '' ?> data-slider-navigation="<?php echo esc_attr( $navigation ); ?>" data-slider-loop="<?php echo esc_attr( $loop ); ?>" data-slider-autoplay="<?php echo esc_attr( $autoplay ); ?>" data-slider-autoplay-time="<?php echo esc_attr( $autoplayTimeout ); ?>" <?php echo esc_attr( $slider_pagination_data ); ?>>
 
@@ -158,9 +160,11 @@ wp_reset_query();
         <?php endif; ?>
 
     </div>
-    <div class="page-container<?php echo esc_attr( $page_container_class ); ?><?php echo esc_attr( $dark_mode_class ); ?>">
 
-        <?php if ( !empty( $project['description'] ) || isset( $project['task'] ) || isset( $project['strategy'] ) || isset( $project['design'] ) || isset( $project['client'] ) || isset( $project['custom_fields'] ) || !empty( $project['tags'] ) || isset( $project['link'] ) ) : ?>
+    <!-- Project Details -->
+    <?php if ( !empty( $project['description'] ) || !empty( $project['task'] ) || !empty( $project['strategy'] ) || !empty( $project['design'] ) || !empty( $project['client'] ) || !empty( $project['custom_fields'] ) || !empty( $project['tags'] ) || !empty( $project['link'] ) ) : ?>
+    
+    <div class="page-container<?php echo esc_attr( $page_container_class ); ?><?php echo esc_attr( $dark_mode_class ); ?>">
         <div class="project-content">
             <div class="vc_row">
                 <div class="vc_col-md-5">
@@ -194,9 +198,8 @@ wp_reset_query();
                 </div>
             </div>
         </div>
-        <?php endif; ?>
-
     </div>
+    <?php endif; ?>
 </div>
 
 <?php if ( $project['custom_content_position'] == 'bottom' ) : ?>

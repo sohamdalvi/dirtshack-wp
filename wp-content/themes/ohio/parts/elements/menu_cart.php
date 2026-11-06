@@ -13,7 +13,7 @@
 	<?php endif; ?>
 
 	<span class="holder">
-		<button class="icon-button cart" data-js="open-mini-cart" aria-label="<?php esc_html_e( 'Cart', 'ohio' ); ?>">
+		<button class="icon-button cart<?php echo esc_attr( ! empty( $args['size_class'] ) ? $args['size_class'] : '' ); ?>" data-js="open-mini-cart" aria-label="<?php esc_html_e( 'Cart', 'ohio' ); ?>">
 
 			<?php if ( $cart_custom_img ) : ?>
 				<img class="custom-icon" src="<?php echo esc_url( $cart_custom_img ); ?>" alt="<?php esc_html_e( 'Cart image', 'ohio' ); ?>">

@@ -4,7 +4,7 @@ class Ohio_Elementor_Carousel_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_register_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/jquery.clb-slider.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/libs/slider.js', [ 'jquery' ], false, true );
         wp_register_script( 'ohio-elementor-carousel-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
@@ -89,7 +89,7 @@ class Ohio_Elementor_Carousel_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Offset Size', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
-                'description' => '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use CSS units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>',
+                'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use CSS units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
                 'condition' => [
                     'offset_items' => 'yes',
                 ],
@@ -159,7 +159,7 @@ class Ohio_Elementor_Carousel_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( '5', 'ohio-extra' ),
                 'label_block' => true,
-                'description' => 'Autoplay interval timeout in seconds.',
+                'description' => __( 'Autoplay interval timeout in seconds.', 'ohio-extra' ),
                 'condition' => [
                     'autoplay' => 'yes',
                 ],
@@ -175,7 +175,7 @@ class Ohio_Elementor_Carousel_Widget extends Ohio_Elementor_Widget_Base {
                 'label_off' => __( 'No', 'ohio-extra' ),
                 'return_value' => 'yes',
                 'default' => '',
-                'description' => 'Stop autoplay on mouse hover.',
+                'description' => __( 'Stop autoplay on mouse hover.', 'ohio-extra' ),
                 'condition' => [
                     'autoplay' => 'yes',
                 ],

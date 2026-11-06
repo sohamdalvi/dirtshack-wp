@@ -4,6 +4,10 @@
 		<?php echo do_shortcode( '[contact-form-7 id="' . esc_attr( $settings['form'] ) . '" title=""]' ); ?>
 		<div class="hidden" data-button-contact="true">
 			<button class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" data-button-loading="true"></button>
+			<?php if ( !empty( $settings['use_icon'] ) ): ?>
+				<?php $icon_position = ( $settings['icon_position'] == 'left' ) ? 'left' : 'right'; ?>
+				<span data-button-contact-icon="<?php echo esc_attr( $icon_position ); ?>"><?php $this->showIconInView( 'icon -' . $icon_position ); ?></span>
+			<?php endif; ?>
         </div>
 
 	<?php else: ?>
@@ -13,8 +17,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.25 7c0 .69-.56 1.25-1.25 1.25s-1.25-.56-1.25-1.25.56-1.25 1.25-1.25 1.25.56 1.25 1.25zm10.75 5c0 6.627-5.373 12-12 12s-12-5.373-12-12 5.373-12 12-12 12 5.373 12 12zm-2 0c0-5.514-4.486-10-10-10s-10 4.486-10 10 4.486 10 10 10 10-4.486 10-10zm-13-2v2h2v6h2v-8h-4z"/></svg>
             </i>
             <div class="clb-blank-note-inner">
-            	<a target="_blank" href="<?php echo get_edit_post_link() . '&action=elementor'; ?>"><b><?php echo esc_html( 'Set a Contact 7 Form', 'ohio-extra' ); ?></b></a>
-				<?php echo esc_html('in the Elementor editor mode to be displayed here.', 'ohio-extra' ); ?>
+            	<a target="_blank" href="<?php echo get_edit_post_link() . '&action=elementor'; ?>"><b><?php echo esc_html__( 'Set a Contact 7 Form', 'ohio-extra' ); ?></b></a>
+				<?php echo esc_html__( 'in the Elementor editor mode to be displayed here.', 'ohio-extra' ); ?>
     		</div>
         </div>
         

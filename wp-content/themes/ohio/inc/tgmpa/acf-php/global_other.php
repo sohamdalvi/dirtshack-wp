@@ -27,7 +27,7 @@
                 "label" => __( 'Google Maps API Key', 'ohio' ),
                 "name" => "global_google_maps_api_key",
                 "type" => "text",
-                "instructions" => 'Add the Google Maps API key to your site. <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key">How to get your API key</a>',
+                "instructions" => __( 'Add the Google Maps API key to your site.', 'ohio' ) . ' <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key">' . __( 'How to get your API key', 'ohio' ) . '</a>',
                 "required" => 0,
                 "conditional_logic" => 0,
                 "default_value" => "",

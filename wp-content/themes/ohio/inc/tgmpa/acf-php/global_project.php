@@ -27,52 +27,52 @@
                 "image_option_value" => [
                     [
                         "name" => "type_1",
-                        "description" => __( 'Simple Left Gallery', 'ohio' ),
+                        "description" => __( 'Simple – Left Gallery', 'ohio' ),
                         "src" => "acf__image_27.svg"
                     ],
                     [
                         "name" => "type_2",
-                        "description" => __( 'Simple Right Gallery', 'ohio' ),
+                        "description" => __( 'Simple – Right Gallery', 'ohio' ),
                         "src" => "acf__image_26.svg"
                     ],
                     [
                         "name" => "type_7",
-                        "description" => __( 'Simple Bottom Gallery', 'ohio' ),
+                        "description" => __( 'Simple – Bottom Gallery', 'ohio' ),
                         "src" => "acf__image_32.svg"
                     ],
                     [
                         "name" => "type_3",
-                        "description" => __( 'Split Screen Left Gallery', 'ohio' ),
+                        "description" => __( 'Split Screen – Left Gallery', 'ohio' ),
                         "src" => "acf__image_29.svg"
                     ],
                     [
                         "name" => "type_4",
-                        "description" => __( 'Split Screen Right Gallery', 'ohio' ),
+                        "description" => __( 'Split Screen – Right Gallery', 'ohio' ),
                         "src" => "acf__image_28.svg"
                     ],
                     [
                         "name" => "type_5",
-                        "description" => __( 'Slider: Simple', 'ohio' ),
+                        "description" => __( 'Slider – Simple', 'ohio' ),
                         "src" => "acf__image_30.svg"
                     ],
                     [
                         "name" => "type_6",
-                        "description" => __( 'Slider: Fullscreen', 'ohio' ),
+                        "description" => __( 'Slider – Fullscreen', 'ohio' ),
                         "src" => "acf__image_31.svg"
                     ],
                     [
                         "name" => "type_8",
-                        "description" => __( 'Slider: Asymmetric', 'ohio' ),
+                        "description" => __( 'Slider – Asymmetric', 'ohio' ),
                         "src" => "acf__image_33.svg"
                     ],
                     [
                         "name" => "type_9",
-                        "description" => __( 'Slider: Creative', 'ohio' ),
+                        "description" => __( 'Slider – Centered', 'ohio' ),
                         "src" => "acf__image_44.svg"
                     ],
                     [
                         "name" => "type_10",
-                        "description" => __( 'Slider: Compact', 'ohio' ),
+                        "description" => __( 'Slider – Compact', 'ohio' ),
                         "src" => "acf__image_54.svg"
                     ]
                 ],
@@ -339,6 +339,11 @@
                             "value" => "1"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "choices" => [
                     "pagination" => __( 'Default', 'ohio' ),
@@ -627,6 +632,33 @@
                 "instructions" => __( 'Add a project custom URL slug. <br><em>Go to <a target="_blank" href="./options-permalink.php">Permalinks</a> to rebuild its structure by clicking the "Save Changes" button.</em>', 'ohio' ),
                 "required" => 0,
                 "default_value" => "project",
+            ],
+            [
+                "key" => "field_593l230597h24l35gal",
+                "label" => '<h4>' . __( 'Gallery', 'ohio' ) . '</h4>',
+                "name" => "",
+                "type" => "message",
+                "required" => 0,
+                "conditional_logic" => 0,
+            ],
+            [
+                "key" => "field_59391f24598db5182cap",
+                "label" => __( 'Image Captions', 'ohio' ),
+                "name" => "global_project_gallery_captions_visibility",
+                "type" => "true_false",
+                "instructions" => __( 'Show captions on project gallery images.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => 0,
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
+                "message" => "",
+                "default_value" => 1,
+                "ui" => 1,
+                "ui_on_text" => "",
+                "ui_off_text" => ""
             ],
             [
                 "key" => "field_593l230597243",

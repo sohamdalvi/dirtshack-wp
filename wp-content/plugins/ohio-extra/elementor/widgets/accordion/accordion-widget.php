@@ -114,6 +114,19 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'show_numbers',
+            [
+                'label' => __( 'Show Numbers?', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'description' => __( 'Show the item number (01, 02, 03…) before each title.', 'ohio-extra' ),
+            ]
+        );
+
         $this->add_control( 
             'tabs',
             [
@@ -154,6 +167,33 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
                 'name' => 'tabs_typography',
                 'label' => __( 'Title Typography', 'ohio-extra' ),
                 'selector' => '{{WRAPPER}} .accordion-header',
+            ]
+        );
+
+        $this->add_control(
+            'number_color',
+            [
+                'label' => __( 'Number Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .accordion.-numbered .accordion-header::before' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'show_numbers' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Typography::get_type(),
+            [
+                'name' => 'number_typography',
+                'label' => __( 'Number Typography', 'ohio-extra' ),
+                'selector' => '{{WRAPPER}} .accordion.-numbered .accordion-header::before',
+                'condition' => [
+                    'show_numbers' => 'yes',
+                ],
             ]
         );
 
@@ -357,6 +397,23 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $repeater->add_control(
+            'icon_type',
+            [
+                'label' => __( 'Icon Type', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'icon',
+                'options' => [
+                    'icon' => __( 'Icon', 'ohio-extra' ),
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
+                    'html' => __( 'Custom HTML', 'ohio-extra' ),
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
             'icon_icon',
             [
                 'label' => __( 'Icon', 'ohio-extra' ),
@@ -366,7 +423,69 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
                     'library' => 'solid',
                 ],
                 'condition' => [
-                    'use_icon' => 'yes'
+                    'use_icon' => 'yes',
+                    'icon_type' => 'icon',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'icon_image',
+            [
+                'label' => __( 'Custom Image', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'image',
+                ],
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'icon_image_size',
+            [
+                'label' => __( 'Image Size', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => [ 'px', 'em', 'rem' ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 200,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 24,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} {{CURRENT_ITEM}} .accordion-header img.icon' => 'width: {{SIZE}}{{UNIT}}; height: auto;',
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'icon_html',
+            [
+                'label' => __( 'Custom HTML', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '<i class="fa-regular fa-star"></i>',
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'html',
+                ],
+                'dynamic' => [
+                    'active' => true,
                 ],
             ]
         );
@@ -465,6 +584,10 @@ class Ohio_Elementor_Accordion_Widget extends Ohio_Elementor_Widget_Base {
             case 'contained':
                 $this->addWrapperClass( '-contained' );
                 break;
+        }
+
+        if ( !empty( $settings['show_numbers'] ) ) {
+            $this->addWrapperClass( '-numbered' );
         }
 
         include( plugin_dir_path( __FILE__ ) . 'accordion-view.php' );

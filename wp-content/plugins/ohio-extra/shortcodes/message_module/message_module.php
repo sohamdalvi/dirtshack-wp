@@ -25,6 +25,7 @@ function ohio_message_module_func( $atts ) {
 	$icon_as_icon = ( isset( $icon_as_icon ) ) ? OhioExtraFilter::string( $icon_as_icon, 'attr', '' ) : '';
 	$icon_size = isset( $icon_size ) ? OhioExtraFilter::string( $icon_size, 'string', '24') : '24';
 	$icon_as_image = ( isset( $icon_as_image ) ) ? OhioExtraFilter::string( wp_get_attachment_url( OhioExtraFilter::string( $icon_as_image ) ), 'attr' ) : false;
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
 	$full_width = isset( $full_width ) ? OhioExtraFilter::boolean( $full_width, false ) : false;
 	$without_close_button = isset( $without_close_button ) ? OhioExtraFilter::boolean( $without_close_button, false ) : false;
 	$wrap_text = isset( $wrap_text ) ? OhioExtraFilter::boolean( $wrap_text, true ) : true;
@@ -218,6 +219,9 @@ function ohio_message_module_func( $atts ) {
 	if ( isset( $icon_size ) && $icon_size != '' ) {
 		$_style_block .= '#' . $wrapper_id . ' .icon{';
 		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' > svg.icon{';
+		$_style_block .= 'height:' . $icon_size . 'px;';
 		$_style_block .= '}';
 	}
 

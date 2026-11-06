@@ -27,6 +27,8 @@ function ohio_recent_posts_func( $atts ) {
 	$card_layout = isset( $card_layout ) ? OhioExtraFilter::string( $card_layout, 'string', 'classic' ) : 'classic';
 	$card_effect = isset( $card_effect ) ? OhioExtraFilter::string( $card_effect, 'string', 'none' ) : 'none';
 	$border_radius = isset( $border_radius ) ? OhioExtraFilter::string( $border_radius, 'string', '') : '';
+	$border_width = isset( $border_width ) ? OhioExtraFilter::string( $border_width, 'string', '') : '';
+	$border_color = isset( $border_color ) ? OhioExtraFilter::string( $border_color, 'string', false ) : false;
 	$metro_style = isset( $metro_style ) ? OhioExtraFilter::boolean( $metro_style ) : true;
 	$tilt_effect = isset( $tilt_effect ) ? OhioExtraFilter::boolean( $tilt_effect ) : false;
 	$drop_shadow = isset( $drop_shadow ) ? OhioExtraFilter::boolean( $drop_shadow ) : false;
@@ -393,6 +395,22 @@ function ohio_recent_posts_func( $atts ) {
 		$_style_block .= '#' . $wrapper_id . ' .blog-item:not(.-contained) .image-holder,';
 		$_style_block .= '#' . $wrapper_id . ' .blog-item.-contained{';
 		$_style_block .= 'border-radius:' . $border_radius . 'px;';
+		$_style_block .= '}';
+	}
+
+	if ( isset( $border_width ) && $border_width != '' && $card_layout != 'blog_grid_6' ) {
+		$_style_block .= '#' . $wrapper_id . ' .blog-item:not(.-contained) .image-holder,';
+		$_style_block .= '#' . $wrapper_id . ' .blog-item.-contained{';
+		$_style_block .= 'border-width:' . $border_width . 'px;';
+		$_style_block .= 'border-style: solid;';
+		$_style_block .= '}';
+	}
+
+	$border_color = OhioExtraParser::VC_color_to_CSS( $border_color, '{{color}}' );
+	if ( $border_color && $card_layout != 'blog_grid_6' ) {
+		$_style_block .= '#' . $wrapper_id . ' .blog-item:not(.-contained) .image-holder,';
+		$_style_block .= '#' . $wrapper_id . ' .blog-item.-contained{';
+		$_style_block .= 'border-color:' . $border_color . ';';
 		$_style_block .= '}';
 	}
 

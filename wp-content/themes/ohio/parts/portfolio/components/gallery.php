@@ -36,6 +36,7 @@ if ( is_array( $project['images_full'] ) && count( $project['images_full'] ) > 0
 }
 
 $is_featured_image = OhioOptions::get( 'project_add_featured_on_page', true );
+$show_image_captions = OhioOptions::get( 'project_gallery_captions_visibility', true );
 
 if ( !$is_featured_image ) {
     if ( $project['featured_image'] ) {
@@ -68,7 +69,10 @@ wp_reset_query();
         <?php if ( $key == 0 ) : ?>
 
             <div class="first-image">
-                <img src="<?php echo esc_url( $art['url'] ); ?>" alt="<?php echo esc_attr( $art['alt'] ); ?>">
+                <figure class="gallery-image">
+                    <img src="<?php echo esc_url( $art['url'] ); ?>" alt="<?php echo esc_attr( $art['alt'] ); ?>"<?php echo OhioHelper::get_image_title_attr( $art['id'] ); ?>>
+                    <?php if ( $show_image_captions ) { echo OhioHelper::get_image_figcaption( $art['id'] ); } ?>
+                </figure>
                 <?php if ( !$video_cover && isset( $project['video']['link'] ) && !empty( $project['video']['link'] ) ) : ?>
                     <div class="video-button -animation open-popup<?php if ( $video_button_style != 'default' ) { echo ' -' . $video_button_style . ''; } ?>" <?php echo esc_attr( $video_params ); ?> data-video="<?php echo esc_url( $project['video']['link'] ); ?>">
                         <button class="icon-button<?php if ( $video_button_size != 'default' ) { echo ' -' . $video_button_size . ''; } ?>" aria-label="<?php esc_html_e( 'Play', 'ohio' ); ?>">
@@ -82,7 +86,10 @@ wp_reset_query();
 
         <?php else : ?>
 
-            <img src="<?php echo esc_url( $art['url'] ); ?>" alt="<?php echo esc_attr( $art['alt'] ); ?>">
+            <figure class="gallery-image">
+                <img src="<?php echo esc_url( $art['url'] ); ?>" alt="<?php echo esc_attr( $art['alt'] ); ?>"<?php echo OhioHelper::get_image_title_attr( $art['id'] ); ?>>
+                <?php if ( $show_image_captions ) { echo OhioHelper::get_image_figcaption( $art['id'] ); } ?>
+            </figure>
 
         <?php endif ?>
 

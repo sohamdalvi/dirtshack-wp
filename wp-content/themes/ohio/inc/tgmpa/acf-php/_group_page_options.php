@@ -471,6 +471,26 @@
                 "return_format" => "value"
             ],
             [
+                "key" => "field_5l92k3239857",
+                "label" => __( 'Contained Menu', 'ohio' ),
+                "name" => "header_contained_menu",
+                "type" => "inherited_checkbox",
+                "instructions" => __( 'Wrap the menu in a light grey overlay container.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => 0,
+                "custom_labels" => [
+                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
+                    "yes" => __( 'Yes', 'ohio' ),
+                    "no" => __( 'No', 'ohio' )
+                ],
+                "allow_null" => 0,
+                "other_choice" => 0,
+                "save_other_choice" => 0,
+                "default_value" => "inherit",
+                "layout" => "horizontal",
+                "return_format" => "value"
+            ],
+            [
                 "key" => "field_59390deaefzxfmod",
                 "label" => __( 'Hamburger Menu Layout', 'ohio' ),
                 "name" => "fullscreen_menu_style",
@@ -669,26 +689,6 @@
                     ]
                 ],
                 "default_value" => "inherit"
-            ],
-            [
-                "key" => "field_5l92k3239857",
-                "label" => __( 'Contained Menu', 'ohio' ),
-                "name" => "header_contained_menu",
-                "type" => "inherited_checkbox",
-                "instructions" => __( 'Add a wrap container for the menu.', 'ohio' ),
-                "required" => 0,
-                "conditional_logic" => 0,
-                "custom_labels" => [
-                    "inherit" => __( 'Use from Theme Settings', 'ohio' ),
-                    "yes" => __( 'Yes', 'ohio' ),
-                    "no" => __( 'No', 'ohio' )
-                ],
-                "allow_null" => 0,
-                "other_choice" => 0,
-                "save_other_choice" => 0,
-                "default_value" => "inherit",
-                "layout" => "horizontal",
-                "return_format" => "value"
             ],
             [
                 "key" => "field_59390deaef614",
@@ -1146,6 +1146,11 @@
                             "value" => "1"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "default_value" => "",
                 "placeholder" => "1344px by default",

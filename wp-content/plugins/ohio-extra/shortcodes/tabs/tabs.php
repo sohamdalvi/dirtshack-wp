@@ -18,9 +18,11 @@ function ohio_tabs_func( $atts, $content = null ) {
 	$tabs_line_color = isset( $tabs_line_color ) ? OhioExtraFilter::string( $tabs_line_color ) : false;
 	$tabs_title_typo = isset( $tabs_title_typo ) ? OhioExtraFilter::string( $tabs_title_typo ) : false;
 	$tabs_active_title_typo = isset( $tabs_active_title_typo ) ? OhioExtraFilter::string( $tabs_active_title_typo ) : false;
-	$tabs_subtitle_typo = isset( $tabs_subtitle_typo ) ? OhioExtraFilter::string( $tabs_subtitle_typo ) : false;
+	$tabs_tab_subtitle_typo = isset( $tabs_tab_subtitle_typo ) ? OhioExtraFilter::string( $tabs_tab_subtitle_typo ) : false;
+	$tabs_subtitle_typo = isset( $tabs_subtitle_typo ) ? OhioExtraFilter::string( $tabs_subtitle_typo ) : false; // Description
 	$tabs_content_typo = isset( $tabs_content_typo ) ? OhioExtraFilter::string( $tabs_content_typo ) : false;
 	$border_radius = isset( $border_radius ) ? OhioExtraFilter::string( $border_radius, 'string', '') : '';
+	$tab_width = isset( $tab_width ) ? OhioExtraFilter::string( $tab_width, 'string', '') : '';
 
 	// Design options
     $content_styles = isset( $content_styles ) ? OhioExtraFilter::string( $content_styles ) : false;
@@ -98,6 +100,14 @@ function ohio_tabs_func( $atts, $content = null ) {
 	$wrapper_classes .= $layout_classes;
 	$wrapper_classes .= $content_classes;
 
+	// Inner tabs: subtitle is stored as "tab_subtitle", description as "subtitle"
+	if ( $content && preg_match( '/\stab_subtitle="[^"]+"/', $content ) ) {
+		$wrapper_classes .= ' -tabs-with-subtitle';
+	}
+	if ( $content && preg_match( '/\ssubtitle="[^"]+"/', $content ) ) {
+		$wrapper_classes .= ' -tabs-with-description';
+	}
+
 	$dark_mode_scheme = isset( $dark_mode_scheme ) ? OhioExtraFilter::string( $dark_mode_scheme, 'string', 'none' ) : 'none';
 	if ( 'light' === $dark_mode_scheme ) {
 		$wrapper_classes .= ' clb__dark_mode_light';
@@ -153,12 +163,34 @@ function ohio_tabs_func( $atts, $content = null ) {
 		}
 	}
 
-	$tab_subtitle_typo = OhioExtraParser::VC_typo_to_CSS( $tabs_subtitle_typo );
+	$tab_tab_subtitle_typo = OhioExtraParser::VC_typo_to_CSS( $tabs_tab_subtitle_typo );
+	OhioExtraParser::VC_typo_custom_font( $tabs_tab_subtitle_typo );
+
+	if ( $tab_tab_subtitle_typo ) {
+		$_selector = '#' . $wrapper_id . ' .tabs-nav-link .subtitle{';
+		$_block_typo = $tab_tab_subtitle_typo;
+		if ( !empty( $_block_typo['desktop'] ) ) {
+			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
+		}
+		if ( !empty( $_block_typo['tablet'] ) ) {
+		    $_style_block .= '@media screen and (min-width: 769px) and (max-width: 1180px){';
+		    $_style_block .= $_selector . $_block_typo['tablet'] . '}';
+		    $_style_block .= '}';
+		}
+		if ( !empty( $_block_typo['mobile'] ) ) {
+		    $_style_block .= '@media screen and (max-width: 768px){';
+		    $_style_block .= $_selector . $_block_typo['mobile'] . '}';
+		    $_style_block .= '}';
+		}
+	}
+
+	// Description (stored as the former "Subtitle Typography" param)
+	$tab_description_typo = OhioExtraParser::VC_typo_to_CSS( $tabs_subtitle_typo );
 	OhioExtraParser::VC_typo_custom_font( $tabs_subtitle_typo );
 
-	if ( $tab_subtitle_typo ) {
-		$_selector = '#' . $wrapper_id . ' .tabs-nav-link .subtitle{';
-		$_block_typo = $tab_subtitle_typo;
+	if ( $tab_description_typo ) {
+		$_selector = '#' . $wrapper_id . ' .tabs-nav-link .description{';
+		$_block_typo = $tab_description_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
 		}
@@ -225,6 +257,13 @@ function ohio_tabs_func( $atts, $content = null ) {
 		$_style_block .= '#' . $wrapper_id . '.-with-button .tabs-nav,';
 		$_style_block .= '#' . $wrapper_id . '.-with-button .tabs-nav-line{';
 		$_style_block .= 'border-radius:' . $border_radius . 'px;';
+		$_style_block .= '}';
+	}
+
+	if ( $tabs_layout == 'onleft' && $tab_width != '' && $tab_width != '0' ) {
+		$_style_block .= '#' . $wrapper_id . '.-vertical .tabs-nav{';
+		$_style_block .= 'width:' . ( is_numeric( $tab_width ) ? $tab_width . 'px' : esc_attr( $tab_width ) ) . ';';
+		$_style_block .= 'flex-shrink:0;';
 		$_style_block .= '}';
 	}
 

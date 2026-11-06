@@ -224,6 +224,7 @@ class OhioHelper {
 			return false;
 		}
 
+		self::add_required_script( 'slider' );
 		$layout = '<div class="slider blog-slider" data-ohio-slider-simple="true">';
 
 		if ( $posts_layout_type ) {
@@ -245,6 +246,82 @@ class OhioHelper {
 		$layout .= '</div>';
 
 		return $layout;
+	}
+
+	/*
+	* Header elements defaults: today's order and mobile visibility
+	*/
+	static function get_header_elements_defaults() {
+		return [
+			'language' => false,
+			'button'   => true,
+			'search'   => (bool) OhioOptions::get_global( 'page_mobile_search_visibility', false ),
+			'account'  => true,
+			'wishlist' => true,
+			'cart'     => true,
+		];
+	}
+
+	/*
+	* Header elements (Theme Settings > Header > General > Header Elements), in display order:
+	* slug => [ 'mobile' => bool, 'size' => 'default'|'small'|'large' ].
+	* A duplicated element keeps its first row, a missing one is added at the end with its defaults.
+	*/
+	static function get_header_elements() {
+		static $elements = null;
+
+		if ( ! is_null( $elements ) ) {
+			return $elements;
+		}
+
+		$defaults = self::get_header_elements_defaults();
+		$sizes = [ 'default', 'small', 'large' ];
+		$elements = [];
+		$rows = OhioOptions::get_global( 'page_header_elements' );
+
+		if ( is_array( $rows ) ) {
+			foreach ( $rows as $row ) {
+				$slug = isset( $row['element'] ) ? $row['element'] : '';
+
+				if ( isset( $defaults[ $slug ] ) && ! isset( $elements[ $slug ] ) ) {
+					$size = isset( $row['icon_size'] ) && in_array( $row['icon_size'], $sizes, true ) ? $row['icon_size'] : 'default';
+					$elements[ $slug ] = [
+						'mobile' => ! empty( $row['mobile'] ),
+						'size'   => $size,
+					];
+				}
+			}
+		}
+
+		foreach ( $defaults as $slug => $mobile ) {
+			if ( ! isset( $elements[ $slug ] ) ) {
+				$elements[ $slug ] = [
+					'mobile' => $mobile,
+					'size'   => 'default',
+				];
+			}
+		}
+
+		return $elements;
+	}
+
+	/*
+	* Is a header element visible in the mobile header
+	*/
+	static function is_header_element_on_mobile( $slug ) {
+		$elements = self::get_header_elements();
+
+		return ! empty( $elements[ $slug ]['mobile'] );
+	}
+
+	/*
+	* Icon size class of a header element: '', ' -small' or ' -large'
+	*/
+	static function get_header_element_size_class( $slug ) {
+		$elements = self::get_header_elements();
+		$size = isset( $elements[ $slug ]['size'] ) ? $elements[ $slug ]['size'] : 'default';
+
+		return $size === 'default' ? '' : ' -' . $size;
 	}
 
 	/*
@@ -811,7 +888,7 @@ class OhioHelper {
 				echo 'data-lazy-load-id="' . wp_unique_prefixed_id('ohio-paginator-') . '" ';
 				echo 'data-lazy-load-scope="' . $scope . '">';
 				echo '<button class="button -pagination ' . implode( ' ', $style_class ) . '">';
-				echo '<span class="loading-text">' . esc_html__( 'Loading', 'ohio-extra' ) . '</span>';
+				echo '<span class="loading-text">' . esc_html__( 'Loading', 'ohio' ) . '</span>';
 				echo '</button>';
 				echo '</div>';
 				break;
@@ -824,11 +901,63 @@ class OhioHelper {
 				echo 'data-lazy-load-id="' . wp_unique_prefixed_id('ohio-paginator-') . '" ';
 				echo 'data-lazy-load-scope="' . $scope . '">';
 				echo '<button class="button -pagination ' . implode( ' ', $style_class ) . '">';
-				echo '<span class="loadmore-text">' . esc_html__( 'Load More', 'ohio-extra' ) . '</span>';
-				echo '<span class="loading-text">' . esc_html__( 'Loading', 'ohio-extra' ) . '</span>';
+				echo '<span class="loadmore-text">' . esc_html__( 'Load More', 'ohio' ) . '</span>';
+				echo '<span class="loading-text">' . esc_html__( 'Loading', 'ohio' ) . '</span>';
 				echo '</button>';
 				echo '</div>';
 				break;
 		}
+	}
+
+	/**
+	 * Returns a ready-to-print ` title="..."` attribute for an attachment,
+	 * or an empty string when no custom title is set (WordPress fills the
+	 * title with the file name on upload, so that default is skipped).
+	 */
+	static function get_image_title_attr( $attachment_id ) {
+		if ( ! $attachment_id ) {
+			return '';
+		}
+
+		$title = trim( get_the_title( $attachment_id ) );
+		if ( '' === $title ) {
+			return '';
+		}
+
+		// Skip the default title WordPress generates from the file name
+		// (also when the file got a -1, -scaled, -rotated or size suffix).
+		$file = get_post_meta( $attachment_id, '_wp_attached_file', true );
+		if ( $file ) {
+			$file_name = pathinfo( $file, PATHINFO_FILENAME );
+			$candidates = array( $file_name );
+			while ( preg_match( '/-(scaled|rotated|\d+|\d+x\d+|e\d{10,})$/i', $file_name ) ) {
+				$file_name = preg_replace( '/-(scaled|rotated|\d+|\d+x\d+|e\d{10,})$/i', '', $file_name );
+				$candidates[] = $file_name;
+			}
+			foreach ( $candidates as $candidate ) {
+				if ( strtolower( $title ) === strtolower( $candidate ) || sanitize_title( $title ) === sanitize_title( $candidate ) ) {
+					return '';
+				}
+			}
+		}
+
+		return ' title="' . esc_attr( $title ) . '"';
+	}
+
+	/**
+	 * Returns a ready-to-print <figcaption> for an attachment,
+	 * or an empty string when the attachment has no caption.
+	 */
+	static function get_image_figcaption( $attachment_id ) {
+		if ( ! $attachment_id ) {
+			return '';
+		}
+
+		$caption = wp_get_attachment_caption( $attachment_id );
+		if ( ! $caption || '' === trim( $caption ) ) {
+			return '';
+		}
+
+		return '<figcaption class="gallery-image-caption">' . wp_kses_post( $caption ) . '</figcaption>';
 	}
 }

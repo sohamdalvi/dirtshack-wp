@@ -1,6 +1,6 @@
 <?php
 	$search_visible = OhioOptions::get( 'page_header_search_visibility', true ) && ! OhioSettings::is_coming_soon_page();
-	$search_visible_mobile = OhioOptions::get( 'page_mobile_search_visibility', false );
+	$search_visible_mobile = OhioHelper::is_header_element_on_mobile( 'search' );
 	
 	OhioOptions::get( 'page_header_search_visibility' ); // trigger selection chain
 	$style_settings_select_type = OhioOptions::get_last_select_type();
@@ -14,6 +14,10 @@
 	}
 	if ( $search_visible_mobile ) {
 		$extra_classes .= ' -mobile-visible';
+	}
+	// Icon size from Header Elements (passed only by the header)
+	if ( ! empty( $args['size_class'] ) ) {
+		$extra_classes .= $args['size_class'];
 	}
 ?>
 

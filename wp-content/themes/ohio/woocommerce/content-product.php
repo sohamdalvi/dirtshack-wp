@@ -64,12 +64,16 @@ if ( $equal_height ) {
 
 $wrapper_classes .= ' -' . $text_align;
 
+// Product card image slider and Quickview popup
+OhioHelper::add_required_script( 'slider' );
+
 $parallax_data = '';
 $tilt_effect = OhioOptions::get_global( 'shop_tilt_effect', true );
 $tilt_perspective = OhioOptions::get( 'shop_tilt_effect_perspective', 6000 );
 
 if ( $tilt_effect ) {
 	$parallax_data = 'data-tilt=true data-tilt-perspective=' . $tilt_perspective . '';
+	OhioHelper::add_required_script( 'tilt' );
 }
 ?>
 

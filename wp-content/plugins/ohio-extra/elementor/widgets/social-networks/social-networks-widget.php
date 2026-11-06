@@ -164,8 +164,8 @@ class Ohio_Elementor_Social_Networks_Widget extends Ohio_Elementor_Widget_Base {
                 'separator' => 'before',
                 'default' => 'custom',
                 'options' => [
-                    'custom' => 'Subscribe links',
-                    'share' => 'Share links',
+                    'custom' => __( 'Subscribe links', 'ohio-extra' ),
+                    'share' => __( 'Share links', 'ohio-extra' ),
                 ],
             ]
         );

@@ -1,7 +1,9 @@
 <div class="ohio-widget service-table <?php echo $this->getWrapperClasses(); ?>" <?php if ( $settings['tilt_effect'] ) { echo esc_attr( $tilt_attrs ); } ?>>
-	<span class="icon-group <?php echo $settings['icon_classes'] ?>">
-		<?php $this->showIconInView( 'icon' ); ?>
-	</span>
+	<?php if ( $this->hasIconInView( 'icon' ) ) : ?>
+		<span class="icon-group <?php echo $settings['icon_classes'] ?>">
+			<?php $this->showIconInView( 'icon' ); ?>
+		</span>
+	<?php endif; ?>
 	<div class="heading">
 		<?php if ( !empty( $settings['subtitle'] ) ) : ?>
 			<div class="subtitle"><?php echo $settings['subtitle']; ?></div>
@@ -17,6 +19,26 @@
 	        <?php echo $settings['description']; ?>
 	    </div>
     <?php endif; ?>
+
+    <?php if ( $settings['table_button_position'] == 'top' && !empty( $settings['use_link'] ) && !empty( $settings['button_link']['url'] ) ) : ?>
+		<div class="service-table-button-holder">
+			<a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" 
+				<?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
+
+				<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ): ?>
+					<?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+				<?php endif; ?>
+
+				<?php echo $settings['button_title']; ?>
+
+				<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ): ?>
+					<?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+				<?php elseif ( empty( $settings['button_icon_use'] ) && $settings['button_style_type'] == 'link' ): ?>
+					<i class="ion-right ion"><svg class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7H16M16 7L11 1M16 7L11 13" stroke-width="2"/></svg></i>
+				<?php endif; ?>
+			</a>
+		</div>
+	<?php endif; ?>
 
     <?php if ( !empty( $settings['features_list'] ) ) : ?>
 	    <div class="service-table-features">
@@ -49,5 +71,23 @@
 
 	    </div>
     <?php endif; ?>
+
+	<?php if ( $settings['table_button_position'] == 'default' && !empty( $settings['use_link'] ) && !empty( $settings['button_link']['url'] ) ) : ?>
+		<a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" 
+			<?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
+
+			<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ): ?>
+				<?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+			<?php endif; ?>
+
+			<?php echo $settings['button_title']; ?>
+
+			<?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ): ?>
+				<?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+			<?php elseif ( empty( $settings['button_icon_use'] ) && $settings['button_style_type'] == 'link' ): ?>
+				<i class="ion-right ion"><svg class="arrow-icon" width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7H16M16 7L11 1M16 7L11 13" stroke-width="2"/></svg></i>
+			<?php endif; ?>
+		</a>
+	<?php endif; ?>
 
 </div>

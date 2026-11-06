@@ -181,6 +181,26 @@ function ohio_recent_posts_sc_map() {
 				'value' => '5'
 			),
 			array(
+				'type' => 'ohio_range',
+				'holder' => 'em',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Border', 'ohio-extra' ),
+				'param_name' => 'border_width',
+				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
+				'value' => '0',
+				'dependency' => array(
+					'element' => 'card_layout',
+					'value' => array(
+						'blog_grid_1',
+						'blog_grid_2',
+						'blog_grid_3',
+						'blog_grid_4',
+						'blog_grid_5',
+						'blog_grid_7'
+					)
+				),
+			),
+			array(
 				'type' => 'ohio_check',
 				'group' => __( 'General', 'ohio-extra' ),
 				'heading' => __( 'Equal Height', 'ohio-extra' ),
@@ -516,10 +536,23 @@ function ohio_recent_posts_sc_map() {
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Background Color', 'ohio-extra' ),
 				'param_name' => 'card_background_color',
+			),
+			array(
+				'type' => 'ohio_colorpicker',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Border Color', 'ohio-extra' ),
+				'param_name' => 'border_color',
 				'dependency' => array(
-					'element' => 'card_boxed',
-					'value' => '1',
-				)
+					'element' => 'card_layout',
+					'value' => array(
+						'blog_grid_1',
+						'blog_grid_2',
+						'blog_grid_3',
+						'blog_grid_4',
+						'blog_grid_5',
+						'blog_grid_7'
+					)
+				),
 			),
 			array(
 				'type' => 'dropdown',
@@ -634,7 +667,7 @@ __( 'Fade Down', 'ohio-extra' ) => 'fade-down',
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

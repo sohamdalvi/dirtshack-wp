@@ -60,48 +60,46 @@ class acf_field_ohio_sizes extends acf_field {
 
 			<?php acf_hidden_input( $hidden ); ?>
 
-			<div class="row">
-				<div class="vc_col-lg-4 column">
+			<div class="row-grid row-grid-3">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Laptop ≤ 1440px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Font Size', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="size-laptop"<?php if ( is_object( $field_value ) && isset( $field_value->laptop_size ) ) { echo ' value="' . $field_value->laptop_size . '"'; } ?>>
 				</div>
-				<div class="vc_col-lg-4 column">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Tablet ≤ 1180px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Font Size', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="size-tablet"<?php if ( is_object( $field_value ) && isset( $field_value->tablet_size ) ) { echo ' value="' . $field_value->tablet_size . '"'; } ?>>
 				</div>
-				<div class="vc_col-lg-4 column">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Mobile ≤ 768px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Font Size', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="size-mobile"<?php if ( is_object( $field_value ) && isset( $field_value->mobile_size ) ) { echo ' value="' . $field_value->mobile_size . '"'; } ?>>
 				</div>
-			</div>
-			<div class="row">
-				<div class="vc_col-lg-4 column">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Laptop ≤ 1440px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Line Height', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="height-laptop"<?php if ( is_object( $field_value ) && isset( $field_value->laptop_height ) ) { echo ' value="' . $field_value->laptop_height . '"'; } ?>>
 				</div>
-				<div class="vc_col-lg-4 column">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Tablet ≤ 1180px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Line Height', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="height-tablet"<?php if ( is_object( $field_value ) && isset( $field_value->tablet_height ) ) { echo ' value="' . $field_value->tablet_height . '"'; } ?>>
 				</div>
-				<div class="vc_col-lg-4 column">
+				<div class="column">
 					<b class="label"><a class="tip" href="https://developer.mozilla.org/en-US/docs/Glossary/Viewport" target="_blank"><?php esc_html_e('Mobile ≤ 768px', 'ohio-extra'); ?></a></b>
 					<b class="label"><?php esc_html_e( 'Line Height', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="height-mobile"<?php if ( is_object( $field_value ) && isset( $field_value->mobile_height ) ) { echo ' value="' . $field_value->mobile_height . '"'; } ?>>
 				</div>

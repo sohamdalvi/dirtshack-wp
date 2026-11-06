@@ -6,8 +6,8 @@ class Ohio_Elementor_Compare_Widget extends Ohio_Elementor_Widget_Base {
 
         wp_register_script( 'ohio-elementor-compare-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
 
-        wp_enqueue_script( 'jquery-event-move', get_template_directory_uri() . '/assets/js/libs/jquery.event.move.min.js', [ 'jquery' ], '1.0.0', true);
-        wp_enqueue_script( 'jquery-twentytwenty', get_template_directory_uri() . '/assets/js/libs/jquery.compare.min.js',[ 'jquery', 'jquery-event-move' ], '1.0.0', true);
+        wp_register_script( 'jquery-event-move', get_template_directory_uri() . '/assets/js/libs/event-move.min.js', [ 'jquery' ], '1.0.0', true);
+        wp_register_script( 'jquery-twentytwenty', get_template_directory_uri() . '/assets/js/libs/compare.min.js',[ 'jquery', 'jquery-event-move' ], '1.0.0', true);
     }
 
     public function get_name()
@@ -26,7 +26,7 @@ class Ohio_Elementor_Compare_Widget extends Ohio_Elementor_Widget_Base {
     }
 
     public function get_script_depends() {
-        return [ 'ohio-elementor-compare-widget' ];
+        return [ 'jquery-twentytwenty', 'ohio-elementor-compare-widget' ];
     }
 
     protected function register_controls()

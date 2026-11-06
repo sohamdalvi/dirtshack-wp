@@ -324,7 +324,7 @@ class Ohio_Elementor_Pricing_Table_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Button Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Read more',
+                'default' => __( 'Read more', 'ohio-extra' ),
                 'label_block' => true,
                 'condition' => [
                     'use_link' => 'yes',
@@ -355,6 +355,8 @@ class Ohio_Elementor_Pricing_Table_Widget extends Ohio_Elementor_Widget_Base {
                 ],
             ]
         );
+
+        $this->addButtonIconControls();
 
         $this->end_controls_section();
 
@@ -695,6 +697,7 @@ class Ohio_Elementor_Pricing_Table_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
         include( plugin_dir_path( __FILE__ ) . 'pricing-table-view.php' );

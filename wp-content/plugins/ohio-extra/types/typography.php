@@ -61,7 +61,7 @@
                                 </ul>
                             </div>
 
-                            <a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+                            <a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
                         </div>
                         <div class="input-pixeles-wrap">
                             <input type="text" data-target="font-size" value="<?php echo esc_attr( $value->font_size ?? '' ); ?>">
@@ -180,7 +180,7 @@
                                 </ul>
                             </div>
 
-                            <a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+                            <a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
                         </div>
                         <div class="input-pixeles-wrap">
                             <input type="text" data-target="line-height" value="<?php echo esc_attr( $value->line_height ?? '' ); ?>">
@@ -216,7 +216,7 @@
                                 </ul>
                             </div>
 
-                            <a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+                            <a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
                         </div>
                         <div class="input-pixeles-wrap">
                             <input type="text" data-target="letter-spacing" value="<?php echo esc_attr( $value->letter_spacing ?? '' ); ?>">

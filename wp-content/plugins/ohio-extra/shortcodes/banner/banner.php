@@ -37,7 +37,7 @@ function ohio_banner_func( $atts ) {
 	$button_animation = isset( $button_animation ) ? OhioExtraFilter::boolean( $button_animation ) : false;
 
 	$title = isset( $title ) ? OhioExtraFilter::string( $title ) : false;
-	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag ) : 'h3';
+	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag, 'h3', true ) : 'h3';
 	$title_typo = isset( $title_typo ) ? OhioExtraFilter::string( $title_typo ) : false;
 	$background_image = isset( $background_image ) ? OhioExtraFilter::string( $background_image ) : false;
 	$image = OhioExtraParser::generateImageAttsById( OhioExtraFilter::string( $background_image ), $title );
@@ -81,6 +81,7 @@ function ohio_banner_func( $atts ) {
 	$tilt_attrs = '';
 	if ( !$tilt_effect ) {
 		$tilt_attrs .= ' data-tilt=true data-tilt-perspective=6000';
+		OhioHelper::add_required_script( 'tilt' );
 	}
 
 	// Wrapper ID

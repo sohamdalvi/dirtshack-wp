@@ -13,6 +13,7 @@
 		$header_sticky = OhioOptions::get( 'page_header_sticky', true );
 		$header_sticky_mobile = OhioOptions::get_global( 'page_header_mobile_sticky' );
 		$header_sticky_initial_offset = OhioOptions::get_global( 'page_header_sticky_initial_offset' );
+		$header_sticky_direction = OhioOptions::get_global( 'page_header_sticky_direction', 'down' );
 
 		$header_sticky_attr = '';
 		if ( $header_sticky ) {
@@ -23,6 +24,9 @@
 		}
 		if ( $header_sticky_initial_offset ) {
 			$header_sticky_attr .= ' data-fixed-initial-offset=' . $header_sticky_initial_offset . '';
+		}
+		if ( $header_sticky_direction == 'up' ) {
+			$header_sticky_attr .= ' data-fixed-direction=up';
 		}
 	}
 

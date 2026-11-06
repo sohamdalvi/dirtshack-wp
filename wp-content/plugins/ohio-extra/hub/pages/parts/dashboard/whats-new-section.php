@@ -14,6 +14,111 @@
 <!-- version -->
 <div class="clb-group">
 <div class="clb-group-headline">
+	<h2><label>Ver 3.8.1</label></h2> Nov 02, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Product gallery breaking on variations with multiple images (WooCommerce 11 variation galleries);
+- Product grid gallery turning into a slider on tablets;
+- <a href="https://ohio.clbthemes.com/tabs-widget/" target="_blank" rel="noopener">Tabs</a> navigation scrolling when items overflow the container;
+- <a href="https://ohio.clbthemes.com/tabs-widget/" target="_blank" rel="noopener">Tabs</a> styles and vertical <a href="https://ohio.clbthemes.com/tabs-widget/" target="_blank" rel="noopener">Tabs</a> spacing;
+- Early textdomain loading notice from Demo Export fields;
+
+### Added
+- Options for Header elements order, icon size and visibility on mobile / desktop;
+- Scroll Direction option for Sticky Header;
+- Icon Type option (Icon, Custom Image, Custom HTML) for <a href="https://ohio.clbthemes.com/accordion-widget/" target="_blank" rel="noopener">Accordion</a> items;
+- Improved performance – JS libraries and element scripts now load only on pages that use them;
+
+### Updated
+- Ohio Extra plugin to the 3.8.1 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.8</label></h2> Oct 20, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Compatibility with WooCommerce 11.2;
+- Minimal portfolio title being clickable on mobile;
+- Fatal error in Recent Projects and Recent Posts widgets when categories are saved as a string;
+- Filled button styles in WPBakery elements to match Elementor;
+- Custom HTML icons rendering and size in WPBakery elements;
+
+### Added
+- New <a href="https://ohio.clbthemes.com/demo36/homedemo36-elementor/" target="_blank" rel="noopener">AI Tool</a> template (Demo 36);
+- Letter Reveal animation and Animation Speed option for <a href="https://ohio.clbthemes.com/dynamic-text-widget/" target="_blank" rel="noopener">Dynamic Text</a>;
+- HTML Tag option for <a href="https://ohio.clbthemes.com/dynamic-text-widget/" target="_blank" rel="noopener">Dynamic Text</a> and div title tag for <a href="https://ohio.clbthemes.com/banner-widget/" target="_blank" rel="noopener">Banner</a>, <a href="https://ohio.clbthemes.com/call-to-action-widget/" target="_blank" rel="noopener">Call to Action</a> and <a href="https://ohio.clbthemes.com/icon-box-widget/" target="_blank" rel="noopener">Icon Box</a>;
+- Subtitle and Description for <a href="https://ohio.clbthemes.com/tabs-widget/" target="_blank" rel="noopener">Tabs</a>, and Tab Width for vertical tabs;
+- Show Numbers option for <a href="https://ohio.clbthemes.com/accordion-widget/" target="_blank" rel="noopener">Accordion</a>;
+- Button for <a href="https://ohio.clbthemes.com/services-table-widget/" target="_blank" rel="noopener">Services Table</a> and button icons for <a href="https://ohio.clbthemes.com/pricing-table-widget/" target="_blank" rel="noopener">Pricing Table</a> and <a href="https://ohio.clbthemes.com/services-table-widget/" target="_blank" rel="noopener">Services Table</a>;
+- Custom HTML icon type for elements with icons;
+- Button Height and Text Fields Height options in theme settings;
+- Fill Color and Border Color (Normal/Hover) for Flat <a href="https://ohio.clbthemes.com/button-widget/" target="_blank" rel="noopener">Button</a> type;
+- Size option for <a href="https://ohio.clbthemes.com/icon-box-widget/" target="_blank" rel="noopener">Icon Box</a>;
+- Button icon option for <a href="https://ohio.clbthemes.com/contact-form-widget/" target="_blank" rel="noopener">Contact Form</a> Elementor widget;
+- Border and Border Color options for <a href="https://ohio.clbthemes.com/blog-posts-widget/" target="_blank" rel="noopener">Blog Posts</a>;
+- Captions and titles on project gallery images with show/hide option;
+- Translation support for remaining hardcoded strings;
+
+### Updated
+- Ohio Extra plugin to the 3.8 version;
+- Ohio Importer plugin to the 1.3.8 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.8</label></h2> Sep 24, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Underline misalignment on hover in Portfolio Grid Type 12;
+- Link target attribute stripped in project Task, Strategy, Design and Client fields;
+- Empty Project Details section showing on project layout 9;
+- First item toolbar hidden in Accordion and Horizontal Accordion in WPBakery editor;
+- WPBakery front-end editor controls display;
+- PHP warnings for undefined array keys in Button element settings;
+
+### Added
+- URL anchors for Portfolio category filters;
+- New Projects blocks in the Ohio Blocks library;
+
+### Updated
+- Ohio Extra plugin to the 3.7.8 version;
+- Ohio Importer plugin to the 1.3.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
+	<h2><label>Ver 3.7.7</label></h2> Sep 14, 2026
+</div>
+<pre>
+### Fixed
+- Minor style fixes and improvements;
+- Tabs, Accordion and Horizontal Accordion breaking in WPBakery front-end editor;
+- Fatal error from duplicate get_slides() declaration;
+
+### Added
+- Active Menu Background option added to Menu Settings;
+
+### Updated
+- Ohio Extra plugin to the 3.7.7 version;
+</pre>
+</div>
+
+<!-- version -->
+<div class="clb-group">
+<div class="clb-group-headline">
 	<h2><label>Ver 3.7.6</label></h2> Sep 07, 2026
 </div>
 <pre>

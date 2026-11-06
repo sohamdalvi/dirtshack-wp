@@ -80,6 +80,11 @@
                         ]
                     ]
                 ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "default_value" => "",
                 "placeholder" => "1344px by default",
                 "prepend" => __( 'Use CSS units', 'ohio' ),
@@ -186,6 +191,11 @@
                         ]
                     ]
                 ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "default_value" => "",
                 "placeholder" => "",
                 "prepend" => __( 'HTML allowed', 'ohio' ),
@@ -207,6 +217,11 @@
                             "value" => "1"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "choices" => [
                     "left" => __( '<i class="bi bi-text-left"></i> Left', 'ohio' ),
@@ -250,6 +265,11 @@
                             "value" => "1"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
             ],
             [
@@ -568,24 +588,6 @@
                 "placeholder" => ""
             ],
             [
-                "key" => "field_592fd8901beb6",
-                "label" => __( 'Text Logo', 'ohio' ),
-                "name" => "global_page_footer_sitename_typo",
-                "type" => "ohio_typo",
-                "instructions" => __( 'Enter the name of your site and it will be used as a footer text logo.', 'ohio' ),
-                "required" => 0,
-                "conditional_logic" => [
-                    [
-                        [
-                            "field" => "field_592fd8901ba9e",
-                            "operator" => "==",
-                            "value" => "sitename"
-                        ]
-                    ]
-                ],
-                "add_theme_inherited" => false
-            ],
-            [
                 "key" => "field_592fd8901c689",
                 "label" => __( 'Custom Footer Image', 'ohio' ),
                 "name" => "global_page_footer_custom_logo",
@@ -639,6 +641,39 @@
                     ]
                 ],
                 "default_value" => ""
+            ],
+            [
+                "key" => "field_592fd8901beb6sty",
+                "label" => '<h4>' . __( 'Styles', 'ohio' ) . '</h4>',
+                "name" => "",
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_592fd8901ba9e",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "type" => "message"
+            ],
+            [
+                "key" => "field_592fd8901beb6",
+                "label" => __( 'Text Logo', 'ohio' ),
+                "name" => "global_page_footer_sitename_typo",
+                "type" => "ohio_typo",
+                "instructions" => __( 'Enter the name of your site and it will be used as a footer text logo.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_592fd8901ba9e",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "add_theme_inherited" => false
             ],
         ],
         "location" => [

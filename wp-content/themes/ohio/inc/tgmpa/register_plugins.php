@@ -17,7 +17,7 @@ function ohio_register_plugins() {
 			'slug' => 'advanced-custom-fields-pro',
 			'source' => 'https://plugins.clbthemes.com/advanced-custom-fields-pro.zip',
 			'required' => true,
-			'version' => '6.8.9',
+			'version' => '6.8.10',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
@@ -52,18 +52,18 @@ function ohio_register_plugins() {
 		array(
 			'name' => 'Ohio Extra',
 			'slug' => 'ohio-extra',
-			'source' => 'https://plugins.clbthemes.com/ohio-extra-v376.zip',
+			'source' => 'https://plugins.clbthemes.com/ohio-extra-v381.zip',
 			'required' => true,
-			'version' => '3.7.6',
+			'version' => '3.8.1',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),
 		array(
 			'name' => 'Ohio Importer',
 			'slug' => 'ohio-importer',
-			'source' => 'https://plugins.clbthemes.com/ohio-importer-v136.zip',
+			'source' => 'https://plugins.clbthemes.com/ohio-importer-v138.zip',
 			'required' => true,
-			'version' => '1.3.6',
+			'version' => '1.3.8',
 			'force_activation' => false,
 			'force_deactivation' => false
 		),

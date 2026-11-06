@@ -49,7 +49,7 @@
 					],
 					[
 						"name" => "grid_11",
-						"description" => __( 'Caption Cursor Grid', 'ohio' ),
+						"description" => __( 'Cursor Caption Grid', 'ohio' ),
 						"src" => "acf__image_portfolio_43.svg"
 					],
 					[
@@ -59,47 +59,47 @@
 					],
 					[
 						"name" => "grid_3",
-						"description" => __( 'Slider: Horizontal', 'ohio' ),
+						"description" => __( 'Slider – Horizontal', 'ohio' ),
 						"src" => "acf__image_portfolio_03.svg"
 					],
 					[
 						"name" => "grid_4",
-						"description" => __( 'Slider: Vertical', 'ohio' ),
+						"description" => __( 'Slider – Vertical', 'ohio' ),
 						"src" => "acf__image_portfolio_04.svg"
 					],
 					[
 						"name" => "grid_5",
-						"description" => __( 'Smooth Scroll: Split Screen', 'ohio' ),
+						"description" => __( 'Smooth Scroll – Split Screen', 'ohio' ),
 						"src" => "acf__image_portfolio_05.svg"
 					],
 					[
 						"name" => "grid_6",
-						"description" => __( 'Carousel: Horizontal', 'ohio' ),
+						"description" => __( 'Carousel – Horizontal', 'ohio' ),
 						"src" => "acf__image_portfolio_06.svg"
 					],
 					[
 						"name" => "grid_7",
-						"description" => __( 'Smooth Scroll: Fullscreen', 'ohio' ),
+						"description" => __( 'Smooth Scroll – Fullscreen', 'ohio' ),
 						"src" => "acf__image_portfolio_07.svg"
 					],
 					[
 						"name" => "grid_8",
-						"description" => __( 'Interactive: Links', 'ohio' ),
+						"description" => __( 'Interactive – Text List', 'ohio' ),
 						"src" => "acf__image_portfolio_42.svg"
 					],
 					[
 						"name" => "grid_9",
-						"description" => __( 'Smooth Scroll: Scattered', 'ohio' ),
+						"description" => __( 'Smooth Scroll – Scattered', 'ohio' ),
 						"src" => "acf__image_portfolio_37.svg"
 					],
 					[
 						"name" => "grid_10",
-						"description" => __( 'Smooth Scroll: Centered', 'ohio' ),
+						"description" => __( 'Smooth Scroll – Centered', 'ohio' ),
 						"src" => "acf__image_portfolio_38.svg"
 					],
 					[
 						"name" => "grid_12",
-						"description" => __( 'Interactive: Vertical Links', 'ohio' ),
+						"description" => __( 'Interactive – Vertical Text List', 'ohio' ),
 						"src" => "acf__image_portfolio_45.svg"
 					]
 				]
@@ -297,7 +297,7 @@
 					"scale" => __( 'Image Scaling', 'ohio' ),
 					"overlay" => __( 'Image Overlay', 'ohio' ),
 					"greyscale" => __( 'Image Greyscale', 'ohio' ),
-					"transition" => __( 'Image Transition', 'ohio' ),
+					"transition" => __( 'Image Crossfade', 'ohio' ),
 				],
 			],
 			[
@@ -1547,6 +1547,11 @@
 						]
 					]
 				],
+				"wrapper" => [
+					"width" => "",
+					"class" => "has-new-badge",
+					"id" => ""
+				],
 				"choices" => [
 					"pagination" => __( 'Default', 'ohio' ),
 					"boxed" => __( 'Boxed', 'ohio' ),
@@ -2319,6 +2324,11 @@
 							"value" => "1"
 						]
 					]
+				],
+				"wrapper" => [
+					"width" => "",
+					"class" => "has-new-badge",
+					"id" => ""
 				],
 				"choices" => [
 					"default" => __( 'Default', 'ohio' ),

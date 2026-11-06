@@ -4,12 +4,11 @@ class Ohio_Elementor_Gallery_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_enqueue_script( 'masonry' );
         wp_register_script( 'ohio-elementor-gallery-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
     public function get_script_depends() {
-        return [ 'masonry', 'ohio-elementor-gallery-widget' ];
+        return [ 'ohio-masonry', 'ohio-elementor-gallery-widget' ];
     }
 
     public function get_name()
@@ -381,8 +380,8 @@ class Ohio_Elementor_Gallery_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'standard',
                 'options' => [
                     'standard' => 'Standard',
-                    'lazy_scroll' => 'Lazy Load',
-                    'lazy_button' => 'Load More',
+                    'lazy_scroll' => __( 'Lazy Load', 'ohio-extra' ),
+                    'lazy_button' => __( 'Load More', 'ohio-extra' ),
                 ],
                 'condition' => [
                     'use_pagination' => 'yes'
@@ -686,6 +685,7 @@ class Ohio_Elementor_Gallery_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
         $grid_classes = '';

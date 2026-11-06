@@ -11,7 +11,7 @@
         <?php endif; ?>
     </div>
     <div class="progress-holder <?php echo $settings['inner_classes'] ?> <?php echo $settings['size_classes'] ?>">
-        <div class="progress-bar" role="progressbar" aria-label="Progress bar">
+        <div class="progress-bar" role="progressbar" aria-label="<?php esc_attr_e( 'Progress bar', 'ohio-extra' ); ?>">
 
             <?php if ( !empty($settings['show_percents_tooltip']) ) : ?>
                 <span class="progress-percent has-tooltip -visible -small" data-tooltip="0%" tabindex="0"></span>

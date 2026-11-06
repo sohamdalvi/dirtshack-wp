@@ -51,6 +51,10 @@ $wrapper_classes   = apply_filters(
 $featured_video = function_exists( 'YITH_Featured_Audio_Video_Init' );
 
 // Slider
+// Guarded with function_exists() because this template can be rendered more than once in a
+// single request (e.g. related/upsell product sections reusing this same override), which
+// would otherwise trigger a "Cannot redeclare function get_slides()" fatal error.
+if ( ! function_exists( 'get_slides' ) ) {
 function get_slides( $size = 'woocommerce_single' ) {
     global $post;
     global $product;
@@ -103,6 +107,7 @@ function get_slides( $size = 'woocommerce_single' ) {
         $loop++;
     }
     echo wp_kses( $html, $allowed_html);
+}
 }
 ?>
 

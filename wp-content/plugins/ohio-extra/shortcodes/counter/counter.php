@@ -25,6 +25,7 @@ function ohio_counter_func( $atts ) {
 	$icon_border_width = isset( $icon_border_width ) ? OhioExtraFilter::string( $icon_border_width, 'string', '') : '';
 	$icon_corners = isset( $icon_corners ) ? OhioExtraFilter::string( $icon_corners, 'string', '') : '';
 	$icon_as_image = isset( $icon_as_image ) ? OhioExtraFilter::string( $icon_as_image ) : false;
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
 	$icon_image_atts = OhioExtraParser::generateImageAttsById( OhioExtraFilter::string( $icon_as_image ), $title );
 	$icon_layout = isset( $icon_layout ) ? OhioExtraFilter::string( $icon_layout, 'string', '' ) : '';
 	$icon_color = isset( $icon_color ) ? OhioExtraFilter::string( $icon_color ) : false;
@@ -270,6 +271,12 @@ function ohio_counter_func( $atts ) {
 	if ( isset( $icon_size ) && $icon_size != '' ) {
 		$_style_block .= '#' . $wrapper_id . ' .icon-group .icon{';
 		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group > span{';
+		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group svg{';
+		$_style_block .= 'height:' . $icon_size . 'px;';
 		$_style_block .= '}';
 	}
 

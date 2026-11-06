@@ -1,14 +1,20 @@
 <?php
 
-if ( function_exists('acf_add_local_field_group') ):
+// Registered on 'acf/init' (fires during 'init') so the translated labels
+// don't trigger WP 6.7+ "translation loading triggered too early" notices.
+add_action( 'acf/init', 'ohio_extra_register_demo_export_fields' );
+function ohio_extra_register_demo_export_fields() {
+    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+        return;
+    }
 
     acf_add_local_field_group(array(
         'key' => 'group_5f3a642c40bc1',
-        'title' => 'Demo Export',
+        'title' => __( 'Demo Export', 'ohio-extra' ),
         'fields' => array(
             array(
                 'key' => 'field_5f3a645f21047',
-                'label' => 'Mark this page to be exported for a specific builder only:',
+                'label' => __( 'Mark this page to be exported for a specific builder only:', 'ohio-extra' ),
                 'name' => 'ohio_for_wpbakery_version_only',
                 'type' => 'radio',
                 'instructions' => '',
@@ -72,5 +78,4 @@ if ( function_exists('acf_add_local_field_group') ):
         'active' => true,
         'description' => '',
     ));
-
-endif;
+}

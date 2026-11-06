@@ -86,7 +86,7 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
                 'multiple' => true,
                 'options' => $param_options,
                 'default' => [],
-                'description' => 'Leave empty for "All categories"',
+                'description' => __( 'Leave empty for "All categories"', 'ohio-extra' ),
                 'label_block' => true
             ]
         );
@@ -248,10 +248,10 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '6',
                 'options' => [
-                    '12' => '1 Column',
-                    '6' => '2 Columns',
-                    '4' => '3 Columns',
-                    '3' => '4 Columns',
+                    '12' => __( '1 Column', 'ohio-extra' ),
+                    '6' => __( '2 Columns', 'ohio-extra' ),
+                    '4' => __( '3 Columns', 'ohio-extra' ),
+                    '3' => __( '4 Columns', 'ohio-extra' ),
                 ],
             ]
         );
@@ -283,7 +283,7 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Link Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Start Shopping',
+                'default' => __( 'Start Shopping', 'ohio-extra' ),
                 'label_block' => true,
                 'condition' => [
                     'use_link' => 'yes',
@@ -320,8 +320,8 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'without',
                 'options' => [
                     'without' => 'None',
-                    'left' => 'Left side',
-                    'right' => 'Right side',
+                    'left' => __( 'Left side', 'ohio-extra' ),
+                    'right' => __( 'Right side', 'ohio-extra' ),
                 ],
                 'condition' => [
                     'use_link' => 'yes',
@@ -337,7 +337,7 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'icon',
                 'options' => [
                     'icon' => 'Icon',
-                    'image' => 'Custom Image',
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
                 ],
                 'condition' => [
                     'icon_position!' => 'without'
@@ -505,6 +505,7 @@ class Ohio_Elementor_Woo_Categories_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
         $layout_classes = '';

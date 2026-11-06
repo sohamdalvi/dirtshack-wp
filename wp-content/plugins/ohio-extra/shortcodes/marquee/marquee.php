@@ -11,7 +11,7 @@ function ohio_marquee_func( $atts ) {
 
     $content_type = isset( $content_type ) ? OhioExtraFilter::string( $content_type, 'string', 'gallery' ) : 'gallery';
 	$images = isset( $images ) ? OhioExtraFilter::string( $images, 'string', '' ) : '';
-	$text = isset( $marquee_text ) ? rawurldecode( base64_decode( $marquee_text ) ) : 'Your marquee text';
+	$text = isset( $marquee_text ) ? rawurldecode( base64_decode( $marquee_text ) ) : __( 'Your marquee text', 'ohio-extra' );
 	$text = OhioExtraFilter::string( $text, 'string', '' );
     $direction = isset( $direction ) ? OhioExtraFilter::string( $direction, 'string', 'ltr' ) : 'ltr';
     $speed = isset( $speed ) ? OhioExtraFilter::string( $speed, 'string', '0.3' ) : '0.3';

@@ -361,7 +361,7 @@ class Ohio_Elementor_Message_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Link Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Read more',
+                'default' => __( 'Read more', 'ohio-extra' ),
                 'label_block' => true,
                 'condition' => [
                     'use_link' => 'yes',

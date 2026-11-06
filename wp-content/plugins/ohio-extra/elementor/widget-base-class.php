@@ -1,6 +1,35 @@
 <?php
 class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
 
+    /**
+     * Builds a script dependency list where some handles load only when the widget settings need them.
+     * Pass plain handles as values and conditional handles as 'handle' => callable returning bool
+     * (a callable, so settings are only read on real widget instances).
+     * In the Elementor editor every handle is kept, because settings change live there.
+     *
+     * @param array $scripts
+     * @return array
+     */
+    protected function conditionalScripts( array $scripts ) {
+        // Widget "type" instances (used by the editor to collect scripts) have no settings,
+        // and reading them throws in Elementor – so keep every handle there and in the editor.
+        $keep_all = $this->is_type_instance()
+            || \Elementor\Plugin::$instance->preview->is_preview_mode()
+            || \Elementor\Plugin::$instance->editor->is_edit_mode();
+        $result = [];
+
+        foreach ( $scripts as $handle => $condition ) {
+            if ( is_int( $handle ) ) {
+                $result[] = $condition;
+            } elseif ( $keep_all || call_user_func( $condition ) ) {
+                $result[] = $handle;
+            }
+        }
+
+        return $result;
+    }
+
+
     protected $inlineStyles = [];
     protected $wrapperClasses = [];
 
@@ -201,9 +230,10 @@ class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button.-default:not(:hover)' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat:not(:hover)' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'button_style_type' => [ 'default' ],
+                    'button_style_type' => [ 'default', 'flat' ],
                 ],
             ]
         );
@@ -215,9 +245,10 @@ class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat' => 'border: var(--clb-button-border-width) var(--clb-border-style-solid) {{VALUE}};',
                 ],
                 'condition' => [
-                    'button_style_type' => [ 'default', 'outline' ],
+                    'button_style_type' => [ 'default', 'outline', 'flat' ],
                 ],
             ]
         );
@@ -249,9 +280,10 @@ class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button.-default:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'button_style_type' => [ 'default' ],
+                    'button_style_type' => [ 'default', 'flat' ],
                 ],
             ]
         );
@@ -263,9 +295,12 @@ class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button:hover' => 'border-color: {{VALUE}};',
+                    // Flat has no border by default: reserve a transparent one (lower specificity than the Normal color rule) so the hover color has room to show
+                    '{{WRAPPER}} .-flat' => 'border: var(--clb-button-border-width) var(--clb-border-style-solid) transparent;',
+                    '{{WRAPPER}} .button.-flat:hover' => 'border-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'button_style_type' => [ 'default', 'outline' ],
+                    'button_style_type' => [ 'default', 'outline', 'flat' ],
                 ],
             ]
         );
@@ -577,24 +612,139 @@ class Ohio_Elementor_Widget_Base extends \Elementor\Widget_Base {
      * @param string $class CSS class
      * @return void
      */
-    protected function showIconInView( $class = '' )
+    /**
+     * Whether showIconInView() would output anything for the given settings prefix
+     */
+    protected function hasIconInView( $prefix = 'icon' )
+    {
+        $settings = $this->get_settings_for_display();
+        $type = isset( $settings[ $prefix . '_type' ] ) ? $settings[ $prefix . '_type' ] : '';
+
+        switch ( $type ) {
+            case 'icon':
+                return !empty( $settings[ $prefix . '_icon' ]['value'] );
+            case 'image':
+                return !empty( $settings[ $prefix . '_image' ]['url'] );
+            case 'html':
+                return isset( $settings[ $prefix . '_html' ] ) && trim( $settings[ $prefix . '_html' ] ) !== '';
+        }
+
+        return false;
+    }
+
+    protected function showIconInView( $class = '', $prefix = 'icon' )
     {
         $settings = $this->get_settings_for_display();
 
-        if ( $settings['icon_type'] == 'icon' ) {
-            \Elementor\Icons_Manager::render_icon( $settings['icon_icon'], [
-                'class' => $class,
-                'style' => $this->getInlineStyle( 'icon' )
-            ] );
-        } elseif ( $settings['icon_type'] == 'image' && !empty( $settings['icon_image']['url'] ) ) {
-            echo '<img class="' . $class . '" ';
-            echo 'src="' . esc_url( $settings['icon_image']['url'] ) . '" ';
-            echo 'srcset="' . wp_get_attachment_image_srcset( $settings['icon_image']['id'], 'large' ) . '" ';
-            echo 'sizes="' . wp_get_attachment_image_sizes( $settings['icon_image']['id'], 'large' ) . '" ';
-            echo 'alt="' . __( 'Icon', 'ohio-extra' ) . '">';
-        } elseif ( $settings['icon_type'] == 'html' ) {
-            echo $settings['icon_html'];
+        if ( empty( $settings[ $prefix . '_type' ] ) ) {
+            return;
         }
+
+        if ( $settings[ $prefix . '_type' ] == 'icon' ) {
+            \Elementor\Icons_Manager::render_icon( $settings[ $prefix . '_icon' ], [
+                'class' => $class,
+                'style' => $this->getInlineStyle( $prefix )
+            ] );
+        } elseif ( $settings[ $prefix . '_type' ] == 'image' && !empty( $settings[ $prefix . '_image' ]['url'] ) ) {
+            echo '<img class="' . $class . '" ';
+            echo 'src="' . esc_url( $settings[ $prefix . '_image' ]['url'] ) . '" ';
+            echo 'srcset="' . wp_get_attachment_image_srcset( $settings[ $prefix . '_image' ]['id'], 'large' ) . '" ';
+            echo 'sizes="' . wp_get_attachment_image_sizes( $settings[ $prefix . '_image' ]['id'], 'large' ) . '" ';
+            echo 'alt="' . __( 'Icon', 'ohio-extra' ) . '">';
+        } elseif ( $settings[ $prefix . '_type' ] == 'html' ) {
+            echo $settings[ $prefix . '_html' ];
+        }
+    }
+
+    /**
+     * Adds "Add Icon?" + position/type/icon/image/HTML controls for a widget button
+     * (call inside an open controls section). Rendered with showIconInView( $class, 'button_icon' ).
+     *
+     * @param string $withCondition Switcher control that enables the button (e.g. 'use_link')
+     */
+    protected function addButtonIconControls( $withCondition = 'use_link' )
+    {
+        $base_condition = ( $withCondition ) ? [ $withCondition => 'yes' ] : [];
+
+        $this->add_control(
+            'button_icon_use',
+            [
+                'label' => __( 'Add Icon?', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+                'separator' => 'before',
+                'condition' => $base_condition,
+            ]
+        );
+
+        $icon_condition = array_merge( $base_condition, [ 'button_icon_use' => 'yes' ] );
+
+        $this->add_control(
+            'button_icon_position',
+            [
+                'label' => __( 'Position', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'left' => __( 'Left', 'ohio-extra' ),
+                    'right' => __( 'Right', 'ohio-extra' ),
+                ],
+                'default' => 'right',
+                'condition' => $icon_condition,
+            ]
+        );
+
+        $this->add_control(
+            'button_icon_type',
+            [
+                'label' => __( 'Type', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'icon' => __( 'Icon', 'ohio-extra' ),
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
+                    'html' => __( 'Custom HTML', 'ohio-extra' ),
+                ],
+                'default' => 'icon',
+                'condition' => $icon_condition,
+            ]
+        );
+
+        $this->add_control(
+            'button_icon_icon',
+            [
+                'label' => __( 'Icon', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-arrow-right',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => array_merge( $icon_condition, [ 'button_icon_type' => 'icon' ] ),
+            ]
+        );
+
+        $this->add_control(
+            'button_icon_image',
+            [
+                'label' => __( 'Custom Image', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'condition' => array_merge( $icon_condition, [ 'button_icon_type' => 'image' ] ),
+            ]
+        );
+
+        $this->add_control(
+            'button_icon_html',
+            [
+                'label' => __( 'Custom HTML', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '<i class="fa-solid fa-arrow-right"></i>',
+                'condition' => array_merge( $icon_condition, [ 'button_icon_type' => 'html' ] ),
+            ]
+        );
     }
 
     /**

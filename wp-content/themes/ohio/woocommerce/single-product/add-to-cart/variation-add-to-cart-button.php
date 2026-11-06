@@ -34,7 +34,7 @@ $ajax_cart = OhioOptions::get( 'woocommerce_product_ajax_cart', true );
 
 	<?php if ( $ajax_cart ) : ?>
 
-		<a class="single_add_to_cart_button button alt data_button_ajax<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" data-button-loading="true" data-product-added-text="<?php echo esc_attr( 'Product Added', 'ohio' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></a>
+		<a class="single_add_to_cart_button button alt data_button_ajax<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" data-button-loading="true" data-product-added-text="<?php echo esc_attr__( 'Product Added', 'ohio' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></a>
 
 	<?php else : ?>
 

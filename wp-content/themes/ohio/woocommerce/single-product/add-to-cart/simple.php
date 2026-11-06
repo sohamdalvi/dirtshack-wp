@@ -54,7 +54,7 @@ if ( $product->is_in_stock() ) : ?>
 
 			<input type="hidden" name="product_id" value="<?php echo absint( $product->get_id() ); ?>" />
 			<input type="hidden" name="variation_id" class="variation_id" value="0" />
-			<a class="single_add_to_cart_button button alt data_button_ajax" data-button-loading="true" data-product-added-text="<?php echo esc_attr( 'Product Added', 'ohio' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></a>
+			<a class="single_add_to_cart_button button alt data_button_ajax" data-button-loading="true" data-product-added-text="<?php echo esc_attr__( 'Product Added', 'ohio' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></a>
 
 		<?php else : ?>
 

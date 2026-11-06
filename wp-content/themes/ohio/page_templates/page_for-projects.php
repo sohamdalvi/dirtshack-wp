@@ -496,6 +496,7 @@
 						}
 					?>
 
+					<?php OhioHelper::add_required_script( 'slider' ); ?>
 					<div class="portfolio-onepage-slider -slider-fs clb-slider-scroll-bar <?php echo esc_attr( $project_layout ); ?>"
 						data-portfolio-grid-slider="true"
 						data-slider-navigation="<?php echo esc_attr( $navBtn ); ?>"

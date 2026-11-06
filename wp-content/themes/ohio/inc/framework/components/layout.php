@@ -213,7 +213,7 @@ class OhioLayout {
 
 		// prev button layout
 		if ( $current_page > 1 ) {
-			$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $current_page - 1 ) ) . '" class="page-link button -unlink -pagination -flat" aria-label="' . esc_attr( 'Previous', 'ohio' ) . '">';
+			$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $current_page - 1 ) ) . '" class="page-link button -unlink -pagination -flat" aria-label="' . esc_attr__( 'Previous', 'ohio' ) . '">';
 			$layout .= '<i class="icon">
 					    	<svg class="default" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M646-442.5H170v-75h476L426.5-737l53.5-53 310 310-310 310-53.5-53L646-442.5Z"/></svg>
 					    </i>';
@@ -226,13 +226,13 @@ class OhioLayout {
 				if ( $value == '...' ) {
 					$layout .= '<li class="page-item"><span class="page-link button -flat">...</span></li>';
 				} else {
-					$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $value ) ) . '" class="page-link button -unlink -pagination ' . implode( ' ', $style_class ) . ( ( $current_page == $value ) ? '' : ' -flat' ) . '" aria-label="' . esc_attr( 'Page', 'ohio' ) . '">' . esc_html( $value ) . '</a></li>';
+					$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $value ) ) . '" class="page-link button -unlink -pagination ' . implode( ' ', $style_class ) . ( ( $current_page == $value ) ? '' : ' -flat' ) . '" aria-label="' . esc_attr__( 'Page', 'ohio' ) . '">' . esc_html( $value ) . '</a></li>';
 				}
 			}
 		}
 		// next button layout
 		if ( $current_page < $all_pages ) {
-			$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $current_page + 1 ) ) . '" class="page-link button -unlink -pagination -flat" aria-label="' . esc_attr( 'Next', 'ohio' ) . '">';
+			$layout .= '<li class="page-item"><a href="' . esc_url( get_pagenum_link( $current_page + 1 ) ) . '" class="page-link button -unlink -pagination -flat" aria-label="' . esc_attr__( 'Next', 'ohio' ) . '">';
 			$layout .= '<i class="icon">
 					    	<svg class="default" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M646-442.5H170v-75h476L426.5-737l53.5-53 310 310-310 310-53.5-53L646-442.5Z"/></svg>
 					    </i>';

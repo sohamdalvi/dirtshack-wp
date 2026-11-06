@@ -8,6 +8,7 @@
         # Ajax cart
         # Search
         # Single product gallery
+        # Variation gallery
         # Sticky product
         # Products grid
         # Zoom product
@@ -89,6 +90,10 @@
     /* # Shop masonry */
 
     function handleShopMasonry() {
+        if (typeof $.fn.masonry !== 'function') {
+            return;
+        }
+
         var shopMasonry = $('[data-shop-masonry]');
         if ( !$('body').hasClass('elementor-page')) {
             shopMasonry.each(function(){
@@ -467,7 +472,7 @@
             });
 
             if (!product.hasClass('classic-gallery')) {
-                scrollContainer.on('scroll wheel', function(e){
+                scrollContainer.off('scroll.ohioProductGallery wheel.ohioProductGallery').on('scroll.ohioProductGallery wheel.ohioProductGallery', function(e){
                     var y = e.originalEvent.deltaY;
 
                     if (($(this).scrollTop() >= imagesOffset[iteration]) && y > 0) {
@@ -487,6 +492,10 @@
                 });
             }
         }
+        if (typeof $.fn.clbSlider !== 'function') {
+            return;
+        }
+
         var singleProductGallery = $('.woocommerce-product-gallery');
 
         if (product.hasClass('classic-gallery')) {
@@ -506,6 +515,15 @@
 
             });
         } else {
+            // Grid layouts (type_4 / type_4_reverse) keep their grid on tablets – never turn them into a slider
+            singleProductGallery = singleProductGallery.filter(function(){
+                return !$(this).closest('.grid-gallery').length;
+            });
+
+            if (!singleProductGallery.length) {
+                return;
+            }
+
             if ($(window).width() <= 1180) {
                 singleProductGallery.clbSlider({
                     dots: false,
@@ -518,6 +536,52 @@
                 }, 400);
             }
         }
+    }
+
+    /* # Variation gallery */
+
+    // WooCommerce 10.8+ replaces the whole gallery markup when a variation has its own
+    // image gallery (and again when the selection is reset), so the Ohio gallery
+    // (slider, thumbnails, image fade-in) has to be set up again on the new markup.
+    function handleVariationGallery() {
+        $(document).on('wc-product-gallery-after-init', '.woocommerce-product-gallery', function () {
+            var gallery = $(this);
+            var popup = gallery.closest('.clb-popup-product');
+            var product = popup.length ? gallery.closest('.product') : gallery.closest('.sticky-gallery');
+            var images = gallery.find('img');
+
+            gallery.find('.gimg').css('opacity', '1');
+
+            // Thumbnails are rebuilt from the new images
+            product.find('.product-thumbs').remove();
+            product.find('.woo-product-image').removeClass('with-gallery');
+
+            // Image offsets (sticky layouts) are only correct once the images have loaded
+            var pending = images.filter(function () {
+                return !this.complete;
+            });
+            var left = pending.length;
+            var init = function () {
+                if (popup.length) {
+                    handleSingleProductGallery(popup.find('.woo-product'), product);
+                } else {
+                    handleSingleProductGallery();
+                }
+            };
+
+            if (!left) {
+                init();
+                return;
+            }
+
+            pending.one('load error', function () {
+                left--;
+
+                if (!left) {
+                    init();
+                }
+            });
+        });
     }
 
     /* # Sticky product */
@@ -582,6 +646,10 @@
     /* # Products grid */
 
     function handleProductsGridGallery() {
+        if (typeof $.fn.clbSlider !== 'function') {
+            return;
+        }
+
         var productSlider = $('.product-item-grid .slider');
         var parentSlider = productSlider.parents('.slider');
 
@@ -627,16 +695,19 @@
     /* # Zoom product */
 
     function handleZoomProductImage() {
-        $('.woo-product-image.with-zoom .product_images .woocommerce-product-gallery__image')
-        .on('mouseover', function(){
+        // Delegated, so it also works for galleries replaced after page load (variation galleries)
+        var zoomItem = '.woo-product-image.with-zoom .product_images .woocommerce-product-gallery__image';
+
+        $(document)
+        .on('mouseover', zoomItem, function(){
             $(this).find('img').css({'transform': 'scale(1.75)'});
         })
-        .on('mouseout', function(){
+        .on('mouseout', zoomItem, function(){
             $(this).find('img').css({'transform': 'scale(1)'});
         })
-        .on('mousemove', function(e){
+        .on('mousemove', zoomItem, function(e){
             $(this).find('img').css({'transform-origin': ((e.pageX - $(this).offset().left) / $(this).width()) * 100 + '% ' + ((e.pageY - $(this).offset().top) / $(this).height()) * 100 +'%'});
-        })
+        });
     }
 
     /* # Product quickview */
@@ -717,6 +788,8 @@
             });
         });
     }
+
+    handleVariationGallery();
 
     $(window).on('load', function () {
         handleShopMasonry();

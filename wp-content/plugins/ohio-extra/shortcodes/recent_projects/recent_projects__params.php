@@ -40,7 +40,7 @@ function ohio_recent_projects_sc_map() {
 					array(
 						'icon' => plugin_dir_url( __FILE__ ) . 'images/acf__image_portfolio_43.svg',
 						'key' => 'grid_11',
-						'title' => __( 'Caption Cursor', 'ohio-extra' )
+						'title' => __( 'Cursor Caption', 'ohio-extra' )
 					),
 					array(
 						'icon' => plugin_dir_url( __FILE__ ) . 'images/acf__image_portfolio_03.svg',
@@ -757,7 +757,7 @@ function ohio_recent_projects_sc_map() {
 			array(
 				'type' => 'ohio_check',
 				'group' => __('Filter', 'ohio-extra'),
-				'heading' => 'Show Empty Categories?',
+				'heading' => __( 'Show Empty Categories?', 'ohio-extra' ),
 				'param_name' => 'show_empty_categories',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'
@@ -884,7 +884,7 @@ function ohio_recent_projects_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Lightbox', 'ohio-extra' ),
 				'heading' => __( 'Show Lightbox?', 'ohio-extra' ),
-				'description' => 'To find more lightbox settings navigate to global <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-general-portfolio">Theme Settings</a>',
+				'description' => __( 'To find more lightbox settings navigate to global <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-general-portfolio">Theme Settings</a>', 'ohio-extra' ),
 				'param_name' => 'lightbox_visibility',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'
@@ -1219,7 +1219,7 @@ __( 'Fade Down', 'ohio-extra' ) => 'fade-down',
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

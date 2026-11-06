@@ -103,48 +103,6 @@
                 "default_value" => "style1"
             ],
             [
-                "key" => "field_5l92k30j57f235kj",
-                "label" => __( 'Contained Menu', 'ohio' ),
-                "name" => "global_page_header_contained_menu",
-                "type" => "true_false",
-                "instructions" => __( 'Add a wrap container for the menu.', 'ohio' ),
-                "required" => 0,
-                "conditional_logic" => [
-                    [
-                        [
-                            "field" => "field_592fd8902e284",
-                            "operator" => "==",
-                            "value" => "1"
-                        ],
-                        [
-                            "field" => "field_59229bda317ae",
-                            "operator" => "!=",
-                            "value" => "style5"
-                        ],
-                        [
-                            "field" => "field_59229bda317ae",
-                            "operator" => "!=",
-                            "value" => "style6"
-                        ],
-                        [
-                            "field" => "field_59229bda317ae",
-                            "operator" => "!=",
-                            "value" => "style7"
-                        ],
-                        [
-                            "field" => "field_59229bda317ae",
-                            "operator" => "!=",
-                            "value" => "style8"
-                        ]
-                    ]
-                ],
-                "message" => "",
-                "default_value" => 0,
-                "ui" => 1,
-                "ui_on_text" => __( 'Yes', 'ohio' ),
-                "ui_off_text" => __( 'No', 'ohio' )
-            ],
-            [
                 "key" => "field_59229bda31bb0",
                 "label" => __( 'Wrap Container', 'ohio' ),
                 "name" => "global_page_header_menu_use_wrapper",
@@ -186,6 +144,11 @@
                             "value" => "1"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "default_value" => "",
                 "placeholder" => "1344px by default",
@@ -461,6 +424,108 @@
                 ]
             ],
             [
+                "key" => "field_59224bda313bfelm",
+                "label" => __( 'Elements <span class="new-badge"></span>', 'ohio' ),
+                "name" => "",
+                "type" => "tab",
+                "instructions" => "",
+                "required" => 0,
+                "conditional_logic" => 0,
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "",
+                    "id" => ""
+                ],
+                "placement" => "top",
+                "endpoint" => 0
+            ],
+            [
+                "key" => "field_59229bda31bb2hel",
+                "label" => __( 'Header Elements', 'ohio' ),
+                "name" => "global_page_header_elements",
+                "type" => "repeater",
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "ohio-header-elements",
+                    "id" => ""
+                ],
+                "instructions" => __( 'Drag the rows to set the order of the header elements, set the icon size and choose which ones stay visible in the mobile header.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => 0,
+                "collapsed" => "",
+                "min" => 6,
+                "max" => 6,
+                "layout" => "table",
+                "button_label" => "",
+                "sub_fields" => [
+                    [
+                        "key" => "field_59229bda31bb2hel_el",
+                        "label" => __( 'Element', 'ohio' ),
+                        "name" => "element",
+                        "type" => "select",
+                        "wrapper" => [
+                            "width" => "",
+                            "class" => "ohio-header-elements-name",
+                            "id" => ""
+                        ],
+                        "instructions" => "",
+                        "required" => 0,
+                        "conditional_logic" => 0,
+                        "choices" => [
+                            "language" => __( 'Language Switcher', 'ohio' ),
+                            "button" => __( 'CTA Buttons', 'ohio' ),
+                            "search" => __( 'Search', 'ohio' ),
+                            "account" => __( 'Account', 'ohio' ),
+                            "wishlist" => __( 'Wishlist', 'ohio' ),
+                            "cart" => __( 'Cart', 'ohio' )
+                        ],
+                        "default_value" => "",
+                        "allow_null" => 0,
+                        "multiple" => 0,
+                        "ui" => 0,
+                        "return_format" => "value"
+                    ],
+                    [
+                        "key" => "field_59229bda31bb2hel_size",
+                        "label" => __( 'Icon Size', 'ohio' ),
+                        "name" => "icon_size",
+                        "type" => "select",
+                        "instructions" => "",
+                        "required" => 0,
+                        "conditional_logic" => [
+                            [ [ "field" => "field_59229bda31bb2hel_el", "operator" => "==", "value" => "account" ] ],
+                            [ [ "field" => "field_59229bda31bb2hel_el", "operator" => "==", "value" => "search" ] ],
+                            [ [ "field" => "field_59229bda31bb2hel_el", "operator" => "==", "value" => "wishlist" ] ],
+                            [ [ "field" => "field_59229bda31bb2hel_el", "operator" => "==", "value" => "cart" ] ]
+                        ],
+                        "choices" => [
+                            "default" => __( 'Default', 'ohio' ),
+                            "small" => __( 'Small', 'ohio' ),
+                            "large" => __( 'Large', 'ohio' )
+                        ],
+                        "default_value" => "default",
+                        "allow_null" => 0,
+                        "multiple" => 0,
+                        "ui" => 0,
+                        "return_format" => "value"
+                    ],
+                    [
+                        "key" => "field_59229bda31bb2hel_mob",
+                        "label" => __( 'Show on Mobile', 'ohio' ),
+                        "name" => "mobile",
+                        "type" => "true_false",
+                        "instructions" => "",
+                        "required" => 0,
+                        "conditional_logic" => 0,
+                        "message" => "",
+                        "default_value" => 1,
+                        "ui" => 1,
+                        "ui_on_text" => __( 'Yes', 'ohio' ),
+                        "ui_off_text" => __( 'No', 'ohio' )
+                    ]
+                ]
+            ],
+            [
                 "key" => "field_59224bda313bf",
                 "label" => __( 'Sticky Header', 'ohio' ),
                 "name" => "",
@@ -535,6 +600,41 @@
                 "min" => 1,
                 "max" => 100000,
                 "step" => ""
+            ],
+            [
+                "key" => "field_59374453f84416",
+                "label" => __( 'Scroll Direction', 'ohio' ),
+                "name" => "global_page_header_sticky_direction",
+                "type" => "select",
+                "instructions" => __( 'Choose the direction when the sticky header appears.', 'ohio' ),
+                "required" => 0,
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda3432a",
+                            "operator" => "==",
+                            "value" => "1"
+                        ]
+                    ]
+                ],
+                "choices" => [
+                    "down" => __( 'Scroll Down', 'ohio' ),
+                    "up" => __( 'Scroll Up', 'ohio' )
+                ],
+                "default_value" => [
+                    "down"
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
+                "allow_null" => 0,
+                "multiple" => 0,
+                "ui" => 0,
+                "ajax" => 0,
+                "return_format" => "value",
+                "placeholder" => ""
             ],
             [
                 "key" => "field_5937433334383415",
@@ -707,6 +807,11 @@
                 "label" => __( 'Search Icon', 'ohio' ),
                 "name" => "global_page_mobile_search_visibility",
                 "type" => "true_false",
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "acf-hidden",
+                    "id" => ""
+                ],
                 "instructions" => __( 'Display the search icon in the mobile header area. <br><em>Go to Theme Settings > General > <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-general">Search</a> to enable the search.</em>', 'ohio' ),
                 "required" => 0,
                 "conditional_logic" => 0,
@@ -1091,11 +1196,16 @@
                     ],
                     [
                         "key" => "field_592fe1ar3500c35",
-                        "label" => __( 'Show on Mobile?', 'ohio' ),
+                        "label" => __( 'Show on Mobile', 'ohio' ),
                         "name" => "button_mobile_visibility",
                         "type" => "true_false",
                         "required" => 0,
                         "conditional_logic" => 0,
+                        "wrapper" => [
+                            "width" => "",
+                            "class" => "has-new-badge",
+                            "id" => ""
+                        ],
                         "message" => "",
                         "default_value" => 1,
                         "ui" => 1,
@@ -1238,5 +1348,106 @@
         "active" => 1,
         "description" => ""
     ] );
+
+    // Header Elements: until the table is saved, show today's order and mobile visibility
+    // (Search takes the legacy "Search Icon" mobile switch). A saved table is cleaned up the same way
+    // the header renders it: the first row of each element is kept, duplicates and unknown rows are dropped,
+    // and missing elements are added at the end.
+    add_filter( 'acf/load_value/key=field_59229bda31bb2hel', function( $value ) {
+        $defaults = OhioHelper::get_header_elements_defaults();
+        $rows = [];
+
+        if ( is_array( $value ) ) {
+            foreach ( $value as $row ) {
+                $element = is_array( $row ) && isset( $row['field_59229bda31bb2hel_el'] ) ? $row['field_59229bda31bb2hel_el'] : '';
+
+                if ( isset( $defaults[ $element ] ) && ! isset( $rows[ $element ] ) ) {
+                    $rows[ $element ] = $row;
+                }
+            }
+        }
+
+        foreach ( $defaults as $element => $mobile ) {
+            if ( ! isset( $rows[ $element ] ) ) {
+                $rows[ $element ] = [
+                    'field_59229bda31bb2hel_el' => $element,
+                    'field_59229bda31bb2hel_mob' => $mobile ? 1 : 0,
+                    'field_59229bda31bb2hel_size' => 'default',
+                ];
+            }
+        }
+
+        return array_values( $rows );
+    }, 20 );
+
+    // Header Elements: each element must appear exactly once.
+    add_filter( 'acf/validate_value/key=field_59229bda31bb2hel', function( $valid, $value ) {
+        if ( $valid !== true || ! is_array( $value ) ) {
+            return $valid;
+        }
+
+        $elements = [];
+        foreach ( $value as $row ) {
+            if ( is_array( $row ) && isset( $row['field_59229bda31bb2hel_el'] ) ) {
+                $elements[] = $row['field_59229bda31bb2hel_el'];
+            }
+        }
+
+        if ( count( $elements ) !== count( array_unique( $elements ) ) ) {
+            return __( 'Each header element can only be listed once.', 'ohio' );
+        }
+
+        return $valid;
+    }, 10, 2 );
+
+    // Header Elements: rows can only be reordered and switched for mobile.
+    // The element names are locked, and adding, duplicating or removing rows is hidden.
+    add_action( 'acf/input/admin_footer', function() {
+        ?>
+        <style>
+            .ohio-header-elements .acf-row-handle .acf-icon,
+            .ohio-header-elements .acf-actions,
+            [data-key="field_59229bda31bb2hel"] .acf-row-handle .acf-icon,
+            [data-key="field_59229bda31bb2hel"] .acf-actions {
+                display: none !important;
+            }
+
+            .ohio-header-elements .ohio-header-elements-name select,
+            [data-key="field_59229bda31bb2hel_el"] select {
+                pointer-events: none;
+                appearance: none;
+                -webkit-appearance: none;
+                background: none;
+                border-color: transparent;
+                box-shadow: none;
+                padding-left: 0;
+            }
+        </style>
+        <script>
+            ( function () {
+                var lock = function () {
+                    document.querySelectorAll( '.ohio-header-elements-name select, [data-key="field_59229bda31bb2hel_el"] select' ).forEach( function ( select ) {
+                        select.setAttribute( 'tabindex', '-1' );
+                        select.setAttribute( 'aria-readonly', 'true' );
+                    } );
+                };
+
+                // Block keyboard changes too (the select still submits its value, unlike a disabled one)
+                document.addEventListener( 'keydown', function ( e ) {
+                    if ( e.target.closest && e.target.closest( '.ohio-header-elements-name, [data-key="field_59229bda31bb2hel_el"]' ) && e.key !== 'Tab' ) {
+                        e.preventDefault();
+                    }
+                }, true );
+
+                if ( window.acf && acf.addAction ) {
+                    acf.addAction( 'ready', lock );
+                    acf.addAction( 'append', lock );
+                } else {
+                    document.addEventListener( 'DOMContentLoaded', lock );
+                }
+            } )();
+        </script>
+        <?php
+    } );
 
 endif;

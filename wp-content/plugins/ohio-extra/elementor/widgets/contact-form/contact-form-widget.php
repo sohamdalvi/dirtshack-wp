@@ -4,7 +4,7 @@ class Ohio_Elementor_Contact_Form_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_register_script( 'ohio-elementor-contact-form-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
+        wp_register_script( 'ohio-elementor-contact-form-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.1.0', true );
     }
 
     public function get_name()
@@ -115,6 +115,105 @@ class Ohio_Elementor_Contact_Form_Widget extends Ohio_Elementor_Widget_Base {
                     '{{WRAPPER}} .contact-form' => 'margin: -{{SIZE}}{{UNIT}};'
                 ],
                 'separator' => 'before'
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+            'icon_section',
+            [
+                'label' => __( 'Button Icon', 'ohio-extra' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'use_icon',
+            [
+                'label' => __( 'Add Icon?', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+
+        $this->add_control(
+            'icon_position',
+            [
+                'label' => __( 'Position', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'left' => __( 'Left', 'ohio-extra' ),
+                    'right' => __( 'Right', 'ohio-extra' ),
+                ],
+                'default' => 'right',
+                'condition' => [
+                    'use_icon' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'icon_type',
+            [
+                'label' => __( 'Type', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'icon' => __( 'Icon', 'ohio-extra' ),
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
+                    'html' => __( 'Custom HTML', 'ohio-extra' ),
+                ],
+                'default' => 'icon',
+                'condition' => [
+                    'use_icon' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'icon_icon',
+            [
+                'label' => __( 'Icon', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::ICONS,
+                'default' => [
+                    'value' => 'fas fa-arrow-right',
+                    'library' => 'fa-solid',
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'icon',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'icon_image',
+            [
+                'label' => __( 'Custom Image', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'image',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'icon_html',
+            [
+                'label' => __( 'Custom HTML', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '<i class="fa-solid fa-arrow-right"></i>',
+                'condition' => [
+                    'use_icon' => 'yes',
+                    'icon_type' => 'html',
+                ],
             ]
         );
 
@@ -235,7 +334,7 @@ class Ohio_Elementor_Contact_Form_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'form',
             [
-                'label' => 'Choose Form',
+                'label' => __( 'Choose Form', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '0',
                 'options' => [ '0' => '- ' . __( 'No contact form selected', 'ohio-extra' ) . ' -' ] + $forms_select,

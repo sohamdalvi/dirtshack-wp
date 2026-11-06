@@ -110,7 +110,7 @@ global $post;
 		$subtitle_text = false;
 	} elseif ( is_day() ) {
 		$title_text = get_the_time( 'F' ) . ' ' . get_the_time( 'd' ) . ', ' . get_the_time( 'Y' );
-		$subtitle_text = 'Posts by date';
+		$subtitle_text = __( 'Posts by date', 'ohio' );
 	} elseif ( is_month() ) {
 		$title_text = get_the_time( 'F' ) . ' ' . get_the_time( 'Y' );
 		$subtitle_text = false;

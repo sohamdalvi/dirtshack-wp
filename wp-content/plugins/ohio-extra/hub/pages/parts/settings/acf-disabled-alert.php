@@ -16,7 +16,7 @@
                     <a target="_blank" href="<?php echo admin_url('themes.php?page=install-required-plugins'); ?>" class="btn"><?php _e( 'Install ACF PRO', 'ohio-extra' ); ?></a>
                     <a target="_blank" href="<?php echo admin_url('plugins.php'); ?>" class="btn btn-flat"><?php _e( 'Manage Plugins', 'ohio-extra' ); ?></a>
                 </div>
-                <button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>
+                <button type="button" class="notice-dismiss"><span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'ohio-extra' ); ?></span></button>
             </div>
         </div>
 

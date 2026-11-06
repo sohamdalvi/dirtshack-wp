@@ -392,9 +392,10 @@ class Ohio_Elementor_Button_Widget extends Ohio_Elementor_Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button.-default:not(:hover)' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat:not(:hover)' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'block_type_layout' => [ 'fill' ],
+                    'block_type_layout' => [ 'fill', 'flat' ],
                 ],
             ]
         );
@@ -406,9 +407,10 @@ class Ohio_Elementor_Button_Widget extends Ohio_Elementor_Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat' => 'border: var(--clb-button-border-width) var(--clb-border-style-solid) {{VALUE}};',
                 ],
                 'condition' => [
-                    'block_type_layout' => [ 'fill', 'outline' ],
+                    'block_type_layout' => [ 'fill', 'outline', 'flat' ],
                 ],
             ]
         );
@@ -440,9 +442,10 @@ class Ohio_Elementor_Button_Widget extends Ohio_Elementor_Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button.-default:hover' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .button.-flat:hover' => 'background-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'block_type_layout' => [ 'fill' ],
+                    'block_type_layout' => [ 'fill', 'flat' ],
                 ],
             ]
         );
@@ -454,9 +457,12 @@ class Ohio_Elementor_Button_Widget extends Ohio_Elementor_Widget_Base {
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .button:hover' => 'border-color: {{VALUE}};',
+                    // Flat has no border by default: reserve a transparent one (lower specificity than the Normal color rule) so the hover color has room to show
+                    '{{WRAPPER}} .-flat' => 'border: var(--clb-button-border-width) var(--clb-border-style-solid) transparent;',
+                    '{{WRAPPER}} .button.-flat:hover' => 'border-color: {{VALUE}};',
                 ],
                 'condition' => [
-                    'block_type_layout' => [ 'fill', 'outline' ],
+                    'block_type_layout' => [ 'fill', 'outline', 'flat' ],
                 ],
             ]
         );

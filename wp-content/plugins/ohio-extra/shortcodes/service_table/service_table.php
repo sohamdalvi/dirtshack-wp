@@ -25,6 +25,7 @@ function ohio_service_table_func( $atts ) {
 	$icon_border_width = isset( $icon_border_width ) ? OhioExtraFilter::string( $icon_border_width, 'string', '') : '';
 	$icon_corners = isset( $icon_corners ) ? OhioExtraFilter::string( $icon_corners, 'string', '') : '';
 	$icon_as_image = ( isset( $icon_as_image ) ) ? OhioExtraFilter::string( wp_get_attachment_url( OhioExtraFilter::string( $icon_as_image ) ), 'attr' ) : false;
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
 	$main_icon_color = isset( $main_icon_color ) ? OhioExtraFilter::string( $main_icon_color ) : false;
 	$icon_bg_color = isset( $icon_bg_color ) ? OhioExtraFilter::string( $icon_bg_color ) : false;
 	$icon_border_color = isset( $icon_border_color ) ? OhioExtraFilter::string( $icon_border_color ) : false;
@@ -43,6 +44,26 @@ function ohio_service_table_func( $atts ) {
 	$table_bg_color_hover = isset( $table_bg_color_hover ) ? OhioExtraFilter::string( $table_bg_color_hover ) : false;
 	$border_width = isset( $border_width ) ? OhioExtraFilter::string( $border_width, 'string', '') : '';
 	$border_color = isset( $border_color ) ? OhioExtraFilter::string( $border_color, 'string', false ) : false;
+	$table_button_position = isset( $table_button_position ) ? OhioExtraFilter::string( $table_button_position, 'string', 'default' ) : 'default';
+
+	// Button
+	$add_link = isset( $add_link ) ? OhioExtraFilter::boolean( $add_link ) : false;
+	$button_link = OhioExtraParser::VC_link_params( ( isset( $button_link ) ) ? $button_link : '', array( 'caption' => __( 'Get Started', 'ohio-extra' ) ) );
+	$readmore_button = isset( $readmore_button ) ? OhioExtraFilter::string( $readmore_button, 'string', false ) : false;
+	$readmore_button = preg_replace( '/\&amp\;/', '&', $readmore_button );
+	parse_str( (string) $readmore_button, $button_settings );
+
+	// Button icon
+	$button_icon_use = isset( $button_icon_use ) ? OhioExtraFilter::boolean( $button_icon_use ) : false;
+	$button_icon_position = isset( $button_icon_position ) ? OhioExtraFilter::string( $button_icon_position, 'string', 'left' ) : 'left';
+	$button_icon_type = isset( $button_icon_type ) ? OhioExtraFilter::string( $button_icon_type, 'string', 'font_icon' ) : 'font_icon';
+	$button_icon_as_icon = isset( $button_icon_as_icon ) ? OhioExtraFilter::string( $button_icon_as_icon, 'string', 'ion ion-md-arrow-forward' ) : 'ion ion-md-arrow-forward';
+	$button_icon_as_image = isset( $button_icon_as_image ) ? OhioExtraFilter::string( $button_icon_as_image, 'string', '' ) : '';
+	$button_icon_as_html = isset( $button_icon_as_html ) ? rawurldecode( base64_decode( $button_icon_as_html ) ) : '';
+	$button_icon_image_atts = ( $button_icon_type == 'user_image' && $button_icon_as_image ) ? OhioExtraParser::generateImageAttsById( $button_icon_as_image, __( 'Icon', 'ohio-extra' ) ) : '';
+	if ( $add_link && $button_icon_use && $button_icon_type == 'font_icon' && $button_icon_as_icon ) {
+		$GLOBALS['ohio_icon_fonts'][] = $button_icon_as_icon;
+	}
 
 	// Design options
     $content_styles = isset( $content_styles ) ? OhioExtraFilter::string( $content_styles ) : false;
@@ -76,6 +97,7 @@ function ohio_service_table_func( $atts ) {
 	$tilt_attrs = '';
 	if ( !$tilt_effect ) {
 		$tilt_attrs .= ' data-tilt=true data-tilt-perspective=6000';
+		OhioHelper::add_required_script( 'tilt' );
 	}
 
 	// Wrapper ID
@@ -123,11 +145,7 @@ function ohio_service_table_func( $atts ) {
 			break;
 	}
 
-	if ( isset( $button_link ) ) {
-		$button_link = OhioExtraParser::VC_link_params( $button_link, array( 'caption' => __( 'Read More', 'ohio-extra' ) ) );
-	} else {
-		$button_link = OhioExtraParser::VC_link_params( '', array( 'caption' => __( 'Read More', 'ohio-extra' ) ) );
-	}
+	// $button_link is already parsed into an array above (VC_link_params), so it must not be parsed again.
 
 	if ( $features_value ) {
 		foreach ($features_value as $feature_key => $feature_value) {
@@ -175,7 +193,7 @@ function ohio_service_table_func( $atts ) {
 	OhioExtraParser::VC_typo_custom_font( $title_typo );
 
 	if ( $table_title_typo ) {
-		$_selector = '#' . $wrapper_id . ' .title{';
+		$_selector = '#' . $wrapper_id . ' h4.title{';
 		$_block_typo = $table_title_typo;
 		if ( !empty( $_block_typo['desktop'] ) ) {
 			$_style_block .= $_selector . $_block_typo['desktop'] . '}';
@@ -415,12 +433,33 @@ function ohio_service_table_func( $atts ) {
 		$_style_block .= '#' . $wrapper_id . ' .icon-group .icon{';
 		$_style_block .= 'font-size:' . $icon_size . 'px;';
 		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group > span{';
+		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group svg{';
+		$_style_block .= 'height:' . $icon_size . 'px;';
+		$_style_block .= '}';
 	}
 
 	if ( isset( $icon_corners ) && $icon_corners != '' ) {
 		$_style_block .= '#' . $wrapper_id . ' .icon-group.-outlined,';
 		$_style_block .= '#' . $wrapper_id . ' .icon-group.-contained{';
 		$_style_block .= 'border-radius:' . $icon_corners . 'px;';
+		$_style_block .= '}';
+	}
+
+	// Button
+	$button_css = OhioExtraParser::VC_button_to_css( $button_settings );
+
+	if ( $button_css['css'] ) {
+		$_style_block .= '#' . $wrapper_id . ' .button{';
+		$_style_block .= $button_css['css'];
+		$_style_block .= '}';
+	}
+
+	if ( $button_css['hover-css'] ) {
+		$_style_block .= '#' . $wrapper_id . ' .button:hover{';
+		$_style_block .= $button_css['hover-css'];
 		$_style_block .= '}';
 	}
 

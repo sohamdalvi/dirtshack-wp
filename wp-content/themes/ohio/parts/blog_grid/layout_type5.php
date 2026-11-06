@@ -61,6 +61,7 @@ $tilt_perspective = OhioOptions::get( 'blog_tilt_effect_perspective', 6000 );
 
 if ( $ohio_post['tilt_effect'] ) {
 	$parallax_data = 'data-tilt=true data-tilt-perspective=' . $tilt_perspective  . '';
+	OhioHelper::add_required_script( 'tilt' );
 }
 
 ?>

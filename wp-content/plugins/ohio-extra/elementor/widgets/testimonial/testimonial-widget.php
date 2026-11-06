@@ -121,7 +121,7 @@ class Ohio_Elementor_Testimonial_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
                 'rows' => 2,
                 'placeholder' => __( 'Enter block title.', 'ohio-extra' ),
-                'default' => 'It\'s awesome!',
+                'default' => __( 'It\'s awesome!', 'ohio-extra' ),
                 'dynamic' => [
                     'active' => true,
                 ],
@@ -133,7 +133,7 @@ class Ohio_Elementor_Testimonial_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Author Name', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'John Doe',
+                'default' => __( 'John Doe', 'ohio-extra' ),
                 'dynamic' => [
                     'active' => true,
                 ],

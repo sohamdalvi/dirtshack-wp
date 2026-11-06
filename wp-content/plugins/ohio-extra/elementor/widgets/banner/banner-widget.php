@@ -111,6 +111,7 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'h3',
                 'options' => [
+                    'div' => 'div',
                     'h1' => 'h1',
                     'h2' => 'h2',
                     'h3' => 'h3',
@@ -588,9 +589,10 @@ class Ohio_Elementor_Banner_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
-        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'] );
+        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'], 'h3', true );
 
         include( plugin_dir_path( __FILE__ ) . 'banner-view.php' );
     }

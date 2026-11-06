@@ -105,7 +105,7 @@ jQuery(function ($) {
 				}
 
 				popupWindow.close();
-				$(this).attr('loading', true).addClass('btn-spinner').text('Proceeding..');
+				$(this).attr('loading', true).addClass('btn-spinner').text(((window.ohioExtraL10n||{}).proceeding||'Proceeding..'));
 
 				jQuery.post(window.ajaxurl, {
 					action: 'ohio_save_license_code',
@@ -127,7 +127,7 @@ jQuery(function ($) {
                 return false;
             }
 
-            $(this).attr('loading', true).addClass('btn-spinner').text('Deactivating..');
+            $(this).attr('loading', true).addClass('btn-spinner').text(((window.ohioExtraL10n||{}).deactivating||'Deactivating..'));
 
             jQuery.post(window.ajaxurl, { 'action': 'ohio_remove_license_code' }, () => {
                 window.location.reload();
@@ -264,7 +264,7 @@ jQuery(function ($) {
 
     // Save settings
     $('#fake-publishing-action .button-publish').on('click', function () {
-        $(this).addClass('btn-spinner').text('Saving..');
+        $(this).addClass('btn-spinner').text(((window.ohioExtraL10n||{}).saving||'Saving..'));
         $('input#publish').trigger('click');
         return false;
     });

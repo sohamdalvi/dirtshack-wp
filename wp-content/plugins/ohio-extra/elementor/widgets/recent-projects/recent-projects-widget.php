@@ -4,15 +4,19 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_enqueue_script( 'masonry' );
-        wp_enqueue_script( 'isotope', get_template_directory_uri() . '/assets/js/libs/isotope.pkgd.min.js', [ 'jquery' ], false, true );
-        wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'isotope', get_template_directory_uri() . '/assets/js/libs/isotope.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
 
         wp_register_script( 'ohio-elementor-recent-projects-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
     public function get_script_depends() {
-        return [ 'masonry', 'isotope', 'aos', 'ohio-elementor-recent-projects-widget' ];
+        return $this->conditionalScripts( [
+            'ohio-masonry',
+            'isotope',
+            'aos' => function () { return in_array( $this->get_settings( 'animation_type' ), [ 'sync', 'async' ], true ); },
+            'ohio-elementor-recent-projects-widget',
+        ] );
     }
 
     public function get_name()
@@ -60,7 +64,7 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
                         'icon' => OHIO_EXTRA_DIR_URL . '/shortcodes/recent_projects/images/acf__image_portfolio_46.svg',
                     ],
                     'grid_11' => [
-                        'title' => __( 'Caption Cursor', 'ohio-extra' ),
+                        'title' => __( 'Cursor Caption', 'ohio-extra' ),
                         'icon' => OHIO_EXTRA_DIR_URL . '/shortcodes/recent_projects/images/acf__image_portfolio_43.svg',
                     ],
                     'grid_3' => [
@@ -985,7 +989,7 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
                 'label_off' => __( 'No', 'ohio-extra' ),
                 'return_value' => 'yes',
                 'default' => 'yes',
-                'description' => 'To find more lightbox settings navigate to global <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-general-portfolio">Theme Settings</a>',
+                'description' => __( 'To find more lightbox settings navigate to global <a target="_blank" href="./admin.php?page=ohio_hub_settings&options_page=theme-general-portfolio">Theme Settings</a>', 'ohio-extra' ),
             ]
         );
 
@@ -1464,6 +1468,10 @@ class Ohio_Elementor_Recent_Projects_Widget extends Ohio_Elementor_Widget_Base {
 
     protected function getProjectsData( $projects = [], $categories = [], $projects_count = 12, $order = 'DESC', $orderby = 'date' )
     {
+        // Settings may be saved as a string (e.g. legacy/imported data); count() on a string is fatal on PHP 8+
+        $categories = is_array( $categories ) ? $categories : array_filter( (array) $categories );
+        $projects = is_array( $projects ) ? $projects : array_filter( (array) $projects );
+
         $_tax_query = [];
 
         if ( count( $categories ) > 0 ) {

@@ -35,11 +35,29 @@
 		/**
 		* Heading tag filtering
 		*/
-		static public function headingTag( $tag, $default = 'h3' ) {
+		static public function headingTag( $tag, $default = 'h3', $allow_div = false ) {
 			$allowed_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' );
+			if ( $allow_div ) {
+				$allowed_tags[] = 'div';
+			}
 			if ( in_array( $tag, $allowed_tags ) ) {
 				return $tag;
 			}
 			return $default;
+		}
+
+		/**
+		* Dynamic Text "Letter Reveal" timing (ms) per speed preset
+		*/
+		static public function dynamicTextRevealTiming( $speed ) {
+			switch ( $speed ) {
+				case 'slow':
+					return array( 'duration' => 700, 'stagger' => 45, 'hold' => 2200 );
+				case 'fast':
+					return array( 'duration' => 400, 'stagger' => 20, 'hold' => 700 );
+				case 'normal':
+				default:
+					return array( 'duration' => 550, 'stagger' => 30, 'hold' => 1200 );
+			}
 		}
 	}

@@ -84,12 +84,14 @@ function ohio_gallery_func( $atts ) {
 
 	if ( $wrapper_gallery_id ) {
 		$animation_attrs .= ' data-gallery=' . esc_attr( $wrapper_gallery_id ) . '';
+		OhioHelper::add_required_script( 'slider' );
 	}
 
 	// Tilt effect
 	$tilt_attrs = '';
 	if ( !$tilt_effect ) {
 		$tilt_attrs .= ' data-tilt=true data-tilt-perspective=6000';
+		OhioHelper::add_required_script( 'tilt' );
 	}
 
 	// Wrapper ID

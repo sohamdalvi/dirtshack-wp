@@ -10,7 +10,9 @@
     <div class="counter-number title titles-typo <?php if ( !empty( $plus_symbol ) ) { echo "-with-increaser"; } ?>">
 		<?php if ( $layout == 'number_with_icon'): ?>
             <div class="icon-group<?php echo esc_attr( $icon_classes ); ?>">
-				<?php if ( $icon_as_icon ) : ?>
+				<?php if ( $icon_type == 'custom_html' && $icon_as_html ) : ?>
+					<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon left-icon' ); ?>
+				<?php elseif ( $icon_as_icon ) : ?>
 					<i class="icon left-icon <?php echo $icon_as_icon; ?>"></i>
 				<?php elseif ( $icon_as_image ) : ?>
 					<img class="icon" <?php echo $icon_image_atts; ?>>

@@ -56,6 +56,11 @@
                 "instructions" => __( 'Set global badge background color (e.g. badges, tags, labels, etc.).', 'ohio' ),
                 "required" => 0,
                 "conditional_logic" => 0,
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "default_value" => ""
             ],
             [
@@ -385,6 +390,31 @@
                 "default_value" => ""
             ],
             [
+                "key" => "field_5937e3aaf346256",
+                "label" => __( 'Height', 'ohio' ),
+                "name" => "global_page_buttons_height",
+                "type" => "text",
+                "instructions" => __( 'Set the global height value for all buttons.', 'ohio' ),
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda32383",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
+                "prepend" => __( 'Use CSS units', 'ohio' ),
+                "placeholder" => "2.75rem",
+                "default_value" => "",
+                "add_theme_inherited" => false
+            ],
+            [
                 "key" => "field_5937e3aaf346254",
                 "label" => __( 'Corner Radius', 'ohio' ),
                 "name" => "global_page_buttons_corners",
@@ -418,6 +448,11 @@
                         ]
                     ]
                 ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
                 "prepend" => __( 'Use CSS units', 'ohio' ),
                 "placeholder" => "2px",
                 "default_value" => "",
@@ -433,6 +468,31 @@
                 "conditional_logic" => 0,
                 "placement" => "top",
                 "endpoint" => 0
+            ],
+            [
+                "key" => "field_54224ad2935873",
+                "label" => __( 'Height', 'ohio' ),
+                "name" => "global_page_forms_height",
+                "type" => "text",
+                "instructions" => __( 'Set the global height value for form text fields. (input, select).', 'ohio' ),
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda32383",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
+                ],
+                "prepend" => __( 'Use CSS units', 'ohio' ),
+                "placeholder" => "2.75rem",
+                "default_value" => "",
+                "add_theme_inherited" => false
             ],
             [
                 "key" => "field_54224ad2935871",
@@ -467,6 +527,11 @@
                             "value" => "sitename"
                         ]
                     ]
+                ],
+                "wrapper" => [
+                    "width" => "",
+                    "class" => "has-new-badge",
+                    "id" => ""
                 ],
                 "prepend" => __( 'Use CSS units', 'ohio' ),
                 "placeholder" => "2px",

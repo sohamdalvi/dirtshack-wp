@@ -78,6 +78,7 @@ $tilt_perspective = OhioOptions::get( 'portfolio_tilt_effect_perspective', 6000 
 
 if ( $project['tilt_effect'] ) {
     $parallax_data = 'data-tilt=true data-tilt-perspective=' . $tilt_perspective  . '';
+    OhioHelper::add_required_script( 'tilt' );
 }
 
 ?>

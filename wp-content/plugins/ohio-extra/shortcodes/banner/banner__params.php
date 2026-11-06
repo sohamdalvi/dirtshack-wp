@@ -92,6 +92,7 @@ function ohio_banner_sc_map() {
 				'heading' => __( 'Title HTML Tag', 'ohio-extra' ),
 				'param_name' => 'heading_tag',
 				'value' => array(
+					__( 'div', 'ohio-extra' ) => 'div',
 					__( 'h1', 'ohio-extra' ) => 'h1',
 					__( 'h2', 'ohio-extra' ) => 'h2',
 					__( 'h3', 'ohio-extra' ) => 'h3',
@@ -400,7 +401,7 @@ function ohio_banner_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

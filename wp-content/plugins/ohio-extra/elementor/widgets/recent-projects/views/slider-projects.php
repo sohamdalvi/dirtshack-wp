@@ -1,3 +1,4 @@
+<?php OhioHelper::add_required_script( 'slider' ); ?>
 <div class="portfolio-onepage-slider -slider-fs clb-slider-scroll-bar <?php echo esc_attr( $settings['card_layout'] . $pagination_type_class ); ?>" 
     data-lazy-container="projects"
     data-portfolio-grid-slider="true"

@@ -13,7 +13,7 @@
     $copyright_text_left = OhioOptions::get_global( 'footer_copyright_left' );
     $copyright_text_right = OhioOptions::get_global( 'footer_copyright_right' );
     $mobile_menu_details = OhioOptions::get_global( 'page_mobile_header_menu_details' );
-    $search_visible_mobile = OhioOptions::get( 'page_mobile_search_visibility', false );
+    $search_visible_mobile = OhioHelper::is_header_element_on_mobile( 'search' );
     $multilevel_indicators = OhioOptions::get( 'page_header_indicator_visibility', true );
     $menu_highlighted = OhioOptions::get( 'page_header_active_menu_highlight', true );
     $menu_images_mobile_visibility = OhioOptions::get( 'page_mobile_menu_items_image', false );

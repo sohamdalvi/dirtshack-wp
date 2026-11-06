@@ -4,12 +4,15 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
         wp_register_script( 'ohio-elementor-recent-posts-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
     public function get_script_depends() {
-        return [ 'aos', 'ohio-elementor-recent-posts-widget' ];
+        return $this->conditionalScripts( [
+            'aos' => function () { return in_array( $this->get_settings( 'animation_type' ), [ 'sync', 'async' ], true ); },
+            'ohio-elementor-recent-posts-widget',
+        ] );
     }
 
     public function get_name()
@@ -260,6 +263,32 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
                 'selectors' => [
                     '{{WRAPPER}} .blog-item:not(.-contained) .image-holder' => 'border-radius: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .blog-item.-contained' => 'border-radius: {{SIZE}}{{UNIT}};'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'border_width',
+            [
+                'label' => __( 'Border', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => 'px',
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                        'step' => 1,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .blog-item:not(.-contained) .image-holder' => 'border-width: {{SIZE}}{{UNIT}}; border-style: solid;',
+                    '{{WRAPPER}} .blog-item.-contained' => 'border-width: {{SIZE}}{{UNIT}}; border-style: solid;'
+                ],
+                'condition' => [
+                    'block_type_layout' => [ 'blog_grid_1', 'blog_grid_2', 'blog_grid_3', 'blog_grid_4', 'blog_grid_5', 'blog_grid_7' ]
                 ],
             ]
         );
@@ -775,6 +804,21 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'border_color',
+            [
+                'label' => __( 'Border Color', 'ohio-extra' ),
+                'type' =>  \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .blog-item:not(.-contained) .image-holder' => 'border-color:{{VALUE}}',
+                    '{{WRAPPER}} .blog-item.-contained' => 'border-color:{{VALUE}}'
+                ],
+                'condition' => [
+                    'block_type_layout' => [ 'blog_grid_1', 'blog_grid_2', 'blog_grid_3', 'blog_grid_4', 'blog_grid_5', 'blog_grid_7' ]
+                ]
+            ]
+        );
+
+        $this->add_control(
             'dark_mode_scheme',
             [
                 'label' => __( 'Dark Mode Background', 'ohio-extra' ),
@@ -954,6 +998,7 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
         // Wrapper classes
         if ( !empty( $settings['masonry_grid'] ) ) {
             $this->addWrapperClass( 'ohio-masonry' );
+            OhioHelper::add_required_script( 'masonry' );
         }
 
         if ( isset( $settings['grid_spacing_css'] ) && !preg_replace( "/[^0-9.]/", '', (string) $settings['grid_spacing_css'] ) ) {
@@ -991,6 +1036,10 @@ class Ohio_Elementor_Recent_Posts_Widget extends Ohio_Elementor_Widget_Base {
 
     protected function getPostsData( $posts = [], $categories = [], $posts_count = 12, $order = 'DESC', $orderby = 'date' )
     {
+        // Settings may be saved as a string (e.g. legacy/imported data); count() on a string is fatal on PHP 8+
+        $categories = is_array( $categories ) ? $categories : array_filter( (array) $categories );
+        $posts = is_array( $posts ) ? $posts : array_filter( (array) $posts );
+
         $_tax_query = [];
 
         if ( count( $categories ) > 0 ) {

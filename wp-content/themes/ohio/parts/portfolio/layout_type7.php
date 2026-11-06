@@ -45,7 +45,8 @@ wp_reset_query();
     </div>
 <?php endif; ?>
 
-<div class="project-page project -layout7">
+<div class="project-page project -layout7<?php echo esc_attr( apply_filters( 'ohio_project_page_class', '' ) ); ?>">
+    <?php do_action( 'ohio_project_page_notice' ); ?>
     <div class="page-container<?php echo esc_attr( $page_container_class . $page_offset_class ); ?>">
 
         <?php if ( $show_headline || isset( $project['raw_categories'] ) || isset( $project['date'] ) || !empty( $project['description'] ) || isset( $project['task'] ) || isset( $project['strategy'] ) || isset( $project['design'] ) || isset( $project['client'] ) || isset( $project['custom_fields'] ) || !empty( $project['tags'] ) || isset( $project['link'] ) ) : ?>

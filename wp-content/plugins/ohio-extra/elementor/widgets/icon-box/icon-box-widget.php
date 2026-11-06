@@ -96,7 +96,7 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'label' => __( 'Title', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => 'Hello there!',
+                'default' => __( 'Hello there!', 'ohio-extra' ),
                 'label_block' => true,
                 'dynamic' => [
                     'active' => true,
@@ -111,6 +111,7 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'h5',
                 'options' => [
+                    'div' => 'div',
                     'h1' => 'h1',
                     'h2' => 'h2',
                     'h3' => 'h3',
@@ -169,6 +170,20 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'icon_group_size',
+            [
+                'label' => __( 'Size', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'default' => __( 'Default', 'ohio-extra' ),
+                    'small' => __( 'Small', 'ohio-extra' ),
+                    'large' => __( 'Large', 'ohio-extra' )
+                ],
+                'default' => 'default',
+            ]
+        );
+
+        $this->add_control(
             'icon_type',
             [
                 'label' => __( 'Type', 'ohio-extra' ),
@@ -176,8 +191,8 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
                 'default' => 'icon',
                 'options' => [
                     'icon' => 'Icon',
-                    'image' => 'Custom Image',
-                    'html' => 'Custom HTML',
+                    'image' => __( 'Custom Image', 'ohio-extra' ),
+                    'html' => __( 'Custom HTML', 'ohio-extra' ),
                 ],
             ]
         );
@@ -313,7 +328,7 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
         $this->start_controls_section(
             'link_section',
             [
-                'label' => __( 'Link', 'ohio-extra' ),
+                'label' => __( 'Button', 'ohio-extra' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -321,7 +336,7 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'use_link',
             [
-                'label' => __( 'Add Link?', 'ohio-extra' ),
+                'label' => __( 'Add Button?', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __( 'Yes', 'ohio-extra' ),
                 'label_off' => __( 'No', 'ohio-extra' ),
@@ -333,7 +348,7 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
         $this->add_control(
             'button_title',
             [
-                'label' => __( 'Link Text', 'ohio-extra' ),
+                'label' => __( 'Button Text', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => __( 'Read more', 'ohio-extra' ),
                 'label_block' => true,
@@ -366,6 +381,8 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
                 ],
             ]
         );
+
+        $this->addButtonIconControls();
 
         $this->end_controls_section();
 
@@ -515,7 +532,16 @@ class Ohio_Elementor_Icon_Box_Widget extends Ohio_Elementor_Widget_Base {
                 break;
         }
 
-        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'], 'h5' );
+        switch ( $settings['icon_group_size'] ?? 'default' ) {
+            case 'small':
+                $settings['icon_classes'] .= ' -small';
+                break;
+            case 'large':
+                $settings['icon_classes'] .= ' -large';
+                break;
+        }
+
+        $settings['heading_tag'] = OhioExtraFilter::headingTag( $settings['heading_tag'], 'h5', true );
 
         include( plugin_dir_path( __FILE__ ) . 'icon-box-view.php' );
     }

@@ -80,12 +80,46 @@ function deregister_my_styles() {
 }
 add_action( 'wp_print_styles', 'deregister_my_styles', 100 );
 
+// Builder previews render widgets after page load, so every library has to be available there
+function ohio_is_builder_preview() {
+    if ( isset( $_GET['elementor-preview'] ) ) {
+        return true;
+    }
+    if ( class_exists( '\Elementor\Plugin' ) && isset( \Elementor\Plugin::$instance->preview ) && \Elementor\Plugin::$instance->preview->is_preview_mode() ) {
+        return true;
+    }
+    if ( function_exists( 'vc_is_page_editable' ) && vc_is_page_editable() ) {
+        return true;
+    }
+    return false;
+}
+
+// Register libraries early, so builder widgets can list them as dependencies
+function ohio_register_own_scripts() {
+    // Core Masonry has no jQuery dependency, so this alias makes sure jQuery prints first and $.fn.masonry exists
+    wp_register_script( 'ohio-masonry', false, array( 'jquery', 'masonry' ), false, true );
+    wp_register_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/libs/slider.js', array( 'jquery' ), false, true );
+    wp_register_script( 'tilt-effect', get_template_directory_uri() . '/assets/js/libs/tilt.min.js', array( 'jquery' ), false, true );
+    // Typed.js + Letter Reveal for the Dynamic Text widget/shortcode
+    wp_register_script( 'ohio-dynamic-text', get_template_directory_uri() . '/assets/js/libs/dynamic-text.min.js', array( 'jquery' ), wp_get_theme()->Version, true );
+}
+
+add_action( 'wp_enqueue_scripts', 'ohio_register_own_scripts', 5 );
+
 // Scripts and libs
 function ohio_enqueue_own_scripts() {
-    wp_enqueue_script( 'jquery-masonry' );
-    wp_enqueue_script( 'ohio-slider', get_template_directory_uri() . '/assets/js/jquery.clb-slider.min.js', array( 'jquery' ), false, true );
-    wp_enqueue_script( 'jquery-mega-menu', get_template_directory_uri() . '/assets/js/libs/jquery.mega-menu.min.js', array( 'jquery' ), false, true );
-    wp_enqueue_script( 'tilt-effect', get_template_directory_uri() . '/assets/js/libs/jquery.tilt.min.js', array( 'jquery' ), false, true );
+    // Libraries below load only when the page content asked for them (OhioHelper::add_required_script)
+    $ohio_load_all_libs = apply_filters( 'ohio_load_all_scripts', ohio_is_builder_preview() );
+
+    if ( $ohio_load_all_libs || OhioHelper::is_script_required( 'masonry' ) ) {
+        wp_enqueue_script( 'ohio-masonry' );
+    }
+    if ( $ohio_load_all_libs || OhioHelper::is_script_required( 'slider' ) ) {
+        wp_enqueue_script( 'ohio-slider' );
+    }
+    if ( $ohio_load_all_libs || OhioHelper::is_script_required( 'tilt' ) ) {
+        wp_enqueue_script( 'tilt-effect' );
+    }
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
     }
@@ -96,20 +130,20 @@ function ohio_enqueue_own_scripts() {
         wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', array( 'jquery' ), false, true );
     }
     if ( OhioHelper::is_script_required( 'isotope' ) ) {
-        wp_enqueue_script( 'isotope', get_template_directory_uri() . '/assets/js/libs/isotope.pkgd.min.js', array( 'jquery' ), false, true );
+        wp_enqueue_script( 'isotope', get_template_directory_uri() . '/assets/js/libs/isotope.min.js', array( 'jquery' ), false, true );
     }
     if ( OhioHelper::is_script_required( 'compare') ) {
-        wp_enqueue_script( 'jquery-event-move', get_template_directory_uri() . '/assets/js/libs/jquery.event.move.min.js', array( 'jquery' ), '1.0.0', true );
-        wp_enqueue_script( 'jquery-twentytwenty', get_template_directory_uri() . '/assets/js/libs/jquery.compare.min.js', array( 'jquery', 'jquery-event-move' ), '1.0.0', true );
+        wp_enqueue_script( 'jquery-event-move', get_template_directory_uri() . '/assets/js/libs/event-move.min.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'jquery-twentytwenty', get_template_directory_uri() . '/assets/js/libs/compare.min.js', array( 'jquery', 'jquery-event-move' ), '1.0.0', true );
     }
     if ( OhioHelper::is_script_required( 'countdown') ) {
-        wp_enqueue_script( 'jquery-countdown', get_template_directory_uri() . '/assets/js/libs/jquery.countdown.min.js', '2.1.0', true );
+        wp_enqueue_script( 'jquery-countdown', get_template_directory_uri() . '/assets/js/libs/countdown.min.js', '2.1.0', true );
     }
-    if ( OhioHelper::is_script_required( 'typed') ) {
-        wp_enqueue_script( 'typed', get_template_directory_uri() . '/assets/js/libs/typed.min.js', array( 'jquery' ), '1.0.0', true );
+    if ( $ohio_load_all_libs || OhioHelper::is_script_required( 'dynamic-text' ) ) {
+        wp_enqueue_script( 'ohio-dynamic-text' );
     }
     if (OhioHelper::is_script_required( 'google-maps' ) ) {
-        wp_enqueue_script( 'jquery-maps', get_template_directory_uri() . '/assets/js/libs/jquery.google-maps.min.js', array( 'jquery' ), '1.0.0', true );
+        wp_enqueue_script( 'jquery-maps', get_template_directory_uri() . '/assets/js/libs/google-maps.min.js', array( 'jquery' ), '1.0.0', true );
     }
     if ( ( isset( $GLOBALS['ohio_use_map'] ) && $GLOBALS['ohio_use_map'] ) || OhioHelper::is_script_required( 'google-maps' ) ) { // Google Maps
         

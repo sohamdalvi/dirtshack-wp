@@ -3,7 +3,7 @@
 function ohio_ocdi_import_files() {
 	return array(
 		array(
-			'import_file_name' => '<b>Landing Page</b> All Pages',
+			'import_file_name' => '<b>' . esc_html__( 'Landing Page', 'ohio' ) . '</b> ' . esc_html__( 'All Pages', 'ohio' ),
 			'categories' => array( esc_html__( 'Inner Pages', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/100/content.xml',
 			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/100/container.xml',
@@ -12,7 +12,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Pages_Inner.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 1</b> Creative Agency',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 1 ) . '</b> ' . esc_html__( 'Creative Agency', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo1/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/01/content.xml',
@@ -23,7 +23,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo1_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 2</b> Design Bureau',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 2 ) . '</b> ' . esc_html__( 'Design Bureau', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo2/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/02/content.xml',
@@ -35,7 +35,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo2_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 3</b> Showcase Interactive',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 3 ) . '</b> ' . esc_html__( 'Showcase Interactive', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo3/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/03/content.xml',
@@ -46,7 +46,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo3_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 4</b> Creative Agency',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 4 ) . '</b> ' . esc_html__( 'Creative Agency', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo4/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/04/content.xml',
@@ -57,7 +57,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo4_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 5</b> Cloud Service',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 5 ) . '</b> ' . esc_html__( 'Cloud Service', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo5/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/05/content.xml',
@@ -68,7 +68,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo5_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 6</b> Showcase Interactive',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 6 ) . '</b> ' . esc_html__( 'Showcase Interactive', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo6/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/06/content.xml',
@@ -79,7 +79,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo6_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 7</b> Minimal Showcase',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 7 ) . '</b> ' . esc_html__( 'Minimal Showcase', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo7/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/07/content.xml',
@@ -90,7 +90,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo7_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 8</b> Creative Agency',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 8 ) . '</b> ' . esc_html__( 'Creative Agency', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo8/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/08/content.xml',
@@ -101,7 +101,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo8_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 9</b> Mobile App',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 9 ) . '</b> ' . esc_html__( 'Mobile App', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo9/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/09/content.xml',
@@ -113,7 +113,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo9_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 10</b> Digital Agency',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 10 ) . '</b> ' . esc_html__( 'Digital Agency', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo10/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/10/content.xml',
@@ -124,7 +124,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo10_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 11</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 11 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo11/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/11/content.xml',
@@ -135,7 +135,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo11_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 12</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 12 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo12/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/12/content.xml',
@@ -146,7 +146,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo12_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 13</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 13 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo13/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/13/content.xml',
@@ -157,7 +157,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo13_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 14</b> Showcase Carousel',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 14 ) . '</b> ' . esc_html__( 'Showcase Carousel', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo14/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/14/content.xml',
@@ -168,7 +168,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo14_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 15</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 15 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo15/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/15/content.xml',
@@ -179,7 +179,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo15_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 16</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 16 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo16/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/16/content.xml',
@@ -190,7 +190,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo16_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 17</b> Showcase Slider',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 17 ) . '</b> ' . esc_html__( 'Showcase Slider', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo17/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/17/content.xml',
@@ -201,7 +201,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo17_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 18</b> Essentials Shop',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 18 ) . '</b> ' . esc_html__( 'Essentials Shop', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo18/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/18/content.xml',
@@ -211,7 +211,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo18_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 19</b> Classic Shop',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 19 ) . '</b> ' . esc_html__( 'Classic Shop', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo19/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/19/content.xml',
@@ -222,7 +222,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo19_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 20</b> Minimal Shop',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 20 ) . '</b> ' . esc_html__( 'Minimal Shop', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo20/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/20/content.xml',
@@ -232,7 +232,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo20_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 21</b> Digital Studio',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 21 ) . '</b> ' . esc_html__( 'Digital Studio', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo21/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/21/content.xml',
@@ -243,7 +243,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo21_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 22</b> Photo Gallery',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 22 ) . '</b> ' . esc_html__( 'Photo Gallery', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo22/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/22/content.xml',
@@ -254,7 +254,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo22_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 23</b> Corporate',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 23 ) . '</b> ' . esc_html__( 'Corporate', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo23/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/23/content.xml',
@@ -265,7 +265,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo23_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 24</b> Travel Blog',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 24 ) . '</b> ' . esc_html__( 'Travel Blog', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo24/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/24/content.xml',
@@ -276,7 +276,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo24_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 25</b> Personal Blog',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 25 ) . '</b> ' . esc_html__( 'Personal Blog', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo25/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/25/content.xml',
@@ -287,7 +287,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo25_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 26</b> Simple App',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 26 ) . '</b> ' . esc_html__( 'Simple App', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo26/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/26/content.xml',
@@ -298,7 +298,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo26_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 27</b> Corporate',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 27 ) . '</b> ' . esc_html__( 'Corporate', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo27/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/27/content.xml',
@@ -309,7 +309,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo27_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 28</b> Conference',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 28 ) . '</b> ' . esc_html__( 'Conference', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo28/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/28/content.xml',
@@ -319,7 +319,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo28_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 29</b> Minimal Blog',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 29 ) . '</b> ' . esc_html__( 'Minimal Blog', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo29/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/29/content.xml',
@@ -330,7 +330,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo29_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 30</b> Coming Soon',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 30 ) . '</b> ' . esc_html__( 'Coming Soon', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo30/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/30/content.xml',
@@ -341,7 +341,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo30_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 31</b> Digital Agency',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 31 ) . '</b> ' . esc_html__( 'Digital Agency', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo31/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/31/content.xml',
@@ -352,7 +352,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo31_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 32</b> Design Studio',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 32 ) . '</b> ' . esc_html__( 'Design Studio', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo32/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/32/content.xml',
@@ -363,7 +363,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo32_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 33</b> Apparel Shop',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 33 ) . '</b> ' . esc_html__( 'Apparel Shop', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo32/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/33/content.xml',
@@ -373,7 +373,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo33_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 34</b> Architectural Studio',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 34 ) . '</b> ' . esc_html__( 'Architectural Studio', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo34/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/34/content.xml',
@@ -383,7 +383,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo34_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Demo 35</b> Blog Magazine',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 35 ) . '</b> ' . esc_html__( 'Blog Magazine', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/demo35/',
 			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/35/content.xml',
@@ -393,7 +393,17 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo35_Home.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 1</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Demo %d', 'ohio' ), 36 ) . '</b> ' . esc_html__( 'AI Tool', 'ohio' ),
+			'preview_url'  => 'https://ohio.clbthemes.com/demo36/',
+			'categories' => array( esc_html__( 'Home', 'ohio' ) ),
+			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/36/content.xml',
+			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/36/container.xml',
+			'import_widget_file_url' => ' https://demo.clbthemes.com/v1/demo/36/widgets.json',
+			'import_options_file_url' => ' https://demo.clbthemes.com/v1/demo/36/options.json',
+			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Demo36_Home.webp'
+		),
+		array(
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 1 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver1/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/40/content.xml',
@@ -404,7 +414,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type1.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 2</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 2 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver2/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/41/content.xml',
@@ -415,7 +425,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type2.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 3</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 3 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver3/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/42/content.xml',
@@ -426,7 +436,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type3.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 4</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 4 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver4/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/43/content.xml',
@@ -437,7 +447,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type4.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 5</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 5 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver5/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/44/content.xml',
@@ -448,7 +458,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type5.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 6</b> About Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 6 ) . '</b> ' . esc_html__( 'About Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/about-ver6/',
 			'categories' => array( esc_html__( 'About', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/45/content.xml',
@@ -459,7 +469,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/About_Type6.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 1</b> Service Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 1 ) . '</b> ' . esc_html__( 'Service Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/service-ver1/',
 			'categories' => array( esc_html__( 'Service', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/110/content.xml',
@@ -469,7 +479,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Services_Type1.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 2</b> Service Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 2 ) . '</b> ' . esc_html__( 'Service Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/service-ver2/',
 			'categories' => array( esc_html__( 'Service', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/111/content.xml',
@@ -479,7 +489,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Services_Type2.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 1</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 1 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver1/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/50/content.xml',
@@ -490,7 +500,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type1.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 2</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 2 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver2/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/51/content.xml',
@@ -501,7 +511,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type2.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 3</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 3 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver3/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/52/content.xml',
@@ -512,7 +522,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type3.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 4</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 4 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver4/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/53/content.xml',
@@ -523,7 +533,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type4.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 5</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 5 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver5/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/54/content.xml',
@@ -534,7 +544,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type5.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 6</b> Contact Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 6 ) . '</b> ' . esc_html__( 'Contact Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-us-ver6/',
 			'categories' => array( esc_html__( 'Contact', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/55/content.xml',
@@ -545,7 +555,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Contact_Type6.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 1</b> Pricing Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 1 ) . '</b> ' . esc_html__( 'Pricing Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/pricing-ver1/',
 			'categories' => array( esc_html__( 'Pricing', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/120/content.xml',
@@ -555,7 +565,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Pricing_Type1.webp'
 		),
 		array(
-			'import_file_name' => '<b>Ver 2</b> Pricing Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Ver %d', 'ohio' ), 2 ) . '</b> ' . esc_html__( 'Pricing Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/pricing-ver2/',
 			'categories' => array( esc_html__( 'Pricing', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/121/content.xml',
@@ -565,7 +575,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Pricing_Type2.webp'
 		),
 		array(
-			'import_file_name' => '<b>Blog Page</b> Posts',
+			'import_file_name' => '<b>' . esc_html__( 'Blog Page', 'ohio' ) . '</b> ' . esc_html__( 'Posts', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/blog/minimal-elementor/',
 			'categories' => array( esc_html__( 'Blog', 'ohio' ) ),
 			'import_file_url' => 'https://demo.clbthemes.com/v1/demo/80/content.xml',
@@ -573,7 +583,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/BlogArchive__Type2__Desktop.webp'
 		),
 		array(
-			'import_file_name' => '<b>Portfolio Page</b> Projects',
+			'import_file_name' => '<b>' . esc_html__( 'Portfolio Page', 'ohio' ) . '</b> ' . esc_html__( 'Projects', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/portfolio/minimal/',
 			'categories' => array( esc_html__( 'Portfolio', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/81/content.xml',
@@ -583,7 +593,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/PortfolioArchive__Type2__Desktop.webp'
 		),
 		array(
-			'import_file_name' => '<b>Single Projects</b> Projects',
+			'import_file_name' => '<b>' . esc_html__( 'Single Projects', 'ohio' ) . '</b> ' . esc_html__( 'Projects', 'ohio' ),
 			'categories' => array( esc_html__( 'Portfolio', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/101/content.xml',
 			// 'import_elementor_file_url:sections' => ' https://demo.clbthemes.com/v1/demo/101/elementor.xml',
@@ -592,7 +602,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/AllProjects_Desktop.jpeg'
 		),
 		array(
-			'import_file_name' => '<b>Shop Page</b> Products',
+			'import_file_name' => '<b>' . esc_html__( 'Shop Page', 'ohio' ) . '</b> ' . esc_html__( 'Products', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/shop/',
 			'categories' => array( esc_html__( 'WooCommerce', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/97/content.xml',
@@ -601,7 +611,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/ProductArchive__Type1__Desktop.webp'
 		),
 		array(
-			'import_file_name' => '<b>Landing 2023</b> Home Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Landing %d', 'ohio' ), 2023 ) . '</b> ' . esc_html__( 'Home Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/',
 			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/98/content.xml',
@@ -612,7 +622,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2023.webp'
 		),
 		array(
-			'import_file_name' => '<b>Landing 2025</b> Home Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Landing %d', 'ohio' ), 2025 ) . '</b> ' . esc_html__( 'Home Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/',
 			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
 			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/99/container.xml',
@@ -622,7 +632,7 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2024.webp'
 		),
 		array(
-			'import_file_name' => '<b>Landing 2026</b> Home Page',
+			'import_file_name' => '<b>' . sprintf( esc_html__( 'Landing %d', 'ohio' ), 2026 ) . '</b> ' . esc_html__( 'Home Page', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/',
 			'categories' => array( esc_html__( 'Landing', 'ohio' ) ),
 			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/96/container.xml',
@@ -632,14 +642,14 @@ function ohio_ocdi_import_files() {
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Landing_2026.webp'
 		),
 		array(
-			'import_file_name' => '<b>UI Elements</b> Shortcodes and Widgets',
+			'import_file_name' => '<b>' . esc_html__( 'UI Elements', 'ohio' ) . '</b> ' . esc_html__( 'Shortcodes and Widgets', 'ohio' ),
 			'categories' => array( esc_html__( 'Elements', 'ohio' ) ),
 			'import_wpbakery_file_url' => 'https://demo.clbthemes.com/v1/demo/70/content.xml',
 			'import_elementor_file_url:containers' => ' https://demo.clbthemes.com/v1/demo/70/container.xml',
 			'import_preview_image_url' => get_template_directory_uri() . '/demo/assets/img/Shortcodes.jpeg'
 		),
 		array(
-			'import_file_name' => '<b>Forms</b> Contact Form 7',
+			'import_file_name' => '<b>' . esc_html__( 'Forms', 'ohio' ) . '</b> ' . esc_html__( 'Contact Form 7', 'ohio' ),
 			'preview_url'  => 'https://ohio.clbthemes.com/contact-form-shortcode/',
 			'categories' => array( esc_html__( 'Forms', 'ohio' ) ),
 			'import_file_url' => 'https://demo.clbthemes.com/v1/demo/60/content.xml',

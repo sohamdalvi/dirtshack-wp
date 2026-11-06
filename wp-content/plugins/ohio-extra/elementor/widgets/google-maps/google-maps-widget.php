@@ -6,7 +6,7 @@ class Ohio_Elementor_Google_Maps_Widget extends Ohio_Elementor_Widget_Base {
 
         $ohio_api_key = OhioOptions::get_global( 'google_maps_api_key', '' );
 
-        wp_register_script( 'jquery-maps', get_template_directory_uri() . '/assets/js/libs/jquery.google-maps.min.js', array('jquery'), '1.0.0', true );
+        wp_register_script( 'jquery-maps', get_template_directory_uri() . '/assets/js/libs/google-maps.min.js', array('jquery'), '1.0.0', true );
 
         wp_register_script( 'google-maps', 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=' . urlencode( esc_attr( $ohio_api_key ) ) . '&callback=handleGoogleMaps', false, null, true );
 

@@ -99,6 +99,16 @@ function ohio_accordion_sc_map() {
 					)
 				)
 			),
+			array(
+				'type' => 'ohio_check',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Show Numbers?', 'ohio-extra' ),
+				'param_name' => 'show_numbers',
+				'description' => __( 'Show the item number (01, 02, 03…) before each title.', 'ohio-extra' ),
+				'value' => array(
+					__( 'Yes', 'ohio-extra' ) => '0'
+				),
+			),
 			
 			// Styles.
 			array(
@@ -106,6 +116,18 @@ function ohio_accordion_sc_map() {
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Title Typography', 'ohio-extra' ),
 				'param_name' => 'accordion_tabs_title_typo',
+			),
+			array(
+				'type' => 'ohio_typography',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Number Typography', 'ohio-extra' ),
+				'param_name' => 'number_typo',
+				'dependency' => array(
+					'element' => 'show_numbers',
+					'value' => array(
+						'1'
+					)
+				),
 			),
 			array(
 				'type' => 'ohio_typography',
@@ -221,7 +243,7 @@ function ohio_accordion_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

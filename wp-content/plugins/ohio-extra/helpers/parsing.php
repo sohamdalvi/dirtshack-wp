@@ -302,12 +302,26 @@
 							}
 							break;
 						case 'flat':
-							if ( $settings['color'] && $settings['color'] != 'brand'  ) {
+							$flat_color = function( $value ) {
+								return ( $value == 'brand' ) ? 'var(--clb-color-primary)' : $value;
+							};
+
+							// Fill
+							if ( $settings['color'] ) {
+								$css .= 'background-color:' . $flat_color( $settings['color'] ) . ';';
 							}
 							if ( $settings['hover-color'] ) {
-								// if ( $settings['hover-color'] != 'brand' ) {
-								// 	$hover_css .= 'background-color:' . $settings['hover-color'] . ';';
-								// }
+								$hover_css .= 'background-color:' . $flat_color( $settings['hover-color'] ) . ';';
+							}
+
+							// Border: Flat has none by default, so add one when a border color is set
+							// (transparent in Normal state if only the Hover color is set, so the size doesn't jump)
+							if ( $settings['border-color'] || $settings['border-hover-color'] ) {
+								$flat_border = ( $settings['border-color'] ) ? $flat_color( $settings['border-color'] ) : 'transparent';
+								$css .= 'border:var(--clb-button-border-width) var(--clb-border-style-solid) ' . $flat_border . ';';
+							}
+							if ( $settings['border-hover-color'] ) {
+								$hover_css .= 'border-color:' . $flat_color( $settings['border-hover-color'] ) . ';';
 							}
 							break;
 						default:
@@ -346,6 +360,9 @@
 							break;
 						case 'flat':
 							$classes .= ' -flat';
+							break;
+						default:
+							$classes .= ' -default';
 							break;
 					}
 				}
@@ -881,4 +898,67 @@
 
 			return $atts;
 		}
+
+		/**
+		* Custom HTML icon output.
+		* Prints the user HTML as is (same structure as the Elementor widgets) and merges
+		* the theme icon classes into its root element, so existing icons keep their styling.
+		* Falls back to a wrapping span when the HTML has no single root element (plain text, several elements).
+		*/
+		static public function VC_icon_html( $html, $classes = 'icon' ) {
+			$html = trim( (string) $html );
+			if ( $html === '' ) {
+				return '';
+			}
+			$classes = trim( (string) $classes );
+			$wrap = function() use ( $html, $classes ) {
+				return '<span class="' . esc_attr( $classes ) . '">' . $html . '</span>';
+			};
+
+			if ( !preg_match( '/^<([a-zA-Z][a-zA-Z0-9-]*)(\b[^>]*?)(\/?)>/s', $html, $open ) ) {
+				return $wrap();
+			}
+			$tag = strtolower( $open[1] );
+			$void = in_array( $tag, array( 'img', 'br', 'hr', 'input', 'source', 'wbr' ), true );
+
+			// Make sure the first element is the only top-level element
+			if ( $open[3] === '/' || $void ) {
+				if ( strlen( $open[0] ) !== strlen( $html ) ) {
+					return $wrap();
+				}
+			} else {
+				$depth = 0;
+				$end = -1;
+				if ( preg_match_all( '/<(\/?)' . preg_quote( $tag, '/' ) . '\b[^>]*?(\/?)>/is', $html, $m, PREG_OFFSET_CAPTURE | PREG_SET_ORDER ) ) {
+					foreach ( $m as $t ) {
+						if ( $t[1][0] === '/' ) {
+							$depth--;
+						} elseif ( $t[2][0] !== '/' ) {
+							$depth++;
+						}
+						if ( $depth === 0 ) {
+							$end = $t[0][1] + strlen( $t[0][0] );
+							break;
+						}
+					}
+				}
+				if ( $end !== strlen( $html ) ) {
+					return $wrap();
+				}
+			}
+
+			// Merge the classes into the root element
+			$attrs = $open[2];
+			$add = preg_split( '/\s+/', $classes );
+			if ( preg_match( '/\sclass\s*=\s*(["\'])(.*?)\1/is', $attrs, $cm ) ) {
+				$current = preg_split( '/\s+/', trim( $cm[2] ) );
+				$merged = trim( implode( ' ', array_unique( array_merge( $current, $add ) ) ) );
+				$attrs = str_replace( $cm[0], ' class=' . $cm[1] . esc_attr( $merged ) . $cm[1], $attrs );
+			} else {
+				$attrs = ' class="' . esc_attr( $classes ) . '"' . $attrs;
+			}
+
+			return '<' . $open[1] . $attrs . $open[3] . '>' . substr( $html, strlen( $open[0] ) );
+		}
+
 	}

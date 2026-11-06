@@ -297,7 +297,8 @@ function ohio_pricing_table_sc_map() {
 				'param_name' => 'icon_type',
 				'value' => array(
 					__( 'Icon', 'ohio-extra' ) => 'font_icon',
-					__( 'Custom Image', 'ohio-extra' ) => 'user_image'
+					__( 'Custom Image', 'ohio-extra' ) => 'user_image',
+					__( 'Custom HTML', 'ohio-extra' ) => 'custom_html'
 				),
 				'dependency' => array(
 					'element' => 'icon_use',
@@ -326,6 +327,18 @@ function ohio_pricing_table_sc_map() {
 					'element' => 'icon_type',
 					'value' => array(
 						'user_image'
+					)
+				)
+			),
+			array(
+				'type' => 'textarea_raw_html',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Custom HTML', 'ohio-extra' ),
+				'param_name' => 'icon_as_html',
+				'dependency' => array(
+					'element' => 'icon_type',
+					'value' => array(
+						'custom_html'
 					)
 				)
 			),
@@ -521,7 +534,7 @@ function ohio_pricing_table_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

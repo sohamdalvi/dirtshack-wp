@@ -25,7 +25,7 @@
     $show_description = OhioOptions::get_global( 'portfolio_gallery_description', true );
     $show_details = OhioOptions::get_global( 'portfolio_gallery_details', true );
     $show_view_text = OhioOptions::get_global( 'portfolio_lightbox_link', true );
-    $view_text = OhioOptions::get_global( 'portfolio_lightbox_link_text', 'View Project' );
+    $view_text = OhioOptions::get_global( 'portfolio_lightbox_link_text', __( 'View Project', 'ohio' ) );
     $navigation_visibility = OhioOptions::get_global( 'lightbox_nav_visibility', true );
     $bullets_visibility = OhioOptions::get_global( 'lightbox_bullets_visibility', true );
     $bullets_type = OhioOptions::get_global( 'lightbox_bullets_type', 'default' );
@@ -37,6 +37,7 @@
     if ( $project ) :
 
 ?>
+<?php if ( $is_slider ) { OhioHelper::add_required_script( 'slider' ); } ?>
 <div class="clb-popup project-lightbox" id="<?php echo esc_attr( $project['popup_id'] ); ?>" data-lazy-to-footer="true">
     <div class="project-lightbox-gallery">
         <div class="slider -slider-lightbox<?php if ( $bullets_type == 'boxed' ) echo esc_html( ' -with-boxed-pagination' ); ?>" <?php $is_slider ? esc_attr_e('data-clb-portfolio-lightbox-slider', 'ohio') : '' ?> data-slider-navigation="<?php echo esc_attr( $navigation_visibility); ?>" data-slider-pagination="<?php echo esc_attr( $bullets_visibility); ?>" data-slider-loop="<?php echo esc_attr( $loop_mode); ?>" data-slider-mousescroll="<?php echo esc_attr( $mousewheel_scrolling); ?>" data-slider-autoplay="<?php echo esc_attr( $autoplay_mode); ?>" data-slider-autoplay-time="<?php echo esc_attr( $autoplay_interval); ?>" data-slider-autoplay-pause="">
@@ -103,21 +104,21 @@
                     <?php if ( $project['strategy'] ) : ?>
                         <li>
                             <div class="h6 title"><?php esc_html_e( 'Strategy', 'ohio' ); ?></div>
-                            <p><?php echo wp_kses( $project['strategy'], 'default' ); ?></p>
+                            <p><?php echo wp_kses( $project['strategy'], 'basic_html' ); ?></p>
                         </li>
                     <?php endif; ?>
 
                     <?php if ( $project['design'] ) : ?>
                         <li>
                             <div class="h6 title"><?php esc_html_e( 'Design', 'ohio' ); ?></div>
-                            <p><?php echo wp_kses( $project['design'], 'default' ); ?></p>
+                            <p><?php echo wp_kses( $project['design'], 'basic_html' ); ?></p>
                         </li>
                     <?php endif; ?>
 
                     <?php if ( $project['client'] ) : ?>
                         <li>
                             <div class="h6 title"><?php esc_html_e( 'Client', 'ohio' ); ?></div>
-                            <p><?php echo wp_kses( $project['client'], 'default' ); ?></p>
+                            <p><?php echo wp_kses( $project['client'], 'basic_html' ); ?></p>
                         </li>
                     <?php endif; ?>
 

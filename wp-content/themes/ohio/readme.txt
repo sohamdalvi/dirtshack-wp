@@ -26,6 +26,95 @@ You can change or remove it from "Ohio Theme > Theme Settings > General";
 
 # Release notes
 
+## [Ver 3.8.1] – Nov 02, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Product gallery breaking on variations with multiple images (WooCommerce 11 variation galleries);
+- Product grid gallery turning into a slider on tablets;
+- Tabs navigation scrolling when items overflow the container;
+- Tabs styles and vertical Tabs spacing;
+- Early textdomain loading notice from Demo Export fields;
+
+### Added
+- Options for Header elements order, icon size and visibility on mobile / desktop;
+- Scroll Direction option for Sticky Header;
+- Icon Type option (Icon, Custom Image, Custom HTML) for Accordion items;
+- Improved performance – JS libraries and element scripts now load only on pages that use them;
+
+### Updated
+- Ohio Extra plugin to the 3.8.1 version;
+
+---------------------------
+
+## [Ver 3.8] – Oct 20, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Compatibility with WooCommerce 11.2;
+- Minimal portfolio title being clickable on mobile;
+- Fatal error in Recent Projects and Recent Posts widgets when categories are saved as a string;
+- Filled button styles in WPBakery elements to match Elementor;
+- Custom HTML icons rendering and size in WPBakery elements;
+
+### Added
+- New AI Tool template (Demo 36);
+- Letter Reveal animation and Animation Speed option for Dynamic Text;
+- HTML Tag option for Dynamic Text and div title tag for Banner, Call to Action and Icon Box;
+- Subtitle and Description for Tabs, and Tab Width for vertical tabs;
+- Show Numbers option for Accordion;
+- Button for Services Table and button icons for Pricing Table and Services Table;
+- Custom HTML icon type for elements with icons;
+- Button Height and Text Fields Height options in theme settings;
+- Fill Color and Border Color (Normal/Hover) for Flat button type;
+- Size option for Icon Box;
+- Button icon option for Contact Form 7 Elementor widget;
+- Border and Border Color options for Blog Posts;
+- Captions and titles on project gallery images with show/hide option;
+- Translation support for remaining hardcoded strings;
+
+### Updated
+- Ohio Extra plugin to the 3.8 version;
+- Ohio Importer plugin to the 1.3.8 version;
+
+---------------------------
+
+## [Ver 3.7.8] – Sep 24, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Underline misalignment on hover in Portfolio Grid Type 12;
+- Link target attribute stripped in project Task, Strategy, Design and Client fields;
+- Empty Project Details section showing on project layout 9;
+- First item toolbar hidden in Accordion and Horizontal Accordion in WPBakery editor;
+- WPBakery front-end editor controls display;
+- PHP warnings for undefined array keys in Button element settings;
+
+### Added
+- URL anchors for Portfolio category filters;
+- New Projects blocks in the Ohio Blocks library;
+
+### Updated
+- Ohio Extra plugin to the 3.7.8 version;
+- Ohio Importer plugin to the 1.3.7 version;
+
+---------------------------
+
+## [Ver 3.7.7] – Sep 14, 2026
+
+### Fixed
+- Minor style fixes and improvements;
+- Tabs, Accordion and Horizontal Accordion breaking in WPBakery front-end editor;
+- Fatal error from duplicate get_slides() declaration;
+
+### Added
+- Active Menu Background option added to Menu Settings;
+
+### Updated
+- Ohio Extra plugin to the 3.7.7 version;
+
+---------------------------
+
 ## [Ver 3.7.6] – Sep 07, 2026
 
 ### Fixed

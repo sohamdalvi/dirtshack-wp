@@ -42,7 +42,7 @@
             ],
             [
                 "key" => "field_593743a43b383415",
-                "label" => "Custom CSS for Desktop <mark></mark>",
+                "label" => __( 'Custom CSS for Desktop', 'ohio' ) . ' <mark></mark>',
                 "name" => "global_page_custom_large_css",
                 "type" => "ohio_code",
                 "instructions" => __( 'Add custom CSS code for devices with a viewport from 1181px.', 'ohio' ),
@@ -53,7 +53,7 @@
             ],
             [
                 "key" => "field_593743a43b373415",
-                "label" => "Custom CSS for Tablet <mark></mark>",
+                "label" => __( 'Custom CSS for Tablet', 'ohio' ) . ' <mark></mark>',
                 "name" => "global_page_custom_medium_css",
                 "type" => "ohio_code",
                 "instructions" => __( 'Add custom CSS code for devices with a viewport up to 1180px.', 'ohio' ),
@@ -64,7 +64,7 @@
             ],
             [
                 "key" => "field_593743a43b363415",
-                "label" => "Custom CSS for Mobile <mark></mark>",
+                "label" => __( 'Custom CSS for Mobile', 'ohio' ) . ' <mark></mark>',
                 "name" => "global_page_custom_small_css",
                 "type" => "ohio_code",
                 "instructions" => __( 'Add custom CSS code for devices with a viewport up to 768px.', 'ohio' ),

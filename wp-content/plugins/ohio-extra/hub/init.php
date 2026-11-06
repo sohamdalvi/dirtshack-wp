@@ -4,7 +4,7 @@ add_action( 'admin_menu', 'register_ohio_hub_page' );
 function register_ohio_hub_page() {
     $side_menu_title = sprintf( '%s%s', __( 'Ohio Theme', 'ohio-extra' ), get_plugins_to_update_label() );
     add_menu_page(
-        'Ohio Theme',
+        __( 'Ohio Theme', 'ohio-extra' ),
         $side_menu_title,
         'edit_others_posts',
         'ohio_hub',
@@ -27,7 +27,7 @@ function ohio_hub_capability( $capability ) {
 add_action( 'admin_menu', 'register_ohio_hub_subpage_dashboard' );
 function register_ohio_hub_subpage_dashboard() {
     $submenu_name = sprintf( '%s%s', __( 'Dashboard', 'ohio-extra' ), get_plugins_to_update_label() );
-    add_submenu_page( 'ohio_hub', 'Help page', $submenu_name, 'edit_others_posts', 'ohio_hub', 'ohio_hub_dashboard_page' );
+    add_submenu_page( 'ohio_hub', __( 'Help page', 'ohio-extra' ), $submenu_name, 'edit_others_posts', 'ohio_hub', 'ohio_hub_dashboard_page' );
 }
 function prepare_plugin_meta() {
     $ordered_plugins = [
@@ -70,6 +70,25 @@ function prepare_plugin_meta() {
     ];
 
     global $tgmpa;
+
+    if ( ! is_object( $tgmpa ) ) {
+        // TGMPA didn't initialize on this site - usually because another
+        // active plugin also bundles a copy of the TGM_Plugin_Activation
+        // library and its class definition won the class_exists() race,
+        // so our own copy's plugins_loaded hook (which populates
+        // $GLOBALS['tgmpa']) never ran. Degrade gracefully instead of a
+        // fatal error that takes down all of wp-admin.
+        foreach ( $ordered_plugins as $slug => &$meta ) {
+            $meta['name']             = ucwords( str_replace( array( '-', '_' ), ' ', $slug ) );
+            $meta['is_active']        = false;
+            $meta['is_installed']     = false;
+            $meta['needs_update']     = false;
+            $meta['current_version']  = '';
+        }
+
+        return $ordered_plugins;
+    }
+
     foreach ( $ordered_plugins as $slug => &$meta ) {
         $meta['name'] = $tgmpa->plugins[$slug]['name'];
         $meta['is_active'] = $tgmpa->is_plugin_active( $slug );
@@ -119,7 +138,7 @@ function ohio_hub_dashboard_page() {
 // Settings
 add_action( 'admin_menu', 'register_ohio_hub_subpage_settings' );
 function register_ohio_hub_subpage_settings() {
-    add_submenu_page( 'ohio_hub', 'Help page', 'Theme Settings', 'edit_others_posts', 'ohio_hub_settings', 'ohio_hub_settings_page' ); 
+    add_submenu_page( 'ohio_hub', __( 'Help page', 'ohio-extra' ), __( 'Theme Settings', 'ohio-extra' ), 'edit_others_posts', 'ohio_hub_settings', 'ohio_hub_settings_page' ); 
 }
 function ohio_hub_settings_page() {
     include 'pages/settings-page.php';

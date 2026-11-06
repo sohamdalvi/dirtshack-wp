@@ -121,6 +121,7 @@ function ohio_video_func( $atts ) {
 	$tilt_attrs = '';
 	if ( !$tilt_effect ) {
 		$tilt_attrs .= ' data-tilt=true data-tilt-perspective=6000';
+		OhioHelper::add_required_script( 'tilt' );
 	}
 
 	// Wrapper ID

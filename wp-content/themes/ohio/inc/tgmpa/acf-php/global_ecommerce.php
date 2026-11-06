@@ -119,7 +119,7 @@
 					"scale" => __( 'Image Scaling', 'ohio' ),
 					"overlay" => __( 'Image Overlay', 'ohio' ),
 					"greyscale" => __( 'Image Greyscale', 'ohio' ),
-					"transition" => __( 'Image Transition', 'ohio' ),
+					"transition" => __( 'Image Crossfade', 'ohio' ),
 				],
 				"default_value" => "none",
 				"allow_null" => 0,

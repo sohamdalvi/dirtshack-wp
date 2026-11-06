@@ -8,7 +8,9 @@
 <div class="accordion-item<?php echo esc_attr( $wrapper_classes ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>">
 	<div class="accordion-button">
         <div class="h6 accordion-header">
-        	<?php if ( $with_icon && $icon_as_icon) : ?>
+        	<?php if ( $with_icon && $icon_type == 'custom_html' && $icon_as_html ) : ?>
+				<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon' ); ?>
+			<?php elseif ( $with_icon && $icon_as_icon ) : ?>
 				<i class="icon <?php echo $icon_as_icon; ?>"></i>
 			<?php endif; ?>
         	<?php echo $heading; ?>

@@ -48,7 +48,7 @@ function ohio_vertical_slider_sc_map() {
 				'group' => __( 'General', 'ohio-extra' ),
 				'heading' => __( 'Autoplay Interval Timeout', 'ohio-extra' ),
 				'param_name' => 'autoplay_timeout',
-				'description' => 'Autoplay interval timeout in seconds.',
+				'description' => __( 'Autoplay interval timeout in seconds.', 'ohio-extra' ),
 				'value' => '3000',
 				'dependency' => array(
 					'element' => 'autoplay_mode',

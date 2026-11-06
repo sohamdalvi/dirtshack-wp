@@ -96,6 +96,7 @@ function ohio_icon_box_sc_map() {
 				'heading' => __( 'Title HTML Tag', 'ohio-extra' ),
 				'param_name' => 'heading_tag',
 				'value' => array(
+					__( 'div', 'ohio-extra' ) => 'div',
 					__( 'h1', 'ohio-extra' ) => 'h1',
 					__( 'h2', 'ohio-extra' ) => 'h2',
 					__( 'h3', 'ohio-extra' ) => 'h3',
@@ -139,11 +140,23 @@ function ohio_icon_box_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'Icon', 'ohio-extra' ),
+				'heading' => __( 'Size', 'ohio-extra' ),
+				'param_name' => 'icon_group_size',
+				'value' => array(
+					__( 'Default', 'ohio-extra' ) => 'default',
+					__( 'Small', 'ohio-extra' ) => 'small',
+					__( 'Large', 'ohio-extra' ) => 'large'
+				),
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Icon', 'ohio-extra' ),
 				'heading' => __( 'Type', 'ohio-extra' ),
 				'param_name' => 'icon_type',
 				'value' => array(
 					__( 'Icon', 'ohio-extra' ) => 'font_icon',
-					__( 'Custom Image', 'ohio-extra' ) => 'user_image'
+					__( 'Custom Image', 'ohio-extra' ) => 'user_image',
+					__( 'Custom HTML', 'ohio-extra' ) => 'custom_html'
 				),
 			),
 			array(
@@ -168,6 +181,18 @@ function ohio_icon_box_sc_map() {
 					'element' => 'icon_type',
 					'value' => array(
 						'user_image'
+					)
+				)
+			),
+			array(
+				'type' => 'textarea_raw_html',
+				'group' => __( 'Icon', 'ohio-extra' ),
+				'heading' => __( 'Custom HTML', 'ohio-extra' ),
+				'param_name' => 'icon_as_html',
+				'dependency' => array(
+					'element' => 'icon_type',
+					'value' => array(
+						'custom_html'
 					)
 				)
 			),
@@ -212,18 +237,18 @@ function ohio_icon_box_sc_map() {
 				'dependency' => array(
 					'element' => 'icon_type',
 					'value' => array(
-						'font_icon'
+						'font_icon', 'custom_html'
 					)
 				),
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
 				'value' => '0'
 			),
 
-			// Link.
+			// Button.
 			array(
 				'type' => 'ohio_check',
-				'group' => __( 'Link', 'ohio-extra' ),
-				'heading' => __( 'Add Link?', 'ohio-extra' ),
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Add Button?', 'ohio-extra' ),
 				'param_name' => 'use_link',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '0'
@@ -231,7 +256,7 @@ function ohio_icon_box_sc_map() {
 			),
 			array(
 				'type' => 'vc_link',
-				'group' => __( 'Link', 'ohio-extra' ),
+				'group' => __( 'Button', 'ohio-extra' ),
 				'heading' => __( 'Link URL', 'ohio-extra' ),
 				'param_name' => 'link_url',
 				'dependency' => array(
@@ -240,6 +265,88 @@ function ohio_icon_box_sc_map() {
 						'1'
 					)
 				),
+			),
+			array(
+				'type' => 'ohio_check',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Add Icon?', 'ohio-extra' ),
+				'param_name' => 'button_icon_use',
+				'value' => array(
+					__( 'Yes', 'ohio-extra' ) => '0'
+				),
+				'dependency' => array(
+					'element' => 'use_link',
+					'value' => array(
+						'1'
+					)
+				),
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Position', 'ohio-extra' ),
+				'param_name' => 'button_icon_position',
+				'std' => 'left',
+				'value' => array(
+					__( 'Left', 'ohio-extra' ) => 'left',
+					__( 'Right', 'ohio-extra' ) => 'right',
+				),
+				'dependency' => array(
+					'element' => 'button_icon_use',
+					'value' => '1'
+				)
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Type', 'ohio-extra' ),
+				'param_name' => 'button_icon_type',
+				'value' => array(
+					__( 'Icon', 'ohio-extra' ) => 'font_icon',
+					__( 'Custom Image', 'ohio-extra' ) => 'user_image',
+					__( 'Custom HTML', 'ohio-extra' ) => 'custom_html'
+				),
+				'dependency' => array(
+					'element' => 'button_icon_use',
+					'value' => '1'
+				)
+			),
+			array(
+				'type' => 'ohio_icon_picker',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Icon', 'ohio-extra' ),
+				'param_name' => 'button_icon_as_icon',
+				'settings' => array(),
+				'dependency' => array(
+					'element' => 'button_icon_type',
+					'value' => array(
+						'font_icon'
+					)
+				)
+			),
+			array(
+				'type' => 'attach_image',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Custom Image', 'ohio-extra' ),
+				'param_name' => 'button_icon_as_image',
+				'dependency' => array(
+					'element' => 'button_icon_type',
+					'value' => array(
+						'user_image'
+					)
+				)
+			),
+			array(
+				'type' => 'textarea_raw_html',
+				'group' => __( 'Button', 'ohio-extra' ),
+				'heading' => __( 'Custom HTML', 'ohio-extra' ),
+				'param_name' => 'button_icon_as_html',
+				'dependency' => array(
+					'element' => 'button_icon_type',
+					'value' => array(
+						'custom_html'
+					)
+				)
 			),
 
 			// Style.
@@ -354,7 +461,7 @@ function ohio_icon_box_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

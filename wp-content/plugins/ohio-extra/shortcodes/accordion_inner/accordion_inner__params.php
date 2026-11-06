@@ -79,17 +79,46 @@ function ohio_accordion_inner_sc_map() {
 				)
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'Icon', 'ohio-extra' ),
+				'heading' => __( 'Type', 'ohio-extra' ),
+				'param_name' => 'icon_type',
+				'value' => array(
+					__( 'Icon', 'ohio-extra' ) => 'font_icon',
+					__( 'Custom HTML', 'ohio-extra' ) => 'custom_html'
+				),
+				'std' => 'font_icon',
+				'dependency' => array(
+					'element' => 'with_icon',
+					'value' => array(
+						'1'
+					)
+				)
+			),
+			array(
 				'type' => 'ohio_icon_picker',
 				'group' => __( 'Icon', 'ohio-extra' ),
 				'heading' => __( 'Icon', 'ohio-extra' ),
 				'param_name' => 'icon_as_icon',
 				'settings' => array(),
 				'dependency' => array(
-					'element' => 'with_icon',
+					'element' => 'icon_type',
 					'value' => array(
-						'1'
+						'font_icon'
 					)
 				),
+			),
+			array(
+				'type' => 'textarea_raw_html',
+				'group' => __( 'Icon', 'ohio-extra' ),
+				'heading' => __( 'Custom HTML', 'ohio-extra' ),
+				'param_name' => 'icon_as_html',
+				'dependency' => array(
+					'element' => 'icon_type',
+					'value' => array(
+						'custom_html'
+					)
+				)
 			),
 
 			// Styles.

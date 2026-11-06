@@ -4,12 +4,15 @@ class Ohio_Elementor_Heading_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_enqueue_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
+        wp_register_script( 'aos', get_template_directory_uri() . '/assets/js/libs/aos.min.js', [ 'jquery' ], false, true );
         wp_register_script( 'ohio-elementor-heading-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend' ], '1.0.0', true );
     }
 
     public function get_script_depends() {
-        return [ 'aos', 'ohio-elementor-heading-widget' ];
+        return $this->conditionalScripts( [
+            'aos' => function () { return ! empty( $this->get_settings( 'highlighted_animation' ) ); },
+            'ohio-elementor-heading-widget',
+        ] );
     }
 
     public function get_name()

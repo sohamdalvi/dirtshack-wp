@@ -13,7 +13,7 @@ function ohio_icon_box_func( $atts ) {
 	$box_type_layout = ( isset( $box_type_layout ) ) ? OhioExtraFilter::string( $box_type_layout, 'string', 'top_icon' ) : 'top_icon';
 	$content_full = isset( $content_full ) ? OhioExtraFilter::string( $content_full, 'string', 'none') : 'none';
 	$box_alignment = ( isset( $box_alignment ) ) ? OhioExtraFilter::string( $box_alignment, 'string', 'center' ) : 'center';
-	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag, 'h5' ) : 'h5';
+	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag, 'h5', true ) : 'h5';
 	$title = ( isset( $title ) ) ? OhioExtraFilter::string( $title, 'string', '' ) : '';
 	$title_typo = ( isset( $title_typo ) ) ? OhioExtraFilter::string( $title_typo ) : false;
 	$description = isset( $description ) ? OhioExtraFilter::string( $description, 'textarea', '' ) : '';
@@ -26,14 +26,28 @@ function ohio_icon_box_func( $atts ) {
 	$readmore_button = preg_replace( '/\&amp\;/', '&', $readmore_button );
 	parse_str( $readmore_button, $button_settings );
 
+	// Button icon
+	$button_icon_use = isset( $button_icon_use ) ? OhioExtraFilter::boolean( $button_icon_use ) : false;
+	$button_icon_position = isset( $button_icon_position ) ? OhioExtraFilter::string( $button_icon_position, 'string', 'left' ) : 'left';
+	$button_icon_type = isset( $button_icon_type ) ? OhioExtraFilter::string( $button_icon_type, 'string', 'font_icon' ) : 'font_icon';
+	$button_icon_as_icon = isset( $button_icon_as_icon ) ? OhioExtraFilter::string( $button_icon_as_icon, 'string', 'ion ion-md-arrow-forward' ) : 'ion ion-md-arrow-forward';
+	$button_icon_as_image = isset( $button_icon_as_image ) ? OhioExtraFilter::string( $button_icon_as_image, 'string', '' ) : '';
+	$button_icon_as_html = isset( $button_icon_as_html ) ? rawurldecode( base64_decode( $button_icon_as_html ) ) : '';
+	$button_icon_image_atts = ( $button_icon_type == 'user_image' && $button_icon_as_image ) ? OhioExtraParser::generateImageAttsById( $button_icon_as_image, __( 'Icon', 'ohio-extra' ) ) : '';
+	if ( $use_link && $button_icon_use && $button_icon_type == 'font_icon' && $button_icon_as_icon ) {
+		$GLOBALS['ohio_icon_fonts'][] = $button_icon_as_icon;
+	}
+
 	// Icon
 	$icon_type_layout = ( isset( $icon_type_layout ) ) ? OhioExtraFilter::string( $icon_type_layout, 'string', 'default' ) : 'default';
+	$icon_group_size = ( isset( $icon_group_size ) ) ? OhioExtraFilter::string( $icon_group_size, 'string', 'default' ) : 'default';
 	$icon_type = ( isset( $icon_type ) ) ? OhioExtraFilter::string( $icon_type, 'string', 'font_icon' ) : 'font_icon';
 	$icon_as_icon = ( isset( $icon_as_icon ) ) ? OhioExtraFilter::string( $icon_as_icon, 'attr', '' ) : '';
 	$icon_size = isset( $icon_size ) ? OhioExtraFilter::string( $icon_size, 'string', '') : '';
 	$icon_border_width = isset( $icon_border_width ) ? OhioExtraFilter::string( $icon_border_width, 'string', '') : '';
 	$icon_corners = isset( $icon_corners ) ? OhioExtraFilter::string( $icon_corners, 'string', '') : '';
 	$icon_as_image = ( isset( $icon_as_image ) ) ? OhioExtraFilter::string( $icon_as_image ) : false;
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
 	$icon_image_atts = OhioExtraParser::generateImageAttsById( OhioExtraFilter::string( $icon_as_image ), $title );
 	$icon_color = ( isset( $icon_color ) ) ? OhioExtraFilter::string( $icon_color ) : false;
 	$border_color = ( isset( $border_color ) ) ? OhioExtraFilter::string( $border_color ) : false;
@@ -116,6 +130,15 @@ function ohio_icon_box_func( $atts ) {
 			break;
 		case 'only_fill':
 			$icon_classes = ' -contained';
+			break;
+	}
+
+	switch ( $icon_group_size ) {
+		case 'small':
+			$icon_classes .= ' -small';
+			break;
+		case 'large':
+			$icon_classes .= ' -large';
 			break;
 	}
 
@@ -211,6 +234,12 @@ function ohio_icon_box_func( $atts ) {
 	if ( isset( $icon_size ) && $icon_size != '' ) {
 		$_style_block .= '#' . $wrapper_id . ' .icon-group .icon{';
 		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group > span{';
+		$_style_block .= 'font-size:' . $icon_size . 'px;';
+		$_style_block .= '}';
+		$_style_block .= '#' . $wrapper_id . ' .icon-group svg{';
+		$_style_block .= 'height:' . $icon_size . 'px;';
 		$_style_block .= '}';
 	}
 

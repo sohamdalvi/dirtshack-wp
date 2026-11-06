@@ -20,7 +20,9 @@
 
         <?php if ( $with_icon == true ): ?>
         	<div class="icon-group">
-	            <?php if ( $icon_as_icon ): ?>
+	            <?php if ( $icon_type == 'custom_html' && $icon_as_html ): ?>
+					<?php echo $icon_as_html; ?>
+				<?php elseif ( $icon_as_icon ): ?>
 					<i class="<?php echo esc_attr( $icon_as_icon ); ?>"></i>
 				<?php elseif ( $icon_as_image ): ?>
 					<img <?php echo $icon_image_atts ?> />

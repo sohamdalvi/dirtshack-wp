@@ -18,8 +18,8 @@
 	$footer_background_text_align = OhioOptions::get( 'page_footer_background_text_align' );
 
 	if ( !$copyright_text_right && !$copyright_text_left ) {
-		$copyright_text_left = '&copy; [ohio_current_year], [ohio_site_name]. Made with passion by <a target="_blank" href="https://clbthemes.com/">Colabrio</a>';
-		$copyright_text_right = '<a target="_blank" href="#">Privacy & Cookie Policy</a> | <a target="_blank" href="#">Terms of Service</a>';
+		$copyright_text_left = '&copy; [ohio_current_year], [ohio_site_name]. ' . esc_html__( 'Made with passion by', 'ohio' ) . ' <a target="_blank" href="https://clbthemes.com/">Colabrio</a>';
+		$copyright_text_right = '<a target="_blank" href="#">' . esc_html__( 'Privacy & Cookie Policy', 'ohio' ) . '</a> | <a target="_blank" href="#">' . esc_html__( 'Terms of Service', 'ohio' ) . '</a>';
 	}
 
 	$footer_widgets_count = 0;

@@ -4,7 +4,7 @@
 	Plugin URI: https://clbthemes.com
 	Description: Supercharge your WordPress site with WPBakery Page Builder shortcodes, Elementor widgets and ACF PRO extended theme settings and additional widgets.
 
-	Version: 3.7.6
+	Version: 3.8.1
 	Author: Colabrio
 	Author URI: https://clbthemes.com
 
@@ -41,9 +41,14 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 
 	// Styles and JS scripts
 	function ohio_extra_admin_style_and_scripts() {
-		wp_enqueue_style( 'ohio-extra-styles', plugin_dir_url( __FILE__ ) . 'assets/css/ohio-extra.css', [], '3.7.6' );
-		wp_enqueue_style( 'ohio-admin-wpbakery-styles', plugin_dir_url( __FILE__ ) . 'assets/css/wpbakery.css', [], '3.7.6' );
-		wp_enqueue_script( 'ohio-extra-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/min/main.min.js', [], '3.7.6' );
+		wp_enqueue_style( 'ohio-extra-styles', plugin_dir_url( __FILE__ ) . 'assets/css/ohio-extra.css', [], '3.8.1' );
+		wp_enqueue_style( 'ohio-admin-wpbakery-styles', plugin_dir_url( __FILE__ ) . 'assets/css/wpbakery.css', [], '3.8.1' );
+		wp_enqueue_script( 'ohio-extra-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/min/main.min.js', [], '3.8.1' );
+		wp_localize_script( 'ohio-extra-scripts', 'ohioExtraL10n', array(
+			'proceeding'   => esc_html__( 'Proceeding..', 'ohio-extra' ),
+			'deactivating' => esc_html__( 'Deactivating..', 'ohio-extra' ),
+			'saving'       => esc_html__( 'Saving..', 'ohio-extra' ),
+		) );
 	}
 	add_action( 'admin_enqueue_scripts', 'ohio_extra_admin_style_and_scripts' );
 
@@ -82,6 +87,9 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 	// Coming soon
 	include_once plugin_dir_path( __FILE__ ) . 'helpers/coming_soon.php';
 
+	// Project page theme-template notice (Elementor editor only)
+	include_once plugin_dir_path( __FILE__ ) . 'helpers/project_page_notice.php';
+
 	// Ohio social shortcodes
 	function ohio_share_woo_func() {
 		global $post;
@@ -110,16 +118,16 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 				foreach ( $social_networks as $link ) {
 					switch ( $link ) {
 						case 'facebook':
-							echo '<a class="-unlink" href="' . $facebook_link . '" target="' . $target_blank . '" aria-label="' . esc_attr( 'Facebook', 'ohio-extra' ) . '"><i class="network fa-brands fa-facebook-f"></i></a>';
+							echo '<a class="-unlink" href="' . $facebook_link . '" target="' . $target_blank . '" aria-label="' . esc_attr__( 'Facebook', 'ohio-extra' ) . '"><i class="network fa-brands fa-facebook-f"></i></a>';
 							break;
 						case 'twitter':
 							echo '<a class="-unlink" href="' . $twitter_link . '" target="' . $target_blank . '" aria-label="' . esc_attr( 'X', 'ohio-extra' ) . '"><i class="network fa-brands fa-x-twitter"></i></a>';
 							break;
 						case 'linkedin':
-							echo '<a class="-unlink" href="' . $linkedin_link . '" target="' . $target_blank . '" aria-label="' . esc_attr( 'Linkedin', 'ohio-extra' ) . '"><i class="network fa-brands fa-linkedin"></i></a>';
+							echo '<a class="-unlink" href="' . $linkedin_link . '" target="' . $target_blank . '" aria-label="' . esc_attr__( 'Linkedin', 'ohio-extra' ) . '"><i class="network fa-brands fa-linkedin"></i></a>';
 							break;
 						case 'pinterest':
-							echo '<a class="-unlink" href="' . $pinterest_link . '" target="' . $target_blank . '" aria-label="' . esc_attr( 'Pinterest', 'ohio-extra' ) . '"><i class="network fa-brands fa-pinterest"></i></span></a>';
+							echo '<a class="-unlink" href="' . $pinterest_link . '" target="' . $target_blank . '" aria-label="' . esc_attr__( 'Pinterest', 'ohio-extra' ) . '"><i class="network fa-brands fa-pinterest"></i></span></a>';
 							break;
 					}
 				}
@@ -158,16 +166,16 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 				foreach ( $social_networks as $link ) {
 					switch ( $link ) {
 						case 'facebook':
-							echo '<a href="' . $facebook_link . '" target="' . $target_blank . '" class="facebook network -unlink" aria-label="' . esc_attr( 'Facebook', 'ohio-extra' ) . '"><i class="fa-brands fa-facebook-f"></i></a>';
+							echo '<a href="' . $facebook_link . '" target="' . $target_blank . '" class="facebook network -unlink" aria-label="' . esc_attr__( 'Facebook', 'ohio-extra' ) . '"><i class="fa-brands fa-facebook-f"></i></a>';
 							break;
 						case 'twitter':
 							echo '<a href="' . $twitter_link . '" target="' . $target_blank . '" class="twitter network -unlink" aria-label="' . esc_attr( 'X', 'ohio-extra' ) . '"><i class="fa-brands fa-x-twitter"></i></a>';
 							break;
 						case 'linkedin':
-							echo '<a href="' . $linkedin_link . '" target="' . $target_blank . '" class="linkedin network -unlink" aria-label="' . esc_attr( 'Linkedin', 'ohio-extra' ) . '"><i class="fa-brands fa-linkedin"></i></a>';
+							echo '<a href="' . $linkedin_link . '" target="' . $target_blank . '" class="linkedin network -unlink" aria-label="' . esc_attr__( 'Linkedin', 'ohio-extra' ) . '"><i class="fa-brands fa-linkedin"></i></a>';
 							break;
 						case 'pinterest':
-							echo '<a href="' . $pinterest_link . '" target="' . $target_blank . '" class="pinterest network -unlink" aria-label="' . esc_attr( 'Pinterest', 'ohio-extra' ) . '"><i class="fa-brands fa-pinterest"></i></a>';
+							echo '<a href="' . $pinterest_link . '" target="' . $target_blank . '" class="pinterest network -unlink" aria-label="' . esc_attr__( 'Pinterest', 'ohio-extra' ) . '"><i class="fa-brands fa-pinterest"></i></a>';
 							break;
 					}
 				}
@@ -439,7 +447,7 @@ if ( in_array( $ohio_extra_get_theme->get( 'TextDomain' ), array( 'ohio', 'ohio-
 		));
 		array_push( $args, array(
 			'id'		=>	'custom-settings',
-			'title'		=>	esc_html__( 'Custom CSS & JS', 'ohio' ),
+			'title'		=>	esc_html__( 'Custom CSS & JS', 'ohio-extra' ),
 			'href'		=>	admin_url( 'admin.php?page=ohio_hub_settings&options_page=theme-general-custom' ),
 			'parent'	=>	'theme-settings',
 		));

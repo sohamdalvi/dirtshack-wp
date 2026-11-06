@@ -182,6 +182,19 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
             ]
         );
 
+        $this->add_control(
+            'table_button_position',
+            [
+                'label' => __( 'Button Position', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => [
+                    'default' => __( 'After Features', 'ohio-extra' ),
+                    'top' => __( 'Before Features', 'ohio-extra' ),
+                ]
+            ]
+        );
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -380,6 +393,67 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
 
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'button_section',
+            [
+                'label' => __( 'Button', 'ohio-extra' ),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'use_link',
+            [
+                'label' => __( 'Add Button?', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => __( 'Yes', 'ohio-extra' ),
+                'label_off' => __( 'No', 'ohio-extra' ),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+
+        $this->add_control(
+            'button_title',
+            [
+                'label' => __( 'Button Text', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => __( 'Read more', 'ohio-extra' ),
+                'label_block' => true,
+                'condition' => [
+                    'use_link' => 'yes',
+                ],
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_link',
+            [
+                'label' => __( 'Link URL', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::URL,
+                'placeholder' => __( 'https://your-link.com', 'ohio-extra' ),
+                'show_external' => true,
+                'default' => [
+                    'url' => '#',
+                    'is_external' => true,
+                    'nofollow' => true,
+                ],
+                'condition' => [
+                    'use_link' => 'yes',
+                ],
+                'dynamic' => [
+                    'active' => true,
+                ],
+            ]
+        );
+
+        $this->addButtonIconControls();
+
+        $this->end_controls_section();
+
         //Styles
         $this->start_controls_section(
             'typo_section',
@@ -395,7 +469,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Title Color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .title' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .heading .title' => 'color: {{VALUE}}',
                 ],
             ]
         );
@@ -405,7 +479,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'name' => 'headline_typography',
                 'label' => __( 'Title Typography', 'ohio-extra' ),
-                'selector' => '{{WRAPPER}} .title',
+                'selector' => '{{WRAPPER}} .heading .title',
             ]
         );
 
@@ -415,7 +489,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
                 'label' => __( 'Subtitle color', 'ohio-extra' ),
                 'type' =>  \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .subtitle' => 'color: {{VALUE}}',
+                    '{{WRAPPER}} .heading .subtitle' => 'color: {{VALUE}}',
                 ],
                 'separator' => 'before'
             ]
@@ -426,7 +500,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
             [
                 'name' => 'subtitle_typography',
                 'label' => __( 'Subtitle Typography', 'ohio-extra' ),
-                'selector' => '{{WRAPPER}} .subtitle',
+                'selector' => '{{WRAPPER}} .heading .subtitle',
             ]
         );
         
@@ -664,6 +738,8 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->end_controls_section();
+
+        $this->addButtonStyleSection();
     }
 
     protected function render() {
@@ -698,6 +774,7 @@ class Ohio_Elementor_Service_Table_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
         include( plugin_dir_path( __FILE__ ) . 'service-table-view.php' );

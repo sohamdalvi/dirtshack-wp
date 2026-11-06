@@ -29,6 +29,7 @@ function ohio_button_func( $atts ) {
 	$icon_type = isset( $icon_type ) ? OhioExtraFilter::string( $icon_type, 'string', 'font_icon' ) : 'font_icon';
 	$icon_as_icon = isset( $icon_as_icon ) ? OhioExtraFilter::string( $icon_as_icon, 'string', '' ) : '';
 	$icon_as_image = isset( $icon_as_image ) ? OhioExtraFilter::string( $icon_as_image, 'string', '' ) : '';
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
 
 	$icon_image_atts = OhioExtraParser::generateImageAttsById( OhioExtraFilter::string( $icon_as_image ), __( 'Icon', 'ohio-extra' ) );
 	$color = isset( $color ) ? OhioExtraFilter::string( $color, 'string', false ) : false;
@@ -194,8 +195,8 @@ function ohio_button_func( $atts ) {
 	$button_color = OhioExtraParser::VC_color_to_CSS( $color, '{{color}}' );
 	if ( $button_color ) {
 		
-		if ( $layout == 'fill' ) {
-			$_style_block .= '#' . $wrapper_id . '.button.-default:not(:hover){';
+		if ( $layout == 'fill' || $layout == 'flat' ) {
+			$_style_block .= '#' . $wrapper_id . '.button:not(:hover){';
 			$_style_block .= 'background-color:' . $button_color . ';';
 			$_style_block .= '}';
 
@@ -205,8 +206,8 @@ function ohio_button_func( $atts ) {
 	$button_hover_color = OhioExtraParser::VC_color_to_CSS( $hover_color, '{{color}}' );
 	if ( $button_hover_color ) {
 		
-		if ( $layout == 'fill' ) {
-			$_style_block .= '#' . $wrapper_id . '.button.-default:hover{';
+		if ( $layout == 'fill' || $layout == 'flat' ) {
+			$_style_block .= '#' . $wrapper_id . '.button:hover{';
 			$_style_block .= 'background-color:' . $button_hover_color . ';';
 			$_style_block .= '}';
 
@@ -214,6 +215,16 @@ function ohio_button_func( $atts ) {
 	}
 
 	$button_border_color = OhioExtraParser::VC_color_to_CSS( $border_color, '{{color}}' );
+	$button_border_hover_color = OhioExtraParser::VC_color_to_CSS( $border_hover_color, '{{color}}' );
+
+	// Flat has no border by default: add one when any border color is set
+	// (transparent in Normal state if only the Hover color is set, so the size doesn't jump)
+	if ( $layout == 'flat' && ( $button_border_color || $button_border_hover_color ) ) {
+		$_style_block .= '#' . $wrapper_id . '.button.-flat{';
+		$_style_block .= 'border:var(--clb-button-border-width) var(--clb-border-style-solid) ' . ( $button_border_color ? $button_border_color : 'transparent' ) . ';';
+		$_style_block .= '}';
+	}
+
 	if ( $button_border_color ) {
 
 		if ( $layout == 'fill' || $layout == 'outline' ) {
@@ -223,10 +234,9 @@ function ohio_button_func( $atts ) {
 		}
 	}
 
-	$button_border_hover_color = OhioExtraParser::VC_color_to_CSS( $border_hover_color, '{{color}}' );
 	if ( $button_border_hover_color ) {
 
-		if ( $layout == 'fill' || $layout == 'outline' ) {
+		if ( $layout == 'fill' || $layout == 'outline' || $layout == 'flat' ) {
 			$_style_block .= '#' . $wrapper_id . '.button:hover{';
 			$_style_block .= 'border-color:' . $button_border_hover_color . ';';
 			$_style_block .= '}';

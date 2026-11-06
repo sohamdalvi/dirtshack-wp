@@ -7,13 +7,17 @@
 ?>
 <div class="ohio-widget service-table<?php echo esc_attr( $wrapper_classes ); ?>" id="<?php echo esc_attr( $wrapper_id ); ?>" <?php echo esc_attr( $animation_attrs ); ?> <?php echo esc_attr( $tilt_attrs ); ?>>
 
-	<span class="icon-group<?php echo esc_attr( $icon_classes ); ?>">
-		<?php if ( $icon_type == 'font_icon' && $icon_as_icon ) : ?>
-			<i class="icon <?php echo $icon_as_icon; ?>"></i>
-		<?php elseif ( $icon_as_image ) : ?>
-			<img src="<?php echo esc_url( $icon_as_image ); ?>" alt="<?php echo esc_attr( $title ); ?>">
-		<?php endif; ?>
-	</span>
+	<?php if ( ( $icon_type == 'font_icon' && $icon_as_icon ) || ( $icon_type == 'custom_html' && $icon_as_html ) || $icon_as_image ) : ?>
+		<span class="icon-group<?php echo esc_attr( $icon_classes ); ?>">
+			<?php if ( $icon_type == 'font_icon' && $icon_as_icon ) : ?>
+				<i class="icon <?php echo $icon_as_icon; ?>"></i>
+			<?php elseif ( $icon_type == 'custom_html' && $icon_as_html ) : ?>
+				<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon' ); ?>
+			<?php elseif ( $icon_as_image ) : ?>
+				<img src="<?php echo esc_url( $icon_as_image ); ?>" alt="<?php echo esc_attr( $title ); ?>">
+			<?php endif; ?>
+		</span>
+	<?php endif; ?>
 
 	<div class="heading">
 		<?php if ( $subtitle ) : ?>
@@ -30,6 +34,32 @@
 	        <?php echo $description; ?>
 	    </div>
     <?php endif; ?>
+
+    <?php if ( $table_button_position == 'top' && $add_link ) : ?>
+		<div class="service-table-button-holder">
+			<a class="button<?php echo $button_css['classes']; ?>" href="<?php echo esc_url( $button_link['url'] ); ?>"<?php if ( $button_link['blank'] ) echo ' target="_blank"'; ?>>
+				<?php if ( $button_icon_use && $button_icon_position == 'left' ) : ?>
+					<?php if ( $button_icon_type == 'user_image' && $button_icon_image_atts ) : ?>
+						<img class="icon -left -image" <?php echo $button_icon_image_atts; ?> />
+					<?php elseif ( $button_icon_type == 'font_icon' && $button_icon_as_icon ) : ?>
+						<i class="icon -left <?php echo $button_icon_as_icon; ?>"></i>
+					<?php elseif ( $button_icon_type == 'custom_html' && $button_icon_as_html ) : ?>
+						<?php echo OhioExtraParser::VC_icon_html( $button_icon_as_html, 'icon -left' ); ?>
+					<?php endif; ?>
+				<?php endif; ?>
+				<?php echo $button_link['caption']; ?>
+				<?php if ( $button_icon_use && $button_icon_position == 'right' ) : ?>
+					<?php if ( $button_icon_type == 'user_image' && $button_icon_image_atts ) : ?>
+						<img class="icon -right -image" <?php echo $button_icon_image_atts; ?> />
+					<?php elseif ( $button_icon_type == 'font_icon' && $button_icon_as_icon ) : ?>
+						<i class="icon -right <?php echo $button_icon_as_icon; ?>"></i>
+					<?php elseif ( $button_icon_type == 'custom_html' && $button_icon_as_html ) : ?>
+						<?php echo OhioExtraParser::VC_icon_html( $button_icon_as_html, 'icon -right' ); ?>
+					<?php endif; ?>
+				<?php endif; ?>
+			</a>
+		</div>
+	<?php endif; ?>
 
     <div class="service-table-features">
 
@@ -62,4 +92,28 @@
 		<?php endif; ?>
 
 	</div>
+
+	<?php if ( $table_button_position == 'default' && $add_link ) : ?>
+		<a class="button<?php echo $button_css['classes']; ?>" href="<?php echo esc_url( $button_link['url'] ); ?>"<?php if ( $button_link['blank'] ) echo ' target="_blank"'; ?>>
+			<?php if ( $button_icon_use && $button_icon_position == 'left' ) : ?>
+				<?php if ( $button_icon_type == 'user_image' && $button_icon_image_atts ) : ?>
+					<img class="icon -left -image" <?php echo $button_icon_image_atts; ?> />
+				<?php elseif ( $button_icon_type == 'font_icon' && $button_icon_as_icon ) : ?>
+					<i class="icon -left <?php echo $button_icon_as_icon; ?>"></i>
+				<?php elseif ( $button_icon_type == 'custom_html' && $button_icon_as_html ) : ?>
+					<?php echo OhioExtraParser::VC_icon_html( $button_icon_as_html, 'icon -left' ); ?>
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php echo $button_link['caption']; ?>
+			<?php if ( $button_icon_use && $button_icon_position == 'right' ) : ?>
+				<?php if ( $button_icon_type == 'user_image' && $button_icon_image_atts ) : ?>
+					<img class="icon -right -image" <?php echo $button_icon_image_atts; ?> />
+				<?php elseif ( $button_icon_type == 'font_icon' && $button_icon_as_icon ) : ?>
+					<i class="icon -right <?php echo $button_icon_as_icon; ?>"></i>
+				<?php elseif ( $button_icon_type == 'custom_html' && $button_icon_as_html ) : ?>
+					<?php echo OhioExtraParser::VC_icon_html( $button_icon_as_html, 'icon -right' ); ?>
+				<?php endif; ?>
+			<?php endif; ?>
+		</a>
+	<?php endif; ?>
 </div>

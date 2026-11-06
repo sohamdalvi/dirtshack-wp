@@ -10,6 +10,10 @@
 	    
 	    <?php if ( $icon_use && $icon_position == 'left' ): ?>
 
+			<?php if ( $icon_type == 'custom_html' && $icon_as_html ): ?>
+				<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon -left' ); ?>
+			<?php else: ?>
+
 	    	<?php if ( !empty( $icon_as_icon ) ): ?>
 	    		<i class="icon -left <?php echo $icon_as_icon; ?>"></i>
 			<?php endif; ?>
@@ -24,11 +28,17 @@
 			    </i>
 			<?php endif; ?>
 
+			<?php endif; ?>
+
 		<?php endif; ?>
 
 		<?php echo $link['caption']; ?>
 
 		<?php if ( $icon_use && $icon_position == 'right' ): ?>
+
+			<?php if ( $icon_type == 'custom_html' && $icon_as_html ): ?>
+				<?php echo OhioExtraParser::VC_icon_html( $icon_as_html, 'icon -right' ); ?>
+			<?php else: ?>
 
 			<?php if ( !empty( $icon_as_icon ) ): ?>
 	    		<i class="icon -right <?php echo $icon_as_icon; ?>"></i>
@@ -42,6 +52,8 @@
 				<i class="icon -right">
 			    	<svg class="default" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M646-442.5H170v-75h476L426.5-737l53.5-53 310 310-310 310-53.5-53L646-442.5Z"/></svg>
 			    </i>
+			<?php endif; ?>
+
 			<?php endif; ?>
 			
 		<?php endif; ?>

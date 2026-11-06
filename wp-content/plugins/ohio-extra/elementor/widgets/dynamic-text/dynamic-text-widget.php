@@ -4,8 +4,7 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
     public function __construct( $data = [], $args = null ) {
         parent::__construct( $data, $args );
 
-        wp_enqueue_script( 'typed', get_template_directory_uri() . '/assets/js/libs/typed.min.js', [ 'jquery' ], '1.0.0', true );
-        wp_register_script( 'ohio-elementor-dynamic-text-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend', 'typed' ], '1.0.0', true );
+        wp_register_script( 'ohio-elementor-dynamic-text-widget', plugin_dir_url( __FILE__ ) . 'handler.js', [ 'jquery', 'elementor-frontend', 'ohio-dynamic-text' ], '1.0.0', true );
     }
 
     public function get_name()
@@ -24,7 +23,7 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
     }
 
     public function get_script_depends() {
-        return [ 'ohio-elementor-dynamic-text-widget' ];
+        return [ 'ohio-dynamic-text', 'ohio-elementor-dynamic-text-widget' ];
     }
 
     protected function register_controls()
@@ -58,6 +57,24 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
                     ],
                 ],
                 'default' => 'left',
+            ]
+        );
+
+        $this->add_control(
+            'html_tag',
+            [
+                'label' => __( 'HTML Tag', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'div',
+                'options' => [
+                    'div' => 'div',
+                    'h1' => 'h1',
+                    'h2' => 'h2',
+                    'h3' => 'h3',
+                    'h4' => 'h4',
+                    'h5' => 'h5',
+                    'h6' => 'h6',
+                ],
             ]
         );
 
@@ -98,9 +115,22 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
         );
 
         $this->add_control(
+            'animation_type',
+            [
+                'label' => __( 'Animation Type', 'ohio-extra' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'typing',
+                'options' => [
+                    'typing' => __( 'Typing', 'ohio-extra' ),
+                    'reveal' => __( 'Letter Reveal', 'ohio-extra' ),
+                ]
+            ]
+        );
+
+        $this->add_control(
             'type_speed',
             [
-                'label' => __( 'Typing Speed', 'ohio-extra' ),
+                'label' => __( 'Animation Speed', 'ohio-extra' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'normal',
                 'options' => [
@@ -231,7 +261,14 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
             $dynamic_title[] = str_replace( "'", "&#39;", $value['list_text'] );
         }
 
+        $animation_type = ( isset( $settings['animation_type'] ) && $settings['animation_type'] === 'reveal' ) ? 'reveal' : 'typing';
+
         $options = (object) array();
+        if ( $animation_type === 'reveal' ) {
+            $this->addWrapperClass( '-reveal' );
+            $options->effect = 'reveal';
+            $options->reveal = OhioExtraFilter::dynamicTextRevealTiming( $settings['type_speed'] );
+        }
         $options->strings =   $dynamic_title;
         $options->loop =      $settings['loop'];
         $options->typeSpeed = $type_speed['type'];
@@ -239,6 +276,8 @@ class Ohio_Elementor_Dynamic_Text_Widget extends Ohio_Elementor_Widget_Base {
         $options->backSpeed = $type_speed['back'];
         $options_json = json_encode( $options, JSON_HEX_TAG );
         $unique_id = uniqid('sc-dynamic-text-');
+
+        $html_tag = isset( $settings['html_tag'] ) && in_array( $settings['html_tag'], [ 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ], true ) ? $settings['html_tag'] : 'div';
 
         include( plugin_dir_path( __FILE__ ) . 'dynamic-text-view.php' );
     }

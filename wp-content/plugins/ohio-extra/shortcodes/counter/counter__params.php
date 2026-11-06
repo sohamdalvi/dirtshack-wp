@@ -154,7 +154,8 @@ function ohio_counter_sc_map() {
 				'param_name' => 'icon_type',
 				'value' => array(
 					__( 'Icon', 'ohio-extra' ) => 'font_icon',
-					__( 'Custom Image', 'ohio-extra' ) => 'user_image'
+					__( 'Custom Image', 'ohio-extra' ) => 'user_image',
+					__( 'Custom HTML', 'ohio-extra' ) => 'custom_html'
 				),
 				'dependency' => array(
 					'element' => 'layout',
@@ -222,6 +223,18 @@ function ohio_counter_sc_map() {
 				)
 			),
 			array(
+				'type' => 'textarea_raw_html',
+				'group' => __( 'Icon', 'ohio-extra' ),
+				'heading' => __( 'Custom HTML', 'ohio-extra' ),
+				'param_name' => 'icon_as_html',
+				'dependency' => array(
+					'element' => 'icon_type',
+					'value' => array(
+						'custom_html'
+					)
+				)
+			),
+			array(
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'Icon', 'ohio-extra' ),
@@ -230,7 +243,7 @@ function ohio_counter_sc_map() {
 				'dependency' => array(
 					'element' => 'icon_type',
 					'value' => array(
-						'font_icon'
+						'font_icon', 'custom_html'
 					)
 				),
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
@@ -365,7 +378,7 @@ function ohio_counter_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

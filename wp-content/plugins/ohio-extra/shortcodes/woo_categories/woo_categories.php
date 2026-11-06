@@ -42,6 +42,8 @@ function ohio_woo_categories_func( $atts ) {
 	$icon_type = isset( $icon_type ) ? OhioExtraFilter::string( $icon_type, 'string', 'font_icon' ) : 'font_icon';
 	$icon_as_icon = isset( $icon_as_icon ) ? OhioExtraFilter::string( $icon_as_icon, 'string', 'ion ion-md-arrow-forward' ) : 'ion ion-md-arrow-forward';
 	$icon_as_image = isset( $icon_as_image ) ? OhioExtraFilter::string( $icon_as_image, 'string', '' ) : '';
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
+	$icon_image_atts = ( $icon_type == 'user_image' && $icon_as_image ) ? OhioExtraParser::generateImageAttsById( $icon_as_image, __( 'Icon', 'ohio-extra' ) ) : '';
 	if ( $icon_type == 'font_icon' && $icon_as_icon ) {
 		$GLOBALS['ohio_icon_fonts'][] = $icon_as_icon;
 	}
@@ -78,6 +80,7 @@ function ohio_woo_categories_func( $atts ) {
 	$tilt_attrs = '';
 	if ( !$tilt_effect ) {
 		$tilt_attrs .= ' data-tilt=true data-tilt-perspective=6000';
+		OhioHelper::add_required_script( 'tilt' );
 	}
 
 	// Wrapper ID

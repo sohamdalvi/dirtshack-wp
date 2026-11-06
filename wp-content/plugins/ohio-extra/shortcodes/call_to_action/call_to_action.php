@@ -20,7 +20,7 @@ function ohio_call_to_action_func( $atts ) {
 	$border_radius = isset( $border_radius ) ? OhioExtraFilter::string( $border_radius, 'string', '') : '';
 	$drop_shadow = isset( $drop_shadow ) ? OhioExtraFilter::boolean( $drop_shadow ) : false;
 	$drop_shadow_intensity = isset( $drop_shadow_intensity ) ? OhioExtraFilter::string( $drop_shadow_intensity, 'string', '') : '';
-	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag ) : 'h2';
+	$heading_tag = isset( $heading_tag ) ? OhioExtraFilter::headingTag( $heading_tag, 'h2', true ) : 'h2';
 	$subtitle_type_layout = isset( $subtitle_type_layout ) ? OhioExtraFilter::string( $subtitle_type_layout, 'string', 'bottom_subtitle' ) : 'bottom_subtitle';
 	$bg_color = isset( $bg_color ) ? OhioExtraFilter::string( $bg_color, 'string', false ) : false;
 	$border_color = isset( $border_color ) ? OhioExtraFilter::string( $border_color, 'string', false ) : false;
@@ -39,6 +39,8 @@ function ohio_call_to_action_func( $atts ) {
 	$icon_type = isset( $icon_type ) ? OhioExtraFilter::string( $icon_type, 'string', 'font_icon' ) : 'font_icon';
 	$icon_as_icon = isset( $icon_as_icon ) ? OhioExtraFilter::string( $icon_as_icon, 'string', 'ion ion-md-arrow-forward' ) : 'ion ion-md-arrow-forward';
 	$icon_as_image = isset( $icon_as_image ) ? OhioExtraFilter::string( $icon_as_image, 'string', '' ) : '';
+	$icon_as_html = isset( $icon_as_html ) ? rawurldecode( base64_decode( $icon_as_html ) ) : '';
+	$icon_image_atts = ( $icon_type == 'user_image' && $icon_as_image ) ? OhioExtraParser::generateImageAttsById( $icon_as_image, __( 'Icon', 'ohio-extra' ) ) : '';
 	if ( $icon_type == 'font_icon' && $icon_as_icon ) {
 		$GLOBALS['ohio_icon_fonts'][] = $icon_as_icon;
 	}

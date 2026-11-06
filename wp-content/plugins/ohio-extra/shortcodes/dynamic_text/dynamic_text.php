@@ -10,7 +10,7 @@ function ohio_dynamic_text_func( $atts ) {
 	if ( isset( $atts ) && is_array( $atts ) ) extract( $atts );
 
 	// Required scripts
-	OhioHelper::add_required_script( 'typed' );
+	OhioHelper::add_required_script( 'dynamic-text' );
 
 	$pre_title = isset( $pre_title ) ? OhioExtraFilter::string( $pre_title ) : '';
 	$post_title = isset( $post_title ) ? OhioExtraFilter::string( $post_title ) : '';
@@ -21,7 +21,9 @@ function ohio_dynamic_text_func( $atts ) {
 	}
 	$dynamic_title = $_dynamic_title;
 	$loop = ( isset( $loop ) ) ? OhioExtraFilter::boolean( $loop ) : true;
+	$html_tag = ( isset( $html_tag ) && in_array( $html_tag, array( 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ), true ) ) ? $html_tag : 'div';
 	$alignment = isset( $alignment ) ? OhioExtraFilter::string( $alignment, 'attr', 'left' ) : 'left';
+	$animation_type = ( isset( $animation_type ) && $animation_type === 'reveal' ) ? 'reveal' : 'typing';
 	$type_speed = isset( $type_speed ) ? OhioExtraFilter::string( $type_speed, 'attr', 'slow' ) : 'slow';
 	$static_typo = isset( $static_typo ) ? OhioExtraFilter::string( $static_typo ) : false;
 	$dynamic_typo = isset( $dynamic_typo ) ? OhioExtraFilter::string( $dynamic_typo ) : false;
@@ -76,7 +78,11 @@ function ohio_dynamic_text_func( $atts ) {
 
 	$wrapper_classes .= isset( $css_class ) ? ' ' . OhioExtraFilter::string( $css_class, 'attr', '' )  : '';
 	$wrapper_classes .= $content_classes;
+	if ( $animation_type === 'reveal' ) {
+		$wrapper_classes .= ' -reveal';
+	}
 
+	$type_speed_key = $type_speed;
 	switch ( $type_speed ) {
 		case 'slow':
 			$type_speed = array(
@@ -110,6 +116,10 @@ function ohio_dynamic_text_func( $atts ) {
 	}
 
 	$options = (object) array();
+	if ( $animation_type === 'reveal' ) {
+		$options->effect = 'reveal';
+		$options->reveal = OhioExtraFilter::dynamicTextRevealTiming( $type_speed_key );
+	}
 	$options->strings = $dynamic_title;
 	$options->typeSpeed = $type_speed['type'];
 	$options->backDelay = $type_speed['delay'];

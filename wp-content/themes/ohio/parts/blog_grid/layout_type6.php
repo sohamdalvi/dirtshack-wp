@@ -58,6 +58,7 @@ $tilt_perspective = OhioOptions::get( 'blog_tilt_effect_perspective', 6000 );
 
 if ( $ohio_post['tilt_effect'] ) {
 	$parallax_data = 'data-tilt=true data-tilt-perspective=' . $tilt_perspective  . '';
+	OhioHelper::add_required_script( 'tilt' );
 }
 
 ?>
@@ -148,7 +149,7 @@ if ( $ohio_post['tilt_effect'] ) {
 		</div>
 		<div class="card-details-item">
 			<?php if ( $read_more_visibility ) : ?>
-		        <a class="read-more -unlink" href="<?php echo esc_url( $ohio_post['url'] ); ?>" aria-label="<?php esc_html_e( 'Read More', 'ohio-extra' ); ?>">
+		        <a class="read-more -unlink" href="<?php echo esc_url( $ohio_post['url'] ); ?>" aria-label="<?php esc_html_e( 'Read More', 'ohio' ); ?>">
 				    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"><path d="M7 7h8.586L5.293 17.293l1.414 1.414L17 8.414V17h2V5H7v2z"/></svg>
 				</a>
 		    <?php endif; ?>

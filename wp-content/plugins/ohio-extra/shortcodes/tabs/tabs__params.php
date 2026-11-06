@@ -104,6 +104,25 @@ function ohio_tabs_sc_map() {
 				'type' => 'ohio_range',
 				'holder' => 'em',
 				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Tab Width', 'ohio-extra' ),
+				'param_name' => 'tab_width',
+				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
+				'value' => '',
+				'range' => array(
+					'min' => 0,
+					'max' => 1000,
+				),
+				'dependency' => array(
+					'element' => 'tabs_layout',
+					'value' => array(
+						'onleft'
+					)
+				)
+			),
+			array(
+				'type' => 'ohio_range',
+				'holder' => 'em',
+				'group' => __( 'General', 'ohio-extra' ),
 				'heading' => __( 'Corners', 'ohio-extra' ),
 				'param_name' => 'border_radius',
 				'description' => __( '<a target="_blank" href="https://www.w3schools.com/cssref/css_units.asp">Use px units&nbsp;<i title="Use CSS unit value." class="far fa-question-circle"></i></a>', 'ohio-extra' ),
@@ -133,6 +152,12 @@ function ohio_tabs_sc_map() {
 				'type' => 'ohio_typography',
 				'group' => __( 'Styles', 'ohio-extra' ),
 				'heading' => __( 'Subtitle Typography', 'ohio-extra' ),
+				'param_name' => 'tabs_tab_subtitle_typo'
+			),
+			array(
+				'type' => 'ohio_typography',
+				'group' => __( 'Styles', 'ohio-extra' ),
+				'heading' => __( 'Description Typography', 'ohio-extra' ),
 				'param_name' => 'tabs_subtitle_typo'
 			),
 			array(
@@ -250,7 +275,7 @@ function ohio_tabs_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

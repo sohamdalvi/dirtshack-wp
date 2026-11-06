@@ -29,6 +29,7 @@ $tilt_perspective = OhioOptions::get( 'shop_tilt_effect_perspective', 6000 );
 
 if ( $tilt_effect ) {
 	$parallax_data = 'data-tilt=true data-tilt-perspective=' . $tilt_perspective . '';
+	OhioHelper::add_required_script( 'tilt' );
 }
 
 $in_wishlist = false;
@@ -93,7 +94,7 @@ if ( function_exists( 'YITH_WCWL_Wishlists' ) ) {
 			</div>
 		<?php endif; ?>
 
-		<a href="<?php echo esc_url( get_post_permalink() ); ?>" aria-label="<?php esc_html_e( 'Product thumbnail', 'ohio-extra' ); ?>"></a>
+		<a href="<?php echo esc_url( get_post_permalink() ); ?>" aria-label="<?php esc_html_e( 'Product thumbnail', 'ohio' ); ?>"></a>
 
 		</div>
 	</div>

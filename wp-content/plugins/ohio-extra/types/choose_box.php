@@ -10,7 +10,7 @@
 	function ohio_extra_choose_box_settings_field( $settings, $value ) {
 
 		if ( empty( $value ) ) {
-			$value = $settings['value'][0]['key'];
+			$value = $settings['value'][0]['key'] ?? '';
 		} elseif ( is_array( $value ) ) {
 			$value = $value['key'];
 		}

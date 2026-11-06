@@ -532,6 +532,7 @@ class Ohio_Elementor_Team_Member_Widget extends Ohio_Elementor_Widget_Base {
 
         if ( $settings['tilt_effect'] ) {
             $tilt_attrs = 'data-tilt=true data-tilt-perspective=6000';
+            OhioHelper::add_required_script( 'tilt' );
         }
 
         include( plugin_dir_path( __FILE__ ) . 'team-member-view.php' );

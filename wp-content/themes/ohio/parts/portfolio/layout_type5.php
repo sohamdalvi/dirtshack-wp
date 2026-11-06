@@ -98,7 +98,9 @@ wp_reset_query();
     </div>
 <?php endif; ?>
 
-<div class="project-page project -layout5<?php echo esc_attr( $page_container_class . $scroll_effect_class ); ?>">
+<?php if ( $is_slider ) { OhioHelper::add_required_script( 'slider' ); } ?>
+<div class="project-page project -layout5<?php echo esc_attr( $page_container_class . $scroll_effect_class ); ?><?php echo esc_attr( apply_filters( 'ohio_project_page_class', '' ) ); ?>">
+    <?php do_action( 'ohio_project_page_notice' ); ?>
     <div class="project-gallery -with-slider">
         <div class="project-slider -slider-layout-5 -slider-fs<?php if ( ! $is_slider ) { echo esc_attr( ' -single' ); } if ( $pagination_type == 'boxed' ) echo esc_attr( ' -with-boxed-pagination' ); ?>" <?php echo $is_slider ? 'data-portfolio-grid-slider' : '' ?> data-slider-navigation="<?php echo esc_attr( $navigation ); ?>" data-slider-loop="<?php echo esc_attr( $loop ); ?>" data-slider-autoplay="<?php echo esc_attr( $autoplay ); ?>" data-slider-autoplay-time="<?php echo esc_attr( $autoplayTimeout ); ?>" <?php echo esc_attr( $slider_pagination_data ); ?>>
 
@@ -148,6 +150,8 @@ wp_reset_query();
             </div>
         <?php endif; ?>
     </div>
+    
+    <!-- Project Details -->
     <div class="page-container<?php echo esc_attr( $page_container_class ); ?><?php echo esc_attr( $dark_mode_class ); ?>">
 
         <?php if ( $show_headline || isset( $project['raw_categories'] ) || isset( $project['date'] ) || !empty( $project['description'] ) || isset( $project['task'] ) || isset( $project['strategy'] ) || isset( $project['design'] ) || isset( $project['client'] ) || isset( $project['custom_fields'] ) || !empty( $project['tags'] ) || isset( $project['link'] ) ) : ?>

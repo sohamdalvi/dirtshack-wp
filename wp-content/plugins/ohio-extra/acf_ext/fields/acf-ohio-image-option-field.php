@@ -40,7 +40,7 @@ class ohio_acf_field_image_option extends acf_field {
 		$url = $this->settings['url'];
 		$version = $this->settings['version'];
 		?>
-		<div class="ohio-acf-image-option-type">
+		<div class="ohio-acf-image-option-type row-grid row-grid-4">
 			<?php
 			$items = $field['image_option_value'];
 			foreach ( $items as $item ) {

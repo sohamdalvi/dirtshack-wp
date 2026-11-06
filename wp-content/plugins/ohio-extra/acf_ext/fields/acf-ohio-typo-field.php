@@ -119,18 +119,18 @@ class acf_field_ohio_typo extends acf_field {
 				</div>
 			<?php endif; ?>
 
-			<div class="row" <?php if ( $inherited ) echo 'style="display:none;"'; ?>>
+			<div class="row-grid row-grid-4" <?php if ( $inherited ) echo 'style="display:none;"'; ?>>
 
 				<!-- Size -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Font Size', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="typo-size"<?php if ( is_object( $field_value ) && isset( $field_value->size ) ) { echo ' value="' . $field_value->size . '"'; } ?>>
 				</div>
 
 				<!-- Weight -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<strong class="label"><?php esc_html_e( 'Font Weight', 'ohio-extra' ); ?></strong>
 					<select name="typo-weight" id="">
 						<option value=""><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
@@ -147,7 +147,7 @@ class acf_field_ohio_typo extends acf_field {
 				</div>
 
 				<!-- Style -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Font Style', 'ohio-extra' ); ?></b>
 					<select name="typo-style">
 						<option value=""><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
@@ -158,13 +158,13 @@ class acf_field_ohio_typo extends acf_field {
 				</div>
 
 				<!-- Font color -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<strong class="label"><?php esc_html_e( 'Color', 'ohio-extra' ); ?></strong>
 					<input type="text" name="typo-color" class="cs-wp-color-picker"<?php if ( is_object( $field_value ) && isset( $field_value->color ) ) { echo ' value="' . $field_value->color . '"'; } ?>>
 				</div>
 
 				<!-- Transform -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Text Transform', 'ohio-extra' ); ?></b>
 					<select name="typo-transform">
 						<option value=""><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
@@ -176,7 +176,7 @@ class acf_field_ohio_typo extends acf_field {
 				</div>
 
 				<!-- Decoration -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Text Decoration', 'ohio-extra' ); ?></b>
 					<select name="typo-decoration">
 						<option value=""><?php esc_html_e( 'Default', 'ohio-extra' ); ?></option>
@@ -188,23 +188,23 @@ class acf_field_ohio_typo extends acf_field {
 				</div>
 
 				<!-- Line Height -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Line Height', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="typo-height"<?php if ( is_object( $field_value ) && isset( $field_value->height ) ) { echo ' value="' . $field_value->height . '"'; } ?>>
 				</div>
 
 				<!-- Letter Spacing -->
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Letter Spacing', 'ohio-extra' ); ?>
-						<a class="tip" title="Use CSS unit value." href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
+						<a class="tip" title="<?php esc_attr_e( 'Use CSS unit value.', 'ohio-extra' ); ?>" href="https://www.w3schools.com/cssref/css_units.asp" target="_blank"><?php esc_html_e( 'CSS Units', 'ohio-extra' ); ?></a>
 					</b>
 					<input type="text" name="typo-spacing"<?php if ( is_object( $field_value ) && isset( $field_value->spacing ) ) { echo ' value="' . $field_value->spacing . '"'; } ?>>
 				</div>
 			</div>
 
-			<div class="row font-picker" <?php if ( $inherited ) echo 'style="display:none;"'; ?>>
+			<div class="row-grid row-grid-4 font-picker" <?php if ( $inherited ) echo 'style="display:none;"'; ?>>
 				<div class="pick_blocker">
 					<div class="preloader">
 						<div class="circ1"></div>
@@ -217,7 +217,7 @@ class acf_field_ohio_typo extends acf_field {
 				<!-- Font family -->
 				<?php $current_font_object = false;?>
 
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<b class="label"><?php esc_html_e( 'Font Family', 'ohio-extra' ); ?>
                         <?php if ( $fonts_type == 'google_fonts' ) { ?>
                         	<a class="tip" href="https://fonts.google.com/" target="_blank"><?php esc_html_e( 'Google Fonts', 'ohio-extra' ); ?></a>
@@ -285,7 +285,7 @@ class acf_field_ohio_typo extends acf_field {
 						</script>
 					<?php endif; ?>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<strong class="label"><?php esc_html_e( 'Variants', 'ohio-extra' ); ?></strong>
 					<div class="checkboxes variants_value">
 						<?php 
@@ -306,7 +306,7 @@ class acf_field_ohio_typo extends acf_field {
 					</div>
 					<span class="no_content"<?php if ( $have_variants ) { echo ' style="display: none;"'; } ?>><?php _e( 'Choose a font "Family" firstly to see option here...', 'ohio-extra'); ?></span>
 				</div>
-				<div class="vc_col-lg-3 column">
+				<div class="column">
 					<strong class="label"><?php esc_html_e( 'Subsets', 'ohio-extra' ); ?></strong>
 					<div class="checkboxes subsets_value">
 						<?php

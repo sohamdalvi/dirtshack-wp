@@ -9,6 +9,9 @@ add_shortcode( 'ohio_vertical_slider', 'ohio_vertical_slider_func' );
 function ohio_vertical_slider_func( $atts, $content = '' ) {
 	if ( isset( $atts ) && is_array( $atts ) ) extract( $atts );
 
+	// Required scripts
+	OhioHelper::add_required_script( 'slider' );
+
 	// Default values, parsing and filtering
 	$mousewheel_scrolling = isset( $mousewheel_scrolling ) ? OhioExtraFilter::boolean( $mousewheel_scrolling, true ) : true;
 	$drag_scrolling = isset( $drag_scrolling ) ? OhioExtraFilter::boolean( $drag_scrolling, true ) : true;

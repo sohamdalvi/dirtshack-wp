@@ -40,6 +40,22 @@ function ohio_dynamic_text_sc_map() {
 				),
 			),
 			array(
+				'type' => 'dropdown',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'HTML Tag', 'ohio-extra' ),
+				'param_name' => 'html_tag',
+				'value' => array(
+					__( 'div', 'ohio-extra' ) => 'div',
+					__( 'h1', 'ohio-extra' ) => 'h1',
+					__( 'h2', 'ohio-extra' ) => 'h2',
+					__( 'h3', 'ohio-extra' ) => 'h3',
+					__( 'h4', 'ohio-extra' ) => 'h4',
+					__( 'h5', 'ohio-extra' ) => 'h5',
+					__( 'h6', 'ohio-extra' ) => 'h6'
+				),
+				'std' => 'div',
+			),
+			array(
 				'type' => 'textfield',
 				'group' => __( 'General', 'ohio-extra' ),
 				'heading' => __( 'Text Before', 'ohio-extra' ),
@@ -70,7 +86,18 @@ function ohio_dynamic_text_sc_map() {
 			array(
 				'type' => 'dropdown',
 				'group' => __( 'General', 'ohio-extra' ),
-				'heading' => __( 'Typing Speed', 'ohio-extra' ),
+				'heading' => __( 'Animation Type', 'ohio-extra' ),
+				'param_name' => 'animation_type',
+				'value' => array(
+					__( 'Typing', 'ohio-extra' ) => 'typing',
+					__( 'Letter Reveal', 'ohio-extra' ) => 'reveal',
+				),
+				'std' => 'typing',
+			),
+			array(
+				'type' => 'dropdown',
+				'group' => __( 'General', 'ohio-extra' ),
+				'heading' => __( 'Animation Speed', 'ohio-extra' ),
 				'param_name' => 'type_speed',
 				'value' => array(
 					__( 'Slow', 'ohio-extra' ) => 'slow',
@@ -159,7 +186,7 @@ function ohio_dynamic_text_sc_map() {
 				'type' => 'ohio_check',
 				'group' => __( 'Appear Effect', 'ohio-extra' ),
 				'heading' => __( 'Animation Repeat', 'ohio-extra' ),
-				'description' => 'Repeat animation while scrolling page up and down',
+				'description' => __( 'Repeat animation while scrolling page up and down', 'ohio-extra' ),
 				'param_name' => 'appearance_once',
 				'value' => array(
 					__( 'Yes', 'ohio-extra' ) => '1'

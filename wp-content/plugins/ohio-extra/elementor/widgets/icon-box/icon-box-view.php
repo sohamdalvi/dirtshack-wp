@@ -16,7 +16,13 @@
             <?php endif; ?>
             <?php if ( !empty( $settings['use_link'] ) && !empty( $settings['button_link']['url'] ) ) : ?>
                 <a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" <?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
+                    <?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ) : ?>
+                        <?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+                    <?php endif; ?>
                     <?php echo $settings['button_title']; ?>
+                    <?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ) : ?>
+                        <?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+                    <?php endif; ?>
                 </a>
             <?php endif; ?>
         </div>
@@ -35,7 +41,13 @@
             <?php endif; ?>
             <?php if ( !empty( $settings['use_link'] ) && !empty( $settings['button_link']['url'] ) ) : ?>
                 <a class="button <?php echo esc_attr( $this->getButtonClasses() ); ?>" <?php echo $this->getLinkAttributesString( $settings['button_link'] ); ?>>
+                    <?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'left' ) : ?>
+                        <?php $this->showIconInView( 'icon -left', 'button_icon' ); ?>
+                    <?php endif; ?>
                     <?php echo $settings['button_title']; ?>
+                    <?php if ( !empty( $settings['button_icon_use'] ) && $settings['button_icon_position'] == 'right' ) : ?>
+                        <?php $this->showIconInView( 'icon -right', 'button_icon' ); ?>
+                    <?php endif; ?>
                 </a>
             <?php endif; ?>
         </div>

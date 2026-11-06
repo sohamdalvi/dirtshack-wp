@@ -53,6 +53,21 @@
                 "add_theme_inherited" => false
             ],
             [
+                "key" => "field_59256ac3f42ecsty",
+                "label" => '<h4>' . __( 'Styles', 'ohio' ) . '</h4>',
+                "name" => "",
+                "conditional_logic" => [
+                    [
+                        [
+                            "field" => "field_59229bda32383",
+                            "operator" => "==",
+                            "value" => "sitename"
+                        ]
+                    ]
+                ],
+                "type" => "message"
+            ],
+            [
                 "key" => "field_59256ac3f42ec",
                 "label" => __( 'Text Logo Typography', 'ohio' ),
                 "name" => "global_page_header_sitename_typo",
@@ -510,7 +525,7 @@
             ],
             [
                 "key" => "field_591b0f30ed84e",
-                "label" => "Scroll to Top",
+                "label" => __( 'Scroll to Top', 'ohio' ),
                 "name" => "",
                 "type" => "tab",
                 "instructions" => "",

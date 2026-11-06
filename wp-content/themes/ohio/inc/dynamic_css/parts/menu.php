@@ -12,11 +12,12 @@
         ## 5. Hamburger Menu Typography
         ## 6. Overlay Details Typography
         ## 7. Overlay Social Accounts Typography
+        ## 8. Active Menu Background
 
     # Mobile Menu
-        ## 8. Initial Resolution
-        ## 9. Background
-        ## 10. Mobile Menu Typography
+        ## 9. Initial Resolution
+        ## 10. Background
+        ## 11. Mobile Menu Typography
 */
 
 OhioOptions::get( 'page_header_menu_style_settings' ); // trigger selection chain
@@ -92,10 +93,21 @@ if ( $hamburger_overlay_socials_typo ) {
     OhioBuffer::pack_dynamic_css_to_buffer( $_selector, $_css );
 }
 
+## 8. Active Menu Background
+$active_menu_background = OhioOptions::get( 'page_header_active_menu_background' );
+if ( $active_menu_background ) {
+	$_selector = [
+		'.nav .nav-item.current-menu-item > .menu-link',
+		'.nav .nav-item > .menu-link:hover'
+	];
+	$_css = 'background-color:' . $active_menu_background . ';';
+	OhioBuffer::pack_dynamic_css_to_buffer( $_selector, $_css );
+}
+
 
 # Mobile Menu
 
-## 8. Initial Resolution
+## 9. Initial Resolution
 $mobile_menu_initial_resolution = OhioOptions::get_global( 'page_mobile_menu_initial_resolution' );
 if ( $mobile_menu_initial_resolution ) {
 	$_selector = [
@@ -108,7 +120,7 @@ if ( $mobile_menu_initial_resolution ) {
 	OhioBuffer::pack_dynamic_css_to_buffer( $_selector, $_css );
 }
 
-## 9. Background
+## 10. Background
 $background_type = OhioOptions::get( 'page_mobile_header_menu_background_type' );
 $background_select_type = OhioOptions::get_last_select_type();
 $background_color = OhioOptions::get_by_type( 'page_mobile_header_menu_background_color', $background_select_type );
@@ -124,7 +136,7 @@ if ( $background_color || $background_image ) {
 	OhioBuffer::pack_dynamic_css_to_buffer( $_selector, $_css );
 }
 
-## 10. Mobile Menu Typography
+## 11. Mobile Menu Typography
 $mobile_menu_typo = OhioOptions::get_global( 'mobile_header_menu_typo' );
 if ( $mobile_menu_typo ) {
     $_selector = [

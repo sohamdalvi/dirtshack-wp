@@ -5,22 +5,22 @@
 <ul class="options-group -unlist">
     <?php if ( !empty( $project['strategy'] ) ) : ?>
         <li>
-            <div class="h6 title"><?php esc_html_e( 'Strategy', 'ohio' ); ?></div>
-            <p><?php echo wp_kses( $project['strategy'], 'default' ); ?></p>
+            <div class="title"><?php esc_html_e( 'Strategy', 'ohio' ); ?></div>
+            <p><?php echo wp_kses( $project['strategy'], 'basic_html' ); ?></p>
         </li>
     <?php endif; ?>
 
     <?php if ( !empty( $project['design'] ) ) : ?>
         <li>
-            <div class="h6 title"><?php esc_html_e( 'Design', 'ohio' ); ?></div>
-            <p><?php echo wp_kses( $project['design'], 'default' ); ?></p>
+            <div class="title"><?php esc_html_e( 'Design', 'ohio' ); ?></div>
+            <p><?php echo wp_kses( $project['design'], 'basic_html' ); ?></p>
         </li>
     <?php endif; ?>
 
     <?php if ( !empty( $project['client'] ) ) : ?>
         <li>
-            <div class="h6 title"><?php esc_html_e( 'Client', 'ohio' ); ?></div>
-            <p><?php echo wp_kses( $project['client'], 'default' ); ?></p>
+            <div class="title"><?php esc_html_e( 'Client', 'ohio' ); ?></div>
+            <p><?php echo wp_kses( $project['client'], 'basic_html' ); ?></p>
         </li>
     <?php endif; ?>
 
@@ -28,7 +28,7 @@
 
         <?php foreach ( $project['custom_fields'] as $custom_field ) : ?>
         <li>
-            <div class="h6 title"><?php echo esc_html( $custom_field['title'] ); ?></div>
+            <div class="title"><?php echo esc_html( $custom_field['title'] ); ?></div>
             <p><?php echo esc_html( $custom_field['value'] ); ?></p>
         </li>
         <?php endforeach; ?>
@@ -37,7 +37,7 @@
 
     <?php if ( !empty( $project['tags'] ) ) : ?>
         <li>
-            <div class="h6 title"><?php esc_html_e( 'Tags', 'ohio' ); ?></div>
+            <div class="title"><?php esc_html_e( 'Tags', 'ohio' ); ?></div>
             <p>
 				<?php if ( $project['raw_tags'] ) : ?>
 
