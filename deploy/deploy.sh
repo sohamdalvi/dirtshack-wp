@@ -37,7 +37,11 @@ if [[ "$REMOTE_USER" == "YOUR_CPANEL_USERNAME" ]]; then
 fi
 
 # ── Build SSH / rsync options ─────────────────────────────────────────────────
-SSH_OPTS="-p ${SSH_PORT} -o StrictHostKeyChecking=no -o ConnectTimeout=10"
+# Strict host key checking: refuse to connect unless the server's key is already in
+# ~/.ssh/known_hosts. If the server's key changes (e.g. Bluehost rebuilds it), rsync
+# fails and prints SSH's warning, instead of deploying to an unverified host. Check
+# the new fingerprint independently, then `ssh-keygen -R <host>` and connect once.
+SSH_OPTS="-p ${SSH_PORT} -o StrictHostKeyChecking=yes -o ConnectTimeout=10"
 [[ -n "$SSH_KEY" ]] && SSH_OPTS+=" -i ${SSH_KEY}"
 
 RSYNC_OPTS=(
@@ -87,6 +91,7 @@ echo ""
 
 # ── Run rsync for each pair ───────────────────────────────────────────────────
 CHANGED=0
+DELETED=0
 for pair in "${SYNC_PAIRS[@]}"; do
   LOCAL_DIR=$(echo "$pair" | awk '{print $1}')
   REMOTE_DIR=$(echo "$pair" | awk '{print $2}')
@@ -114,11 +119,21 @@ for pair in "${SYNC_PAIRS[@]}"; do
 
   # Count changed files (lines starting with >, <, c, h)
   FILE_CHANGES=$(echo "$OUTPUT" | grep -cE '^[><ch]' || true)
+  # Files --delete removes from the server ("*deleting  path"). All of them are
+  # listed, never cut short: a deletion is the change most worth seeing.
+  FILE_DELETIONS=$(echo "$OUTPUT" | grep -c '^\*deleting' || true)
   if [[ $FILE_CHANGES -gt 0 ]]; then
     echo "$OUTPUT" | grep -E '^[><ch]' | head -20
     [[ $FILE_CHANGES -gt 20 ]] && echo "  ... and $((FILE_CHANGES - 20)) more"
     CHANGED=$((CHANGED + FILE_CHANGES))
-  else
+  fi
+  if [[ $FILE_DELETIONS -gt 0 ]]; then
+    echo "$OUTPUT" | grep '^\*deleting' | sed -E 's/^\*deleting +//' | while IFS= read -r path; do
+      echo -e "  ${RED}✖ delete${NC}  ${path}"
+    done
+    DELETED=$((DELETED + FILE_DELETIONS))
+  fi
+  if [[ $FILE_CHANGES -eq 0 && $FILE_DELETIONS -eq 0 ]]; then
     echo "  ✓ No changes."
   fi
   echo ""
@@ -127,14 +142,15 @@ done
 # ── Summary ───────────────────────────────────────────────────────────────────
 echo "════════════════════════════════════════════════════"
 if $DRY_RUN; then
-  if [[ $CHANGED -gt 0 ]]; then
-    warn "${CHANGED} file(s) would be updated. Run with --push to deploy."
+  if [[ $CHANGED -gt 0 || $DELETED -gt 0 ]]; then
+    warn "${CHANGED} file(s) would be updated, ${DELETED} deleted from the server. Run with --push to deploy."
+    [[ $DELETED -gt 0 ]] && warn "Check the deletions above: they are files on the server that are not in this repo."
   else
     info "Nothing to sync — remote is already up to date."
   fi
 else
-  if [[ $CHANGED -gt 0 ]]; then
-    info "${CHANGED} file(s) synced to production."
+  if [[ $CHANGED -gt 0 || $DELETED -gt 0 ]]; then
+    info "${CHANGED} file(s) synced to production, ${DELETED} deleted."
     info "Remember to purge the cache on dirtshack.in !"
   else
     info "Nothing changed — remote was already up to date."
