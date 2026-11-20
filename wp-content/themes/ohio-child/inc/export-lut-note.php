@@ -14,7 +14,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
-const DIRTSHACK_LUT_TEXT = 'Export supply has been made without payment of tax on account of generation of the attached LUT dated 16-11-2026 vide acknowledgment no. AD2711260128249';
+const DIRTSHACK_LUT_LINE_1 = 'LUT Declaration: Supply meant for export under Letter of Undertaking (LUT) without payment of integrated tax.';
+const DIRTSHACK_LUT_LINE_2 = 'LUT ARN: AD2711260128249 | Dated: 16-11-2026';
 
 add_action( 'wpo_wcpdf_after_order_details', 'dirtshack_export_lut_note', 10, 2 );
 function dirtshack_export_lut_note( $document_type, $order ) {
@@ -32,8 +33,11 @@ function dirtshack_export_lut_note( $document_type, $order ) {
 		return;
 	}
 
+	// Light grey box below the Total row, smaller muted text, two lines.
 	printf(
-		'<div class="export-lut-note" style="margin-top:6mm;font-size:9pt;"><strong>%s</strong></div>',
-		esc_html( DIRTSHACK_LUT_TEXT )
+		'<div class="export-lut-note" style="margin-top:5mm;padding:2.5mm 3mm;background:#F3F4F6;border-top:0.3mm solid #E5E7EB;color:#4B5563;font-size:8.5pt;line-height:1.4;">'
+		. '<div>%s</div><div><strong>%s</strong></div></div>',
+		esc_html( DIRTSHACK_LUT_LINE_1 ),
+		esc_html( DIRTSHACK_LUT_LINE_2 )
 	);
 }
