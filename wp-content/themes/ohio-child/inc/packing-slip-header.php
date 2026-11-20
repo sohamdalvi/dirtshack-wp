@@ -6,7 +6,7 @@
  * instead of the registered business name and full address:
  *
  *   DirtShack Pune
- *   GSTN: 27AIQPD6061J1ZZ
+ *   GSTIN: 27AIQPD6061J1ZZ
  *
  * The customer's shipping address sits top-right next to the logo, and this
  * shop block moves below it on the left (pdf-templates/packing-slip.php).
@@ -24,7 +24,7 @@
 defined( 'ABSPATH' ) || exit;
 
 const DIRTSHACK_PACKING_SLIP_SHOP_NAME = 'DirtShack Pune';
-const DIRTSHACK_PACKING_SLIP_ADDRESS   = 'GSTN: 27AIQPD6061J1ZZ';
+const DIRTSHACK_PACKING_SLIP_ADDRESS   = 'GSTIN: 27AIQPD6061J1ZZ';
 
 function dirtshack_is_packing_slip( $document ) {
 	return is_object( $document ) && method_exists( $document, 'get_type' ) && 'packing-slip' === $document->get_type();
