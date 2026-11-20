@@ -269,6 +269,9 @@ require get_stylesheet_directory() . '/inc/invoice-date.php';
 // Customer GSTIN on orders (admin field + validation + PDF invoice; read by GST report).
 require get_stylesheet_directory() . '/inc/customer-gstin.php';
 
+// LUT note on export invoices (shipping country other than India; PDF Invoices & Packing Slips).
+require get_stylesheet_directory() . '/inc/export-lut-note.php';
+
 // "Shipped" order status (between Processing and Completed).
 require get_stylesheet_directory() . '/inc/order-status-shipped.php';
 
