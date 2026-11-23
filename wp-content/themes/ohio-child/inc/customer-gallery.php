@@ -250,7 +250,7 @@ function dirtshack_gallery_css() {
 	.ds-cgallery-wrap{margin-top:2.5rem;margin-bottom:1rem}
 	.ds-cgallery{scroll-margin-top:110px}
 	.ds-cgallery--product .ds-cgallery__head{align-items:center;margin-bottom:.85rem}
-	.ds-cgallery--product .ds-cgallery__title{font-size:clamp(1.15rem,1rem + .6vw,1.5rem);line-height:1.2;text-transform:uppercase;letter-spacing:.02em}
+	.ds-cgallery--product .ds-cgallery__title{font-family:inherit;font-weight:600;font-size:1.35rem;line-height:1.25;letter-spacing:-.035em;text-transform:none;color:inherit}
 	.ds-cgallery__count{font-size:.7em;font-weight:400;text-transform:none;letter-spacing:normal;opacity:.6}
 	.ds-cgallery__strip{display:flex;align-items:center;gap:.5rem;padding:.75rem;border-radius:10px;background:#efefef}
 	.ds-cgallery__track{list-style:none;flex:1 1 auto;min-width:0;margin:0;padding:2px;display:flex;gap:.6rem;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch}

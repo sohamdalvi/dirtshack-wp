@@ -92,6 +92,18 @@ function dirtshack_minfo_remove_additional_tab( $tabs ) {
 	return $tabs;
 }
 
+// Hide the Reviews tab while the product has no approved reviews. Shown again as
+// soon as one is approved. Customers can't start a review from the tab while it's
+// hidden.
+add_filter( 'woocommerce_product_tabs', 'dirtshack_minfo_hide_empty_reviews', 99 );
+function dirtshack_minfo_hide_empty_reviews( $tabs ) {
+	global $product;
+	if ( $product instanceof WC_Product && 0 === (int) $product->get_review_count() ) {
+		unset( $tabs['reviews'] );
+	}
+	return $tabs;
+}
+
 // "More Info" tab between Video guide (15) and Reviews (30).
 add_filter( 'woocommerce_product_tabs', 'dirtshack_minfo_tab' );
 function dirtshack_minfo_tab( $tabs ) {

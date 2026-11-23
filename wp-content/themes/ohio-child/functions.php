@@ -296,6 +296,7 @@ require get_stylesheet_directory() . '/inc/product-more-info.php';
 // workers/customer-gallery) on product pages, a [customer_gallery] page, and
 // Products → Customer Gallery in the admin. Off until DIRTSHACK_GALLERY_URL is set.
 require get_stylesheet_directory() . '/inc/customer-gallery.php';
+require get_stylesheet_directory() . '/inc/customer-gallery-instagram.php';
 
 // ─── Redirect legacy /shop/ → /woo-shop/ (the real WooCommerce shop) ──────────
 //
