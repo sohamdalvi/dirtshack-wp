@@ -18,6 +18,8 @@ export function emptyState() {
 		products: {},
 		outputs: {},
 		lastRecheck: null,
+		aliases: {},
+		appliedAliases: {},
 		lastRun: null,
 		lastSuccess: null,
 	};

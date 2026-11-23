@@ -89,7 +89,7 @@ test('a run with nothing new only reads the album and writes its record and stat
 
 	const status = await run({ now: hoursLater(1) });
 	assert.equal(status.ok, true);
-	assert.deepEqual(world.calls, ['album']);
+	assert.deepEqual(world.calls, ['album', 'aliases']);
 	assert.deepEqual(bucket.puts.sort(), ['_sync/state.json', 'status.json']);
 	assert.deepEqual(bucket.deletes, []);
 });
