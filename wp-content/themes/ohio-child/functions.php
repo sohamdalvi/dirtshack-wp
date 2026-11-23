@@ -290,6 +290,7 @@ require get_stylesheet_directory() . '/inc/holiday-notice.php';
 // Product video guides: YouTube links → "Video guide" tab + summary link (uses the Braap facade).
 require get_stylesheet_directory() . '/inc/product-video.php';
 require get_stylesheet_directory() . '/inc/product-tabs-guard.php';
+require get_stylesheet_directory() . '/inc/product-more-info.php';
 
 // Customer Gallery: customer photos from Cloudflare R2 (synced from Facebook by
 // workers/customer-gallery) on product pages, a [customer_gallery] page, and

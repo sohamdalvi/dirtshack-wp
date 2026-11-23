@@ -31,6 +31,17 @@ function dirtshack_tabs_guard_description( $content ) {
 	if ( ! function_exists( 'is_product' ) || ! is_product() || ! in_the_loop() ) {
 		return $content;
 	}
+	return dirtshack_tabs_strip_panels( $content );
+}
+
+/**
+ * Remove tabs-content-item from any id="tab-…" element in a string of HTML.
+ * Used for product descriptions and for the More Info tab content.
+ *
+ * @param string $content HTML.
+ * @return string
+ */
+function dirtshack_tabs_strip_panels( $content ) {
 	if ( false === strpos( $content, 'tabs-content-item' ) ) {
 		return $content;
 	}
