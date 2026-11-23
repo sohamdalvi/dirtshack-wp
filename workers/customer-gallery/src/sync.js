@@ -3,17 +3,20 @@
  *
  *  1. List the album (captions only, so the reply stays small).
  *  2. Photos gone from the album: delete their files.
- *  3. New photos, edited captions, photos still waiting, and once a day every
+ *  3. Read the product alias map (old slug → new version). A change rechecks
+ *     every photo.
+ *  4. New photos, edited captions, photos still waiting, and once a day every
  *     photo: check the caption's slugs against the shop's products.
- *  4. Matched photos without files: copy Facebook's ~1600 px and ~480 px
+ *  5. Matched photos without files: copy Facebook's ~1600 px and ~480 px
  *     versions into R2, as many as this run's request limit allows.
- *  5. Rewrite products/<slug>.json and all.json where they changed, and
+ *  6. Rewrite products/<slug>.json and all.json where they changed, and
  *     always write status.json.
  *
  * The free Workers plan allows 50 outside requests and 10 ms of CPU per run, so
  * nothing is resized here and a big backlog is copied over several runs.
  */
 
+import { aliasKey, loadAliases, resolveSlugs } from './aliases.js';
 import { parseCaption } from './caption.js';
 import { BudgetExhausted, describeError } from './errors.js';
 import { getImageSizes, listAlbum, pickRenditions } from './facebook.js';
@@ -121,8 +124,20 @@ export async function runSync(env, options = {}) {
 			}
 		}
 
-		// 3. Photos to (re)check against the shop's products.
-		const recheck = Boolean(options.recheck) || !state.lastRecheck || now - Date.parse(state.lastRecheck) >= DAY_MS;
+		// 3. Product aliases (old slug → new version). If the map differs from the
+		// one last applied, every photo is rechecked so the change shows at once.
+		let aliases = state.aliases || {};
+		try {
+			aliases = await loadAliases(http, cfg);
+			state.aliases = aliases;
+		} catch (err) {
+			status.warnings.push(`The product alias map could not be read (${describeError(err)}); the last one was used.`);
+		}
+		const aliasesChanged = aliasKey(aliases) !== aliasKey(state.appliedAliases || {});
+
+		// 4. Photos to (re)check against the shop's products.
+		const recheck =
+			Boolean(options.recheck) || aliasesChanged || !state.lastRecheck || now - Date.parse(state.lastRecheck) >= DAY_MS;
 		const toCheck = album.filter((p) => {
 			const prev = state.photos[p.id];
 			if (!prev || recheck || prev.caption !== (p.name || '')) {
@@ -146,11 +161,15 @@ export async function runSync(env, options = {}) {
 					changed = true;
 				}
 				const slugSet = new Set(Object.keys(catalog));
+				// Alias keys count as matches even when the old product is gone.
+				const matchable = new Set([...slugSet, ...Object.keys(aliases)]);
 				const toCopy = [];
 				for (const p of toCheck.sort(newestFirstFb)) {
 					const prev = state.photos[p.id];
 					const caption = p.name || '';
-					const { slugs, caption: text } = parseCaption(caption, slugSet);
+					const parsed = parseCaption(caption, matchable);
+					const text = parsed.caption;
+					const slugs = resolveSlugs(parsed.slugs, aliases, slugSet);
 					const entry = {
 						id: p.id,
 						created: normaliseTime(p.created_time),
@@ -178,11 +197,12 @@ export async function runSync(env, options = {}) {
 					state.photos[p.id] = entry;
 				}
 
-				// 4. Copy files for matched photos that don't have them yet.
+				// 5. Copy files for matched photos that don't have them yet.
 				if (toCopy.length && (await copyPhotos(toCopy, { http, bucket, cfg, budgetLeft: () => budget }))) {
 					changed = true;
 				}
 				if (recheck) {
+					state.appliedAliases = aliases;
 					state.lastRecheck = now.toISOString();
 					rechecked = true;
 					changed = true;
@@ -194,7 +214,7 @@ export async function runSync(env, options = {}) {
 		status.error = describeError(err);
 	}
 
-	// 5. Outputs. Rechecks rewrite everything, in case a file was lost.
+	// 6. Outputs. Rechecks rewrite everything, in case a file was lost.
 	if (changed || !state.outputs['all.json']) {
 		try {
 			await writeOutputs(bucket, state, cfg, rechecked);

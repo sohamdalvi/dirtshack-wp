@@ -403,6 +403,132 @@ function dirtshack_gallery_sync_now() {
 	exit;
 }
 
+// ─── Product aliases: an old product slug that now means a new version ──────
+// Photos captioned with an old slug also show on the new product, so a new
+// version doesn't need every caption edited. The map is stored here and served
+// at /wp-json/dirtshack/v1/gallery-aliases, where the Worker reads it on each sync.
+
+const DIRTSHACK_GALLERY_ALIASES_OPTION = 'ds_gallery_aliases';
+
+add_action( 'rest_api_init', 'dirtshack_gallery_register_aliases_route' );
+function dirtshack_gallery_register_aliases_route() {
+	register_rest_route(
+		'dirtshack/v1',
+		'/gallery-aliases',
+		array(
+			'methods'             => 'GET',
+			'callback'            => 'dirtshack_gallery_aliases_response',
+			'permission_callback' => '__return_true', // Slugs only; the same ones the shop shows publicly.
+		)
+	);
+}
+
+function dirtshack_gallery_aliases_response() {
+	$map = get_option( DIRTSHACK_GALLERY_ALIASES_OPTION, array() );
+	// An object, even when empty, so the Worker always gets a JSON object.
+	return new WP_REST_Response( (object) ( is_array( $map ) ? $map : array() ), 200, array( 'Cache-Control' => 'no-cache' ) );
+}
+
+/** Whether a slug belongs to a published product. */
+function dirtshack_gallery_is_live_product_slug( $slug ) {
+	$post = get_page_by_path( $slug, OBJECT, 'product' );
+	return $post && 'publish' === $post->post_status;
+}
+
+add_action( 'admin_post_ds_gallery_aliases', 'dirtshack_gallery_save_aliases' );
+function dirtshack_gallery_save_aliases() {
+	if ( ! current_user_can( 'manage_woocommerce' ) ) {
+		wp_die( esc_html__( 'You are not allowed to do that.', 'ohio-child' ), 403 );
+	}
+	check_admin_referer( 'ds_gallery_aliases' );
+
+	$old_in = isset( $_POST['alias_from'] ) ? (array) wp_unslash( $_POST['alias_from'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification -- checked above.
+	$new_in = isset( $_POST['alias_to'] ) ? (array) wp_unslash( $_POST['alias_to'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification -- checked above.
+
+	$map    = array();
+	$errors = array();
+	foreach ( $old_in as $i => $raw_old ) {
+		$old = sanitize_title( (string) $raw_old );
+		$new = sanitize_title( (string) ( $new_in[ $i ] ?? '' ) );
+		if ( '' === $old && '' === $new ) {
+			continue;
+		}
+		if ( '' === $old || '' === $new ) {
+			$errors[] = __( 'Each row needs both an old slug and a new one.', 'ohio-child' );
+			continue;
+		}
+		if ( $old === $new ) {
+			/* translators: %s: product slug */
+			$errors[] = sprintf( __( '"%s" can\'t move to itself.', 'ohio-child' ), $old );
+			continue;
+		}
+		if ( isset( $map[ $old ] ) ) {
+			/* translators: %s: product slug */
+			$errors[] = sprintf( __( '"%s" is listed more than once.', 'ohio-child' ), $old );
+			continue;
+		}
+		if ( ! dirtshack_gallery_is_live_product_slug( $new ) ) {
+			/* translators: %s: product slug */
+			$errors[] = sprintf( __( '"%s" is not a published product.', 'ohio-child' ), $new );
+			continue;
+		}
+		$map[ $old ] = $new;
+	}
+
+	// One step only: a target can't itself be moved, or a photo's product would depend on the order of moves.
+	foreach ( $map as $old => $new ) {
+		if ( isset( $map[ $new ] ) ) {
+			/* translators: 1: old slug, 2: new slug */
+			$errors[] = sprintf( __( '"%1$s" moves to "%2$s", which also moves. Point "%1$s" at the final product.', 'ohio-child' ), $old, $new );
+		}
+	}
+
+	if ( $errors ) {
+		$notice = array( 'ok' => false, 'message' => implode( ' ', array_unique( $errors ) ) );
+	} else {
+		update_option( DIRTSHACK_GALLERY_ALIASES_OPTION, $map, false );
+		$notice = array(
+			'ok'      => true,
+			'message' => $map
+				? __( 'Saved. Photos are moved at the next sync (within the hour), or use "Sync now".', 'ohio-child' )
+				: __( 'Saved. No products are moved.', 'ohio-child' ),
+		);
+	}
+	set_transient( 'ds_gallery_notice_' . get_current_user_id(), $notice, 5 * MINUTE_IN_SECONDS );
+	wp_safe_redirect( dirtshack_gallery_admin_url() );
+	exit;
+}
+
+/** The "Moved products" table: old slug → new slug, plus blank rows to add more. */
+function dirtshack_gallery_aliases_section() {
+	$map = get_option( DIRTSHACK_GALLERY_ALIASES_OPTION, array() );
+	$map = is_array( $map ) ? $map : array();
+
+	echo '<h2>' . esc_html__( 'Moved products', 'ohio-child' ) . '</h2>';
+	echo '<p>' . esc_html__( 'When a product gets a new version, enter the old slug and the new one. Photos captioned with the old slug then also show on the new product, so their captions don\'t need editing. Leave a row empty to remove it.', 'ohio-child' ) . '</p>';
+	echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
+	echo '<input type="hidden" name="action" value="ds_gallery_aliases">';
+	wp_nonce_field( 'ds_gallery_aliases' );
+	echo '<table class="widefat striped ds-cg-aliases"><thead><tr><th>' . esc_html__( 'Old slug', 'ohio-child' ) . '</th><th>' . esc_html__( 'Moves to (new product slug)', 'ohio-child' ) . '</th></tr></thead><tbody>';
+	$rows = array();
+	foreach ( $map as $from => $to ) {
+		$rows[] = array( $from, $to );
+	}
+	for ( $i = 0; $i < 3; $i++ ) {
+		$rows[] = array( '', '' );
+	}
+	foreach ( $rows as $row ) {
+		printf(
+			'<tr><td><input type="text" name="alias_from[]" value="%1$s" class="regular-text" placeholder="rear-lift-strap"></td><td><input type="text" name="alias_to[]" value="%2$s" class="regular-text" placeholder="rear-lift-strap-v2"></td></tr>',
+			esc_attr( $row[0] ),
+			esc_attr( $row[1] )
+		);
+	}
+	echo '</tbody></table>';
+	submit_button( __( 'Save moved products', 'ohio-child' ), 'secondary', 'submit', false );
+	echo '</form>';
+}
+
 function dirtshack_gallery_admin_page() {
 	if ( ! current_user_can( 'manage_woocommerce' ) ) {
 		return;
@@ -512,6 +638,7 @@ function dirtshack_gallery_admin_page() {
 		echo '</tbody></table>';
 	}
 
+	dirtshack_gallery_aliases_section();
 	dirtshack_gallery_admin_slugs( is_array( $all ) ? $all : null );
 
 	$page = dirtshack_gallery_page_url();

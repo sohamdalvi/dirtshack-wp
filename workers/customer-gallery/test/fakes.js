@@ -85,9 +85,11 @@ export class FakeBucket {
  * Photos: {id, name, created_time, widths?}. Products: {id, slug, name}.
  */
 export class FakeWorld {
-	constructor({ photos = [], products = [] } = {}) {
+	constructor({ photos = [], products = [], aliases = {} } = {}) {
 		this.photos = photos.map((p) => ({ ...p }));
 		this.products = products.map((p) => ({ ...p }));
+		this.aliases = { ...aliases };
+		this.aliasStatus = 200;
 		this.pageSize = 100;
 		this.calls = [];
 		this.shopStatus = 200;
@@ -148,6 +150,14 @@ export class FakeWorld {
 				return Response.json({ id: p.id, images: sizesOf(p, 'jpg'), webp_images: sizesOf(p, 'webp') });
 			}
 			return Response.json({ error: { message: 'Unknown path components', code: 100 } }, { status: 400 });
+		}
+
+		if (u.origin === SHOP && u.pathname === '/wp-json/dirtshack/v1/gallery-aliases') {
+			this.calls.push('aliases');
+			if (this.aliasStatus !== 200) {
+				return new Response('blocked', { status: this.aliasStatus });
+			}
+			return Response.json(this.aliases);
 		}
 
 		if (u.origin === SHOP) {
